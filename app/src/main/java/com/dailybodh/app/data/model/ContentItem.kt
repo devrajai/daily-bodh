@@ -16,6 +16,8 @@ data class ContentItem(
     val id: String,
     val chapter: Int? = null,
     val verse: Int? = null,
+    // e.g. "Sankhya Yoga" - shown alongside the chapter and verse numbers.
+    @SerialName("chapter_name") val chapterName: String? = null,
     val sanskrit: String? = null,
     val transliteration: String? = null,
     // Keyed by language code, e.g. {"en": "...", "hi": "..."}
@@ -28,10 +30,14 @@ data class ContentItem(
     val author: String? = null,
     val tags: List<String> = emptyList()
 ) {
-    /** Best-effort title for lists, e.g. "Chapter 2, Verse 47". */
+    /** Best-effort title for lists, e.g. "Chapter 2 · Sankhya Yoga, Verse 47". */
     val reference: String?
         get() = when {
-            chapter != null && verse != null -> "Chapter $chapter, Verse $verse"
+            chapter != null && verse != null -> buildString {
+                append("Chapter ").append(chapter)
+                if (!chapterName.isNullOrBlank()) append(" · ").append(chapterName)
+                append(", Verse ").append(verse)
+            }
             author != null -> author
             else -> null
         }

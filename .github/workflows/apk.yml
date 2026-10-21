@@ -1,7 +1,8 @@
 name: Build APK
 
-# Builds the debug APK on GitHub's runners and publishes it into docs/download/
-# so the GitHub Pages site can serve it. Also attaches it to a release.
+# Builds the debug APK on GitHub's runners, generates the full Bhagavad Gita pack
+# from the public-domain source, and publishes the APK into docs/download/ so the
+# GitHub Pages site can serve it. Also attaches the APK to a release.
 
 on:
   push:
@@ -29,13 +30,22 @@ jobs:
       # packages we need are present and the licences are accepted.
       - name: Prepare Android SDK
         run: |
-          echo "ANDROID_HOME=${ANDROID_HOME:-/usr/local/lib/android/sdk}"
           export ANDROID_HOME="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
           echo "ANDROID_HOME=$ANDROID_HOME" >> "$GITHUB_ENV"
           SDKM="$(command -v sdkmanager || echo "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager")"
           echo "using $SDKM"
           yes | "$SDKM" --licenses >/dev/null 2>&1 || true
           "$SDKM" "platform-tools" "platforms;android-34" "build-tools;34.0.0"
+
+      - name: Fetch the public-domain Gita source data
+        run: |
+          mkdir -p /tmp/gitasrc
+          for f in verse.json translation.json chapters.json; do
+            curl -fsSL "https://raw.githubusercontent.com/gita/gita/main/data/$f" -o "/tmp/gitasrc/$f"
+          done
+
+      - name: Generate the full Gita pack (18 chapters, 701 shlokas)
+        run: python3 tools/build_gita.py --src /tmp/gitasrc --out app/src/main/assets/content/gita.json
 
       - name: Build debug APK
         run: |
@@ -48,15 +58,15 @@ jobs:
           cp app/build/outputs/apk/debug/app-debug.apk docs/download/DailyBodh-1.0-debug.apk
           ls -la docs/download
 
-      - name: Commit APK to docs/
+      - name: Publish APK and the generated pack
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/download/DailyBodh-1.0-debug.apk
+          git add docs/download/DailyBodh-1.0-debug.apk app/src/main/assets/content/gita.json
           if git diff --staged --quiet; then
-            echo "APK unchanged"
+            echo "nothing to publish"
           else
-            git commit -m "Publish latest APK to the download page"
+            git commit -m "Publish APK and generated Gita pack [skip ci]"
             git push
           fi
 
@@ -65,5 +75,5 @@ jobs:
         with:
           tag_name: latest-build
           name: Latest build
-          body: "Automatically built debug APK of Daily Bodh."
+          body: "Automatically built debug APK of Daily Bodh, with the complete Bhagavad Gita."
           files: app/build/outputs/apk/debug/app-debug.apk
