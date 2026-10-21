@@ -1,0 +1,94 @@
+{
+  "packId": "leadership",
+  "packName": "Leadership",
+  "description": "On responsibility, example and looking after people.",
+  "version": 1,
+  "ordering": "daily",
+  "items": [
+    {
+      "id": "lead-1",
+      "text": "A leader is one who knows the way, goes the way, and shows the way.",
+      "author": "John C. Maxwell",
+      "translations": {
+        "en": "A leader is one who knows the way, goes the way, and shows the way.",
+        "hi": "नेता वह है जो मार्ग जानता है, उस पर चलता है और दूसरों को दिखाता है।",
+        "mr": ""
+      },
+      "summary_1line": "Know the way, walk it, then show it.",
+      "summary_2to3line": "Leadership is three moves in sequence: clarity, personal example, and guidance. Skipping the middle one is where trust breaks.",
+      "bodh_3to4line": "People follow conduct before they follow instructions. If you would not do it yourself, do not ask it of others. Example is the cheapest and most persuasive form of authority.",
+      "tags": [
+        "example",
+        "trust"
+      ]
+    },
+    {
+      "id": "lead-2",
+      "text": "Leadership is not about being in charge. It is about taking care of those in your charge.",
+      "author": "Simon Sinek",
+      "translations": {
+        "en": "Leadership is not about being in charge. It is about taking care of those in your charge.",
+        "hi": "नेतृत्व अधिकार का नहीं, अपने लोगों की देखभाल का नाम है।",
+        "mr": ""
+      },
+      "summary_1line": "Leadership is care, not command.",
+      "summary_2to3line": "Authority is a tool, not the point. The work of a leader is to make the people around them capable and secure.",
+      "bodh_3to4line": "Reframe leadership as service. Ask what your team needs to do their best work, then remove those obstacles. People remember how you carried them, not how you directed them.",
+      "tags": [
+        "service",
+        "care"
+      ]
+    },
+    {
+      "id": "lead-3",
+      "text": "The best executive is the one who has sense enough to pick good people to do what he wants done.",
+      "author": "Attributed to Theodore Roosevelt",
+      "translations": {
+        "en": "The best executive is the one who has sense enough to pick good people to do what he wants done.",
+        "hi": "सर्वोत्तम नेतृत्व वह है जो अपने लिए सही लोग चुनना जानता है।",
+        "mr": ""
+      },
+      "summary_1line": "Great leaders choose great people.",
+      "summary_2to3line": "Judgement in hiring and delegation outweighs personal heroics. Surround yourself with people better than you at their tasks.",
+      "bodh_3to4line": "The instinct to do everything yourself is a ceiling. Select well, then step back. Your leverage is the quality of the people you trust, not the hours you personally put in.",
+      "tags": [
+        "delegation",
+        "hiring"
+      ]
+    },
+    {
+      "id": "lead-4",
+      "text": "If your actions inspire others to dream more, learn more, do more and become more, you are a leader.",
+      "author": "Attributed to John Quincy Adams",
+      "translations": {
+        "en": "If your actions inspire others to dream more, learn more, do more and become more, you are a leader.",
+        "hi": "यदि आपके कार्य दूसरों को अधिक सपने देखने और बनने के लिए प्रेरित करें, तो आप नेता हैं।",
+        "mr": ""
+      },
+      "summary_1line": "You lead when you enlarge others.",
+      "summary_2to3line": "Leadership shows up as growth in the people around you. If they dream and do more because of you, that is the proof.",
+      "bodh_3to4line": "Measure your leadership by the capacity you leave behind. A good leader is not missed because everything stops without them, but because they built people who can carry on.",
+      "tags": [
+        "growth",
+        "inspiration"
+      ]
+    },
+    {
+      "id": "lead-5",
+      "text": "Management is doing things right; leadership is doing the right things.",
+      "author": "Attributed to Peter Drucker",
+      "translations": {
+        "en": "Management is doing things right; leadership is doing the right things.",
+        "hi": "प्रबंधन सही काम करना है; नेतृत्व सही काम चुनना है।",
+        "mr": ""
+      },
+      "summary_1line": "Efficiency is management; direction is leadership.",
+      "summary_2to3line": "You can be flawless at the wrong task. Leadership is the discipline of choosing what deserves to be done at all.",
+      "bodh_3to4line": "Both matter, but they answer different questions. Ask 'are we climbing the right mountain?' before optimising how fast you climb. Direction first, then speed.",
+      "tags": [
+        "direction",
+        "effectiveness"
+      ]
+    }
+  ]
+}

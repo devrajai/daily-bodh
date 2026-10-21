@@ -1,0 +1,94 @@
+{
+  "packId": "business",
+  "packName": "Business",
+  "description": "Practical thoughts on building, selling and keeping promises.",
+  "version": 1,
+  "ordering": "daily",
+  "items": [
+    {
+      "id": "biz-1",
+      "text": "Your most unhappy customers are your greatest source of learning.",
+      "author": "Bill Gates",
+      "translations": {
+        "en": "Your most unhappy customers are your greatest source of learning.",
+        "hi": "आपके सबसे असंतुष्ट ग्राहक सीखने का सबसे बड़ा स्रोत हैं।",
+        "mr": ""
+      },
+      "summary_1line": "Learn most from your unhappiest customers.",
+      "summary_2to3line": "Complaints are free consulting. The people who care enough to be annoyed are telling you where the product truly breaks.",
+      "bodh_3to4line": "Treat criticism as data rather than attack. The customer who complains has stayed engaged; the one who quietly leaves teaches you nothing. Build a habit of mining friction for insight.",
+      "tags": [
+        "customer",
+        "learning"
+      ]
+    },
+    {
+      "id": "biz-2",
+      "text": "The best way to predict the future is to invent it.",
+      "author": "Alan Kay",
+      "translations": {
+        "en": "The best way to predict the future is to invent it.",
+        "hi": "भविष्य की भविष्यवाणी करने का सबसे अच्छा तरीका उसे गढ़ना है।",
+        "mr": ""
+      },
+      "summary_1line": "Don't forecast the future - build it.",
+      "summary_2to3line": "Rather than guessing what will happen, create the thing you want to see. Action is a better oracle than prediction.",
+      "bodh_3to4line": "Planning is useful, but it can become a substitute for doing. When the future is uncertain, the person who ships something gets to shape it. Bias toward building.",
+      "tags": [
+        "innovation",
+        "action"
+      ]
+    },
+    {
+      "id": "biz-3",
+      "text": "If you're not embarrassed by the first version of your product, you've launched too late.",
+      "author": "Reid Hoffman",
+      "translations": {
+        "en": "If you're not embarrassed by the first version of your product, you've launched too late.",
+        "hi": "अगर आप अपने उत्पाद के पहले संस्करण से शर्मिंदा नहीं हैं, तो आपने बहुत देर से लॉन्च किया।",
+        "mr": ""
+      },
+      "summary_1line": "Ship before it feels ready.",
+      "summary_2to3line": "Waiting for polish is often just fear in disguise. A slightly embarrassing launch beats a perfect product that never ships.",
+      "bodh_3to4line": "Standards matter, but so does contact with reality. The first version exists to teach you what version two should be. Perfectionism at the start is usually procrastination.",
+      "tags": [
+        "shipping",
+        "iteration"
+      ]
+    },
+    {
+      "id": "biz-4",
+      "text": "The value of an idea lies in the using of it.",
+      "author": "Thomas Edison",
+      "translations": {
+        "en": "The value of an idea lies in the using of it.",
+        "hi": "विचार का मूल्य उसके उपयोग में है।",
+        "mr": ""
+      },
+      "summary_1line": "An idea is worth what you do with it.",
+      "summary_2to3line": "Ideas are cheap and plentiful; execution is scarce. The worth of a thought is realised only when it is put to work.",
+      "bodh_3to4line": "Keep a bias toward implementation. The distance between a clever idea and a working product is where most value is created or lost. Judge yourself by what you built, not what you imagined.",
+      "tags": [
+        "execution",
+        "ideas"
+      ]
+    },
+    {
+      "id": "biz-5",
+      "text": "Do not be embarrassed by your failures; learn from them and start again.",
+      "author": "Richard Branson",
+      "translations": {
+        "en": "Do not be embarrassed by your failures; learn from them and start again.",
+        "hi": "अपनी असफलताओं से शर्मिंदा न हों; उनसे सीखें और फिर शुरू करें।",
+        "mr": ""
+      },
+      "summary_1line": "Failures are tuition, not verdicts.",
+      "summary_2to3line": "Every serious builder fails repeatedly. The skill is to extract the lesson quickly and begin the next attempt without shame.",
+      "bodh_3to4line": "Shame is expensive and teaches nothing. Separate the outcome from your worth: the venture failed, you did not. Take the lesson, keep the momentum.",
+      "tags": [
+        "failure",
+        "resilience"
+      ]
+    }
+  ]
+}

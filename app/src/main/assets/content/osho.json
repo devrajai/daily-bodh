@@ -1,0 +1,94 @@
+{
+  "packId": "osho",
+  "packName": "Inner Thoughts",
+  "description": "Short original reflections in a contemplative spirit. These are original writings by the app author - no copyrighted text is reproduced.",
+  "version": 1,
+  "ordering": "daily",
+  "items": [
+    {
+      "id": "inner-1",
+      "text": "The mind that watches itself grows quiet on its own.",
+      "author": null,
+      "translations": {
+        "en": "The mind that watches itself grows quiet on its own.",
+        "hi": "जो मन स्वयं को देखता है, वह अपने आप शांत हो जाता है।",
+        "mr": ""
+      },
+      "summary_1line": "Watchfulness itself brings calm.",
+      "summary_2to3line": "You do not have to force the mind to be still. Simply observe it without judgement, and its noise begins to settle by itself.",
+      "bodh_3to4line": "Trying to stop thoughts is just more thinking. Sit back as a witness instead. Attention without interference is a gentle solvent - the agitation loosens when no one keeps stirring it.",
+      "tags": [
+        "awareness",
+        "calm"
+      ]
+    },
+    {
+      "id": "inner-2",
+      "text": "You are not the weather of your mind; you are the sky it moves through.",
+      "author": null,
+      "translations": {
+        "en": "You are not the weather of your mind; you are the sky it moves through.",
+        "hi": "तुम मन का मौसम नहीं, वह आकाश हो जिससे वह गुज़रता है।",
+        "mr": ""
+      },
+      "summary_1line": "You are the sky, not the weather.",
+      "summary_2to3line": "Thoughts and moods pass like clouds. The awareness that notices them is unchanging and untouched.",
+      "bodh_3to4line": "Identify less with each passing mood. When anger or sadness arrives, remember it is a visitor in a space far larger than itself. You are the room, not the guest.",
+      "tags": [
+        "identity",
+        "witness"
+      ]
+    },
+    {
+      "id": "inner-3",
+      "text": "Comparison is a borrowed ruler; measure your growth with your own yesterdays.",
+      "author": null,
+      "translations": {
+        "en": "Comparison is a borrowed ruler; measure your growth with your own yesterdays.",
+        "hi": "तुलना उधार का पैमाना है; अपनी वृद्धि को अपने कल से नापो।",
+        "mr": ""
+      },
+      "summary_1line": "Measure yourself against your own past.",
+      "summary_2to3line": "Measuring your life with someone else's scale always distorts. The honest comparison is with who you were yesterday.",
+      "bodh_3to4line": "Envy and pride both come from borrowed standards. Drop the ruler and look only at your own direction: are you moving toward what you value? That question has no competitor.",
+      "tags": [
+        "comparison",
+        "growth"
+      ]
+    },
+    {
+      "id": "inner-4",
+      "text": "Silence is not empty; it is where you meet yourself without an audience.",
+      "author": null,
+      "translations": {
+        "en": "Silence is not empty; it is where you meet yourself without an audience.",
+        "hi": "मौन खाली नहीं; वहीं तुम बिना दर्शक के स्वयं से मिलते हो।",
+        "mr": ""
+      },
+      "summary_1line": "In silence you meet yourself.",
+      "summary_2to3line": "Silence is not a lack of sound but a presence of attention. Without an audience, you can finally hear what is true in you.",
+      "bodh_3to4line": "The world keeps you performing. Deliberate silence - a few minutes with nothing to do and no one to impress - restores the self that performance hides. Guard that time.",
+      "tags": [
+        "silence",
+        "self"
+      ]
+    },
+    {
+      "id": "inner-5",
+      "text": "Let go not by throwing things away, but by holding them more lightly.",
+      "author": null,
+      "translations": {
+        "en": "Let go not by throwing things away, but by holding them more lightly.",
+        "hi": "छोड़ना चीज़ें फेंकना नहीं; उन्हें हल्के हाथों से थामना है।",
+        "mr": ""
+      },
+      "summary_1line": "Freedom is a lighter grip.",
+      "summary_2to3line": "Detachment is not renunciation. It is the same life held with looser hands, so nothing owns you.",
+      "bodh_3to4line": "You do not have to leave the world to be free of it. Keep your work, your people, your joys - just hold them as gifts rather than possessions. A light grip keeps both the joy and the peace.",
+      "tags": [
+        "detachment",
+        "freedom"
+      ]
+    }
+  ]
+}

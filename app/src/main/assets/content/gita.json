@@ -1,0 +1,202 @@
+{
+  "packId": "gita",
+  "packName": "Bhagavad Gita",
+  "description": "700 shlokas in order, one per day. This sample ships the first 10.",
+  "version": 1,
+  "ordering": "sequential",
+  "items": [
+    {
+      "id": "gita-2-47",
+      "chapter": 2,
+      "verse": 47,
+      "sanskrit": "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।\nमा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि॥",
+      "transliteration": "karmaṇy-evādhikāras te mā phaleṣu kadācana\nmā karma-phala-hetur bhūr mā te saṅgo 'stv akarmaṇi",
+      "translations": {
+        "en": "You have a right to your actions alone, never to the fruits of them. Do not let the fruit be your motive, nor be attached to inaction.",
+        "hi": "तुम्हारा अधिकार केवल कर्म करने में है, फल में कभी नहीं। फल को ही कर्म का हेतु मत बनाओ, और अकर्म में भी आसक्त मत होओ।",
+        "mr": ""
+      },
+      "summary_1line": "Do your duty; do not be attached to the result.",
+      "summary_2to3line": "Act with full effort, but release your grip on the outcome. Work done for its own sake frees you; work done only for reward binds you.",
+      "bodh_3to4line": "The verse separates effort from expectation. You control the sincerity of the act, not what it eventually returns. When the mind stops bargaining with the future, action becomes lighter and steadier. Do the work well, then let it go.",
+      "tags": [
+        "duty",
+        "action",
+        "detachment"
+      ]
+    },
+    {
+      "id": "gita-2-20",
+      "chapter": 2,
+      "verse": 20,
+      "sanskrit": "न जायते म्रियते वा कदाचिन्\nनायं भूत्वा भविता वा न भूयः।\nअजो नित्यः शाश्वतोऽयं पुराणो\nन हन्यते हन्यमाने शरीरे॥",
+      "transliteration": "na jāyate mriyate vā kadācin\nnāyaṁ bhūtvā bhavitā vā na bhūyaḥ\najo nityaḥ śāśvato 'yaṁ purāṇo\nna hanyate hanyamāne śarīre",
+      "translations": {
+        "en": "The soul is never born and never dies. It has not come into being, and it will not cease to be. Unborn, eternal, ever-existing and primeval, it is not slain when the body is slain.",
+        "hi": "आत्मा न कभी जन्म लेता है और न मरता है। यह न हुआ है और न फिर होगा। अजन्मा, नित्य, शाश्वत और पुरातन यह आत्मा शरीर के मारे जाने पर भी नहीं मारा जाता।",
+        "mr": ""
+      },
+      "summary_1line": "The soul is unborn and deathless.",
+      "summary_2to3line": "What is essential in you was never created and can never be destroyed. Bodies change; the awareness within does not.",
+      "bodh_3to4line": "Fear of loss rests on the belief that we are the body. The verse points to something in us that no event can add to or take from. Sit with that: the part of you that watches was here before this body and will outlast it. From that ground, grief softens.",
+      "tags": [
+        "soul",
+        "death",
+        "eternity"
+      ]
+    },
+    {
+      "id": "gita-2-14",
+      "chapter": 2,
+      "verse": 14,
+      "sanskrit": "मात्रास्पर्शास्तु कौन्तेय शीतोष्णसुखदुःखदाः।\nआगमापायिनोऽनित्यास्तांस्तितिक्षस्व भारत॥",
+      "transliteration": "mātrā-sparśās tu kaunteya śītoṣṇa-sukha-duḥkha-dāḥ\nāgamāpāyino 'nityās tāṁs titikṣasva bhārata",
+      "translations": {
+        "en": "Contact with the senses brings cold and heat, pleasure and pain. They come and go and are impermanent; learn to endure them, O Bharata.",
+        "hi": "हे कुन्तीपुत्र! इन्द्रियों के विषयों का स्पर्श सर्दी-गर्मी और सुख-दुःख देता है। ये आते-जाते और अनित्य हैं; हे भारत, इन्हें सहन करना सीखो।",
+        "mr": ""
+      },
+      "summary_1line": "Pleasure and pain come and go; endure them patiently.",
+      "summary_2to3line": "Comfort and discomfort are visitors, not permanent residents. Endurance is not numbness; it is the patience that lets a feeling pass without being ruled by it.",
+      "bodh_3to4line": "The instruction is not to feel less but to suffer the passing weather of the mind with steadiness. Pain arrives, stays a while, and leaves. If you do not clutch it, it does not become your identity. Patience here is a skill, and it grows with practice.",
+      "tags": [
+        "patience",
+        "endurance",
+        "impermanence"
+      ]
+    },
+    {
+      "id": "gita-2-11",
+      "chapter": 2,
+      "verse": 11,
+      "sanskrit": "अशोच्यानन्वशोचस्त्वं प्रज्ञावादांश्च भाषसे।\nगतासूनगतासूंश्च नानुशोचन्ति पण्डिताः॥",
+      "transliteration": "aśocyān anvaśocas tvaṁ prajñā-vādāṁś ca bhāṣase\n gatāsūn agatāsūṁś ca nānuśocanti paṇḍitāḥ",
+      "translations": {
+        "en": "You grieve for those who should not be grieved for, yet you speak words of wisdom. The wise grieve neither for the living nor for the dead.",
+        "hi": "तुम उनके लिए शोक कर रहे हो जिनके लिए शोक उचित नहीं, फिर भी ज्ञान की बातें करते हो। ज्ञानी न जीवितों के लिए और न मृतकों के लिए शोक करते हैं।",
+        "mr": ""
+      },
+      "summary_1line": "The wise do not grieve for the living or the dead.",
+      "summary_2to3line": "Grief can speak in the language of philosophy while still being grief. True understanding is measured not by clever words but by a settled mind.",
+      "bodh_3to4line": "This is the opening of Krishna's teaching: a gentle rebuke of words that do not match the inner state. It asks us to notice the gap between what we say we know and how we actually feel. Closing that gap is the real work of wisdom.",
+      "tags": [
+        "grief",
+        "wisdom"
+      ]
+    },
+    {
+      "id": "gita-4-7",
+      "chapter": 4,
+      "verse": 7,
+      "sanskrit": "यदा यदा हि धर्मस्य ग्लानिर्भवति भारत।\nअभ्युत्थानमधर्मस्य तदात्मानं सृजाम्यहम्॥",
+      "transliteration": "yadā yadā hi dharmasya glānir bhavati bhārata\nabhyutthānam adharmasya tadātmānaṁ sṛjāmy aham",
+      "translations": {
+        "en": "Whenever righteousness declines and unrighteousness rises, O Bharata, I manifest myself.",
+        "hi": "हे भारत! जब-जब धर्म की हानि और अधर्म की वृद्धि होती है, तब-तब मैं स्वयं को प्रकट करता हूँ।",
+        "mr": ""
+      },
+      "summary_1line": "When goodness declines, it is restored again.",
+      "summary_2to3line": "Decay is never the final word. Whenever balance is lost, a corrective force appears, often through ordinary people who choose to act.",
+      "bodh_3to4line": "The promise here is cyclical, not passive: restoration comes, but usually through someone's willingness to stand up. Read it as an invitation to be the correction you wish to see, rather than a reason to wait.",
+      "tags": [
+        "dharma",
+        "restoration"
+      ]
+    },
+    {
+      "id": "gita-4-8",
+      "chapter": 4,
+      "verse": 8,
+      "sanskrit": "परित्राणाय साधूनां विनाशाय च दुष्कृताम्।\nधर्मसंस्थापनार्थाय सम्भवामि युगे युगे॥",
+      "transliteration": "paritrāṇāya sādhūnāṁ vināśāya ca duṣkṛtām\ndharma-saṁsthāpanārthāya sambhavāmi yuge yuge",
+      "translations": {
+        "en": "For the protection of the good, for the destruction of the wicked, and for the re-establishment of dharma, I come into being age after age.",
+        "hi": "साधुओं की रक्षा के लिए, दुष्कर्मियों के विनाश के लिए और धर्म की स्थापना के लिए मैं युग-युग में प्रकट होता हूँ।",
+        "mr": ""
+      },
+      "summary_1line": "Goodness is protected and order restored, age after age.",
+      "summary_2to3line": "The verse names the purpose of every renewal: shelter the good, end cruelty, and rebuild the ground of right action.",
+      "bodh_3to4line": "Beyond the cosmic reading is a practical one. Each generation inherits a duty to guard what is decent and to repair what has been broken. The phrase 'age after age' makes it a standing task, not a one-time event.",
+      "tags": [
+        "protection",
+        "dharma"
+      ]
+    },
+    {
+      "id": "gita-6-5",
+      "chapter": 6,
+      "verse": 5,
+      "sanskrit": "उद्धरेदात्मनात्मानं नात्मानमवसादयेत्।\nआत्मैव ह्यात्मनो बन्धुरात्मैव रिपुरात्मनः॥",
+      "transliteration": "uddhared ātmanātmānaṁ nātmānam avasādayet\nātmaiva hy ātmano bandhur ātmaiva ripur ātmanaḥ",
+      "translations": {
+        "en": "Lift yourself by yourself; do not let yourself fall. The self alone is the friend of the self, and the self alone is its enemy.",
+        "hi": "अपने द्वारा अपना उद्धार करो; अपने को गिरने मत दो। आत्मा ही आत्मा का मित्र है और आत्मा ही आत्मा का शत्रु है।",
+        "mr": ""
+      },
+      "summary_1line": "You are your own friend or your own enemy.",
+      "summary_2to3line": "No one can rescue you from yourself, and no one can defeat you more thoroughly than your own habits. The same self can lift or drag.",
+      "bodh_3to4line": "The verse puts agency exactly where it belongs: in your hands. The mind that trains itself becomes an ally; the mind left untended becomes the chief obstacle. Every small disciplined choice tips the balance.",
+      "tags": [
+        "self-mastery",
+        "mind"
+      ]
+    },
+    {
+      "id": "gita-12-15",
+      "chapter": 12,
+      "verse": 15,
+      "sanskrit": "यस्मान्नोद्विजते लोको लोकान्नोद्विजते च यः।\nहर्षामर्षभयोद्वेगैर्मुक्तो यः स च मे प्रियः॥",
+      "transliteration": "yasmān nodvijate loko lokān nodvijate ca yaḥ\nharṣāmarṣa-bhayodvegair mukto yaḥ sa ca me priyaḥ",
+      "translations": {
+        "en": "He by whom the world is not disturbed, and who is not disturbed by the world, who is free from joy, envy, fear and anxiety, is dear to me.",
+        "hi": "जिससे संसार उद्विग्न नहीं होता और जो संसार से उद्विग्न नहीं होता, जो हर्ष, अमर्ष, भय और उद्वेग से मुक्त है, वह मुझे प्रिय है।",
+        "mr": ""
+      },
+      "summary_1line": "Be one who neither disturbs nor is disturbed.",
+      "summary_2to3line": "Equanimity has two sides: not unsettling others, and not being easily unsettled by them. Freedom from envy, fear and agitation is its mark.",
+      "bodh_3to4line": "This is a portrait of steadiness in relationship. The calm person is a refuge, not a source of friction. Notice the pairing: the same balance that keeps you unshaken also keeps you from shaking others.",
+      "tags": [
+        "equanimity",
+        "peace"
+      ]
+    },
+    {
+      "id": "gita-18-66",
+      "chapter": 18,
+      "verse": 66,
+      "sanskrit": "सर्वधर्मान्परित्यज्य मामेकं शरणं व्रज।\nअहं त्वां सर्वपापेभ्यो मोक्षयिष्यामि मा शुचः॥",
+      "transliteration": "sarva-dharmān parityajya mām ekaṁ śaraṇaṁ vraja\nahaṁ tvāṁ sarva-pāpebhyo mokṣayiṣyāmi mā śucaḥ",
+      "translations": {
+        "en": "Abandon all varieties of duty and simply surrender unto me alone. I shall deliver you from all sinful reactions; do not fear.",
+        "hi": "समस्त धर्मों को त्यागकर केवल मेरी शरण में आ जाओ। मैं तुम्हें सब पापों से मुक्त कर दूँगा, तुम शोक मत करो।",
+        "mr": ""
+      },
+      "summary_1line": "Let go of fear and take refuge in the highest.",
+      "summary_2to3line": "The final instruction of the Gita is surrender, not passivity. Release the anxious burden of self-judgement and trust a larger order.",
+      "bodh_3to4line": "After all the analysis, the closing word is simple: stop carrying it alone. Surrender here means dropping the exhausting project of self-justification. The verse ends with 'do not grieve' - reassurance, not demand.",
+      "tags": [
+        "surrender",
+        "faith"
+      ]
+    },
+    {
+      "id": "gita-3-35",
+      "chapter": 3,
+      "verse": 35,
+      "sanskrit": "श्रेयान्स्वधर्मो विगुणः परधर्मात्स्वनुष्ठितात्।\nस्वधर्मे निधनं श्रेयः परधर्मो भयावहः॥",
+      "transliteration": "śreyān sva-dharmo viguṇaḥ para-dharmāt sv-anuṣṭhitāt\nsva-dharme nidhanaṁ śreyaḥ para-dharmo bhayāvahaḥ",
+      "translations": {
+        "en": "Better is one's own duty, though imperfectly done, than the duty of another well performed. Better to die in one's own duty; the duty of another brings danger.",
+        "hi": "दूसरे के भलीभाँति किए गए धर्म से अपना धर्म अच्छा है, चाहे वह गुणरहित हो। अपने धर्म में मरना भी श्रेयस्कर है; परधर्म भय देने वाला है।",
+        "mr": ""
+      },
+      "summary_1line": "Your own imperfect path beats a borrowed perfect one.",
+      "summary_2to3line": "Imitating someone else's life, however successful it looks, is riskier than walking your own path imperfectly. Belonging matters more than polish.",
+      "bodh_3to4line": "The verse warns against comparison-driven living. A borrowed role never fits, and its dangers are hidden. Your own work, done with your own hands even clumsily, keeps you grounded in who you actually are.",
+      "tags": [
+        "purpose",
+        "authenticity"
+      ]
+    }
+  ]
+}

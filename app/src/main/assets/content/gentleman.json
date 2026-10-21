@@ -1,0 +1,94 @@
+{
+  "packId": "gentleman",
+  "packName": "Be a Gentleman",
+  "description": "On courtesy, consideration and quiet dignity.",
+  "version": 1,
+  "ordering": "daily",
+  "items": [
+    {
+      "id": "gent-1",
+      "text": "A gentleman is one who never hurts anyone's feelings unintentionally.",
+      "author": "Attributed to Oscar Wilde",
+      "translations": {
+        "en": "A gentleman is one who never hurts anyone's feelings unintentionally.",
+        "hi": "सज्जन वह है जो कभी अनजाने में किसी की भावनाओं को ठेस न पहुँचाए।",
+        "mr": ""
+      },
+      "summary_1line": "Courtesy means care with others' feelings.",
+      "summary_2to3line": "Refinement is measured by attentiveness, not display. The gentleman's default is to avoid causing needless hurt.",
+      "bodh_3to4line": "Consideration is a practice, not a mood. It means noticing the effect of your words before you speak them, and treating the feelings of others as real. Small courtesies, consistently kept, are the whole thing.",
+      "tags": [
+        "courtesy",
+        "consideration"
+      ]
+    },
+    {
+      "id": "gent-2",
+      "text": "Manners maketh man.",
+      "author": "Traditional proverb (William of Wykeham)",
+      "translations": {
+        "en": "Manners maketh man.",
+        "hi": "शिष्टाचार ही मनुष्य को मनुष्य बनाता है।",
+        "mr": ""
+      },
+      "summary_1line": "Manners shape the person.",
+      "summary_2to3line": "Behaviour and character are woven together. How you treat people is not a veneer - it is a large part of who you are.",
+      "bodh_3to4line": "Good manners are the visible edge of inward respect. They cost nothing, ease everything, and quietly announce what kind of person you have decided to be.",
+      "tags": [
+        "manners",
+        "character"
+      ]
+    },
+    {
+      "id": "gent-3",
+      "text": "Politeness is the flower of humanity.",
+      "author": "Attributed to Joseph Joubert",
+      "translations": {
+        "en": "Politeness is the flower of humanity.",
+        "hi": "शिष्टता मानवता का पुष्प है।",
+        "mr": ""
+      },
+      "summary_1line": "Politeness is a sign of our humanity.",
+      "summary_2to3line": "Courtesy is a cultivated bloom, not a weakness. It shows that we can choose gentleness over impulse.",
+      "bodh_3to4line": "Anyone can be kind when it is easy. Politeness shines when you are tired, rushed or annoyed. That is when it proves itself as a discipline rather than a mood.",
+      "tags": [
+        "politeness",
+        "humanity"
+      ]
+    },
+    {
+      "id": "gent-4",
+      "text": "The true gentleman is one whose conduct proceeds from good will and an acute sense of propriety.",
+      "author": "Attributed to John Henry Newman",
+      "translations": {
+        "en": "The true gentleman is one whose conduct proceeds from good will and an acute sense of propriety.",
+        "hi": "सच्चा सज्जन वह है जिसका आचरण सद्भाव और औचित्य की सूक्ष्म समझ से निकलता है।",
+        "mr": ""
+      },
+      "summary_1line": "Good will, guided by good judgement.",
+      "summary_2to3line": "It is not enough to mean well; the gentleman also reads the moment and acts fittingly.",
+      "bodh_3to4line": "Kindness without judgement can wound; judgement without kindness can chill. The gentleman holds both: warmth of intent and a fine sense of what the situation actually calls for.",
+      "tags": [
+        "goodwill",
+        "judgement"
+      ]
+    },
+    {
+      "id": "gent-5",
+      "text": "Kindness is a language which the deaf can hear and the blind can see.",
+      "author": "Attributed to Mark Twain",
+      "translations": {
+        "en": "Kindness is a language which the deaf can hear and the blind can see.",
+        "hi": "दया एक ऐसी भाषा है जिसे बहरा सुन सकता है और अंधा देख सकता है।",
+        "mr": ""
+      },
+      "summary_1line": "Kindness needs no words to be felt.",
+      "summary_2to3line": "Genuine kindness is perceived directly, beyond speech. It registers on anyone who receives it.",
+      "bodh_3to4line": "You never fully know how much a small kindness matters to someone. Because it travels without words, it reaches people your cleverness never could. Give it freely.",
+      "tags": [
+        "kindness",
+        "compassion"
+      ]
+    }
+  ]
+}

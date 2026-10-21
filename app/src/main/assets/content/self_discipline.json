@@ -1,0 +1,94 @@
+{
+  "packId": "discipline",
+  "packName": "Self-Discipline & Willpower",
+  "description": "On habits, restraint and mastering the mind.",
+  "version": 1,
+  "ordering": "daily",
+  "items": [
+    {
+      "id": "disc-1",
+      "text": "We are what we repeatedly do. Excellence, then, is not an act, but a habit.",
+      "author": "Will Durant",
+      "translations": {
+        "en": "We are what we repeatedly do. Excellence, then, is not an act, but a habit.",
+        "hi": "हम वही हैं जो हम बार-बार करते हैं; श्रेष्ठता अभ्यास है, कर्म नहीं।",
+        "mr": ""
+      },
+      "summary_1line": "Excellence is a habit, not an event.",
+      "summary_2to3line": "Character is built from repetition, not from single heroic acts. Small consistent choices compound into who you become.",
+      "bodh_3to4line": "Stop waiting to feel excellent and start repeating small good acts. Motivation is unreliable; habit is durable. Design your day so the right action is the easy default.",
+      "tags": [
+        "habit",
+        "excellence"
+      ]
+    },
+    {
+      "id": "disc-2",
+      "text": "Discipline is the bridge between goals and accomplishment.",
+      "author": "Attributed to Jim Rohn",
+      "translations": {
+        "en": "Discipline is the bridge between goals and accomplishment.",
+        "hi": "अनुशासन लक्ष्य और उपलब्धि के बीच का पुल है।",
+        "mr": ""
+      },
+      "summary_1line": "Discipline turns goals into results.",
+      "summary_2to3line": "A goal is only a wish until discipline carries it across. The gap between wanting and having is closed by daily structure.",
+      "bodh_3to4line": "Goals set direction; discipline supplies movement. When you feel far from a goal, the missing piece is rarely desire - it is a routine you can keep on a bad day.",
+      "tags": [
+        "discipline",
+        "goals"
+      ]
+    },
+    {
+      "id": "disc-3",
+      "text": "The first and greatest victory is to conquer yourself.",
+      "author": "Attributed to Plato",
+      "translations": {
+        "en": "The first and greatest victory is to conquer yourself.",
+        "hi": "सबसे पहली और सबसे बड़ी विजय स्वयं पर विजय है।",
+        "mr": ""
+      },
+      "summary_1line": "Mastering yourself is the first victory.",
+      "summary_2to3line": "Every external conquest is smaller than the internal one. Restraint over one's own impulses is the foundation of all other strength.",
+      "bodh_3to4line": "Notice how much of your day is spent obeying your own impulses. Each time you pause and choose deliberately, you win a small internal battle that quietly strengthens the whole.",
+      "tags": [
+        "self-control",
+        "victory"
+      ]
+    },
+    {
+      "id": "disc-4",
+      "text": "He who conquers himself is the mightiest warrior.",
+      "author": "Attributed to Confucius",
+      "translations": {
+        "en": "He who conquers himself is the mightiest warrior.",
+        "hi": "जो स्वयं को जीतता है वही सबसे महान योद्धा है।",
+        "mr": ""
+      },
+      "summary_1line": "Self-mastery is the greatest strength.",
+      "summary_2to3line": "Strength measured by force is shallow. The person who governs their own reactions holds the deepest kind of power.",
+      "bodh_3to4line": "Anger, craving and fear are the real opponents. Defeating them requires no audience and no applause, which is exactly why it is harder and more valuable.",
+      "tags": [
+        "strength",
+        "restraint"
+      ]
+    },
+    {
+      "id": "disc-5",
+      "text": "Rule your mind or it will rule you.",
+      "author": "Attributed to Horace",
+      "translations": {
+        "en": "Rule your mind or it will rule you.",
+        "hi": "मन पर शासन करो, वरना मन तुम पर शासन करेगा।",
+        "mr": ""
+      },
+      "summary_1line": "Either you govern your mind or it governs you.",
+      "summary_2to3line": "An untended mind defaults to reactivity. Attention and intention are what turn it from a master into a servant.",
+      "bodh_3to4line": "The mind is an excellent tool and a poor master. Give it clear tasks and quiet periods, and it serves you; leave it idle and it will manufacture problems to chew on.",
+      "tags": [
+        "mind",
+        "mastery"
+      ]
+    }
+  ]
+}

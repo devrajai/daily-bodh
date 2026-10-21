@@ -1,0 +1,94 @@
+{
+  "packId": "motivation",
+  "packName": "Motivation",
+  "description": "Short sparks for starting and persevering.",
+  "version": 1,
+  "ordering": "daily",
+  "items": [
+    {
+      "id": "mot-1",
+      "text": "It always seems impossible until it's done.",
+      "author": "Attributed to Nelson Mandela",
+      "translations": {
+        "en": "It always seems impossible until it's done.",
+        "hi": "जब तक काम पूरा न हो, वह असंभव ही लगता है।",
+        "mr": ""
+      },
+      "summary_1line": "It looks impossible until it is done.",
+      "summary_2to3line": "The feeling of impossibility is not evidence. Most hard things only become believable after someone finishes them.",
+      "bodh_3to4line": "Doubt is loudest before the first step. Break the impossible thing into a first move small enough to make today. Momentum rewrites what feels possible.",
+      "tags": [
+        "perseverance",
+        "courage"
+      ]
+    },
+    {
+      "id": "mot-2",
+      "text": "The only way to do great work is to love what you do.",
+      "author": "Steve Jobs",
+      "translations": {
+        "en": "The only way to do great work is to love what you do.",
+        "hi": "महान कार्य करने का एकमात्र तरीका यह है कि आप अपने काम से प्रेम करें।",
+        "mr": ""
+      },
+      "summary_1line": "Love the work to make it great.",
+      "summary_2to3line": "Sustained excellence is hard to fake. Genuine engagement with the craft is what carries you through the long middle.",
+      "bodh_3to4line": "You cannot out-discipline indifference forever. If the work bores you, either find the part that fascinates you or change the work. Care is the raw material of quality.",
+      "tags": [
+        "passion",
+        "craft"
+      ]
+    },
+    {
+      "id": "mot-3",
+      "text": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+      "author": "Attributed to Winston Churchill",
+      "translations": {
+        "en": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+        "hi": "सफलता अंतिम नहीं और असफलता घातक नहीं; जो मायने रखता है वह आगे बढ़ने का साहस है।",
+        "mr": ""
+      },
+      "summary_1line": "Keep going - that is what counts.",
+      "summary_2to3line": "Neither triumph nor defeat is the endpoint. The variable that matters most is the willingness to continue.",
+      "bodh_3to4line": "Treat both success and failure as weather, not climate. Do not get attached to either. The habit of beginning again is the real asset.",
+      "tags": [
+        "courage",
+        "perseverance"
+      ]
+    },
+    {
+      "id": "mot-4",
+      "text": "Start where you are. Use what you have. Do what you can.",
+      "author": "Arthur Ashe",
+      "translations": {
+        "en": "Start where you are. Use what you have. Do what you can.",
+        "hi": "जहाँ हो वहीं से शुरू करो, जो है उसी से करो, जो कर सकते हो वही करो।",
+        "mr": ""
+      },
+      "summary_1line": "Begin with what you already have.",
+      "summary_2to3line": "Perfect conditions are a fantasy. The work starts with the tools and time you actually possess right now.",
+      "bodh_3to4line": "Waiting for ideal circumstances is a comfortable way to never start. Take inventory of what you have today and make the smallest real move with it. That is always enough to begin.",
+      "tags": [
+        "starting",
+        "resourcefulness"
+      ]
+    },
+    {
+      "id": "mot-5",
+      "text": "Believe you can and you're halfway there.",
+      "author": "Attributed to Theodore Roosevelt",
+      "translations": {
+        "en": "Believe you can and you're halfway there.",
+        "hi": "मान लो कि तुम कर सकते हो, तो आधा रास्ता तय हो गया।",
+        "mr": ""
+      },
+      "summary_1line": "Belief is half the distance.",
+      "summary_2to3line": "Confidence is not a guarantee of success, but its absence guarantees hesitation. Expectation shapes effort.",
+      "bodh_3to4line": "Self-belief is not vanity; it is fuel. It changes how long you try and how well you recover. Feed it with evidence of your own past persistence.",
+      "tags": [
+        "confidence",
+        "belief"
+      ]
+    }
+  ]
+}
