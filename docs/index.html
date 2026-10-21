@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Daily Bodh — one shloka or thought a day, fully offline</title>
+<meta name="description" content="Daily Bodh is a free, fully offline Android app and home-screen widget that shows one Bhagavad Gita shloka or one thought per day. No internet permission, no accounts, no ads, no tracking." />
+<meta property="og:title" content="Daily Bodh" />
+<meta property="og:description" content="One shloka or thought a day on your home screen. Fully offline Android app." />
+<meta property="og:type" content="website" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%231A237E'/%3E%3Ctext x='50' y='68' font-size='54' text-anchor='middle' fill='white' font-family='Georgia,serif'%3E%E0%A5%90%3C/text%3E%3C/svg%3E" />
+<style>
+  :root{
+    --indigo:#1A237E; --indigo-2:#2A34A0; --gold:#E8B84B;
+    --ink:#1B1B1F; --muted:#5B5B66; --cream:#F6F3EC; --card:#FFFFFF;
+    --line:#E6E2D8; --radius:18px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;
+       color:var(--ink);background:var(--cream);line-height:1.6}
+  a{color:var(--indigo-2)}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+  header.nav{position:sticky;top:0;z-index:20;background:rgba(246,243,236,.9);backdrop-filter:blur(8px);
+             border-bottom:1px solid var(--line)}
+  .nav .wrap{display:flex;align-items:center;gap:16px;height:60px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px}
+  .mark{width:30px;height:30px;border-radius:8px;background:var(--indigo);color:#fff;display:grid;
+        place-items:center;font-family:Georgia,serif;font-size:18px}
+  .nav nav{margin-left:auto;display:flex;gap:18px;font-size:15px}
+  .nav nav a{text-decoration:none;color:var(--muted)}
+  .nav nav a:hover{color:var(--indigo)}
+  @media(max-width:640px){.nav nav{display:none}}
+
+  .hero{background:linear-gradient(160deg,#1A237E 0%,#131A5C 55%,#0E1240 100%);color:#fff;
+        padding:72px 0 84px;position:relative;overflow:hidden}
+  .hero:after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;
+              background:radial-gradient(circle,rgba(232,184,75,.22),transparent 62%)}
+  .hero .wrap{position:relative;z-index:1;max-width:760px}
+  .kicker{display:inline-block;font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+          color:var(--gold);font-weight:700;margin-bottom:14px}
+  h1{font-size:clamp(2.1rem,5vw,3.3rem);line-height:1.1;margin:0 0 14px;font-weight:800}
+  .hero p.lead{font-size:clamp(1.05rem,2.2vw,1.28rem);color:#D9DCF2;margin:0 0 26px;max-width:640px}
+  .btns{display:flex;flex-wrap:wrap;gap:12px}
+  .btn{display:inline-flex;align-items:center;gap:9px;padding:13px 20px;border-radius:999px;
+       font-weight:650;text-decoration:none;font-size:15px;border:1px solid transparent;cursor:pointer}
+  .btn.primary{background:var(--gold);color:#241C00}
+  .btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.4)}
+  .btn.ghost:hover{background:rgba(255,255,255,.1)}
+  .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .badge{font-size:13px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.1);
+         border:1px solid rgba(255,255,255,.2);color:#E7E9F8}
+
+  section{padding:64px 0}
+  h2{font-size:clamp(1.5rem,3.4vw,2rem);margin:0 0 10px;font-weight:800}
+  .sub{color:var(--muted);margin:0 0 30px;max-width:680px}
+  .grid{display:grid;gap:18px}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:820px){.g3,.g2{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+  .card h3{margin:0 0 6px;font-size:1.06rem}
+  .card p{margin:0;color:var(--muted);font-size:.96rem}
+  .ico{width:38px;height:38px;border-radius:10px;background:#EEF0FB;color:var(--indigo);
+       display:grid;place-items:center;font-size:19px;margin-bottom:12px}
+
+  .packs{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+  .pill{background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 15px;font-size:.92rem}
+  .pill b{color:var(--indigo)}
+
+  .privacy{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .priv-line{font-size:1.2rem;font-weight:700;color:var(--indigo);margin:0 0 14px}
+  ul.ticks{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+  ul.ticks li{padding-left:30px;position:relative;color:#33333a}
+  ul.ticks li:before{content:"✓";position:absolute;left:0;top:0;color:#1B7F3B;font-weight:800}
+
+  .steps{counter-reset:s;display:grid;gap:16px}
+  .step{position:relative;padding:20px 22px 20px 66px;background:#fff;border:1px solid var(--line);
+        border-radius:var(--radius)}
+  .step:before{counter-increment:s;content:counter(s);position:absolute;left:20px;top:20px;width:32px;height:32px;
+               border-radius:50%;background:var(--indigo);color:#fff;display:grid;place-items:center;font-weight:700}
+  .step h3{margin:0 0 4px;font-size:1rem}
+  .step p{margin:0;color:var(--muted);font-size:.95rem}
+  pre{background:#12143A;color:#E9EAF7;padding:14px 16px;border-radius:12px;overflow:auto;
+      font-size:13.5px;margin:10px 0 0;line-height:1.5}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  .notice{background:#FFF7E2;border:1px solid #F0DDA8;border-radius:14px;padding:16px 18px;
+          font-size:.96rem;color:#5A4600;margin:0 0 26px}
+  .notice b{color:#3E3000}
+
+  footer{background:#0E1240;color:#B9BDD9;padding:40px 0;font-size:.92rem}
+  footer a{color:#DCE0F7}
+  .foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <div class="brand"><span class="mark">ॐ</span> Daily Bodh</div>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#packs">Content</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#install">Install</a>
+      <a href="https://github.com/devrajai/daily-bodh">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <span class="kicker">Free · Open source · Offline</span>
+    <h1>One shloka or thought a day, on your home screen.</h1>
+    <p class="lead">Daily Bodh is a quiet Android app and home-screen widget. The Bhagavad Gita,
+      verse by verse, or a short daily thought — beautifully placed, entirely on your device.</p>
+    <div class="btns">
+      <a class="btn primary" href="#install">Build &amp; install</a>
+      <a class="btn ghost" href="https://github.com/devrajai/daily-bodh">View source on GitHub</a>
+    </div>
+    <div class="badges">
+      <span class="badge">No internet permission</span>
+      <span class="badge">No accounts</span>
+      <span class="badge">No ads or analytics</span>
+      <span class="badge">Kotlin · Jetpack Compose · Glance</span>
+    </div>
+  </div>
+</div>
+
+<section id="features">
+  <div class="wrap">
+    <h2>A widget that behaves like a daily ritual</h2>
+    <p class="sub">Place it, forget it, and let it change by itself at midnight.</p>
+    <div class="grid g3">
+      <div class="card"><div class="ico">📿</div><h3>Gita, in order</h3>
+        <p>One shloka per day, in sequence, looping back after the end. Or pick any other pack.</p></div>
+      <div class="card"><div class="ico">🌗</div><h3>Changes at midnight</h3>
+        <p>A background job refreshes every widget after midnight, so the day's content is always current.</p></div>
+      <div class="card"><div class="ico">🗂️</div><h3>Many widgets, many packs</h3>
+        <p>Each widget on your home screen can show a different pack, language and colour at the same time.</p></div>
+      <div class="card"><div class="ico">🔤</div><h3>Six ways to read</h3>
+        <p>Original, transliteration, translation, 1-line summary, 2–3 line summary, or a 3–4 line bodh.</p></div>
+      <div class="card"><div class="ico">🎨</div><h3>Full control</h3>
+        <p>Background colour and transparency, shadow, corner radius, font colour, size, style and widget size.</p></div>
+      <div class="card"><div class="ico">📤</div><h3>Favourite &amp; share</h3>
+        <p>Tap the widget for the full view, save favourites, and share any verse as an image.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="packs" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <h2>Seven content packs, ready to grow</h2>
+    <p class="sub">All content is plain JSON bundled inside the app. Add your own verses and thoughts
+      without writing a line of code.</p>
+    <div class="packs">
+      <span class="pill"><b>Bhagavad Gita</b> — 700 shlokas, in order</span>
+      <span class="pill">Business</span>
+      <span class="pill">Leadership</span>
+      <span class="pill">Self-Discipline &amp; Willpower</span>
+      <span class="pill">Be a Gentleman</span>
+      <span class="pill">Motivation</span>
+      <span class="pill">Inner Thoughts</span>
+    </div>
+    <p class="sub" style="margin-top:22px;margin-bottom:0">
+      Languages ship with English and Hindi, and adding another is a two-line change.
+    </p>
+  </div>
+</section>
+
+<section id="privacy" class="privacy">
+  <div class="wrap">
+    <h2>Private by construction</h2>
+    <p class="priv-line">No data is collected. Works fully offline.</p>
+    <ul class="ticks">
+      <li>The app declares <b>no INTERNET permission</b> — it physically cannot reach the network.</li>
+      <li>No login, no account, no sign-up of any kind.</li>
+      <li>No ads, no trackers, no analytics, no crash reporting.</li>
+      <li>All content ships inside the app; all your settings stay on your device.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="install">
+  <div class="wrap">
+    <h2>Install</h2>
+    <p class="sub">Daily Bodh is built from source. There is no published APK download yet — the steps
+      below produce one on your own machine in a few minutes.</p>
+
+    <div class="notice">
+      <b>Heads up:</b> a signed APK is not hosted here yet. Clone the project and build it yourself
+      (or open it in Android Studio and press Run). The whole app is open source.
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <h3>Get the code</h3>
+        <p>Clone the repository.</p>
+        <pre><code>git clone https://github.com/devrajai/daily-bodh.git
+cd daily-bodh</code></pre>
+      </div>
+      <div class="step">
+        <h3>Build the APK</h3>
+        <p>With JDK 17 and the Android SDK installed. Use <code>gradlew.bat</code> on Windows.</p>
+        <pre><code>./gradlew assembleDebug
+# -> app/build/outputs/apk/debug/app-debug.apk</code></pre>
+      </div>
+      <div class="step">
+        <h3>Install on your phone</h3>
+        <p>With the phone connected over USB and debugging enabled.</p>
+        <pre><code>adb install -r app/build/outputs/apk/debug/app-debug.apk</code></pre>
+      </div>
+      <div class="step">
+        <h3>Add the widget</h3>
+        <p>Long-press your home screen → Widgets → Daily Bodh → drag it out and pick a pack.</p>
+      </div>
+    </div>
+
+    <p class="sub" style="margin-top:26px">
+      Prefer Android Studio? Open the folder, let Gradle sync, and press Run. Full instructions,
+      including signing a release build, are in the project README.
+    </p>
+    <div class="btns">
+      <a class="btn primary" href="https://github.com/devrajai/daily-bodh" style="background:var(--indigo);color:#fff">Open the repository</a>
+      <a class="btn ghost" href="https://github.com/devrajai/daily-bodh/blob/main/README.md" style="color:var(--indigo);border-color:var(--indigo)">Read the README</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div>Daily Bodh — a personal, offline reading widget. Built with Kotlin &amp; Jetpack Compose.</div>
+    <div><a href="https://github.com/devrajai/daily-bodh">github.com/devrajai/daily-bodh</a></div>
+  </div>
+</footer>
+
+</body>
+</html>
