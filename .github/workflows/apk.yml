@@ -1,8 +1,9 @@
 name: Build APK
 
-# Builds the debug APK on GitHub's runners, generates the full Bhagavad Gita pack
-# from the public-domain source, and publishes the APK into docs/download/ so the
-# GitHub Pages site can serve it. Also attaches the APK to a release.
+# Builds both flavours on GitHub's runners, generates the full Bhagavad Gita pack
+# from the public-domain source, and publishes the APKs plus the update manifest
+# into docs/download/ so the GitHub Pages site can serve them. Also attaches the
+# APKs to a release.
 
 on:
   push:
@@ -47,33 +48,45 @@ jobs:
       - name: Generate the full Gita pack (18 chapters, 701 shlokas)
         run: python3 tools/build_gita.py --src /tmp/gitasrc --out app/src/main/assets/content/gita.json
 
-      - name: Build debug APK
+      - name: Build both flavours
         run: |
           chmod +x gradlew
-          ./gradlew assembleDebug --no-daemon --stacktrace
+          ./gradlew assembleOfflineDebug assembleUpdaterDebug --no-daemon --stacktrace
 
-      - name: Stage APK for the website
+      - name: Stage APKs and the update manifest
         run: |
+          set -e
           mkdir -p docs/download
-          cp app/build/outputs/apk/debug/app-debug.apk docs/download/DailyBodh-1.0-debug.apk
+          cp app/build/outputs/apk/offline/debug/app-offline-debug.apk docs/download/DailyBodh-offline.apk
+          cp app/build/outputs/apk/updater/debug/app-updater-debug.apk docs/download/DailyBodh-updater.apk
+          VCODE=$(grep -oE 'versionCode = [0-9]+' app/build.gradle.kts | grep -oE '[0-9]+' | head -1)
+          VNAME=$(grep -oE 'versionName = "[^"]+"' app/build.gradle.kts | sed 's/.*"\(.*\)"/\1/' | head -1)
+          printf '{"versionCode": %s, "versionName": "%s", "apk": "DailyBodh-updater.apk", "notes": "Daily Bodh %s"}\n' \
+            "$VCODE" "$VNAME" "$VNAME" > docs/download/latest.json
           ls -la docs/download
+          cat docs/download/latest.json
 
-      - name: Publish APK and the generated pack
+      - name: Publish APKs, manifest and the generated pack
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/download/DailyBodh-1.0-debug.apk app/src/main/assets/content/gita.json
+          git add docs/download/DailyBodh-offline.apk \
+                  docs/download/DailyBodh-updater.apk \
+                  docs/download/latest.json \
+                  app/src/main/assets/content/gita.json
           if git diff --staged --quiet; then
             echo "nothing to publish"
           else
-            git commit -m "Publish APK and generated Gita pack [skip ci]"
+            git commit -m "Publish APKs, update manifest and generated Gita pack [skip ci]"
             git push
           fi
 
-      - name: Attach APK to a release
+      - name: Attach APKs to a release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: latest-build
           name: Latest build
-          body: "Automatically built debug APK of Daily Bodh, with the complete Bhagavad Gita."
-          files: app/build/outputs/apk/debug/app-debug.apk
+          body: "Automatically built debug APKs of Daily Bodh: the offline build and the updater build."
+          files: |
+            docs/download/DailyBodh-offline.apk
+            docs/download/DailyBodh-updater.apk
