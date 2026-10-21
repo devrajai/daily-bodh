@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Daily Bodh content pack",
+  "type": "object",
+  "required": [
+    "packId",
+    "packName",
+    "items"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "packId": {
+      "type": "string",
+      "description": "Stable id used by the app, e.g. \"gita\"."
+    },
+    "packName": {
+      "type": "string",
+      "description": "Name shown in the UI."
+    },
+    "description": {
+      "type": "string"
+    },
+    "version": {
+      "type": "integer",
+      "default": 1
+    },
+    "ordering": {
+      "type": "string",
+      "enum": [
+        "sequential",
+        "daily"
+      ],
+      "default": "daily",
+      "description": "sequential = advance one item per day in order (Gita). daily = pick by day-of-year."
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique within the pack."
+          },
+          "chapter": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "verse": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "sanskrit": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "transliteration": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "translations": {
+            "type": "object",
+            "description": "Language code -> text. Add any language you like.",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "summary_1line": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "summary_2to3line": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "bodh_3to4line": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "text": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Generic body for non-Gita packs."
+          },
+          "author": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
