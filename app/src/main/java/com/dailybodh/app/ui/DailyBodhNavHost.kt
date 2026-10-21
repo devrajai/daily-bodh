@@ -11,6 +11,7 @@ import com.dailybodh.app.ui.screens.DetailScreen
 import com.dailybodh.app.ui.screens.FavoritesScreen
 import com.dailybodh.app.ui.screens.HomeScreen
 import com.dailybodh.app.ui.screens.PackLibraryScreen
+import com.dailybodh.app.ui.screens.SoundsScreen
 import com.dailybodh.app.ui.screens.WidgetSettingsScreen
 
 @Composable
@@ -21,6 +22,7 @@ fun DailyBodhNavHost(vm: MainViewModel) {
         composable("library") { PackLibraryScreen(vm, nav) }
         composable("widget") { WidgetSettingsScreen(vm, nav) }
         composable("favorites") { FavoritesScreen(vm, nav) }
+        composable("sounds") { SoundsScreen(vm, nav) }
         composable("about") { AboutScreen(vm, nav) }
         composable(
             "detail/{packId}/{itemId}",

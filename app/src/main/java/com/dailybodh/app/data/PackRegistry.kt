@@ -14,6 +14,9 @@ data class PackInfo(
 object PackRegistry {
     val packs: List<PackInfo> = listOf(
         PackInfo("gita", "content/gita.json", "Bhagavad Gita"),
+        PackInfo("aarti", "content/aarti.json", "Aarti & Prayers"),
+        PackInfo("mantras", "content/mantras.json", "Mantras"),
+        PackInfo("puja", "content/puja.json", "Puja & Rituals"),
         PackInfo("business", "content/business_quotes.json", "Business"),
         PackInfo("leadership", "content/leadership.json", "Leadership"),
         PackInfo("discipline", "content/self_discipline.json", "Self-Discipline"),
