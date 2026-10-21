@@ -38,9 +38,7 @@ import androidx.navigation.NavController
 import com.dailybodh.app.data.ContentPicker
 import com.dailybodh.app.data.model.ContentItem
 import com.dailybodh.app.ui.MainViewModel
-import com.dailybodh.app.ui.favItem
 import com.dailybodh.app.ui.favKey
-import com.dailybodh.app.ui.favPack
 import java.time.LocalDate
 
 @Composable
@@ -143,6 +141,7 @@ fun BottomBar(nav: NavController, current: String) {
         Triple("library", "Library", Icons.Filled.FavoriteBorder),
         Triple("widget", "Widget", Icons.Filled.FavoriteBorder),
         Triple("favorites", "Favorites", Icons.Filled.Favorite),
+        Triple("sounds", "Sounds", Icons.Filled.FavoriteBorder),
         Triple("about", "About", Icons.Filled.FavoriteBorder)
     )
     NavigationBar {
