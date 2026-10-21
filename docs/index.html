@@ -15,8 +15,8 @@
   :root{
     --indigo:#1A237E; --indigo-2:#2A34A0; --gold:#E8B84B;
     --ink:#1B1B1F; --muted:#5B5B66; --cream:#F6F3EC; --card:#FFFFFF;
-    --line:#E6E2D8; --radius:18px;
-    --pad:20px;
+    --line:#E6E2D8; --radius:18px; --pad:20px;
+    --safe-b:env(safe-area-inset-bottom,0px);
   }
   *{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
@@ -27,55 +27,63 @@
   a{color:var(--indigo-2)}
   .wrap{max-width:1060px;margin:0 auto;padding:0 var(--pad)}
 
-  /* ---- header ---- */
-  header.nav{position:sticky;top:0;z-index:20;background:rgba(246,243,236,.94);backdrop-filter:blur(10px);
+  /* ---------- header ---------- */
+  header.nav{position:sticky;top:0;z-index:30;background:rgba(246,243,236,.95);backdrop-filter:blur(10px);
              border-bottom:1px solid var(--line)}
-  .nav .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:10px var(--pad)}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px}
+  .nav .wrap{display:flex;align-items:center;gap:10px;padding:9px var(--pad);min-height:58px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;text-decoration:none;color:var(--ink);
+         font-size:16px;letter-spacing:.1px}
   .mark{width:30px;height:30px;border-radius:8px;background:var(--indigo);color:#fff;display:grid;
-        place-items:center;font-family:Georgia,serif;font-size:18px;flex:0 0 auto}
-  .nav nav{display:flex;gap:4px;margin-left:auto;overflow-x:auto;max-width:100%;
-           scrollbar-width:none;-webkit-overflow-scrolling:touch}
-  .nav nav::-webkit-scrollbar{display:none}
-  .nav nav a{text-decoration:none;color:var(--muted);font-size:15px;padding:9px 12px;border-radius:999px;
-             white-space:nowrap}
-  .nav nav a:hover{color:var(--indigo);background:#ECEAE0}
-  @media(max-width:720px){
-    .nav nav{margin-left:0;order:2;width:100%;border-top:1px solid var(--line);padding-top:6px;padding-bottom:2px}
-    .nav nav a{font-size:14px;padding:8px 10px}
+        place-items:center;font-family:Georgia,serif;font-size:17px;flex:0 0 auto}
+  .links{display:flex;gap:2px;margin-left:auto}
+  .links a{text-decoration:none;color:var(--muted);font-size:15px;padding:9px 12px;border-radius:999px;
+           white-space:nowrap;min-height:40px;display:inline-flex;align-items:center}
+  .links a:hover{color:var(--indigo);background:#ECEAE0}
+  .headcta{margin-left:8px;padding:10px 16px;min-height:40px;font-size:14px}
+  .burger{display:none;margin-left:auto;background:none;border:1px solid var(--line);border-radius:10px;
+          width:44px;height:44px;font-size:20px;line-height:1;color:var(--indigo);cursor:pointer}
+  @media(max-width:800px){
+    .links{display:none}
+    body.navopen .links{display:flex;flex-direction:column;align-items:stretch;gap:2px;
+      position:absolute;left:0;right:0;top:100%;background:#fff;border-bottom:1px solid var(--line);
+      padding:8px var(--pad) 14px;box-shadow:0 12px 24px rgba(0,0,0,.08)}
+    body.navopen .links a{padding:14px 10px;font-size:16px;border-radius:12px}
+    .burger{display:block}
+    .headcta{margin-left:auto;margin-right:8px}
   }
+  @media(max-width:400px){.headcta{display:none}}
 
-  /* ---- hero ---- */
+  /* ---------- hero ---------- */
   .hero{background:linear-gradient(160deg,#1A237E 0%,#131A5C 55%,#0E1240 100%);color:#fff;
-        padding:64px 0 72px;position:relative;overflow:hidden}
+        padding:60px 0 66px;position:relative;overflow:hidden}
   .hero:after{content:"";position:absolute;right:-140px;top:-140px;width:420px;height:420px;border-radius:50%;
               background:radial-gradient(circle,rgba(232,184,75,.22),transparent 62%);pointer-events:none}
   .hero .wrap{position:relative;z-index:1;max-width:760px}
   .kicker{display:inline-block;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
           color:var(--gold);font-weight:700;margin-bottom:14px}
-  h1{font-size:clamp(1.9rem,7vw,3.3rem);line-height:1.12;margin:0 0 14px;font-weight:800;
+  h1{font-size:clamp(1.85rem,6.6vw,3.3rem);line-height:1.12;margin:0 0 14px;font-weight:800;
      letter-spacing:-.02em;text-wrap:balance}
-  .hero p.lead{font-size:clamp(1rem,3.4vw,1.28rem);color:#D9DCF2;margin:0 0 26px;max-width:640px}
+  .hero p.lead{font-size:clamp(1rem,3.3vw,1.25rem);color:#D9DCF2;margin:0 0 26px;max-width:640px}
   .btns{display:flex;flex-wrap:wrap;gap:12px}
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:14px 22px;border-radius:999px;
        font-weight:650;text-decoration:none;font-size:15px;border:1px solid transparent;cursor:pointer;
-       min-height:48px;text-align:center}
+       min-height:50px;text-align:center}
   .btn.primary{background:var(--gold);color:#241C00}
   .btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.45)}
   .btn.ghost:hover{background:rgba(255,255,255,.1)}
+  .btn.dark{background:var(--indigo);color:#fff}
   .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
   .badge{font-size:13px;padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.1);
          border:1px solid rgba(255,255,255,.2);color:#E7E9F8}
 
-  /* ---- sections ---- */
-  section{padding:60px 0}
-  h2{font-size:clamp(1.4rem,5.4vw,2rem);margin:0 0 10px;font-weight:800;letter-spacing:-.01em;text-wrap:balance}
-  .sub{color:var(--muted);margin:0 0 28px;max-width:680px;font-size:1rem}
+  /* ---------- sections ---------- */
+  section{padding:58px 0;scroll-margin-top:74px}
+  h2{font-size:clamp(1.4rem,5.2vw,2rem);margin:0 0 10px;font-weight:800;letter-spacing:-.01em;text-wrap:balance}
+  .sub{color:var(--muted);margin:0 0 26px;max-width:680px;font-size:1rem}
   .grid{display:grid;gap:16px}
   .g3{grid-template-columns:repeat(3,1fr)}
-  .g2{grid-template-columns:repeat(2,1fr)}
   @media(max-width:860px){.g3{grid-template-columns:1fr 1fr}}
-  @media(max-width:600px){.g3,.g2{grid-template-columns:1fr}}
+  @media(max-width:600px){.g3{grid-template-columns:1fr}}
   .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
   .card h3{margin:0 0 6px;font-size:1.06rem}
   .card p{margin:0;color:var(--muted);font-size:.96rem}
@@ -86,7 +94,22 @@
   .pill{background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 15px;font-size:.92rem}
   .pill b{color:var(--indigo)}
 
-  .privacy{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  /* ---------- download ---------- */
+  #download{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .dl{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:start}
+  @media(max-width:780px){.dl{grid-template-columns:1fr}}
+  .dlcard{background:linear-gradient(160deg,#1A237E,#0E1240);color:#fff;border-radius:22px;padding:26px}
+  .dlcard .ver{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700}
+  .dlcard h3{margin:8px 0 4px;font-size:1.5rem}
+  .dlcard p{margin:0 0 18px;color:#C9CDE8;font-size:.95rem}
+  .dlcard .btn{width:100%}
+  .meta{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;font-size:13px;color:#C9CDE8}
+  .meta b{display:block;color:#fff;font-weight:600;font-size:14px}
+  .hash{word-break:break-all;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;color:#9AA0C9}
+  ol.how{margin:0;padding-left:20px;display:grid;gap:9px;color:#33333a}
+  ol.how li{padding-left:2px}
+
+  .privacy{background:var(--cream)}
   .priv-line{font-size:clamp(1.1rem,4vw,1.25rem);font-weight:700;color:var(--indigo);margin:0 0 14px}
   ul.ticks{list-style:none;padding:0;margin:0;display:grid;gap:10px}
   ul.ticks li{padding-left:30px;position:relative;color:#33333a}
@@ -104,21 +127,26 @@
     .step:before{left:16px;top:16px;width:28px;height:28px;font-size:14px}
   }
   pre{background:#12143A;color:#E9EAF7;padding:14px 16px;border-radius:12px;overflow-x:auto;
-      font-size:13.5px;margin:10px 0 0;line-height:1.55;white-space:pre;max-width:100%}
+      font-size:13px;margin:10px 0 0;line-height:1.55;white-space:pre;max-width:100%}
   code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;word-break:break-word}
-  .notice{background:#FFF7E2;border:1px solid #F0DDA8;border-radius:14px;padding:16px 18px;
-          font-size:.96rem;color:#5A4600;margin:0 0 24px}
+  details.src{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:4px 18px}
+  details.src summary{cursor:pointer;padding:14px 0;font-weight:650;min-height:48px;display:flex;align-items:center}
+  details.src[open] summary{border-bottom:1px solid var(--line);margin-bottom:12px}
+  details.src .inner{padding-bottom:16px}
+  .notice{background:#FFF7E2;border:1px solid #F0DDA8;border-radius:14px;padding:15px 17px;
+          font-size:.94rem;color:#5A4600;margin:16px 0 0}
   .notice b{color:#3E3000}
 
-  footer{background:#0E1240;color:#B9BDD9;padding:36px 0;font-size:.92rem}
+  footer{background:#0E1240;color:#B9BDD9;padding:34px 0 calc(34px + var(--safe-b));font-size:.92rem}
   .foot{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
 
   @media(max-width:480px){
     :root{--pad:16px}
-    section{padding:48px 0}
-    .hero{padding:44px 0 52px}
+    section{padding:44px 0}
+    .hero{padding:42px 0 50px}
     .btns .btn{width:100%}
     .card{padding:18px}
+    .meta{grid-template-columns:1fr}
   }
 </style>
 </head>
@@ -126,31 +154,34 @@
 
 <header class="nav">
   <div class="wrap">
-    <div class="brand"><span class="mark">&#2384;</span> Daily Bodh</div>
-    <nav>
+    <a class="brand" href="#top"><span class="mark">&#2384;</span> Daily Bodh</a>
+    <nav class="links" id="links">
       <a href="#features">Features</a>
       <a href="#packs">Content</a>
+      <a href="#download">Download</a>
       <a href="#privacy">Privacy</a>
       <a href="#install">Install</a>
     </nav>
+    <a class="btn primary headcta" href="download/DailyBodh-1.0-debug.apk" download>Download</a>
+    <button class="burger" aria-label="Open menu" onclick="document.body.classList.toggle('navopen')">&#9776;</button>
   </div>
 </header>
 
-<div class="hero">
+<div class="hero" id="top">
   <div class="wrap">
     <span class="kicker">Free &middot; Offline &middot; No tracking</span>
     <h1>One shloka or thought a day, on your home screen.</h1>
     <p class="lead">Daily Bodh is a quiet Android app and home-screen widget. The Bhagavad Gita,
       verse by verse, or a short daily thought &mdash; beautifully placed, entirely on your device.</p>
     <div class="btns">
-      <a class="btn primary" href="#install">How to install</a>
-      <a class="btn ghost" href="#features">See what&rsquo;s inside</a>
+      <a class="btn primary" href="download/DailyBodh-1.0-debug.apk" download>Download the app (11 MB)</a>
+      <a class="btn ghost" href="#install">How to install</a>
     </div>
     <div class="badges">
       <span class="badge">No internet permission</span>
       <span class="badge">No accounts</span>
       <span class="badge">No ads or analytics</span>
-      <span class="badge">Kotlin &middot; Jetpack Compose &middot; Glance</span>
+      <span class="badge">Android 8.0+</span>
     </div>
   </div>
 </div>
@@ -196,6 +227,42 @@
   </div>
 </section>
 
+<section id="download">
+  <div class="wrap">
+    <h2>Download</h2>
+    <p class="sub">Grab the APK and install it straight on your phone. It is a self-signed build, so
+      your phone will ask you to allow installs from this source once.</p>
+    <div class="dl">
+      <div class="dlcard">
+        <div class="ver">Latest build</div>
+        <h3>Daily Bodh 1.0</h3>
+        <p>Debug build &middot; 11 MB &middot; Android 8.0 and above</p>
+        <a class="btn primary" href="download/DailyBodh-1.0-debug.apk" download>Download APK</a>
+        <div class="meta">
+          <div><b>Package</b>com.dailybodh.app</div>
+          <div><b>Version</b>1.0 (code 1)</div>
+          <div><b>Minimum</b>Android 8.0 (API 26)</div>
+          <div><b>Target</b>Android 14 (API 34)</div>
+        </div>
+        <p class="hash" style="margin-top:14px">SHA-256: 06d1e12c230ae7ab2ccecac0c5657039ae0f6533cb3cc1fbeec3f50e5ae1c94e</p>
+      </div>
+      <div>
+        <h3 style="margin-top:0">Install in three steps</h3>
+        <ol class="how">
+          <li>Tap <b>Download APK</b> above.</li>
+          <li>Open the downloaded file. If Android blocks it, allow
+            &ldquo;Install unknown apps&rdquo; for your browser or file manager, then tap Install.</li>
+          <li>Open <b>Daily Bodh</b>, then long-press your home screen &rarr; Widgets &rarr; Daily Bodh.</li>
+        </ol>
+        <div class="notice">
+          <b>Why a warning?</b> This app is not distributed through an app store, so Android shows a
+          standard caution for sideloaded apps. The APK is signed and contains no network permission.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="privacy" class="privacy">
   <div class="wrap">
     <h2>Private by construction</h2>
@@ -211,45 +278,39 @@
 
 <section id="install">
   <div class="wrap">
-    <h2>Install</h2>
-    <p class="sub">Daily Bodh is built from source. There is no app-store download &mdash; the steps below
-      produce the app on your own machine in a few minutes.</p>
+    <h2>Install &amp; build</h2>
+    <p class="sub">Most people just want the APK above. If you would rather build it yourself, or you
+      want to change the content, the source is here.</p>
 
-    <div class="notice">
-      <b>Heads up:</b> a ready-made APK is not published here. Build it yourself from the project
-      folder, or open it in Android Studio and press Run.
-    </div>
-
-    <div class="steps">
-      <div class="step">
-        <h3>Open the project</h3>
-        <p>Open the <b>DailyBodh</b> folder in Android Studio (Koala 2024.1 or newer).</p>
-      </div>
-      <div class="step">
-        <h3>Let Gradle sync</h3>
-        <p>Android Studio downloads the build tools and dependencies on first open. Use JDK 17.</p>
-      </div>
-      <div class="step">
-        <h3>Build the APK</h3>
-        <p>Press <b>Run</b>, or from the project folder in a terminal (use <code>gradlew.bat</code> on Windows):</p>
-        <pre><code>./gradlew assembleDebug
+    <details class="src">
+      <summary>Build the app from source</summary>
+      <div class="inner">
+        <div class="steps">
+          <div class="step">
+            <h3>Open the project</h3>
+            <p>Open the project folder in Android Studio (Koala 2024.1 or newer) with JDK 17.</p>
+          </div>
+          <div class="step">
+            <h3>Let Gradle sync</h3>
+            <p>Android Studio downloads the build tools and dependencies on first open.</p>
+          </div>
+          <div class="step">
+            <h3>Build the APK</h3>
+            <p>Press <b>Run</b>, or from the project folder in a terminal (use <code>gradlew.bat</code> on Windows):</p>
+            <pre><code>./gradlew assembleDebug
 # -&gt; app/build/outputs/apk/debug/app-debug.apk</code></pre>
+          </div>
+          <div class="step">
+            <h3>Install on your phone</h3>
+            <p>With the phone connected over USB and debugging enabled:</p>
+            <pre><code>adb install -r app/build/outputs/apk/debug/app-debug.apk</code></pre>
+          </div>
+        </div>
+        <p class="sub" style="margin:18px 0 0">
+          The README covers signing a release build and how to add your own content to the JSON packs.
+        </p>
       </div>
-      <div class="step">
-        <h3>Install on your phone</h3>
-        <p>With the phone connected over USB and debugging enabled:</p>
-        <pre><code>adb install -r app/build/outputs/apk/debug/app-debug.apk</code></pre>
-      </div>
-      <div class="step">
-        <h3>Add the widget</h3>
-        <p>Long-press your home screen &rarr; Widgets &rarr; Daily Bodh &rarr; drag it out and pick a pack.</p>
-      </div>
-    </div>
-
-    <p class="sub" style="margin-top:26px;margin-bottom:0">
-      Full instructions, including how to sign a release build and how to add your own content,
-      are in the project&rsquo;s README.
-    </p>
+    </details>
   </div>
 </section>
 
@@ -260,5 +321,10 @@
   </div>
 </footer>
 
+<script>
+  document.getElementById('links').addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') document.body.classList.remove('navopen');
+  });
+</script>
 </body>
 </html>

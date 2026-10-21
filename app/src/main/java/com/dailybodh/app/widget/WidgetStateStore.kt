@@ -8,6 +8,7 @@ import androidx.glance.GlanceId
 import androidx.glance.appwidget.GlanceAppWidgetManager
 import androidx.glance.appwidget.state.getAppWidgetState
 import androidx.glance.appwidget.state.updateAppWidgetState
+import androidx.glance.state.PreferencesGlanceStateDefinition
 import com.dailybodh.app.data.WidgetSettings
 import kotlinx.serialization.json.Json
 import java.time.LocalDate
@@ -26,7 +27,7 @@ object WidgetStateStore {
     private val json = Json { ignoreUnknownKeys = true; encodeDefaults = true }
 
     suspend fun readSettings(context: Context, glanceId: GlanceId): WidgetSettings {
-        val prefs = getAppWidgetState(context, glanceId)
+        val prefs = getAppWidgetState(context, PreferencesGlanceStateDefinition, glanceId)
         val raw = prefs[settingsKey] ?: return WidgetSettings()
         return runCatching { json.decodeFromString(WidgetSettings.serializer(), raw) }
             .getOrDefault(WidgetSettings())
@@ -39,14 +40,14 @@ object WidgetStateStore {
 
     /** The "change on tap" offset, reset automatically when the day changes. */
     suspend fun readOffset(context: Context, glanceId: GlanceId): Int {
-        val prefs = getAppWidgetState(context, glanceId)
+        val prefs = getAppWidgetState(context, PreferencesGlanceStateDefinition, glanceId)
         val today = LocalDate.now().toEpochDay()
         return if (prefs[offsetDayKey] == today) (prefs[offsetKey] ?: 0) else 0
     }
 
     suspend fun bumpOffset(context: Context, glanceId: GlanceId) {
         val today = LocalDate.now().toEpochDay()
-        val prefs = getAppWidgetState(context, glanceId)
+        val prefs = getAppWidgetState(context, PreferencesGlanceStateDefinition, glanceId)
         val current = if (prefs[offsetDayKey] == today) (prefs[offsetKey] ?: 0) else 0
         updateAppWidgetState(context, glanceId) { p ->
             p[offsetDayKey] = today
