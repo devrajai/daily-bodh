@@ -12,9 +12,26 @@ android {
         applicationId = "com.dailybodh.app"
         minSdk = 26
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.1"
         vectorDrawables { useSupportLibrary = true }
+    }
+
+    flavorDimensions += "distribution"
+    productFlavors {
+        // Fully offline: no INTERNET permission anywhere, no network code compiled in.
+        create("offline") {
+            dimension = "distribution"
+            buildConfigField("boolean", "UPDATE_CHECKS_ENABLED", "false")
+            resValue("string", "build_variant_label", "Offline build")
+        }
+        // Adds the nightly update check. INTERNET + install permission live in
+        // src/updater/AndroidManifest.xml so the offline build never gets them.
+        create("updater") {
+            dimension = "distribution"
+            buildConfigField("boolean", "UPDATE_CHECKS_ENABLED", "true")
+            resValue("string", "build_variant_label", "Updater build")
+        }
     }
 
     buildTypes {
@@ -37,7 +54,10 @@ android {
     }
     kotlinOptions { jvmTarget = "17" }
 
-    buildFeatures { compose = true }
+    buildFeatures {
+        compose = true
+        buildConfig = true
+    }
     composeOptions { kotlinCompilerExtensionVersion = "1.5.14" }
 
     packaging {
