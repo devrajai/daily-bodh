@@ -1,0 +1,119 @@
+{
+ "packId": "mantras",
+ "packName": "Mantras",
+ "description": "Widely used mantras with meaning, and notes on when and how they are traditionally chanted.",
+ "version": 1,
+ "ordering": "daily",
+ "items": [
+  {
+   "id": "mantra-gayatri",
+   "text": "ॐ भूर्भुवः स्वः।\nतत्सवितुर्वरेण्यं।\nभर्गो देवस्य धीमहि।\nधियो यो नः प्रचोदयात्॥",
+   "transliteration": "om bhūr bhuvaḥ svaḥ\ntat savitur vareṇyaṁ\nbhargo devasya dhīmahi\ndhiyo yo naḥ pracodayāt",
+   "translations": {"en": "Om. We meditate on the radiant splendour of the Sun, the most worthy of reverence, across the three worlds. May it awaken our understanding.", "hi": "ॐ। हम तीनों लोकों में व्याप्त, सबसे पूजनीय सविता (सूर्य) के दिव्य तेज का ध्यान करते हैं। वह हमारी बुद्धि को प्रेरित करे।", "mr": ""},
+   "summary_1line": "The mother of the Vedic mantras",
+   "summary_2to3line": "A prayer to the sun for illumination of the mind — not for things, but for clear understanding.",
+   "bodh_3to4line": "Traditionally chanted at the three twilight junctions (dawn, noon, dusk), 3, 9, 27 or 108 times. It is the core of sandhya vandana. Anyone may chant it; the counts are a discipline, not a requirement.",
+   "tags": ["mantra", "vedic", "daily"]
+  },
+  {
+   "id": "mantra-mrityunjaya",
+   "text": "ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम्।\nउर्वारुकमिव बन्धनान् मृत्योर्मुक्षीय मामृतात्॥",
+   "transliteration": "om tryambakaṁ yajāmahe sugandhiṁ puṣṭi-vardhanam\nurvārukam iva bandhanān mṛtyor mukṣīya māmṛtāt",
+   "translations": {"en": "Om. We worship the three-eyed one, fragrant, who nourishes all beings. May he release us from death as a cucumber is freed from its vine — and not from immortality.", "hi": "ॐ। हम त्रिनेत्रधारी, सुगंधित, पुष्टि बढ़ाने वाले शिव की उपासना करते हैं। जैसे खीरा बेल से अलग होता है, वैसे ही वे हमें मृत्यु के बंधन से मुक्त करें — अमरता से नहीं।", "mr": ""},
+   "summary_1line": "The great victory-over-death mantra",
+   "summary_2to3line": "It asks for release from what binds us — illness, fear, the grip of mortality — while asking to be kept in life, not taken from it.",
+   "bodh_3to4line": "Chanted in times of illness, before a medical procedure, on birthdays and on Shivratri, often 108 times. Many families chant it as a daily protective mantra.",
+   "tags": ["mantra", "shiva", "health"]
+  },
+  {
+   "id": "mantra-om-namah-shivaya",
+   "text": "ॐ नमः शिवाय॥",
+   "transliteration": "om namaḥ śivāya",
+   "translations": {"en": "Om, I bow to Shiva — to the auspicious one within.", "hi": "ॐ, मैं शिव को नमन करता हूँ — भीतर स्थित कल्याणकारी को।", "mr": ""},
+   "summary_1line": "The five-syllable mantra of Shiva",
+   "summary_2to3line": "The five syllables are said to stand for the five elements; the mantra is a bow to the auspicious presence in all of them.",
+   "bodh_3to4line": "Chanted silently or aloud at any time, commonly 108 times on a mala. It needs no special setting — many people repeat it while walking or working.",
+   "tags": ["mantra", "shiva", "panchakshari"]
+  },
+  {
+   "id": "mantra-ganesh-vakratunda",
+   "text": "वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ।\nनिर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥",
+   "transliteration": "vakratuṇḍa mahākāya sūrya-koṭi sama-prabha\nnirvighnaṁ kuru me deva sarva-kāryeṣu sarvadā",
+   "translations": {"en": "O curved-trunked one, of great body, radiant as a million suns — remove my obstacles, O Lord, in all my undertakings, always.", "hi": "हे वक्रतुंड, महाकाय, करोड़ों सूर्यों के समान तेजस्वी! हे देव, मेरे सभी कार्यों में सदा विघ्न दूर कीजिए।", "mr": ""},
+   "summary_1line": "The mantra before beginning anything",
+   "summary_2to3line": "A single request, made to Ganesha, for the road ahead to be clear.",
+   "bodh_3to4line": "Chanted once at the start of a journey, an exam, a new job, a puja — any beginning. Ganesha is invoked first by convention.",
+   "tags": ["mantra", "ganesh", "beginnings"]
+  },
+  {
+   "id": "mantra-hare-krishna",
+   "text": "हरे कृष्ण हरे कृष्ण कृष्ण कृष्ण हरे हरे।\nहरे राम हरे राम राम राम हरे हरे॥",
+   "transliteration": "hare kṛṣṇa hare kṛṣṇa kṛṣṇa kṛṣṇa hare hare\nhare rāma hare rāma rāma rāma hare hare",
+   "translations": {"en": "Hare Krishna, Hare Krishna, Krishna Krishna, Hare Hare; Hare Rama, Hare Rama, Rama Rama, Hare Hare.", "hi": "हरे कृष्ण हरे कृष्ण, कृष्ण कृष्ण हरे हरे। हरे राम हरे राम, राम राम हरे हरे।", "mr": ""},
+   "summary_1line": "The great mantra of the names",
+   "summary_2to3line": "Sixteen names of the divine in a call-and-response form; it is sung rather than recited, and needs no meaning to be worked with.",
+   "bodh_3to4line": "Sung in kirtan, alone or in a group, with or without a count. In the Gaudiya Vaishnava tradition it is the principal practice of the age.",
+   "tags": ["mantra", "krishna", "kirtan"]
+  },
+  {
+   "id": "mantra-om-namo-bhagavate",
+   "text": "ॐ नमो भगवते वासुदेवाय॥",
+   "transliteration": "om namo bhagavate vāsudevāya",
+   "translations": {"en": "Om. I bow to the Lord Vasudeva (Krishna).", "hi": "ॐ। मैं भगवान वासुदेव (कृष्ण) को नमन करता हूँ।", "mr": ""},
+   "summary_1line": "A twelve-syllable mantra of Vishnu",
+   "summary_2to3line": "A bow to Vasudeva, the divine who dwells in all things. It is a complete prayer in four words.",
+   "bodh_3to4line": "Chanted 108 times on a mala, commonly on Ekadashi, Vaikuntha Ekadashi and Krishna Janmashtami, and as a daily remembrance.",
+   "tags": ["mantra", "vishnu", "krishna"]
+  },
+  {
+   "id": "mantra-saraswati",
+   "text": "ॐ ऐं सरस्वत्यै नमः॥",
+   "transliteration": "om aiṁ sarasvatyai namaḥ",
+   "translations": {"en": "Om, I bow to Saraswati, with the seed syllable Aim.", "hi": "ॐ, ऐं बीज सहित मैं सरस्वती को नमन करता हूँ।", "mr": ""},
+   "summary_1line": "A short mantra for learning",
+   "summary_2to3line": "A single-line invocation of Saraswati, used to ask for clarity of speech, memory and study.",
+   "bodh_3to4line": "Chanted before study, before an examination, or on Vasant Panchami — often 108 times, or simply three times before opening a book.",
+   "tags": ["mantra", "saraswati", "learning"]
+  },
+  {
+   "id": "mantra-lakshmi",
+   "text": "ॐ श्रीं ह्रीं श्रीं कमले कमलालये प्रसीद प्रसीद॥",
+   "transliteration": "om śrīṁ hrīṁ śrīṁ kamale kamalālaye prasīda prasīda",
+   "translations": {"en": "Om, Shrim Hrim Shrim — O you who dwell in the lotus, be pleased, be pleased.", "hi": "ॐ, श्रीं ह्रीं श्रीं — हे कमल में निवास करने वाली, प्रसन्न होइए, प्रसन्न होइए।", "mr": ""},
+   "summary_1line": "A mantra for Lakshmi",
+   "summary_2to3line": "It calls on the goddess who sits in the lotus, asking her to turn her attention toward the household.",
+   "bodh_3to4line": "Chanted on Fridays, on Diwali, and during Lakshmi puja, commonly 108 times. Often done after cleaning the house and lighting a lamp.",
+   "tags": ["mantra", "lakshmi", "wealth"]
+  },
+  {
+   "id": "mantra-durga",
+   "text": "ॐ ऐं ह्रीं क्लीं चामुण्डायै विच्चे॥",
+   "transliteration": "om aiṁ hrīṁ klīṁ cāmuṇḍāyai vicce",
+   "translations": {"en": "Om, Aim Hrim Klim — to Chamunda, the one who discerns.", "hi": "ॐ, ऐं ह्रीं क्लीं — विवेक रखने वाली चामुंडा को नमन।", "mr": ""},
+   "summary_1line": "A bija mantra of the Mother goddess",
+   "summary_2to3line": "Three seed syllables followed by an address to the fierce form of the goddess, invoked for courage and protection.",
+   "bodh_3to4line": "Chanted during Navratri and on Durga puja days, often 108 times. Traditionally recited with a steady, unhurried breath.",
+   "tags": ["mantra", "durga", "protection"]
+  },
+  {
+   "id": "mantra-hanuman",
+   "text": "ॐ हं हनुमते रुद्रात्मकाय हुं फट्॥",
+   "transliteration": "om haṁ hanumate rudrātmakāya huṁ phaṭ",
+   "translations": {"en": "Om, Ham — to Hanuman, who is of the nature of Rudra, Hum Phat.", "hi": "ॐ, हं — रुद्र स्वरूप हनुमान को नमन, हुं फट्।", "mr": ""},
+   "summary_1line": "A mantra for courage",
+   "summary_2to3line": "It invokes Hanuman as Rudra's own form — strength in service — and is used when courage is needed.",
+   "bodh_3to4line": "Chanted on Tuesdays and Saturdays, often 108 times, or a single round before something difficult.",
+   "tags": ["mantra", "hanuman", "courage"]
+  },
+  {
+   "id": "mantra-shanti",
+   "text": "ॐ असतो मा सद्गमय।\nतमसो मा ज्योतिर्गमय।\nमृत्योर्मा अमृतं गमय।\nॐ शान्तिः शान्तिः शान्तिः॥",
+   "transliteration": "om asato mā sad gamaya\ntamaso mā jyotir gamaya\nmṛtyor mā amṛtaṁ gamaya\nom śāntiḥ śāntiḥ śāntiḥ",
+   "translations": {"en": "Lead me from the unreal to the real; from darkness to light; from death to immortality. Om, peace, peace, peace.", "hi": "हे प्रभु, मुझे असत्य से सत्य की ओर, अंधकार से प्रकाश की ओर, मृत्यु से अमरता की ओर ले चलिए। ॐ, शांति, शांति, शांति।", "mr": ""},
+   "summary_1line": "A prayer for three kinds of light",
+   "summary_2to3line": "Three paired requests — real over unreal, light over dark, life over death — followed by peace invoked three times.",
+   "bodh_3to4line": "Chanted at the end of a reading, a havan or a puja, and often at the start of study. The triple shanti is a standard closing.",
+   "tags": ["mantra", "upanishad", "peace"]
+  }
+ ]
+}
