@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Daily Bodh</string>
+    <string name="widget_label">Daily Bodh</string>
+    <string name="widget_description">One shloka or thought per day, fully offline.</string>
+    <string name="privacy_line">No data is collected. Works fully offline.</string>
+</resources>
