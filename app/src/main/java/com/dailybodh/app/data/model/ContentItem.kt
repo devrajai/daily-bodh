@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
  * A single unit of content. Different packs use different subsets of fields:
  *  - Gita items use chapter/verse/sanskrit/transliteration/translations/summary/bodh.
  *  - Quote packs use text + author (and may also fill translations/summaries).
- *  - Puja items use text as a title, plus samagri and steps.
+ *  - Puja and remedy items use text as a title, plus samagri and steps.
  *
  * Unknown JSON fields are ignored on read, so you can add fields to a pack
  * without breaking older versions of the app.
@@ -29,7 +29,9 @@ data class ContentItem(
     // Generic text used by non-Gita packs (quotes, thoughts, ritual titles).
     val text: String? = null,
     val author: String? = null,
-    // Ritual guides (the puja pack): what you need, and the steps in order.
+    // Optional link the author supplies (e.g. a video they have the right to share).
+    @SerialName("video_url") val videoUrl: String? = null,
+    // Ritual and remedy guides: what you need, and the steps in order.
     val samagri: List<String> = emptyList(),
     val steps: List<String> = emptyList(),
     val tags: List<String> = emptyList()

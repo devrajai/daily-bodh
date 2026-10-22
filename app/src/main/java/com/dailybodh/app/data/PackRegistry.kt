@@ -17,6 +17,7 @@ object PackRegistry {
         PackInfo("aarti", "content/aarti.json", "Aarti & Prayers"),
         PackInfo("mantras", "content/mantras.json", "Mantras"),
         PackInfo("puja", "content/puja.json", "Puja & Rituals"),
+        PackInfo("remedies", "content/remedies.json", "Remedies"),
         PackInfo("business", "content/business_quotes.json", "Business"),
         PackInfo("leadership", "content/leadership.json", "Leadership"),
         PackInfo("discipline", "content/self_discipline.json", "Self-Discipline"),

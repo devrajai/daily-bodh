@@ -1,0 +1,75 @@
+{
+ "packId": "remedies",
+ "packName": "Remedies",
+ "description": "Traditional remedies for common problems - mantra, daan and havan options - with what the tradition says and a plain warning about what they are not.",
+ "version": 1,
+ "ordering": "daily",
+ "items": [
+  {
+   "id": "rem-health",
+   "text": "Health and recovery",
+   "translations": {"en": "Traditionally: the Mahamrityunjaya mantra, and Rudrabhishek or a small havan on a Monday or on Shivratri.", "hi": "परंपरा के अनुसार: महामृत्युंजय मंत्र, तथा सोमवार या शिवरात्रि पर रुद्राभिषेक या छोटा हवन।", "mr": ""},
+   "summary_1line": "Illness, slow recovery, or a run of poor health",
+   "summary_2to3line": "Traditionally: the Mahamrityunjaya mantra, and Rudrabhishek or a small havan on a Monday or on Shivratri.",
+   "bodh_3to4line": "In the tradition, illness is met with two things at once - medicine, and the steadiness of a practice that stops fear from doing its own damage. This is traditional faith practice, offered as tradition and not as treatment. It is not a substitute for a doctor, and it does not replace medicine or treatment. If something is actually wrong, see a qualified professional.",
+   "samagri": ["A Shivalinga or a picture of Shiva", "Water, milk and bel leaves for abhishek", "A rudraksha mala", "Ghee and havan samagri, if you do a havan", "Black sesame or urad dal for daan"],
+   "steps": ["Chant the Mahamrityunjaya mantra 108 times, morning or evening, seated and unhurried. Continue for 40 days if you take it up.", "On a Monday or on Shivratri, do a simple abhishek: pour water, then milk, over the linga while reciting Om Namah Shivaya.", "If you keep a havan, offer ghee and samagri with the Mahamrityunjaya mantra.", "Daan: give black sesame, urad dal or a simple meal to someone who needs it - traditionally on a Saturday or Monday.", "Keep up whatever treatment you have been given. The practice is done alongside it, never instead of it."],
+   "tags": ["remedy", "health"]
+  },
+  {
+   "id": "rem-money",
+   "text": "Money and debt",
+   "translations": {"en": "Traditionally: the Lakshmi mantra and a Friday puja, with daan of food or grain rather than money for money's sake.", "hi": "परंपरा के अनुसार: लक्ष्मी मंत्र और शुक्रवार का पूजन, तथा अन्न या धान्य का दान।", "mr": ""},
+   "summary_1line": "Debt, a stalled income, or money that will not stay",
+   "summary_2to3line": "Traditionally: the Lakshmi mantra and a Friday puja, with daan of food or grain rather than money for money's sake.",
+   "bodh_3to4line": "The tradition treats money as a matter of order and giving, not of magic. The remedy is a discipline - a fixed day, a fixed practice, and giving something away each week. This is traditional faith practice, not financial advice. For anything serious - debt you cannot service, a legal or tax matter - see a qualified professional.",
+   "samagri": ["A picture or murti of Lakshmi", "A small lamp and incense", "Lotus or any fresh flowers", "Coins and a kalash for the altar", "Grain, rice or a meal for daan"],
+   "steps": ["On Fridays, clean the puja space, light a lamp and offer flowers to Lakshmi.", "Chant Om Shrim Hrim Shrim Kamale Kamalalaye Prasida Prasida 108 times.", "Keep your accounts in order the same day - the tradition pairs the mantra with actually tidying the ledger.", "Daan: give grain, rice or a cooked meal to someone who needs it every Friday. Give food, not cash, as the remedy.", "For debt, tax or legal problems, see a qualified adviser. That is not the havan's job."],
+   "tags": ["remedy", "money"]
+  },
+  {
+   "id": "rem-marriage",
+   "text": "Marriage and delay in marriage",
+   "translations": {"en": "Traditionally: Guna Milana first, then worship of Gauri-Shankar or a Katyayani vrat, with the Nadi and Bhakoot doshas checked.", "hi": "परंपरा के अनुसार: पहले गुण मिलान, फिर गौरी-शंकर की उपासना या कात्यायनी व्रत।", "mr": ""},
+   "summary_1line": "Delay in marriage, or a match that will not settle",
+   "summary_2to3line": "Traditionally: Guna Milana first, then worship of Gauri-Shankar or a Katyayani vrat, with the Nadi and Bhakoot doshas checked.",
+   "bodh_3to4line": "The tradition's first step is not a remedy at all - it is the compatibility reading, which tells you whether the objection is astronomical or simply practical. Only then does it prescribe worship. This is traditional faith practice, and the tables behind Guna Milana differ between lineages.",
+   "samagri": ["The birth nakshatra and rashi of both people, if known", "A picture of Gauri and Shankar", "Kumkum, haldi, flowers, lamp, incense", "Fruit and sweets for prasad", "A Katyayani or Gauri vrat if you take one up"],
+   "steps": ["Work out the Guna Milana score in the Match section, and read the per-koota breakdown rather than the total alone.", "If Nadi or Bhakoot is flagged, the tradition offers parihara (specific cancelling remedies) - ask someone who knows your lineage rather than acting on a score.", "Worship Gauri and Shankar on Fridays, or keep the Katyayani vrat on Tuesdays through the month if that is your practice.", "Chant the Gauri-Shankar mantra your family uses 108 times.", "Daan: feed a married couple or give a pair of clothes to someone in need."],
+   "tags": ["remedy", "marriage", "compatibility"]
+  },
+  {
+   "id": "rem-career",
+   "text": "Career and work",
+   "translations": {"en": "Traditionally: Hanuman worship on Tuesdays and Saturdays, and the Vakratunda mantra before interviews or applications.", "hi": "परंपरा के अनुसार: मंगलवार और शनिवार को हनुमान पूजन, तथा साक्षात्कार से पहले वक्रतुंड मंत्र।", "mr": ""},
+   "summary_1line": "A stalled career, a difficult workplace, or repeated rejection",
+   "summary_2to3line": "Traditionally: Hanuman worship on Tuesdays and Saturdays, and the Vakratunda mantra before interviews or applications.",
+   "bodh_3to4line": "The tradition reads a stuck career as a matter of courage and clarity rather than fate - which is why the remedies it prescribes are Hanuman's, the god of effort in service. This is traditional faith practice, not career advice.",
+   "samagri": ["A picture of Hanuman", "Sindoor and chameli oil for the offering", "A Hanuman Chalisa, if you have one", "Boondi or a simple sweet for prasad", "Red flowers"],
+   "steps": ["On Tuesdays and Saturdays, light a lamp before Hanuman and offer sindoor and red flowers.", "Read or listen to the Hanuman Chalisa, then the Hanuman aarti.", "Chant Om Ham Hanumate Rudratmakaya Hum Phat 108 times before an interview or a difficult meeting.", "Chant the Vakratunda mantra once before sending any application.", "Daan: give a meal, or help someone with the work they cannot do alone. The tradition pairs this remedy with actual service."],
+   "tags": ["remedy", "career", "work"]
+  },
+  {
+   "id": "rem-education",
+   "text": "Education and study",
+   "translations": {"en": "Traditionally: Saraswati worship on Vasant Panchami and on Wednesdays, with the Saraswati mantra before opening a book.", "hi": "परंपरा के अनुसार: वसंत पंचमी और बुधवार को सरस्वती पूजन, तथा पुस्तक खोलने से पहले सरस्वती मंत्र।", "mr": ""},
+   "summary_1line": "Difficulty concentrating, or repeated failure in study",
+   "summary_2to3line": "Traditionally: Saraswati worship on Vasant Panchami and on Wednesdays, with the Saraswati mantra before opening a book.",
+   "bodh_3to4line": "The tradition's study remedies are built around a fixed time and a fixed seat - which is, in practice, exactly what studying needs. This is traditional faith practice.",
+   "samagri": ["A picture of Saraswati", "White flowers, and white or yellow cloth for the altar", "A lamp and incense", "Books and pens, placed at the altar for the blessing", "Honey or a simple sweet for prasad"],
+   "steps": ["Set a fixed time and a fixed place for study, and keep to it. This is the actual remedy.", "On Wednesdays and on Vasant Panchami, worship Saraswati and place your books and pens before her.", "Chant Om Aim Sarasvatyai Namah 108 times before study, or three times before opening the book.", "Chant the Gayatri at the three twilight junctions if you keep sandhya.", "Daan: give books, stationery or study material to a student who needs it."],
+   "tags": ["remedy", "education", "study"]
+  },
+  {
+   "id": "rem-obstacles",
+   "text": "Obstacles and general hurdles",
+   "translations": {"en": "Traditionally: Ganesha worship first, before anything else, plus a simple havan and daan.", "hi": "परंपरा के अनुसार: सबसे पहले गणेश पूजन, तथा सरल हवन और दान।", "mr": ""},
+   "summary_1line": "Repeated obstruction, things falling apart at the last step",
+   "summary_2to3line": "Traditionally: Ganesha worship first, before anything else, plus a simple havan and daan.",
+   "bodh_3to4line": "Every other remedy in the tradition starts here, because Ganesha is invoked before any undertaking. If you only do one, the tradition says do this one. This is traditional faith practice.",
+   "samagri": ["A picture or murti of Ganesha", "Durva grass, red flowers, kumkum and haldi", "Modak or a simple sweet", "A lamp, incense and a bell", "Ghee and samagri if you keep a havan"],
+   "steps": ["Before starting anything, chant the Vakratunda mantra once.", "On Ganesh Chaturthi and on Wednesdays, worship Ganesha with durva grass and red flowers, and sing Jai Ganesh Jai Ganesh Deva.", "Chant Om Gam Ganapataye Namah 108 times when a thing keeps stalling.", "If you keep a havan, offer ghee and samagri with the Ganesha mantra, and close with the shanti mantra.", "Daan: give modak, jaggery or a simple sweet to a child or to someone in need."],
+   "tags": ["remedy", "obstacles", "ganesh"]
+  }
+ ]
+}
