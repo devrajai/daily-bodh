@@ -1,6 +1,10 @@
 /* Daily Bodh — the Kundli screen and the Jyotish reference tab.
    Loaded after chart.js and before the main inline script, so the renderers
-   exist by the time index.html registers its tabs. */
+   exist by the time index.html registers its tabs.
+
+   Everything here is free: no API, no key, no account, no paid service.
+   Positions come from the bundled ephemeris, the tables are classical, and
+   the interpretive text is the tradition's own. */
 
 let PLACES = null;
 async function places(){
@@ -8,13 +12,32 @@ async function places(){
   return PLACES;
 }
 
+/* ------------------------------------------------- western aspects + vargas */
+const ASPECTS = [["Conjunction",0,8],["Opposition",180,8],["Trine",120,7],
+                 ["Square",90,7],["Sextile",60,5]];
+function aspectBetween(a,b){
+  let d = Math.abs(a-b) % 360; if(d > 180) d = 360 - d;
+  for(const [name,ang,orb] of ASPECTS){
+    const off = Math.abs(d-ang);
+    if(off <= orb) return {name, off};
+  }
+  return null;
+}
+/* D9 navamsa: each sign divided into nine parts of 3 degrees 20 minutes.
+   The continuous division is exactly equivalent to the classical rule that a
+   movable sign starts its navamsa from itself, a fixed sign from the ninth,
+   and a dual sign from the fifth - verified for all twelve signs. */
+const navamsaOf = lon => Math.floor(lon/(30/9)) % 12;
+/* tropical = sidereal + ayanamsa (the Western zodiac) */
+const tropicalOf = (lon, jd) => norm360(lon + ayanamsa(jd));
+
 async function renderKundli(){
   const s = $('#kundli');
   const P = await places();
   if(!s.dataset.built){
     s.innerHTML = `
       <h2>Kundli</h2>
-      <p class="lead">A birth chart with a real ascendant: enter the date, the time and the place, and the lagna and the twelve bhavas are cast from them.</p>
+      <p class="lead">A birth chart with a real ascendant: enter the date, the time and the place, and the lagna, the twelve bhavas, the aspects, the navamsa and the current transits are all cast from them.</p>
       <div class="card">
         <div class="row">
           <div><label>Birth date</label><input type="date" id="kd" value="1990-03-15"></div>
@@ -27,7 +50,7 @@ async function renderKundli(){
         <button class="go" id="kgo">Cast the chart</button>
       </div>
       <div id="kout"></div>
-      <div class="warn">The ascendant needs an exact birth time — a few minutes moves it. If the time is a guess, read the chart from the Moon instead, which is what the "from Moon" column below is for. Planets are interpolated between noon positions, so a fast-moving Moon can be a fraction of a degree out.</div>
+      <div class="warn">The ascendant needs an exact birth time — a few minutes moves it. If the time is a guess, read the chart from the Moon instead, which is what the "from Moon" column is for. Planets are interpolated between noon positions, so a fast-moving Moon can be a fraction of a degree out.</div>
     `;
     s.dataset.built='1';
     $('#kp').addEventListener('change',()=>{
@@ -67,27 +90,47 @@ async function drawKundli(){
     const lon = P[g], h = houseOf(ascRashi, lon), hMoon = houseOf(rashiOf(P.Moon), lon);
     const dig = DIGBALA[g] === h ? '<span class="ok">yes</span>' : '<span class="muted">no</span>';
     return `<tr>
-      <td style="width:16%"><strong>${g}</strong></td>
-      <td style="width:18%">${RASHI[rashiOf(lon)].split(' (')[0]}</td>
-      <td style="width:12%">${(lon%30).toFixed(1)}°</td>
-      <td style="width:16%">${NAK[nakOf(lon)]} ${padaOf(lon)}</td>
-      <td style="width:9%">${h}</td>
+      <td style="width:15%"><strong>${g}</strong></td>
+      <td style="width:16%">${RASHI[rashiOf(lon)].split(' (')[0]}</td>
+      <td style="width:11%">${(lon%30).toFixed(1)}°</td>
+      <td style="width:14%">${NAK[nakOf(lon)]} ${padaOf(lon)}</td>
+      <td style="width:8%">${h}</td>
       <td style="width:9%">${hMoon}</td>
-      <td style="width:12%">${dignity(g, lon)}</td>
-      <td style="width:8%">${dig}</td>
+      <td style="width:13%">${dignity(g, lon)}</td>
+      <td style="width:7%">${dig}</td>
+      <td style="width:7%">${RASHI[navamsaOf(lon)].split(' (')[0]}</td>
     </tr>`;
   }).join('');
 
-  /* ---- panchadha maitri ---- */
-  const maitri = [];
-  for(let i=0;i<7;i++) for(let j=i+1;j<7;j++){
+  /* ---- western aspects ---- */
+  const aspRows = [];
+  for(let i=0;i<9;i++) for(let j=i+1;j<9;j++){
     const a=GRAHAS[i], b=GRAHAS[j];
-    maitri.push(`${a}–${b}: <strong>${panchadha(a,b,rashiByPlanet)}</strong>`);
+    const as = aspectBetween(P[a], P[b]);
+    if(as) aspRows.push(`<tr><td style="width:34%">${a} – ${b}</td>
+      <td style="width:26%">${as.name}</td>
+      <td class="muted">${as.off.toFixed(1)}° from exact${as.off<1?' <span class="ok">(tight)</span>':''}</td></tr>`);
   }
 
-  /* ---- aspects ---- */
-  const asp = GRAHAS.filter(g=>SPECIAL_ASPECT[g]).map(g=>
-    `${g} (in house ${houseOf(ascRashi,P[g])}) aspects ${aspectsOf(g, houseOf(ascRashi,P[g])).join(', ')}`);
+  /* ---- parashari special aspects ---- */
+  const drishti = GRAHAS.filter(g=>SPECIAL_ASPECT[g]).map(g=>
+    `${g} in house ${houseOf(ascRashi,P[g])} aspects houses ${aspectsOf(g, houseOf(ascRashi,P[g])).join(', ')}`);
+
+  /* ---- transits today against the natal chart ---- */
+  const nowP = await planetsAt(iso(today()), (today().getHours())/24);
+  let transits = '';
+  if(nowP){
+    transits = GRAHAS.map(g=>{
+      const hL = houseOf(ascRashi, nowP[g]), hM = houseOf(rashiOf(P.Moon), nowP[g]);
+      const natalR = rashiOf(P[g]);
+      const moved = rashiOf(nowP[g]) !== natalR;
+      return `<tr><td style="width:16%"><strong>${g}</strong></td>
+        <td style="width:26%">${RASHI[rashiOf(nowP[g])].split(' (')[0]}</td>
+        <td style="width:14%">house ${hL}</td>
+        <td style="width:14%">from Moon ${hM}</td>
+        <td class="muted">${moved ? 'moved from natal '+RASHI[natalR].split(' (')[0] : 'same sign as natal'}</td></tr>`;
+    }).join('');
+  }
 
   /* ---- Panch Mahapurusha ---- */
   const mp = [];
@@ -100,7 +143,7 @@ async function drawKundli(){
     else if(KENDRA.includes(hM)) mp.push(`${MAHAPURUSHA[g]} — ${g} in its own or exalted sign, in kendra house ${hM} from the Moon`);
   });
 
-  /* ---- raja yoga: kendra lord joined to trikona lord ---- */
+  /* ---- raja yoga ---- */
   const kLords = [...new Set(KENDRA.map(lordOfHouse))];
   const tLords = [...new Set(TRIKONA.map(lordOfHouse))];
   const raja = [];
@@ -117,7 +160,6 @@ async function drawKundli(){
   const fromL = houseOf(ascRashi, P.Mars), fromM = houseOf(rashiOf(P.Moon), P.Mars), fromV = houseOf(rashiOf(P.Venus), P.Mars);
   const bad = [1,4,7,8,12];
   const ks = kaalSarp(P);
-  const nowP = await planetsAt(iso(today()), (today().getHours())/24);
   let sade = null;
   if(nowP){
     const h = houseOf(rashiOf(P.Moon), nowP.Saturn);
@@ -127,20 +169,38 @@ async function drawKundli(){
   const age = (today() - new Date(dateStr+'T00:00:00'))/864e5/365.25;
   const md = vimshottari(P.Moon, age);
 
+  const maitri = [];
+  for(let i=0;i<7;i++) for(let j=i+1;j<7;j++)
+    maitri.push(`${GRAHAS[i]}–${GRAHAS[j]}: <strong>${panchadha(GRAHAS[i],GRAHAS[j],rashiByPlanet)}</strong>`);
+
   box.innerHTML = `
     <div class="card">
       <h3>Lagna</h3>
       <div class="big">${RASHI[ascRashi]}</div>
-      <p class="muted">Ascendant at ${(asc%30).toFixed(2)}° of ${RASHI[ascRashi].split(' (')[0]}, cast for ${p.name} (${p.lat}, ${p.lon}) at ${timeStr} local, UTC${off>=0?'+':''}${off}.</p>
-      <p class="muted">Lagna lord: <strong>${GRAHAS[SIGN_LORD[ascRashi]]}</strong> · Moon sign: ${RASHI[rashiOf(P.Moon)].split(' (')[0]} · nakshatra ${NAK[b.nak]} pada ${b.pada}</p>
+      <p class="muted">Ascendant at ${(asc%30).toFixed(2)}° of ${RASHI[ascRashi].split(' (')[0]} (sidereal, Lahiri), cast for ${p.name} (${p.lat}, ${p.lon}) at ${timeStr} local, UTC${off>=0?'+':''}${off}.</p>
+      <p class="muted">Tropical ascendant: ${RASHI[Math.floor(tropicalOf(asc,jd)/30)%12].split(' (')[0]} ${(tropicalOf(asc,jd)%30).toFixed(2)}° · Lagna lord: <strong>${GRAHAS[SIGN_LORD[ascRashi]]}</strong> · Moon ${RASHI[rashiOf(P.Moon)].split(' (')[0]}, ${NAK[b.nak]} pada ${b.pada}</p>
     </div>
     <div class="card">
       <h3>The nine grahas</h3>
       <table>
-        <tr class="muted"><td>Graha</td><td>Rashi</td><td>Deg</td><td>Nakshatra</td><td>House</td><td>from Moon</td><td>Dignity</td><td>Digbala</td></tr>
+        <tr class="muted"><td>Graha</td><td>Rashi</td><td>Deg</td><td>Nakshatra</td><td>House</td><td>from Moon</td><td>Dignity</td><td>Digbala</td><td>D9</td></tr>
         ${rows}
       </table>
-      <p class="muted" style="margin-top:10px">House is counted from the lagna; "from Moon" is counted from the Moon sign, which is the reading to use when the birth time is uncertain.</p>
+      <p class="muted" style="margin-top:10px">Sidereal positions, Lahiri ayanamsa (${ayanamsa(jd).toFixed(2)}°). D9 is the navamsa sign. House is from the lagna; "from Moon" is the reading to use when the birth time is uncertain.</p>
+    </div>
+    <div class="card">
+      <h3>Transits today</h3>
+      ${ nowP ? `<table>${transits}</table>
+        <p class="muted">Where each graha sits now, and the house it occupies counted from your lagna and from your natal Moon.</p>`
+        : '<p class="muted">No ephemeris for today.</p>' }
+    </div>
+    <div class="card">
+      <h3>Aspects</h3>
+      ${ aspRows.length ? `<table>${aspRows.join('')}</table>` : '<p class="muted">No aspects within orb.</p>' }
+      <p class="muted" style="margin-top:10px">Orbs: 8° for conjunction and opposition, 7° for trine and square, 5° for sextile.</p>
+      <p style="margin-top:12px"><strong>Parashari special aspects (drishti)</strong></p>
+      ${drishti.map(x=>`<p class="muted">${x}</p>`).join('')}
+      <p class="muted">Every planet also aspects the 7th from itself. The nodes are not given special aspects here, because practice differs.</p>
     </div>
     <div class="card">
       <h3>Vimshottari dasha</h3>
@@ -179,12 +239,7 @@ async function drawKundli(){
       <h3>Panchadha maitri <span class="muted" style="font-weight:400;font-size:13px">(five-fold relationship)</span></h3>
       <p class="muted">${maitri.join(' · ')}</p>
     </div>
-    <div class="card">
-      <h3>Aspects</h3>
-      ${asp.map(x=>`<p class="muted">${x}</p>`).join('')}
-      <p class="muted">Every planet also aspects the 7th from itself. The nodes are not given special aspects here, because practice differs.</p>
-    </div>
-    <div class="warn">No Shadbala, Ashtakavarga or divisional charts are computed — those are large tables I could not verify against an authoritative source from here, so the app leaves them out rather than guess.</div>
+    <div class="warn">No Shadbala, Ashtakavarga or the other divisional charts beyond D9 are computed — those are large tables I could not verify against an authoritative source from here, so the app leaves them out rather than guess. Everything on this page is computed in your browser from files bundled with the site: no API, no key, no account, no paid service.</div>
   `;
 }
 
