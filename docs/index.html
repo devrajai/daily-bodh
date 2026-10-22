@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Daily Bodh — Panchang, Horoscope, Muhurat, Kundali</title>
-<meta name="description" content="Panchang, daily and monthly horoscope by rashi, auspicious muhurat dates, kundali matching, a rashi chart with Mangal and Kaal Sarp dosha, numerology, palmistry and the classical Shastra library.">
+<title>Daily Bodh — Panchang, Horoscope, Muhurat, Kundli</title>
+<meta name="description" content="Panchang, daily and monthly horoscope by rashi, auspicious muhurat dates, kundali matching, a birth chart with a real ascendant, numerology, palmistry, and the classical Shastra and Jyotish libraries.">
 <style>
   :root{
     --navy:#0f1729; --navy2:#1b2740; --cream:#f7f4ec; --card:#ffffff;
@@ -60,7 +60,7 @@
     <div class="om">ॐ</div>
     <div>
       <h1>Daily Bodh</h1>
-      <div class="sub">Panchang · Horoscope · Muhurat · Kundli · Numerology</div>
+      <div class="sub">Panchang · Horoscope · Muhurat · Kundli · Jyotish</div>
     </div>
   </div>
   <nav id="tabs"></nav>
@@ -69,12 +69,13 @@
   <section id="panchang"></section>
   <section id="horoscope"></section>
   <section id="muhurat"></section>
+  <section id="kundli"></section>
   <section id="match"></section>
   <section id="numerology"></section>
   <section id="palmistry"></section>
-  <section id="kundli"></section>
   <section id="lalkitab"></section>
   <section id="shastra"></section>
+  <section id="jyotish"></section>
   <section id="reading"></section>
 </main>
 <footer>
@@ -84,6 +85,8 @@
   named on each screen; the classical texts are described, never reproduced.
 </footer>
 
+<script src="chart.js"></script>
+<script src="kundli.js"></script>
 <script>
 /* ---------------------------------------------------------------- helpers */
 const $ = (s,r=document)=>r.querySelector(s);
@@ -364,7 +367,7 @@ async function renderMatch(){
     s.dataset.built='1';
     s.person = {A:{rashi:0,nak:0},B:{rashi:0,nak:0}};
     for(const k of ['A','B']){
-      const box=$('#p'+k), p=s.person[k];
+      const box=$('#p'+k);
       box.innerHTML = `
         <h3>Person ${k}</h3>
         <label>Rashi (Moon sign)</label>
@@ -471,6 +474,15 @@ async function renderLalkitab(){
     packList(L.items, $('#lk')); s.dataset.built='1';
   }
 }
+async function renderShastra(){
+  const s = $('#shastra');
+  if(!s.dataset.built){
+    const S = await data('shastra.json');
+    s.innerHTML = `<h2>Shastra library</h2>
+      <p class="lead">${S.description||''}</p><div class="card" id="sh"></div>`;
+    packList(S.items, $('#sh')); s.dataset.built='1';
+  }
+}
 const PACKS=[['remedies','Remedies'],['aarti','Aarti & Prayers'],['mantras','Mantras'],['puja','Puja & Rituals']];
 async function renderReading(){
   const s = $('#reading');
@@ -488,32 +500,7 @@ async function renderReading(){
   }
 }
 
-/* ------------------------------------------------------- ephemeris + kundli */
-let EPH=null;
-async function eph(){
-  if(EPH) return EPH;
-  const e = await data('ephemeris.json');
-  const bin = atob(e.lon); const u = new Uint8Array(bin.length);
-  for(let i=0;i<bin.length;i++) u[i]=bin.charCodeAt(i);
-  EPH = { from:new Date(e.from+'T00:00:00Z'), bodies:e.bodies, buf:u, note:e.note };
-  return EPH;
-}
-async function planets(dateStr){
-  const e = await eph();
-  const i = Math.round((new Date(dateStr+'T00:00:00Z')-e.from)/864e5);
-  const n = e.bodies.length;
-  if(i<0 || i >= e.buf.length/(2*n)) return null;
-  const out={};
-  e.bodies.forEach((b,j)=>{ const o=(i*n+j)*2; out[b]=(e.buf[o]|(e.buf[o+1]<<8))/100; });
-  out.Ketu = (out.Rahu+180)%360;
-  return out;
-}
-const GRAHAS = ["Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn","Rahu","Ketu"];
-const rashiOf = lon => Math.floor(lon/30)%12;
-const nakOf   = lon => Math.floor(lon/(360/27))%27;
-const padaOf  = lon => Math.floor((lon%(360/27))/((360/27)/4))+1;
-const houseFrom = (a,b) => ((b-a+12)%12)+1;
-
+/* ------------------------------------------- dasha + kaal sarp (used by chart.js) */
 const VIM_LORDS=["Ketu","Venus","Sun","Moon","Mars","Rahu","Jupiter","Saturn","Mercury"];
 const VIM_YEARS=[7,20,6,10,7,18,16,19,17];
 function vimshottari(moonLon, ageYears){
@@ -538,16 +525,6 @@ function vimshottari(moonLon, ageYears){
   return {lord, ant, start:VIM_LORDS[start], balance:first};
 }
 
-function mangalDosha(P){
-  const m=rashiOf(P.Mars);
-  const fromMoon=houseFrom(rashiOf(P.Moon),m);
-  const fromVenus=houseFrom(rashiOf(P.Venus),m);
-  const bad=[1,4,7,8,12];
-  return {fromMoon, fromVenus,
-          moon:bad.includes(fromMoon), venus:bad.includes(fromVenus),
-          present:bad.includes(fromMoon)||bad.includes(fromVenus)};
-}
-
 const KS_NAMES=["Anant","Kulik","Vasuki","Shankhpal","Padma","Mahapadma","Takshak",
                 "Karkotak","Shankhachud","Ghatak","Vishdhar","Sheshnag"];
 function kaalSarp(P){
@@ -558,85 +535,7 @@ function kaalSarp(P){
   const b=seven.every(g=>inArc(P[g],ketu,rahu));
   if(!a && !b) return {present:false};
   return {present:true, side:a?"Rahu to Ketu":"Ketu to Rahu",
-          rahuRashi:rashiOf(rahu), name:KS_NAMES[rashiOf(rahu)]};
-}
-
-async function renderKundli(){
-  const s = $('#kundli');
-  if(!s.dataset.built){
-    s.innerHTML = `
-      <h2>Kundli</h2>
-      <p class="lead">The rashi chart for a birth date, plus Mangal dosha, Kaal Sarp, Sade Sati and the Vimshottari dasha — all computed from the grahas' real positions.</p>
-      <div class="card">
-        <label>Birth date</label>
-        <input type="date" id="kd" value="1990-03-15">
-        <div id="kout"></div>
-      </div>
-      <div class="warn" id="kwarn">Positions are for noon IST on that date, and no ascendant is derived — that needs an exact birth time and place. So this is a Moon-chart-grade reading: the grahas' signs, the Moon's nakshatra and pada, the dasha, and the doshas read from the Moon and Venus. It is not a full janma kundli.</div>
-    `;
-    s.dataset.built='1';
-    $('#kd').addEventListener('change',()=>drawKundli());
-    drawKundli();
-  }
-}
-async function drawKundli(){
-  const box=$('#kout'); if(!box) return;
-  const dateStr=$('#kd').value; if(!dateStr){ box.innerHTML=''; return; }
-  const P = await planets(dateStr);
-  if(!P){ box.innerHTML='<p class="muted" style="margin-top:12px">No ephemeris for that date (1930-2035).</p>'; return; }
-  const b = await birthStar(dateStr);
-  const age = (today()-new Date(dateStr+'T00:00:00'))/864e5/365.25;
-  const md = vimshottari(P.Moon, age);
-  const mdo = mangalDosha(P), ks = kaalSarp(P);
-  const nowP = await planets(iso(today()));
-  const natalMoon = rashiOf(P.Moon);
-  let sade=null;
-  if(nowP){
-    const h = houseFrom(natalMoon, rashiOf(nowP.Saturn));
-    sade = {house:h, active:[12,1,2].includes(h)};
-  }
-  const rows = GRAHAS.map(g=>{
-    const lon=P[g], r=rashiOf(lon);
-    return `<tr><td class="k" style="width:22%">${g}</td><td style="width:26%">${RASHI[r].split(' (')[0]}</td>
-      <td class="muted">${lon.toFixed(2)}° · ${NAK[nakOf(lon)]} pada ${padaOf(lon)}</td></tr>`;
-  }).join('');
-  box.innerHTML = `
-    <h3 style="margin-top:14px">Grahas on ${dateStr}</h3>
-    <table>${rows}</table>
-    <h3 style="margin-top:16px">Moon</h3>
-    <table>
-      <tr><td class="k">Rashi</td><td>${RASHI[natalMoon]}</td></tr>
-      <tr><td class="k">Nakshatra</td><td>${NAK[b.nak]} · pada ${b.pada}</td></tr>
-      <tr><td class="k">Vimshottari dasha</td><td>${md.lord} mahadasha, ${md.ant} antardasha <span class="muted">(born in ${md.start}, balance ${md.balance.toFixed(1)} yrs)</span></td></tr>
-    </table>
-    <h3 style="margin-top:16px">Mangal dosha</h3>
-    <table>
-      <tr><td class="k">Mars from the Moon</td><td>house ${mdo.fromMoon} — <span class="${mdo.moon?'no':'ok'}">${mdo.moon?'affected':'clear'}</span></td></tr>
-      <tr><td class="k">Mars from Venus</td><td>house ${mdo.fromVenus} — <span class="${mdo.venus?'no':'ok'}">${mdo.venus?'affected':'clear'}</span></td></tr>
-    </table>
-    <p class="muted">Read from the Moon and Venus only, because the lagna needs a birth time. Cancellation rules (dosha bhanga) are not applied — in the tradition they frequently cancel the dosha.</p>
-    <h3 style="margin-top:16px">Kaal Sarp</h3>
-    <p>${ ks.present
-        ? `<span class="no">Present</span> — all seven grahas lie on the ${ks.side} side. Rahu is in ${RASHI[ks.rahuRashi].split(' (')[0]}, which gives the type <strong>${ks.name}</strong> when named by house from the ascendant.`
-        : '<span class="ok">Not present</span> — the seven grahas are not all on one side of the Rahu-Ketu axis.' }</p>
-    <p class="muted">The twelve names (Anant, Kulik, Vasuki …) are assigned by Rahu's house from the ascendant; shown here by Rahu's sign, which is an approximation without a birth time.</p>
-    <h3 style="margin-top:16px">Sade Sati</h3>
-    ${ sade ? `<p>${ sade.active
-        ? `<span class="no">Running</span> — Saturn is in house ${sade.house} from the natal Moon.`
-        : `<span class="ok">Not running</span> — Saturn is in house ${sade.house} from the natal Moon (Sade Sati is houses 12, 1 and 2).` }</p>
-      <p class="muted">Saturn's position today: ${RASHI[rashiOf(nowP.Saturn)].split(' (')[0]}.</p>` : '' }
-    <div class="warn">Positions are computed for noon IST and no ascendant is derived, so this cannot replace a janma kundli cast with an exact birth time and place. The doshas are rule-based checks, not verdicts.</div>
-  `;
-}
-
-async function renderShastra(){
-  const s = $('#shastra');
-  if(!s.dataset.built){
-    const S = await data('shastra.json');
-    s.innerHTML = `<h2>Shastra library</h2>
-      <p class="lead">${S.description||''}</p><div class="card" id="sh"></div>`;
-    packList(S.items, $('#sh')); s.dataset.built='1';
-  }
+          rahuRashi:Math.floor(rahu/30)%12};
 }
 
 /* ------------------------------------------------------------------ tabs */
@@ -645,7 +544,7 @@ const TABS=[['panchang','Panchang',renderPanchang],['horoscope','Horoscope',rend
   ['match','Kundali match',renderMatch],
   ['numerology','Numerology',renderNumerology],['palmistry','Palmistry',renderPalmistry],
   ['lalkitab','Lal Kitab',renderLalkitab],['shastra','Shastra',renderShastra],
-  ['reading','Reading',renderReading]];
+  ['jyotish','Jyotish',renderJyotish],['reading','Reading',renderReading]];
 const done={};
 function show(id){
   document.querySelectorAll('section').forEach(s=>s.classList.toggle('on', s.id===id));
