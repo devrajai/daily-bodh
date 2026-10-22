@@ -1,0 +1,74 @@
+{
+ "packId": "lalkitab",
+ "packName": "Lal Kitab (overview)",
+ "description": "An attributed description of the Lal Kitab system. The five volumes (1939-1952) are still in copyright and are not reproduced.",
+ "version": 1,
+ "ordering": "daily",
+ "items": [
+  {
+   "id": "lk-what",
+   "text": "What Lal Kitab is",
+   "translations": {
+    "en": "Lal Kitab ('the red book') is a set of five volumes on astrology and samudrik shastra, written in Urdu and later in Hindi. They were authored by Pt. Roop Chand Joshi (1898-1982) of Pharwala, Jalandhar, between 1939 and 1952.",
+    "hi": "Lal Kitab ('the red book') is a set of five volumes on astrology and samudrik shastra, written in Urdu and later in Hindi. They were authored by Pt. Roop Chand Joshi (1898-1982) of Pharwala, Jalandhar, between 1939 and 1952.",
+    "mr": ""
+   },
+   "summary_1line": "Five volumes by Pt. Roop Chand Joshi, published 1939-1952",
+   "summary_2to3line": "Lal Kitab ('the red book') is a set of five volumes on astrology and samudrik shastra, written in Urdu and later in Hindi. They were authored by Pt. Roop Chand Joshi (1898-1982) of Pharwala, Jalandhar, between 1939 and 1952.",
+   "bodh_3to4line": "The five volumes are Lal Kitab Ke Farman (1939), Lal Kitab Ke Armaan (1940), the Gutka (1941), the revised Farman (1942) and the large 1952 edition. A copy of the 1939 first edition is held in the Lahore Museum. Source: the published volumes and standard reference summaries of them.",
+   "tags": [
+    "lalkitab",
+    "reference"
+   ]
+  },
+  {
+   "id": "lk-not-reproduced",
+   "text": "Why the text itself is not in this app",
+   "translations": {
+    "en": "Pt. Roop Chand Joshi died in 1982. Under Indian copyright that runs for sixty years after an author's death, the five volumes remain protected, so this app does not reproduce them. What follows is an attributed description of the system, not the text.",
+    "hi": "Pt. Roop Chand Joshi died in 1982. Under Indian copyright that runs for sixty years after an author's death, the five volumes remain protected, so this app does not reproduce them. What follows is an attributed description of the system, not the text.",
+    "mr": ""
+   },
+   "summary_1line": "Copyright, and a problem with the editions in circulation",
+   "summary_2to3line": "Pt. Roop Chand Joshi died in 1982. Under Indian copyright that runs for sixty years after an author's death, the five volumes remain protected, so this app does not reproduce them. What follows is an attributed description of the system, not the text.",
+   "bodh_3to4line": "There is a second reason. Practitioners of Lal Kitab have said for years that most editions sold in the market are corrupt - that translators have added and dropped material, and that no printed translation is a faithful copy of the Urdu originals. If you want Lal Kitab, the originals or a careful transliteration of them are the only reliable source. Treat anything else, including this summary, as second-hand.",
+   "tags": [
+    "lalkitab",
+    "caveat"
+   ]
+  },
+  {
+   "id": "lk-framework",
+   "text": "How the system is organised",
+   "translations": {
+    "en": "Lal Kitab keeps the planets and the houses of ordinary Vedic astrology but fixes several planets to particular houses - the 'pakka ghar', or permanent home, of each planet - and reads the chart largely from which planets sit in which houses, rather than from a full predictive apparatus. The volumes are written as farmaan: short edicts, often in verse, each stating a combination and what follows from it.",
+    "hi": "Lal Kitab keeps the planets and the houses of ordinary Vedic astrology but fixes several planets to particular houses - the 'pakka ghar', or permanent home, of each planet - and reads the chart largely from which planets sit in which houses, rather than from a full predictive apparatus. The volumes are written as farmaan: short edicts, often in verse, each stating a combination and what follows from it.",
+    "mr": ""
+   },
+   "summary_1line": "Fixed houses, planets in them, and 'farmaan' edicts",
+   "summary_2to3line": "Lal Kitab keeps the planets and the houses of ordinary Vedic astrology but fixes several planets to particular houses - the 'pakka ghar', or permanent home, of each planet - and reads the chart largely from which planets sit in which houses, rather than from a full predictive apparatus. The volumes are written as farmaan: short edicts, often in verse, each stating a combination and what follows from it.",
+   "bodh_3to4line": "The 1939 volume is in large part about palmistry and samudrik shastra - nails, fingers, palm shape, the forehead, the lines of the hand - and only the later volumes develop the astrology. That is why Lal Kitab is often paired with palmistry. This is an outline of the structure only; the detail belongs to the volumes themselves.",
+   "tags": [
+    "lalkitab",
+    "framework"
+   ]
+  },
+  {
+   "id": "lk-remedies",
+   "text": "The remedies, and what they are",
+   "translations": {
+    "en": "Lal Kitab is best known for its upaya (remedies): giving things away (daan), keeping or planting particular plants, wearing or discarding particular metals, and small household actions performed in a fixed way. The remedies are characteristically cheap and use ordinary things.",
+    "hi": "Lal Kitab is best known for its upaya (remedies): giving things away (daan), keeping or planting particular plants, wearing or discarding particular metals, and small household actions performed in a fixed way. The remedies are characteristically cheap and use ordinary things.",
+    "mr": ""
+   },
+   "summary_1line": "Daan, plants, metals and small household actions",
+   "summary_2to3line": "Lal Kitab is best known for its upaya (remedies): giving things away (daan), keeping or planting particular plants, wearing or discarding particular metals, and small household actions performed in a fixed way. The remedies are characteristically cheap and use ordinary things.",
+   "bodh_3to4line": "These are faith practices within a specific tradition, not treatment. They do not replace medicine, legal or financial advice, and the tradition itself ties them to willpower and to actually changing something in your conduct. This app will not generate remedies for you, because doing so would mean inventing them.",
+   "tags": [
+    "lalkitab",
+    "remedies",
+    "caveat"
+   ]
+  }
+ ]
+}
