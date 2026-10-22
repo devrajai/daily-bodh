@@ -1,9 +1,10 @@
 name: Build APK
 
-# Builds both flavours on GitHub's runners, generates all the derived assets
-# (the full Gita pack, the temple tones, the panchang/festival/rashifal data and
-# the Moon-star table), and publishes the APKs plus the update manifest into
-# docs/download/ so the GitHub Pages site can serve them.
+# Builds both flavours on GitHub's runners, generates every derived asset (the Gita
+# pack, the temple tones, the reference packs, the panchang/festival/rashifal data
+# and the Moon-star table), and publishes the APKs, a source archive and the update
+# manifest into docs/download/ so the GitHub Pages site is the single place to get
+# everything.
 
 on:
   push:
@@ -27,8 +28,6 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      # GitHub's ubuntu runners ship the Android SDK already. Just make sure the
-      # packages we need are present and the licences are accepted.
       - name: Prepare Android SDK
         run: |
           export ANDROID_HOME="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
@@ -54,6 +53,9 @@ jobs:
       - name: Generate the bundled temple tones
         run: python3 tools/make_sounds.py --out app/src/main/assets/sounds
 
+      - name: Generate the reference packs (numerology, palmistry, Lal Kitab)
+        run: python3 tools/author_reference.py --out app/src/main/assets/content
+
       - name: Generate panchang, festivals, rashifal and the Moon-star table
         run: |
           python3 tools/build_panchang.py --out app/src/main/assets/content \
@@ -66,12 +68,13 @@ jobs:
           chmod +x gradlew
           ./gradlew assembleOfflineDebug assembleUpdaterDebug --no-daemon --stacktrace
 
-      - name: Stage APKs and the update manifest
+      - name: Stage APKs, source archive and the update manifest
         run: |
           set -e
           mkdir -p docs/download
           cp app/build/outputs/apk/offline/debug/app-offline-debug.apk docs/download/DailyBodh-offline.apk
           cp app/build/outputs/apk/updater/debug/app-updater-debug.apk docs/download/DailyBodh-updater.apk
+          git archive --format=zip --prefix=DailyBodh/ -o docs/download/DailyBodh-source.zip HEAD
           VCODE=$(grep -oE 'versionCode = [0-9]+' app/build.gradle.kts | grep -oE '[0-9]+' | head -1)
           VNAME=$(grep -oE 'versionName = "[^"]+"' app/build.gradle.kts | sed 's/.*"\(.*\)"/\1/' | head -1)
           printf '{"versionCode": %s, "versionName": "%s", "apk": "DailyBodh-updater.apk", "notes": "Daily Bodh %s"}\n' \
@@ -85,17 +88,21 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add docs/download/DailyBodh-offline.apk \
                   docs/download/DailyBodh-updater.apk \
+                  docs/download/DailyBodh-source.zip \
                   docs/download/latest.json \
                   app/src/main/assets/content/gita.json \
                   app/src/main/assets/content/panchang.json \
                   app/src/main/assets/content/festivals.json \
                   app/src/main/assets/content/rashifal.json \
                   app/src/main/assets/content/moonstars.json \
+                  app/src/main/assets/content/numerology.json \
+                  app/src/main/assets/content/palmistry.json \
+                  app/src/main/assets/content/lalkitab.json \
                   app/src/main/assets/sounds
           if git diff --staged --quiet; then
             echo "nothing to publish"
           else
-            git commit -m "Publish APKs, manifest and generated assets [skip ci]"
+            git commit -m "Publish APKs, source archive, manifest and generated assets [skip ci]"
             git push
           fi
 

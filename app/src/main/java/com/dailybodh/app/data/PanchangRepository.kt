@@ -74,6 +74,18 @@ class PanchangRepository(private val context: Context) {
         return if (idx in bytes.indices) bytes[idx].toInt() else null
     }
 
+    /** Sidereal longitude of the Moon (0..360) at local noon on that date. */
+    suspend fun moonLongitude(birth: LocalDate): Double? {
+        loadMoonStars()
+        val start = moonStart ?: return null
+        val idx = java.time.temporal.ChronoUnit.DAYS.between(start, birth).toInt()
+        val bytes = moonStars ?: return null
+        val at = idx * 2
+        if (at < 0 || at + 1 >= bytes.size) return null
+        val centi = (bytes[at].toInt() and 0xFF) or ((bytes[at + 1].toInt() and 0xFF) shl 8)
+        return centi / 100.0
+    }
+
     suspend fun festivalsInMonth(year: Int, month: Int): List<Festival> {
         val prefix = "%04d-%02d".format(year, month)
         return festivals().festivals.filter { it.d.startsWith(prefix) }
