@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""Moon-star table: the nakshatra index at local noon (IST) for each date.
+"""Moon-star table: the nakshatra index and the Moon's sidereal longitude at
+local noon (IST) for each date.
 
-Used only to *approximate* a birth star when the exact one is not known, so the
-table stores one byte per day. Computed with kalagana (MIT).
+Used to approximate a birth star and to derive the nakshatra, pada and the
+Vimshottari dasha when the exact birth chart is not available. Computed with
+kalagana (MIT).
 """
 import argparse, base64, datetime as dt, json, os
-from kalagana.limbs import nakshatra_number
+from kalagana.limbs import nakshatra_number, sidereal_moon_longitude
 from kalagana.julian import datetime_to_jd
 
 def main():
@@ -19,20 +21,27 @@ def main():
     end = dt.date(a.y1, 12, 31)
     n = (end - start).days + 1
     raw = bytearray()
+    lon = bytearray()
     d = start
     for _ in range(n):
         # 12:00 IST = 06:30 UT
         jd = datetime_to_jd(dt.datetime(d.year, d.month, d.day, 6, 30))
-        raw.append(nakshatra_number(jd) % 27)
+        raw.append((nakshatra_number(jd) - 1) % 27)
+        # sidereal longitude in centidegrees, 0..35999, two bytes little-endian
+        c = int(round((sidereal_moon_longitude(jd) % 360.0) * 100)) % 36000
+        lon.append(c & 0xFF)
+        lon.append((c >> 8) & 0xFF)
         d += dt.timedelta(days=1)
 
     payload = {
         "from": start.isoformat(),
         "days": n,
-        "note": ("Nakshatra index (0=Ashwini .. 26=Revati) at 12:00 IST. The Moon changes "
-                 "nakshatra roughly once a day, so this is an approximation for a birth star, "
-                 "not a substitute for the exact one from a birth chart."),
+        "note": ("Nakshatra index (0=Ashwini .. 26=Revati) and the Moon's sidereal longitude "
+                 "at 12:00 IST. The Moon changes nakshatra roughly once a day, so this is an "
+                 "approximation for a birth star, not a substitute for the exact one from a "
+                 "birth chart."),
         "stars": base64.b64encode(bytes(raw)).decode(),
+        "moonLon": base64.b64encode(bytes(lon)).decode(),
     }
     os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
     with open(a.out, "w", encoding="utf-8") as f:
