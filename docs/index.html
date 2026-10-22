@@ -22,6 +22,7 @@
   nav::-webkit-scrollbar{display:none}
   nav button{background:none;border:0;color:#c9d2e4;font:inherit;font-size:14px;padding:9px 12px;border-radius:9px 9px 0 0;white-space:nowrap;cursor:pointer}
   nav button[aria-selected="true"]{background:var(--cream);color:var(--navy);font-weight:600}
+  nav button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
   main{max-width:1000px;margin:0 auto;padding:16px 16px 64px}
   section{display:none}
   section.on{display:block}
@@ -63,32 +64,36 @@
       <div class="sub">Panchang · Horoscope · Muhurat · Kundli · Jyotish</div>
     </div>
   </div>
-  <nav id="tabs"></nav>
+  <nav id="tabs" role="tablist"></nav>
 </header>
 <main>
-  <section id="panchang"></section>
-  <section id="horoscope"></section>
-  <section id="muhurat"></section>
-  <section id="kundli"></section>
-  <section id="match"></section>
-  <section id="numerology"></section>
-  <section id="palmistry"></section>
-  <section id="lalkitab"></section>
-  <section id="shastra"></section>
-  <section id="jyotish"></section>
-  <section id="reading"></section>
+  <section id="panchang" role="tabpanel" tabindex="0"></section>
+  <section id="horoscope" role="tabpanel" tabindex="0"></section>
+  <section id="muhurat" role="tabpanel" tabindex="0"></section>
+  <section id="kundli" role="tabpanel" tabindex="0"></section>
+  <section id="match" role="tabpanel" tabindex="0"></section>
+  <section id="numerology" role="tabpanel" tabindex="0"></section>
+  <section id="palmistry" role="tabpanel" tabindex="0"></section>
+  <section id="lalkitab" role="tabpanel" tabindex="0"></section>
+  <section id="shastra" role="tabpanel" tabindex="0"></section>
+  <section id="jyotish" role="tabpanel" tabindex="0"></section>
+  <section id="reading" role="tabpanel" tabindex="0"></section>
 </main>
 <footer>
   Everything here is computed in your browser from files bundled with this site —
   no server, no accounts, no tracking, nothing sent anywhere. Astronomy is computed
   with kalagana (MIT), Lahiri ayanamsa. Sources for the interpretive material are
   named on each screen; the classical texts are described, never reproduced.
+  <span id="footer-meta"></span>
 </footer>
 
 <script src="chart.js"></script>
 <script src="kundli.js"></script>
 <script>
 /* ---------------------------------------------------------------- helpers */
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(console.error);
+}
 const $ = (s,r=document)=>r.querySelector(s);
 const el = (t,c,h)=>{const n=document.createElement(t); if(c)n.className=c; if(h!=null)n.innerHTML=h; return n;};
 /* Fetch a bundled JSON file. A failure is never cached, so a retry really
@@ -278,19 +283,34 @@ async function renderPanchang(){
 
 /* ------------------------------------------------------------- horoscope */
 async function renderHoroscope(){
-  const R = await data('rashifal.json');
+  const infoData = await data('rashifal-info.json');
   const s = $('#horoscope');
   if(s.dataset.rashi==null) s.dataset.rashi='0';
   if(!s.dataset.period) s.dataset.period='daily';
   const r = +s.dataset.rashi, per = s.dataset.period, t = today();
   const key = per==='daily' ? iso(t) : (per==='monthly' ? iso(t).slice(0,7) : String(t.getFullYear()));
-  const bag = per==='daily' ? R.daily : (per==='monthly' ? R.monthly : R.yearly);
+
+  let R = null;
+  try {
+    if(per === 'daily') {
+      const year = key.slice(0,4);
+      R = await data('rashifal-daily-' + year + '.json');
+    } else if (per === 'monthly') {
+      R = await data('rashifal-monthly.json');
+    } else {
+      R = await data('rashifal-yearly.json');
+    }
+  } catch(e) {
+    R = {}; // Ignore fetch failure if year file doesn't exist
+  }
+
+  const bag = per==='daily' ? (R.daily||{}) : (per==='monthly' ? (R.monthly||{}) : (R.yearly||{}));
   const entry = (bag[key]||[])[r];
-  const info = R.rashis[r]||{};
+  const info = infoData.rashis[r]||{};
   s.innerHTML = `
     <h2>Horoscope</h2>
     <p class="lead">The real planetary transits and the classical gochar reading for each Moon sign — computed, not written by hand.</p>
-    <div class="chips">${R.rashis.map((x,i)=>`<button class="chip" data-r="${i}" aria-pressed="${i===r}">${x.key}</button>`).join('')}</div>
+    <div class="chips">${infoData.rashis.map((x,i)=>`<button class="chip" data-r="${i}" aria-pressed="${i===r}">${x.key}</button>`).join('')}</div>
     <div class="chips">
       ${['daily','monthly','yearly'].map(p=>`<button class="chip" data-p="${p}" aria-pressed="${p===per}">${p[0].toUpperCase()+p.slice(1)}</button>`).join('')}
     </div>
@@ -301,9 +321,9 @@ async function renderHoroscope(){
         <p class="muted">Score ${entry.s} of 5${entry.b?` · ${entry.b}`:''}</p>
         ${entry.f.length?`<p><strong>Favourable</strong><br>${entry.f.join(', ')}</p>`:''}
         ${entry.c.length?`<p><strong>Needs care</strong><br>${entry.c.join(', ')}</p>`:''}
-      ` : `<p class="muted">No reading bundled for ${key}. Daily covers ${R.dailyFrom} to ${R.dailyTo}; monthly and yearly cover ${R.monthlyFrom} to ${R.monthlyTo}.</p>` }
+      ` : `<p class="muted">No reading bundled for ${key}. Daily covers ${infoData.dailyFrom} to ${infoData.dailyTo}; monthly and yearly cover ${infoData.monthlyFrom} to ${infoData.monthlyTo}.</p>` }
     </div>
-    <div class="warn">${R.disclaimer||''}</div>
+    <div class="warn">${infoData.disclaimer||''}</div>
   `;
   s.querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>{ s.dataset.rashi=b.dataset.r; renderHoroscope(); });
   s.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>{ s.dataset.period=b.dataset.p; renderHoroscope(); });
@@ -585,13 +605,34 @@ function show(id){
     });
 }
 $('#tabs').innerHTML = TABS.map(([id,label])=>
-  `<button data-t="${id}">${label}</button>`).join('');
-document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>show(b.dataset.t));
+  `<button data-t="${id}" role="tab" aria-controls="${id}">${label}</button>`).join('');
+document.querySelectorAll('#tabs button').forEach((b,i,arr)=>{
+  b.onclick=()=>show(b.dataset.t);
+});
+$('#tabs').addEventListener('keydown', e => {
+  const tabs = Array.from(document.querySelectorAll('#tabs button'));
+  const i = tabs.indexOf(document.activeElement);
+  if(i > -1) {
+    if(e.key === 'ArrowRight') {
+      e.preventDefault();
+      tabs[(i + 1) % tabs.length].focus();
+    } else if(e.key === 'ArrowLeft') {
+      e.preventDefault();
+      tabs[(i - 1 + tabs.length) % tabs.length].focus();
+    }
+  }
+});
 show((location.hash||'#panchang').slice(1));
 window.addEventListener('hashchange',()=>{
   const id=(location.hash||'#panchang').slice(1);
   if(TABS.some(t=>t[0]===id)) show(id);
 });
+data('metadata.json').then(m => {
+  if(m && m.generated) {
+    const d = new Date(m.generated);
+    $('#footer-meta').innerHTML = '<br>Data generated on: ' + d.toLocaleDateString() + ' ' + d.toLocaleTimeString();
+  }
+}).catch(()=>{});
 </script>
 </body>
 </html>
