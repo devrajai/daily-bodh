@@ -11,6 +11,7 @@ import com.dailybodh.app.ui.screens.DetailScreen
 import com.dailybodh.app.ui.screens.FavoritesScreen
 import com.dailybodh.app.ui.screens.HomeScreen
 import com.dailybodh.app.ui.screens.MatchScreen
+import com.dailybodh.app.ui.screens.MuhuratScreen
 import com.dailybodh.app.ui.screens.NumerologyScreen
 import com.dailybodh.app.ui.screens.PackLibraryScreen
 import com.dailybodh.app.ui.screens.PanchangScreen
@@ -31,6 +32,7 @@ fun DailyBodhNavHost(vm: MainViewModel) {
         composable("rashifal") { RashifalScreen(vm, nav) }
         composable("match") { MatchScreen(vm, nav) }
         composable("numerology") { NumerologyScreen(vm, nav) }
+        composable("muhurat") { MuhuratScreen(vm, nav) }
         composable("about") { AboutScreen(vm, nav) }
         composable(
             "detail/{packId}/{itemId}",

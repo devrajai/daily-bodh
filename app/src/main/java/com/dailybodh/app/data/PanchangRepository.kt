@@ -5,6 +5,7 @@ import com.dailybodh.app.data.panchang.Festival
 import com.dailybodh.app.data.panchang.FestivalFile
 import com.dailybodh.app.data.panchang.PanchangDay
 import com.dailybodh.app.data.panchang.PanchangFile
+import com.dailybodh.app.data.panchang.MuhuratFile
 import com.dailybodh.app.data.panchang.RashifalFile
 import android.util.Base64
 import org.json.JSONObject
@@ -40,6 +41,16 @@ class PanchangRepository(private val context: Context) {
     suspend fun rashifal(): RashifalFile = rashifalCache ?: withContext(Dispatchers.IO) {
         json.decodeFromString(RashifalFile.serializer(), text("rashifal.json"))
     }.also { rashifalCache = it }
+
+    private var muhuratCache: MuhuratFile? = null
+
+    suspend fun muhurat(): MuhuratFile = muhuratCache ?: withContext(Dispatchers.IO) {
+        json.decodeFromString(MuhuratFile.serializer(), text("muhurat.json"))
+    }.also { muhuratCache = it }
+
+    /** The panchang days from [from] onwards, in order. */
+    suspend fun daysFrom(from: LocalDate, limit: Int): List<PanchangDay> =
+        panchang().days.filter { it.d >= from.toString() }.take(limit)
 
     suspend fun day(date: LocalDate): PanchangDay? =
         panchang().days.firstOrNull { it.d == date.toString() }

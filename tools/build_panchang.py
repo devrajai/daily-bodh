@@ -21,6 +21,14 @@ RASHIS = [
     ("Kumbh", "Aquarius", "Kumbha"), ("Meen", "Pisces", "Meena"),
 ]
 
+NAK_NAMES = ["Ashwini","Bharani","Krittika","Rohini","Mrigashira","Ardra","Punarvasu",
+             "Pushya","Ashlesha","Magha","Purva Phalguni","Uttara Phalguni","Hasta","Chitra",
+             "Swati","Vishakha","Anuradha","Jyeshtha","Mula","Purva Ashadha","Uttara Ashadha",
+             "Shravana","Dhanishta","Shatabhisha","Purva Bhadrapada","Uttara Bhadrapada","Revati"]
+
+TITHI_NAMES = ["Pratipada","Dwitiya","Tritiya","Chaturthi","Panchami","Shashthi","Saptami",
+               "Ashtami","Navami","Dashami","Ekadashi","Dwadashi","Trayodashi","Chaturdashi"]
+
 MONTHS = ["January", "February", "March", "April", "May", "June",
           "July", "August", "September", "October", "November", "December"]
 
@@ -61,7 +69,9 @@ def day_record(day):
         "masa": d.masa_purnimanta,
         "tithi": tithi.name if tithi else "",
         "tithiEnd": hhmm(tithi.end) if tithi else "",
+        "tithiNum": tithi_number(tithi.name if tithi else "", d.paksha),
         "nakshatra": nak.name if nak else "",
+        "nakNum": nakshatra_number(nak.name if nak else ""),
         "nakEnd": hhmm(nak.end) if nak else "",
         "yoga": yoga.name if yoga else "",
         "karana": karana.name if karana else "",
@@ -73,6 +83,23 @@ def day_record(day):
         "abhijit": window(m.get("abhijit")),
         "brahma": window(m.get("brahma_muhurta")),
     }
+
+
+def tithi_number(name, paksha):
+    """1..30, where 1-15 is Shukla and 16-30 is Krishna."""
+    if not name:
+        return 0
+    bare = name.replace(paksha, "").strip()
+    if bare in ("Purnima", "Amavasya"):
+        return 15 if paksha == "Shukla" else 30
+    if bare in TITHI_NAMES:
+        idx = TITHI_NAMES.index(bare) + 1
+        return idx if paksha == "Shukla" else idx + 15
+    return 0
+
+
+def nakshatra_number(name):
+    return NAK_NAMES.index(name) if name in NAK_NAMES else -1
 
 
 def rashi_record(r):
