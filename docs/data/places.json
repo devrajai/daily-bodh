@@ -1,0 +1,236 @@
+{
+ "note": "Birth places bundled with the site so the ascendant can be cast. offset is the standard UTC offset; historical daylight saving is not modelled.",
+ "places": [
+  {
+   "name": "Ahmedabad",
+   "lat": 23.0225,
+   "lon": 72.5714,
+   "tz": "Asia/Kolkata",
+   "offset": 5.5
+  },
+  {
+   "name": "Amritsar",
+   "lat": 31.634,
+   "lon": 74.8723,
+   "tz": "Asia/Kolkata",
+   "offset": 5.5
+  },
+  {
+   "name": "Bengaluru",
+   "lat": 12.9716,
+   "lon": 77.5946,
+   "tz": "Asia/Kolkata",
+   "offset": 5.5
+  },
+  {
+   "name": "Bhopal",
+   "lat": 23.2599,
+   "lon": 77.4126,
+   "tz": "Asia/Kolkata",
+   "offset": 5.5
+  },
+  {
+   "name": "Bhubaneswar",
+   "lat": 20.2961,
+   "lon": 85.8245,
+   "tz": "Asia/Kolkata",
+   "offset": 5.5
+  },
+  {
+   "name": "Bikaner",
+   "lat": 28.0229,
+   "lon": 73.3119,
+   "tz": "Asia/Kolkata",
+   "offset": 5.5
+  },
+  {
+   "name": "Chennai",
+   "lat": 13.0827,
+   "lon": 80.2707,
+   "tz": "Asia/Kolkata",
+   "offset": 5.5
+  },
+  {
+   "name": "Delhi",
+   "lat": 28.6139,
+   "lon": 77.209,
+   "tz": "Asia/Kolkata",
+   "offset": 5.5
+  },
+  {
+   "name": "Dubai",
+   "lat": 25.2048,
+   "lon": 55.2708,
+   "tz": "Asia/Dubai",
+   "offset": 4.0
+  },
+  {
+   "name": "Gurugram",
+   "lat": 28.4595,
+   "lon": 77.0266,
+   "tz": "Asia/Kolkata",
+   "offset": 5.5
+  },
+  {
+   "name": "Guwahati",
+   "lat": 26.1445,
+   "lon": 91.7362,
+   "tz": "Asia/Kolkata",
+   "offset": 5.5
+  },
+  {
+   "name": "Hyderabad",
+   "lat": 17.385,
+   "lon": 78.4867,
+   "tz": "Asia/Kolkata",
+   "offset": 5.5
+  },
+  {
+   "name": "Jaipur",
+   "lat": 26.9124,
+   "lon": 75.7873,
+   "tz": "Asia/Kolkata",
+   "offset": 5.5
+  },
+  {
+   "name": "Kanpur",
+   "lat": 26.4499,
+   "lon": 80.3319,
+   "tz": "Asia/Kolkata",
+   "offset": 5.5
+  },
+  {
+   "name": "Kathmandu",
+   "lat": 27.7172,
+   "lon": 85.324,
+   "tz": "Asia/Kathmandu",
+   "offset": 5.75
+  },
+  {
+   "name": "Kochi",
+   "lat": 9.9312,
+   "lon": 76.2673,
+   "tz": "Asia/Kolkata",
+   "offset": 5.5
+  },
+  {
+   "name": "Kolkata",
+   "lat": 22.5726,
+   "lon": 88.3639,
+   "tz": "Asia/Kolkata",
+   "offset": 5.5
+  },
+  {
+   "name": "Kota",
+   "lat": 25.2138,
+   "lon": 75.8648,
+   "tz": "Asia/Kolkata",
+   "offset": 5.5
+  },
+  {
+   "name": "London",
+   "lat": 51.5074,
+   "lon": -0.1278,
+   "tz": "Europe/London",
+   "offset": 0.0
+  },
+  {
+   "name": "Lucknow",
+   "lat": 26.8467,
+   "lon": 80.9462,
+   "tz": "Asia/Kolkata",
+   "offset": 5.5
+  },
+  {
+   "name": "Mumbai",
+   "lat": 19.076,
+   "lon": 72.8777,
+   "tz": "Asia/Kolkata",
+   "offset": 5.5
+  },
+  {
+   "name": "New Delhi",
+   "lat": 28.6139,
+   "lon": 77.209,
+   "tz": "Asia/Kolkata",
+   "offset": 5.5
+  },
+  {
+   "name": "New York",
+   "lat": 40.7128,
+   "lon": -74.006,
+   "tz": "America/New_York",
+   "offset": -5.0
+  },
+  {
+   "name": "Noida",
+   "lat": 28.5355,
+   "lon": 77.391,
+   "tz": "Asia/Kolkata",
+   "offset": 5.5
+  },
+  {
+   "name": "Patna",
+   "lat": 25.5941,
+   "lon": 85.1376,
+   "tz": "Asia/Kolkata",
+   "offset": 5.5
+  },
+  {
+   "name": "Pune",
+   "lat": 18.5204,
+   "lon": 73.8567,
+   "tz": "Asia/Kolkata",
+   "offset": 5.5
+  },
+  {
+   "name": "Singapore",
+   "lat": 1.3521,
+   "lon": 103.8198,
+   "tz": "Asia/Singapore",
+   "offset": 8.0
+  },
+  {
+   "name": "Srinagar",
+   "lat": 34.0837,
+   "lon": 74.7973,
+   "tz": "Asia/Kolkata",
+   "offset": 5.5
+  },
+  {
+   "name": "Sydney",
+   "lat": -33.8688,
+   "lon": 151.2093,
+   "tz": "Australia/Sydney",
+   "offset": 10.0
+  },
+  {
+   "name": "Thiruvananthapuram",
+   "lat": 8.5241,
+   "lon": 76.9366,
+   "tz": "Asia/Kolkata",
+   "offset": 5.5
+  },
+  {
+   "name": "Toronto",
+   "lat": 43.6532,
+   "lon": -79.3832,
+   "tz": "America/Toronto",
+   "offset": -5.0
+  },
+  {
+   "name": "Ujjain",
+   "lat": 23.1765,
+   "lon": 75.7885,
+   "tz": "Asia/Kolkata",
+   "offset": 5.5
+  },
+  {
+   "name": "Varanasi",
+   "lat": 25.3176,
+   "lon": 82.9739,
+   "tz": "Asia/Kolkata",
+   "offset": 5.5
+  }
+ ]
+}

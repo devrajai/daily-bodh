@@ -1,0 +1,270 @@
+{
+ "packId": "jyotish",
+ "packName": "Jyotish",
+ "version": 1,
+ "ordering": "daily",
+ "description": "The classical classification tables of phalit jyotish - the rashis, the grahas, the twelve bhavas, the friendships, the aspects and the principal yogas. Described from the Parashari texts; no translated text is copied.",
+ "items": [
+  {
+   "id": "j-rashi-class",
+   "text": "Classifying the twelve rashis",
+   "translations": {"en": "A rashi is not just a slice of the zodiac. The texts classify each one by element (fire, earth, air, water), by movement (chara movable, sthira fixed, dwisvabhava dual), by gender, by caste (varna), by temperament (krura harsh or saumya gentle), by body (dwi-pada, chatus-pada, bahu-pada or keeta), by how it rises (shirshodaya head-first, prishtodaya hind-first, ubhayodaya both), and by which of sattva, rajas and tamas predominates.", "hi": "", "mr": ""},
+   "summary_1line": "Seven ways the texts sort the signs",
+   "summary_2to3line": "A rashi is classified by element, by movement (chara, sthira, dwisvabhava), by gender, by varna, by temperament (krura or saumya), by body, by how it rises, and by guna.",
+   "bodh_3to4line": "These classifications are the vocabulary of prediction: a planet in a fixed sign behaves with more inertia than the same planet in a movable one, and a planet in a water sign carries a different flavour from the same planet in fire. Nothing here is interpretation yet - it is the table you interpret with.",
+   "tags": ["jyotish", "rashi"],
+   "steps": [
+    "Movable (chara): Aries, Cancer, Libra, Capricorn.",
+    "Fixed (sthira): Taurus, Leo, Scorpio, Aquarius.",
+    "Dual (dwisvabhava): Gemini, Virgo, Sagittarius, Pisces.",
+    "Fire: Aries, Leo, Sagittarius. Earth: Taurus, Virgo, Capricorn. Air: Gemini, Libra, Aquarius. Water: Cancer, Scorpio, Pisces.",
+    "Male signs: Aries, Gemini, Leo, Libra, Sagittarius, Aquarius. Female: the other six.",
+    "Harsh (krura): Aries, Gemini, Leo, Libra, Sagittarius, Aquarius - the odd signs. Gentle (saumya): the even signs.",
+    "Human (manushya): Gemini, Virgo, Libra, Aquarius and the first half of Sagittarius. Animal: Aries, Taurus, Leo and the second half of Sagittarius. Keeta (insect): Cancer, Scorpio, Pisces. Quadruped (chatuspada): Aries, Taurus, Leo, the second half of Sagittarius and the first half of Capricorn."
+   ]
+  },
+  {
+   "id": "j-rashi-lords",
+   "text": "Rashis and their lords",
+   "translations": {"en": "Aries and Scorpio are Mars's; Taurus and Libra Venus's; Gemini and Virgo Mercury's; Cancer the Moon's; Leo the Sun's; Sagittarius and Pisces Jupiter's; Capricorn and Aquarius Saturn's.", "hi": "", "mr": ""},
+   "summary_1line": "Which graha rules which sign",
+   "summary_2to3line": "Aries and Scorpio are Mars's; Taurus and Libra Venus's; Gemini and Virgo Mercury's; Cancer the Moon's; Leo the Sun's; Sagittarius and Pisces Jupiter's; Capricorn and Aquarius Saturn's.",
+   "bodh_3to4line": "The lord of a bhava is the ruler of the sign on its cusp, and most prediction works through the lord: where it sits, what it is with, and how strong it is. The Sun and Moon own one sign each, and the nodes own none - they are shadow planets.",
+   "tags": ["jyotish", "rashi"]
+  },
+  {
+   "id": "j-rashi-organs",
+   "text": "Rashis and the body",
+   "translations": {"en": "The zodiac is mapped onto the body from head to foot: Aries the head, Taurus the face and neck, Gemini the shoulders and arms, Cancer the chest and heart area, Leo the stomach and upper back, Virgo the abdomen and intestines, Libra the kidneys and lower back, Scorpio the generative organs, Sagittarius the hips and thighs, Capricorn the knees, Aquarius the calves and ankles, Pisces the feet.", "hi": "", "mr": ""},
+   "summary_1line": "The sign-to-limb correspondence",
+   "summary_2to3line": "The zodiac is mapped onto the body from head to foot, Aries the head through Pisces the feet.",
+   "bodh_3to4line": "This is the basis of the medical astrology the texts use - an afflicted sign points at the limb it governs. It is traditional correspondence, not diagnosis.",
+   "tags": ["jyotish", "rashi", "body"]
+  },
+  {
+   "id": "j-graha-karaka",
+   "text": "The karakatvas of the grahas",
+   "translations": {"en": "The Sun signifies the soul, the father, authority, vitality and the bones. The Moon the mind, the mother, the emotions and the blood. Mars energy, courage, brothers, land and injury. Mercury speech, intellect, trade and writing. Jupiter wisdom, children, fortune and the guru. Venus love, marriage, beauty, vehicles and comfort. Saturn time, discipline, labour, sorrow and longevity. Rahu obsession, foreign things and illusion; Ketu detachment, moksha and the past.", "hi": "", "mr": ""},
+   "summary_1line": "What each planet signifies",
+   "summary_2to3line": "Sun soul and father, Moon mind and mother, Mars energy and brothers, Mercury speech and intellect, Jupiter wisdom and children, Venus love and comfort, Saturn time and discipline, Rahu obsession, Ketu detachment.",
+   "bodh_3to4line": "These karakatvas are the sense in which a planet 'owns' a matter. When several planets carry the same karakatva, that matter is emphasised in the chart; when the karaka is afflicted, the matter suffers. This is the common list found across the Parashari texts.",
+   "tags": ["jyotish", "graha"]
+  },
+  {
+   "id": "j-graha-exalt",
+   "text": "Exaltation, debilitation and moolatrikona",
+   "translations": {"en": "Every planet has a sign where it is exalted (uccha) and therefore strongest, a sign where it is debilitated (neecha) and weakest, and a sign it owns where a particular portion is its moolatrikona - its own home ground, stronger than ordinary ownership.", "hi": "", "mr": ""},
+   "summary_1line": "Where each planet is strongest and weakest",
+   "summary_2to3line": "Each planet has an exaltation sign, a debilitation sign, and a moolatrikona - its own home ground, stronger than ordinary ownership.",
+   "bodh_3to4line": "The degrees matter. The Sun is exalted at 10 degrees of Aries and debilitated at 10 of Libra; the Moon at 3 of Taurus and 3 of Scorpio; Mars at 28 of Capricorn and 28 of Cancer; Mercury at 15 of Virgo and 15 of Pisces; Jupiter at 5 of Cancer and 5 of Capricorn; Venus at 27 of Pisces and 27 of Virgo; Saturn at 20 of Libra and 20 of Aries. Moolatrikona: the Sun in Leo, the Moon in Taurus, Mars in Aries, Mercury in Virgo, Jupiter in Sagittarius, Venus in Libra, Saturn in Aquarius.",
+   "tags": ["jyotish", "graha", "strength"]
+  },
+  {
+   "id": "j-graha-friendship",
+   "text": "Natural friendship between the grahas",
+   "translations": {"en": "The Sun counts the Moon, Mars and Jupiter as friends, Mercury as neutral, and Venus and Saturn as enemies. The Moon counts the Sun and Mercury as friends and the rest as neutral. Mars counts the Sun, Moon and Jupiter as friends and Mercury as an enemy. Mercury counts the Sun and Venus as friends and the Moon as an enemy. Jupiter counts the Sun, Moon and Mars as friends, Saturn as neutral and Mercury and Venus as enemies. Venus counts Mercury and Saturn as friends and the Sun and Moon as enemies. Saturn counts Mercury and Venus as friends and the Sun, Moon and Mars as enemies.", "hi": "", "mr": ""},
+   "summary_1line": "Who is whose friend, by nature",
+   "summary_2to3line": "A fixed table of natural friendship, given per planet in the classical texts.",
+   "bodh_3to4line": "Natural friendship is inherent to the planets and never changes. It is only one half of the picture - the other half is temporal, and the two combine into the five-fold relationship. The nodes are generally not given natural friendship, as they own no sign.",
+   "tags": ["jyotish", "graha", "friendship"]
+  },
+  {
+   "id": "j-graha-tatkalik",
+   "text": "Temporary friendship",
+   "translations": {"en": "Tatkalik maitri is friendship by placement in the chart. A planet treats as its temporary friends the planets sitting in the 2nd, 3rd, 4th, 10th, 11th and 12th houses from itself, and as temporary enemies those in the 1st, 5th, 6th, 7th, 8th and 9th.", "hi": "", "mr": ""},
+   "summary_1line": "Who is whose friend, by position",
+   "summary_2to3line": "A planet treats as temporary friends the planets in the 2nd, 3rd, 4th, 10th, 11th and 12th houses from itself, and as enemies those in the 1st, 5th, 6th, 7th, 8th and 9th.",
+   "bodh_3to4line": "This is why the same two planets can be friends in one chart and enemies in another. It is computed from the chart, so it needs the positions of all the planets - which the Kundli screen now has.",
+   "tags": ["jyotish", "graha", "friendship"]
+  },
+  {
+   "id": "j-graha-panchadha",
+   "text": "The five-fold relationship (panchadha maitri)",
+   "translations": {"en": "Natural friend plus temporal friend is adhi mitra, a great friend. Natural friend plus temporal enemy, and natural enemy plus temporal friend, both reduce to sama, neutral. Natural neutral plus temporal friend is mitra. Natural neutral plus temporal enemy is shatru. Natural enemy plus temporal enemy is adhi shatru.", "hi": "", "mr": ""},
+   "summary_1line": "Natural and temporary friendship combined",
+   "summary_2to3line": "Combining the two tables gives five relationships: adhi mitra, mitra, sama, shatru and adhi shatru.",
+   "bodh_3to4line": "This is the relationship the texts actually use when judging whether two planets will help or harm each other. It is computable from the chart, and the Kundli screen shows it.",
+   "tags": ["jyotish", "graha", "friendship"]
+  },
+  {
+   "id": "j-graha-aspects",
+   "text": "Aspects (drishti)",
+   "translations": {"en": "Every planet aspects the 7th house from itself with a full glance. Beyond that, Mars also aspects the 4th and 8th, Jupiter the 5th and 9th, and Saturn the 3rd and 10th.", "hi": "", "mr": ""},
+   "summary_1line": "Which house each planet looks at",
+   "summary_2to3line": "All planets aspect the 7th from themselves; Mars also the 4th and 8th, Jupiter the 5th and 9th, and Saturn the 3rd and 10th.",
+   "bodh_3to4line": "These three are the planets with special aspects, and it is one reason a Mars or Saturn is watched carefully - it reaches houses the others do not. Some texts give the nodes aspects too; practice differs, so the app uses the three classical special-aspect planets and says so.",
+   "tags": ["jyotish", "graha", "drishti"]
+  },
+  {
+   "id": "j-graha-digbala",
+   "text": "Directional strength (digbala)",
+   "translations": {"en": "Each planet has a direction in which it is strong: the Sun and Mars in the 10th (south), Jupiter and Mercury in the 1st (east), Saturn in the 7th (west), and the Moon and Venus in the 4th (north).", "hi": "", "mr": ""},
+   "summary_1line": "Where each planet is strongest by direction",
+   "summary_2to3line": "Sun and Mars strong in the 10th, Jupiter and Mercury in the 1st, Saturn in the 7th, Moon and Venus in the 4th.",
+   "bodh_3to4line": "Digbala is one of the classical sources of planetary strength, alongside exaltation, moolatrikona and the friendship tables. Like the others it needs a house to be meaningful, so it needs the ascendant.",
+   "tags": ["jyotish", "graha", "strength"]
+  },
+  {
+   "id": "j-graha-attributes",
+   "text": "The attributes of the grahas",
+   "translations": {"en": "Gender: the Sun, Mars and Jupiter are male; the Moon and Venus female; Mercury and Saturn neuter. Element: the Sun and Mars are fire, the Moon and Venus water, Mercury earth, Jupiter ether, Saturn and Rahu air. Dosha: the Sun is pitta, the Moon kapha and vata, Mars pitta, Mercury tridosha, Jupiter kapha, Venus vata-kapha, Saturn vata. Guna: the Sun, Moon and Jupiter are sattvic; Mercury and Venus rajasic; Mars, Saturn and Rahu tamasic. Taste: the Sun is pungent, the Moon salty, Mars bitter, Mercury mixed, Jupiter sweet, Venus sour, Saturn astringent.", "hi": "", "mr": ""},
+   "summary_1line": "Gender, element, dosha, guna, varna and taste",
+   "summary_2to3line": "Each planet carries a gender, an element, a dosha, a guna and a taste in the classical tables.",
+   "bodh_3to4line": "These are the correspondences the texts use when a planet's nature has to be matched to a matter - an illness, a food, a temperament. They are traditional classification, not medicine.",
+   "tags": ["jyotish", "graha"]
+  },
+  {
+   "id": "j-graha-bodyparts",
+   "text": "Grahas and the body",
+   "translations": {"en": "The Sun governs the bones, heart, right eye and head. The Moon the blood, the left eye and the mind. Mars the marrow, neck and energy. Mercury the skin and nervous system. Jupiter the fat and the liver. Venus the reproductive system and the kidneys. Saturn the nerves, teeth and feet. Rahu and Ketu the subtle body and the breath.", "hi": "", "mr": ""},
+   "summary_1line": "Which limb each planet governs",
+   "summary_2to3line": "Sun bones and heart, Moon blood and mind, Mars marrow and neck, Mercury skin and nerves, Jupiter fat and liver, Venus the reproductive system, Saturn nerves and feet.",
+   "bodh_3to4line": "Read alongside the sign-to-limb mapping: the sign says which limb, the planet says what kind of trouble or strength.",
+   "tags": ["jyotish", "graha", "body"]
+  },
+  {
+   "id": "j-bhava-1", "text": "The first bhava (lagna)",
+   "translations": {"en": "The first house is the self - the body, the temperament, the vitality and the direction of the life. Its sign is the lagna, and the lord of the lagna is read as the person themselves.", "hi": "", "mr": ""},
+   "summary_1line": "Body, self, vitality, fame, general fortune",
+   "summary_2to3line": "The first house is the self - body, temperament, vitality and the direction of the life.",
+   "bodh_3to4line": "The lagna is fixed by the moment of birth, so it needs an exact birth time and place. Everything else in the chart is read from it.",
+   "tags": ["jyotish", "bhava"]
+  },
+  {
+   "id": "j-bhava-2", "text": "The second bhava",
+   "translations": {"en": "The second house governs accumulated wealth, the power of speech, the family you are born into, and what you eat. It is also, with the seventh, a marak bhava.", "hi": "", "mr": ""},
+   "summary_1line": "Wealth, speech, family, food, and one of the marak houses",
+   "summary_2to3line": "The second house governs wealth, speech, family and food, and is one of the two marak houses.",
+   "bodh_3to4line": "Why the second and seventh are marak is a classical point of some subtlety: they are the houses that 'kill' the lagna, being the 2nd and the 7th from it.",
+   "tags": ["jyotish", "bhava"]
+  },
+  {
+   "id": "j-bhava-3", "text": "The third bhava",
+   "translations": {"en": "The third house covers younger siblings, valour and effort, the hands and communication, and short travel. Mars is its natural karaka.", "hi": "", "mr": ""},
+   "summary_1line": "Siblings, courage, communication, short journeys",
+   "summary_2to3line": "The third house covers younger siblings, valour, the hands and communication, and short travel.",
+   "bodh_3to4line": "It is an upachaya house - one of the houses that grows better with time and with effort.",
+   "tags": ["jyotish", "bhava"]
+  },
+  {
+   "id": "j-bhava-4", "text": "The fourth bhava",
+   "translations": {"en": "The fourth house governs the mother, the home and property, vehicles, education in the early years, and the happiness of the mind. The Moon and Venus are read here.", "hi": "", "mr": ""},
+   "summary_1line": "Mother, home, land, vehicles, inner peace",
+   "summary_2to3line": "The fourth house governs the mother, home and property, vehicles, early education, and the happiness of the mind.",
+   "bodh_3to4line": "Being a kendra, it is one of the pillars of the chart.",
+   "tags": ["jyotish", "bhava"]
+  },
+  {
+   "id": "j-bhava-5", "text": "The fifth bhava",
+   "translations": {"en": "The fifth house covers children, intelligence and learning, creativity, romance, and purva punya - the merit carried from previous lives. Jupiter is its karaka.", "hi": "", "mr": ""},
+   "summary_1line": "Children, intelligence, creativity, past merit",
+   "summary_2to3line": "The fifth house covers children, intelligence, creativity, romance, and purva punya.",
+   "bodh_3to4line": "It is a trikona house, and the trikonas are the most auspicious in the chart.",
+   "tags": ["jyotish", "bhava"]
+  },
+  {
+   "id": "j-bhava-6", "text": "The sixth bhava",
+   "translations": {"en": "The sixth house governs enemies, illness, debt, servants and service, and day-to-day competition. It is an upachaya house, so it strengthens with time.", "hi": "", "mr": ""},
+   "summary_1line": "Enemies, disease, debt, service, competition",
+   "summary_2to3line": "The sixth house governs enemies, illness, debt, service and competition, and strengthens with time.",
+   "bodh_3to4line": "A strong sixth house is read as the capacity to overcome opposition, not as misfortune.",
+   "tags": ["jyotish", "bhava"]
+  },
+  {
+   "id": "j-bhava-7", "text": "The seventh bhava",
+   "translations": {"en": "The seventh house governs the spouse and marriage, business partnerships, and dealings with others. Venus is its karaka, and it is the second of the two marak houses.", "hi": "", "mr": ""},
+   "summary_1line": "Spouse, partnership, business, and the other marak house",
+   "summary_2to3line": "The seventh house governs the spouse, marriage, partnerships and dealings with others.",
+   "bodh_3to4line": "It is also the house of the public - how the world receives you.",
+   "tags": ["jyotish", "bhava"]
+  },
+  {
+   "id": "j-bhava-8", "text": "The eighth bhava",
+   "translations": {"en": "The eighth house governs the length of life, death, inheritance and legacies, chronic illness, and everything hidden - the occult, research, sudden events. Saturn is read here.", "hi": "", "mr": ""},
+   "summary_1line": "Longevity, death, inheritance, the hidden",
+   "summary_2to3line": "The eighth house governs longevity, death, inheritance, chronic illness and everything hidden.",
+   "bodh_3to4line": "It is the most difficult house in the classical reading, and also the house of deep knowledge.",
+   "tags": ["jyotish", "bhava"]
+  },
+  {
+   "id": "j-bhava-9", "text": "The ninth bhava",
+   "translations": {"en": "The ninth house governs fortune or bhagya, dharma, the father, the guru and higher learning, pilgrimage and long journeys. Jupiter is its karaka.", "hi": "", "mr": ""},
+   "summary_1line": "Fortune, dharma, father, the guru, long journeys",
+   "summary_2to3line": "The ninth house governs fortune, dharma, the father, the guru, higher learning and long journeys.",
+   "bodh_3to4line": "It is a trikona, and with the fifth it is one of the two most benefic houses.",
+   "tags": ["jyotish", "bhava"]
+  },
+  {
+   "id": "j-bhava-10", "text": "The tenth bhava",
+   "translations": {"en": "The tenth house governs profession, karma in the sense of work done in the world, status and authority, and the father in some readings. The Sun, Saturn and Mercury are read here.", "hi": "", "mr": ""},
+   "summary_1line": "Career, karma, status, authority",
+   "summary_2to3line": "The tenth house governs profession, work done in the world, status and authority.",
+   "bodh_3to4line": "It is a kendra and the strongest of the upachaya houses.",
+   "tags": ["jyotish", "bhava"]
+   },
+  {
+   "id": "j-bhava-11", "text": "The eleventh bhava",
+   "translations": {"en": "The eleventh house governs income and gains, elder siblings, friends, and the fulfilment of desires. Jupiter is its karaka.", "hi": "", "mr": ""},
+   "summary_1line": "Gains, income, elder siblings, fulfilment of desire",
+   "summary_2to3line": "The eleventh house governs income, gains, elder siblings, friends and the fulfilment of desires.",
+   "bodh_3to4line": "It is an upachaya house and, with the third and sixth, strengthens with time.",
+   "tags": ["jyotish", "bhava"]
+  },
+  {
+   "id": "j-bhava-12", "text": "The twelfth bhava",
+   "translations": {"en": "The twelfth house governs loss and expenditure, confinement, foreign residence, and moksha - liberation. Saturn is read here.", "hi": "", "mr": ""},
+   "summary_1line": "Loss, expenditure, moksha, foreign lands",
+   "summary_2to3line": "The twelfth house governs loss, expenditure, confinement, foreign residence and moksha.",
+   "bodh_3to4line": "The texts read it both as the house of loss and as the house of liberation, which is the same idea seen from two ends.",
+   "tags": ["jyotish", "bhava"]
+  },
+  {
+   "id": "j-bhava-groups", "text": "The groups of houses",
+   "translations": {"en": "The houses are read in groups as well as singly. Kendras are the angles - 1, 4, 7, 10. Trikonas are the trines - 1, 5, 9. Upachaya houses - 3, 6, 10, 11 - improve with time. Dusthanas - 6, 8, 12 - are the difficult houses. Marak houses - 2 and 7.", "hi": "", "mr": ""},
+   "summary_1line": "Kendra, trikona, upachaya, dusthana, marak",
+   "summary_2to3line": "Kendras 1, 4, 7, 10; trikonas 1, 5, 9; upachaya 3, 6, 10, 11; dusthanas 6, 8, 12; marak 2 and 7.",
+   "bodh_3to4line": "A planet is strong in a kendra or a trikona and weak in a dusthana. The kendra-trikona relationship is what produces raja yoga, and the app checks it on the Kundli screen.",
+   "tags": ["jyotish", "bhava"]
+  },
+  {
+   "id": "j-yoga-mahapurusha", "text": "The Panch Mahapurusha yogas",
+   "translations": {"en": "When Mars, Mercury, Jupiter, Venus or Saturn sits in its own sign, its exaltation sign or its moolatrikona, and in a kendra from the lagna, the texts name a yoga. Mars gives Ruchaka, Mercury Bhadra, Jupiter Hamsa, Venus Malavya and Saturn Shasha.", "hi": "", "mr": ""},
+   "summary_1line": "Five yogas of the great person",
+   "summary_2to3line": "Mars, Mercury, Jupiter, Venus or Saturn dignified and in a kendra gives Ruchaka, Bhadra, Hamsa, Malavya or Shasha.",
+   "bodh_3to4line": "Each is read for a different kind of eminence - Ruchaka for command and physical courage, Bhadra for intellect and learning, Hamsa for wisdom and dharma, Malavya for beauty, comfort and the arts, Shasha for authority and endurance. The yoga needs a kendra, so it needs the lagna; the app checks it from the Moon as well, and labels which.",
+   "tags": ["jyotish", "yoga"]
+  },
+  {
+   "id": "j-yoga-raja", "text": "Raja yoga",
+   "translations": {"en": "A raja yoga forms when a lord of a kendra (1, 4, 7, 10) and a lord of a trikona (1, 5, 9) are joined - by conjunction, by mutual aspect, or by exchange of signs. The first house is both a kendra and a trikona, so its lord is the easiest partner.", "hi": "", "mr": ""},
+   "summary_1line": "The kendra-trikona connection",
+   "summary_2to3line": "A lord of a kendra joined to a lord of a trikona forms raja yoga.",
+   "bodh_3to4line": "This is the central raja yoga of the Parashari texts, and there are many named variations. The app reports the plain conjunction, mutual-aspect and exchange forms, and says which lords formed it.",
+   "tags": ["jyotish", "yoga"]
+  },
+  {
+   "id": "j-yoga-yogakari", "text": "Yogakari planets",
+   "translations": {"en": "For some ascendants a single planet rules both a kendra and a trikona, and that planet becomes the yogakari - the maker of yoga. The clearest case is Saturn for a Taurus or Libra ascendant, where it rules the 9th and 10th.", "hi": "", "mr": ""},
+   "summary_1line": "A planet that rules both a kendra and a trikona",
+   "summary_2to3line": "A planet ruling both a kendra and a trikona becomes the yogakari, as Saturn does for Taurus and Libra ascendants.",
+   "bodh_3to4line": "A yogakari is read as doing good even when it is a natural malefic, because its lordships are auspicious. This is why Saturn is said to behave well for Taurus and Libra.",
+   "tags": ["jyotish", "yoga"]
+  },
+  {
+   "id": "j-yoga-sade-sati", "text": "Sade Sati",
+   "translations": {"en": "Sade Sati is the roughly seven-and-a-half year period in which Saturn transits the 12th, 1st and 2nd houses from the natal Moon.", "hi": "", "mr": ""},
+   "summary_1line": "Saturn's transit over the natal Moon",
+   "summary_2to3line": "Sade Sati is the period in which Saturn transits the 12th, 1st and 2nd houses from the natal Moon.",
+   "bodh_3to4line": "It is a transit, not a natal yoga, and the texts treat it as a period of pressure and maturation rather than simple misfortune. Its intensity depends on Saturn's strength in the natal chart, which is why a bare 'you have Sade Sati' tells you very little.",
+   "tags": ["jyotish", "yoga", "transit"]
+  },
+  {
+   "id": "j-yoga-ashtakavarga", "text": "On the strength systems not implemented here",
+   "translations": {"en": "The classical texts also use Shadbala (six sources of strength), Ashtakavarga (the eight-fold point system), and the full varga scheme of divisional charts. The app computes dignity, digbala and the friendship tables, but not Shadbala or Ashtakavarga.", "hi": "", "mr": ""},
+   "summary_1line": "What is deliberately left out, and why",
+   "summary_2to3line": "Shadbala, Ashtakavarga and the divisional charts are not computed, and the app says so.",
+   "bodh_3to4line": "They are left out because they are large, arithmetically heavy tables and I could not verify an implementation of them against an authoritative source from here. Rather than ship a number I cannot stand behind, the app omits them and says so. The texts for them are named in the Shastra library.",
+   "tags": ["jyotish", "caveat"]
+  }
+ ]
+}
