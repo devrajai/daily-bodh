@@ -1,9 +1,9 @@
 name: Build APK
 
 # Builds both flavours on GitHub's runners, generates every derived asset (the Gita
-# pack, the temple tones, the reference packs, the panchang/festival/rashifal data
-# and the Moon-star table), publishes that content into docs/data/ for the website,
-# and stages the APKs plus a source archive in docs/download/.
+# pack, the temple tones, the reference packs, the shastra library, the panchang
+# family and the graha ephemeris), publishes that content into docs/data/ for the
+# website, and stages the APKs plus a source archive in docs/download/.
 
 on:
   push:
@@ -55,11 +55,19 @@ jobs:
       - name: Generate the reference packs (numerology, palmistry, Lal Kitab)
         run: python3 tools/author_reference.py --out app/src/main/assets/content
 
+      - name: Generate the shastra library
+        run: python3 tools/author_shastra.py --out app/src/main/assets/content
+
       - name: Generate panchang, festivals, rashifal and the Moon-star table
         run: |
           python3 tools/build_panchang.py --out app/src/main/assets/content \
             --city Delhi --from 2026 --to 2031 --rashifal-daily-to 2028
           python3 tools/build_moonstars.py --out app/src/main/assets/content/moonstars.json \
+            --from 1930 --to 2035
+
+      - name: Generate the graha ephemeris
+        run: |
+          python3 tools/build_ephemeris.py --out app/src/main/assets/content/ephemeris.json \
             --from 1930 --to 2035
 
       - name: Publish the content for the website
@@ -98,9 +106,11 @@ jobs:
                   app/src/main/assets/content/festivals.json \
                   app/src/main/assets/content/rashifal.json \
                   app/src/main/assets/content/moonstars.json \
+                  app/src/main/assets/content/ephemeris.json \
                   app/src/main/assets/content/numerology.json \
                   app/src/main/assets/content/palmistry.json \
                   app/src/main/assets/content/lalkitab.json \
+                  app/src/main/assets/content/shastra.json \
                   app/src/main/assets/sounds
           if git diff --staged --quiet; then
             echo "nothing to publish"

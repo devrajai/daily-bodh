@@ -7,8 +7,9 @@ served straight to the browser. Nothing is fetched from a third party.
 import argparse, json, os, shutil
 
 WEB = ["panchang.json", "festivals.json", "rashifal.json", "moonstars.json",
-       "muhurat.json", "numerology.json", "palmistry.json", "lalkitab.json",
-       "remedies.json", "aarti.json", "mantras.json", "puja.json"]
+       "ephemeris.json", "muhurat.json", "numerology.json", "palmistry.json",
+       "lalkitab.json", "shastra.json", "remedies.json", "aarti.json",
+       "mantras.json", "puja.json"]
 
 
 def main():
