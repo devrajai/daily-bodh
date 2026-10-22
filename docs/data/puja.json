@@ -1,0 +1,86 @@
+{
+ "packId": "puja",
+ "packName": "Puja & Rituals",
+ "description": "How to do common pujas and festival rituals at home, step by step, with the items needed and why each step is done. Written as common pan-Indian practice; household and regional traditions differ.",
+ "version": 1,
+ "ordering": "daily",
+ "items": [
+  {
+   "id": "puja-daily",
+   "text": "Daily puja at home (nitya puja)",
+   "translations": {"en": "A short daily routine: clean the space, light a lamp, offer water and flowers, recite, and close with aarti.", "hi": "एक छोटी दैनिक विधि: स्थान की सफाई, दीप, जल और फूल, पाठ, और अंत में आरती।", "mr": ""},
+   "summary_1line": "Every day, morning or evening",
+   "summary_2to3line": "A short daily routine: clean the space, light a lamp, offer water and flowers, recite, and close with aarti.",
+   "bodh_3to4line": "Daily puja is not a performance; it is a fixed anchor in the day. The point is regularity, not length — ten sincere minutes daily is the traditional aim. Most households keep it simple on weekdays and fuller on festivals. What you offer, and in what order, differs by family and region; there is no single correct sequence.",
+   "samagri": ["A clean cloth or a small chowki (low platform)", "A small oil lamp (diya) with oil or ghee and a wick", "Incense sticks", "A bell (ghanti)", "Water in a small vessel (kalash) and a spoon (achmani)", "Flowers or loose petals", "Kumkum and haldi", "A plate for prasad (fruit, sugar, or whatever you keep)"],
+   "steps": ["Bathe and put on clean clothes. Many people take a bath first; at minimum wash hands and face.", "Clean the puja space and sprinkle a little water. Spread the cloth or set up the chowki.", "Sit facing east or north if you can. Light the lamp and the incense.", "Ring the bell once, then offer water — a spoonful, three times, into the vessel or toward the image.", "Offer flowers or petals, and apply kumkum and haldi.", "Recite whatever you know: a mantra from the Mantras pack, a shloka from the Gita, or the Gayatri.", "Offer a fruit or a little prasad, then perform aarti (see the aarti guide) or sing one aarti.", "Sit quietly for a moment, then take the prasad yourself and share it with the household."],
+   "tags": ["puja", "daily", "beginners"]
+  },
+  {
+   "id": "puja-aarti",
+   "text": "Performing aarti",
+   "translations": {"en": "How the aarti is actually done: the lamp on a plate, circled in front of the deity, with the bell and the song.", "hi": "आरती कैसे की जाती है: थाली में दीप, देवता के सामने घुमाना, घंटी और गीत।", "mr": ""},
+   "summary_1line": "At the close of any puja, and at evening temples",
+   "summary_2to3line": "How the aarti is actually done: the lamp on a plate, circled in front of the deity, with the bell and the song.",
+   "bodh_3to4line": "Aarti is the moment the worship turns outward — the lamp is offered, and the same flame is then passed to those present, so everyone receives it. The circling direction and the number of circles vary by region. In many South Indian traditions the aarti plate is moved in a full circle or in three circles; in many North Indian households it is a gentle sweep. Follow whichever your family does.",
+   "samagri": ["An aarti plate (thali) or a small tray", "A lamp — a single diya, or a five-wick lamp (panchmukhi)", "Camphor (kapur) for the final offering, if you use it", "A bell (ghanti)", "Roli/kumkum for the tilak afterwards", "A small spoon to carry water for the final offering"],
+   "steps": ["Light the lamp on the aarti plate and place it in front of the deity.", "Pick up the bell in your left hand and the plate in your right (reverse it if that is your family's custom).", "Begin the aarti song — any from the Aarti pack. Ring the bell steadily in time.", "Move the plate in circles in front of the image: slowly, at the level of the heart or the face, never above the deity's head.", "If you use camphor, light it at the end and circle it once, then offer the flame to the deity.", "When the song ends, ring the bell three times and set it down.", "Carry the plate to each person present, holding it while they pass their palms over the flame and touch their eyes — receiving the light.", "Apply a tilak of kumkum, and offer a little water to everyone's right palm as the final offering."],
+   "tags": ["puja", "aarti", "how-to"]
+  },
+  {
+   "id": "puja-ganesh",
+   "text": "Ganesh Chaturthi puja at home",
+   "translations": {"en": "Installing and worshipping a Ganesha murti or image at home, from the welcome through to the visarjan (immersion).", "hi": "घर पर गणेश मूर्ति की स्थापना और पूजा, स्वागत से विसर्जन तक।", "mr": ""},
+   "summary_1line": "Ganesh Chaturthi, and before any new beginning",
+   "summary_2to3line": "Installing and worshipping a Ganesha murti or image at home, from the welcome through to the visarjan (immersion).",
+   "bodh_3to4line": "Ganesha is invoked first in every Hindu undertaking because he is the remover of obstacles. The festival is a household affair as much as a public one: the murti is welcomed, fed, sung to daily, and then released into water. In Maharashtra the public pandals dominate, but the home puja is its own thing. The clay murti is preferred precisely because it returns to the earth.",
+   "samagri": ["A clay Ganesha murti or a picture", "A chowki or table, with a clean cloth", "A kalash with water and mango leaves, and a coconut on top", "Durva grass (or ordinary green grass if unavailable)", "Modak or a simple sweet, and a banana", "Kumkum, haldi, sandalwood paste, incense, lamp, bell", "Red flowers, and a red cloth for the murti", "A thread (janeyu) for the murti, if your tradition uses one"],
+   "steps": ["Clean the house and choose a spot, usually facing east or the main door.", "Set up the chowki, spread the cloth, and place the kalash beside the murti's place.", "Bring the murti home with the face covered, then uncover it and seat it on the chowki.", "Offer water for washing the feet, then water to drink, then a bath — a spoonful each is enough.", "Apply kumkum and haldi, place the durva grass and red flowers, and offer the janeyu if you use one.", "Light the lamp and incense, ring the bell, and recite the Vakratunda mantra or Om Gam Ganapataye Namah.", "Offer modak or the sweet and the banana, and place a little before the murti.", "Perform aarti — Jai Ganesh Jai Ganesh Deva — every day for the days you keep the murti.", "On the final day, sing the aarti once more, then carry the murti to water and release it, turning away as it is immersed."],
+   "tags": ["puja", "ganesh", "festival"]
+  },
+  {
+   "id": "puja-lakshmi",
+   "text": "Lakshmi puja (Diwali)",
+   "translations": {"en": "The evening worship of Lakshmi for the household's wellbeing, done after cleaning the house and lighting the lamps.", "hi": "घर की सुख-समृद्धि के लिए संध्या के समय लक्ष्मी पूजन, घर की सफाई और दीप जलाने के बाद।", "mr": ""},
+   "summary_1line": "Diwali, and Fridays",
+   "summary_2to3line": "The evening worship of Lakshmi for the household's wellbeing, done after cleaning the house and lighting the lamps.",
+   "bodh_3to4line": "Lakshmi puja is a house-cleaning as much as a ritual: the traditional understanding is that the goddess enters a home that is clean, lit and orderly. On Diwali the puja is done at dusk, after the lamps are placed, and the business books of a shop or household are often kept near the altar for the blessing. Regional timing varies — in many parts of Gujarat and Maharashtra it is done at night, in Bengal it is part of Kali puja instead.",
+   "samagri": ["A picture or murti of Lakshmi, often with Ganesha beside her", "Small oil lamps (diyas) — as many as you like", "A kalash with water and mango leaves", "Kumkum, haldi, sandalwood, incense", "Lotus flowers or any fresh flowers", "Coins and, if you keep one, the account book", "Sweets and a coconut", "Rice, and a betel leaf with areca nut"],
+   "steps": ["Clean the whole house during the day, and finish before dusk.", "Place the lamps: at the door, in the puja space, and in the corners of the rooms.", "Set up the altar with the kalash and the image of Lakshmi, with Ganesha beside her.", "Light the lamp and incense, ring the bell.", "Offer water, then kumkum, haldi and flowers.", "Recite the Lakshmi mantra or the Kanakadhara Stotram; chant Om Shrim Hrim Shrim Kamale Kamalalaye Prasida Prasida.", "Place the coins and the account book before the altar for the blessing.", "Offer sweets and the coconut, then perform aarti — Om Jai Lakshmi Mata.", "Distribute the prasad, and leave the lamps burning as long as is safe."],
+   "tags": ["puja", "lakshmi", "festival", "diwali"]
+  },
+  {
+   "id": "puja-shiv",
+   "text": "Shiva puja and a simple rudrabhishek",
+   "translations": {"en": "Worshipping a Shivalinga with water, milk and bel leaves — the most straightforward form of abhishek.", "hi": "जल, दूध और बेलपत्र से शिवलिंग की पूजा — अभिषेक का सबसे सरल रूप।", "mr": ""},
+   "summary_1line": "Shivratri, Mondays, and the month of Shravan",
+   "summary_2to3line": "Worshipping a Shivalinga with water, milk and bel leaves — the most straightforward form of abhishek.",
+   "bodh_3to4line": "The Shivalinga is bathed rather than dressed: water, milk, honey and bel leaves are poured over it while mantras are recited. This is one of the simplest pujas to do at home because it needs very little — a linga, water and bel leaves. A full rudrabhishek takes a priest and hours; the household version is a few minutes and just as valid. Some households keep a linga in water overnight on Shivratri.",
+   "samagri": ["A Shivalinga (stone, or a small one kept at home)", "Bel (bilva) leaves — three leaflets, ideally", "Water, milk, honey, curd, and ghee (as many as you have)", "A small vessel with a spout for pouring, or a spoon", "Kumkum, sandalwood paste, incense, lamp", "White flowers, and dhatura or cannabis leaves where customary", "A rudraksha mala, if you have one"],
+   "steps": ["Clean the space and place the linga on a plate with a rim, so the water is collected.", "Sit facing east or north. Light the lamp and incense.", "Pour water over the linga while reciting Om Namah Shivaya. Pour slowly, in a steady stream.", "Follow with milk, then honey, then curd, then a little ghee, if you are using them.", "Offer bel leaves — traditionally three at a time, placed on the linga.", "Apply a tilak of kumkum and sandalwood, and offer white flowers.", "Recite the Mahamrityunjaya mantra or Om Namah Shivaya, 11, 21 or 108 times.", "Offer fruit or a simple sweet, and perform aarti — Om Jai Shiv Omkara.", "Pour the collected water on a plant or in the garden rather than down the drain."],
+   "tags": ["puja", "shiva", "how-to"]
+  },
+  {
+   "id": "puja-navratri",
+   "text": "Navratri / Devi puja at home",
+   "translations": {"en": "Keeping a lamp burning for the nine nights, worshipping the nine forms, and closing with a kanya pujan or a havan.", "hi": "नौ रातों तक दीप जलाना, नौ रूपों की पूजा, और कन्या पूजन या हवन से समापन।", "mr": ""},
+   "summary_1line": "Nine nights of Navratri, and Durga puja days",
+   "summary_2to3line": "Keeping a lamp burning for the nine nights, worshipping the nine forms, and closing with a kanya pujan or a havan.",
+   "bodh_3to4line": "Navratri is observed very differently across India: in Gujarat it is garba and fasting, in Bengal it is Durga Puja with a pandal and a murti, in the south it is Golu with dolls arranged on steps. What is common is a lamp that is kept alight for nine nights and a daily offering. Fasting rules also vary — some keep a full fast, some only avoid grain, some do neither. Choose what your household actually does.",
+   "samagri": ["A lamp (akhand jyot) that can stay lit, or a lamp you light daily", "A picture or murti of Durga in her nine forms", "Kumkum, haldi, incense, flowers", "A kalash with water and mango leaves", "Fruit, and something for the kanya pujan on the eighth or ninth day", "Barley seeds (jowara) to sow in a pot, if that is your tradition", "A red cloth for the altar"],
+   "steps": ["On the first night, clean the altar, set up the kalash and the image, and light the lamp.", "Sow the barley in a pot if you follow that custom, and water it daily.", "Each day: light the lamp, offer flowers, kumkum and fruit, and recite the Durga mantra or the Devi Kavach.", "Sing the aarti — Jai Ambe Gauri — daily.", "Read or listen to the account of the nine forms, one each night, if you follow that practice.", "Keep the fast in whatever form your household keeps, if any.", "On the eighth or ninth day, perform kanya pujan: invite young girls, wash their feet, offer food and a small gift.", "On the final day, perform a havan if you do one, then distribute prasad and, where customary, immerse the barley sprouts."],
+   "tags": ["puja", "durga", "festival", "navratri"]
+  },
+  {
+   "id": "puja-griha-pravesh",
+   "text": "Griha Pravesh (housewarming)",
+   "translations": {"en": "The ceremony for entering a new house: purifying the space, a havan, and the first meal cooked in the new kitchen.", "hi": "नए घर में प्रवेश की विधि: स्थान की शुद्धि, हवन, और नई रसोई में पहला भोजन।", "mr": ""},
+   "summary_1line": "On first entering a new home",
+   "summary_2to3line": "The ceremony for entering a new house: purifying the space, a havan, and the first meal cooked in the new kitchen.",
+   "bodh_3to4line": "Griha Pravesh is about marking a threshold: the house is cleaned, purified with fire and water, and entered deliberately rather than merely occupied. A priest usually conducts the havan, but a household can do a simple version. Families differ on the auspicious day and on whether the entry is done with the right foot first, carrying a lamp, or carrying a kalash — all are traditional.",
+   "samagri": ["A kalash with water and mango leaves, and a coconut", "A lamp and incense", "Ghee, samagri (havan mixture) and a havan kund, if you are doing a havan", "Milk, which is often boiled over at the threshold", "Kumkum, haldi, sandalwood", "Ganesha and Lakshmi images", "Sweets and fruit for prasad", "A broom and cleaning materials — the cleaning comes first"],
+   "steps": ["Clean the whole house thoroughly, and finish any repairs before the ceremony.", "Set up the altar with Ganesha and Lakshmi, and place the kalash.", "At the appointed time, enter with the right foot first, carrying the lamp or the kalash.", "Boil milk so that it overflows at the threshold or in the kitchen — a sign of abundance.", "Light the lamp and incense, and recite the Ganesha mantra first, then the Lakshmi mantra.", "If you are doing a havan, light it and offer ghee and samagri while reciting the Gayatri.", "Perform aarti to Ganesha and Lakshmi.", "Cook the first meal in the new kitchen — traditionally something simple and sweet — and share it.", "Give the prasad to those who helped, and to neighbours."],
+   "tags": ["puja", "home", "ceremony"]
+  }
+ ]
+}

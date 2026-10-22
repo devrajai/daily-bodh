@@ -1,0 +1,169 @@
+{
+ "packId": "palmistry",
+ "packName": "Palmistry (reference)",
+ "description": "What the classical texts say about each line, mount and hand shape - Cheiro (1894) and Benham (1900), both public domain. A reference, not a reading of your hand.",
+ "version": 1,
+ "ordering": "daily",
+ "items": [
+  {
+   "id": "palm-lines-intro",
+   "text": "The seven lines of the hand",
+   "translations": {
+    "en": "Cheiro and Benham read the hand mainly by its lines and mounts. The four principal lines are the Line of Life, the Line of Head, the Line of Heart and the Line of Fate; the Line of Sun, the Line of Health (Mercury) and the Girdle of Venus are read alongside them.",
+    "hi": "Cheiro and Benham read the hand mainly by its lines and mounts. The four principal lines are the Line of Life, the Line of Head, the Line of Heart and the Line of Fate; the Line of Sun, the Line of Health (Mercury) and the Girdle of Venus are read alongside them.",
+    "mr": ""
+   },
+   "summary_1line": "How the classical texts organise the hand",
+   "summary_2to3line": "Cheiro and Benham read the hand mainly by its lines and mounts. The four principal lines are the Line of Life, the Line of Head, the Line of Heart and the Line of Fate; the Line of Sun, the Line of Health (Mercury) and the Girdle of Venus are read alongside them.",
+   "bodh_3to4line": "Read this section as a reference to what the classical texts say about each feature - not as a reading of your own hand. Cheiro's Language of the Hand (1894) and Benham's Laws of Scientific Hand Reading (1900) are both out of copyright, and the descriptions here follow them. Palmistry is a traditional system with no demonstrated predictive basis; it is included because you asked for it, not because it works.",
+   "tags": [
+    "palmistry",
+    "reference"
+   ]
+  },
+  {
+   "id": "palm-life",
+   "text": "Line of Life",
+   "translations": {
+    "en": "Traditionally read for vitality, constitution and the general course of life - not, as is often said, for its length. Cheiro treats a long, clear, unbroken line as vitality; a chained or broken line as periods of low health; branches rising toward the Mount of Jupiter as ambition.",
+    "hi": "Traditionally read for vitality, constitution and the general course of life - not, as is often said, for its length. Cheiro treats a long, clear, unbroken line as vitality; a chained or broken line as periods of low health; branches rising toward the Mount of Jupiter as ambition.",
+    "mr": ""
+   },
+   "summary_1line": "Encircles the base of the thumb, from between thumb and index finger toward the wrist",
+   "summary_2to3line": "Traditionally read for vitality, constitution and the general course of life - not, as is often said, for its length. Cheiro treats a long, clear, unbroken line as vitality; a chained or broken line as periods of low health; branches rising toward the Mount of Jupiter as ambition.",
+   "bodh_3to4line": "Cheiro is explicit that the Line of Life does not measure how long you will live. That claim is a later popular addition. Source: Cheiro, Language of the Hand.",
+   "tags": [
+    "palmistry",
+    "line"
+   ]
+  },
+  {
+   "id": "palm-head",
+   "text": "Line of Head",
+   "translations": {
+    "en": "Read for the quality and direction of thought. A straight line to the Mount of Mercury is read as practical, business-like thinking; a line sloping to the Mount of the Moon as imagination. A line joined to the Line of Life at the start is read as caution or a strong early attachment to family.",
+    "hi": "Read for the quality and direction of thought. A straight line to the Mount of Mercury is read as practical, business-like thinking; a line sloping to the Mount of the Moon as imagination. A line joined to the Line of Life at the start is read as caution or a strong early attachment to family.",
+    "mr": ""
+   },
+   "summary_1line": "Runs across the palm, usually starting near the thumb side and crossing toward the Mount of Moon or Mercury",
+   "summary_2to3line": "Read for the quality and direction of thought. A straight line to the Mount of Mercury is read as practical, business-like thinking; a line sloping to the Mount of the Moon as imagination. A line joined to the Line of Life at the start is read as caution or a strong early attachment to family.",
+   "bodh_3to4line": "Source: Cheiro, Language of the Hand; Benham, Laws of Scientific Hand Reading.",
+   "tags": [
+    "palmistry",
+    "line"
+   ]
+  },
+  {
+   "id": "palm-heart",
+   "text": "Line of Heart",
+   "translations": {
+    "en": "Read for the affections and the emotional life. Ending under the index finger (Jupiter) is read as idealism in love; ending under the middle finger (Saturn) as a more physical or self-regarding attachment. A chained line is read as changing affections.",
+    "hi": "Read for the affections and the emotional life. Ending under the index finger (Jupiter) is read as idealism in love; ending under the middle finger (Saturn) as a more physical or self-regarding attachment. A chained line is read as changing affections.",
+    "mr": ""
+   },
+   "summary_1line": "Runs across the upper palm, from the Mount of Mercury side toward the Mount of Jupiter",
+   "summary_2to3line": "Read for the affections and the emotional life. Ending under the index finger (Jupiter) is read as idealism in love; ending under the middle finger (Saturn) as a more physical or self-regarding attachment. A chained line is read as changing affections.",
+   "bodh_3to4line": "Source: Cheiro, Language of the Hand.",
+   "tags": [
+    "palmistry",
+    "line"
+   ]
+  },
+  {
+   "id": "palm-fate",
+   "text": "Line of Fate (Destiny)",
+   "translations": {
+    "en": "Read for the sense of direction and outward career. A strong line rising from the wrist is read as a clear path from early on; a line that begins midway as a career that forms later; a broken line as changes of direction.",
+    "hi": "Read for the sense of direction and outward career. A strong line rising from the wrist is read as a clear path from early on; a line that begins midway as a career that forms later; a broken line as changes of direction.",
+    "mr": ""
+   },
+   "summary_1line": "Rises from the wrist or the centre of the palm toward the Mount of Saturn",
+   "summary_2to3line": "Read for the sense of direction and outward career. A strong line rising from the wrist is read as a clear path from early on; a line that begins midway as a career that forms later; a broken line as changes of direction.",
+   "bodh_3to4line": "Cheiro's treatment is the source. Benham warns the Line of Fate should never be read alone.",
+   "tags": [
+    "palmistry",
+    "line"
+   ]
+  },
+  {
+   "id": "palm-sun",
+   "text": "Line of Sun (Apollo)",
+   "translations": {
+    "en": "Read for recognition, reputation and the arts. Marked clearly, it is read as public success or artistic gift; absent or faint, the tradition reads it as a life without public notice rather than a life without worth.",
+    "hi": "Read for recognition, reputation and the arts. Marked clearly, it is read as public success or artistic gift; absent or faint, the tradition reads it as a life without public notice rather than a life without worth.",
+    "mr": ""
+   },
+   "summary_1line": "A short line rising toward the ring finger",
+   "summary_2to3line": "Read for recognition, reputation and the arts. Marked clearly, it is read as public success or artistic gift; absent or faint, the tradition reads it as a life without public notice rather than a life without worth.",
+   "bodh_3to4line": "Source: Cheiro, Language of the Hand.",
+   "tags": [
+    "palmistry",
+    "line"
+   ]
+  },
+  {
+   "id": "palm-health",
+   "text": "Line of Health (Mercury / Hepatica)",
+   "translations": {
+    "en": "Traditionally read for the state of the digestion and the nerves. Cheiro reads a clear line as good health and a chained one as digestive trouble, and warns strongly against reading it as illness on its own.",
+    "hi": "Traditionally read for the state of the digestion and the nerves. Cheiro reads a clear line as good health and a chained one as digestive trouble, and warns strongly against reading it as illness on its own.",
+    "mr": ""
+   },
+   "summary_1line": "Runs from the base of the little finger down across the palm",
+   "summary_2to3line": "Traditionally read for the state of the digestion and the nerves. Cheiro reads a clear line as good health and a chained one as digestive trouble, and warns strongly against reading it as illness on its own.",
+   "bodh_3to4line": "Source: Cheiro, Language of the Hand. The tradition itself cautions against using this line to diagnose anything.",
+   "tags": [
+    "palmistry",
+    "line"
+   ]
+  },
+  {
+   "id": "palm-mounts",
+   "text": "The mounts",
+   "translations": {
+    "en": "Under each finger and around the palm sit the mounts: Venus at the base of the thumb, Jupiter under the index, Saturn under the middle finger, Apollo (Sun) under the ring finger, Mercury under the little finger, the Moon on the outer lower palm, and Mars between thumb and palm and below Mercury.",
+    "hi": "Under each finger and around the palm sit the mounts: Venus at the base of the thumb, Jupiter under the index, Saturn under the middle finger, Apollo (Sun) under the ring finger, Mercury under the little finger, the Moon on the outer lower palm, and Mars between thumb and palm and below Mercury.",
+    "mr": ""
+   },
+   "summary_1line": "The raised pads of the palm, named for the planets",
+   "summary_2to3line": "Under each finger and around the palm sit the mounts: Venus at the base of the thumb, Jupiter under the index, Saturn under the middle finger, Apollo (Sun) under the ring finger, Mercury under the little finger, the Moon on the outer lower palm, and Mars between thumb and palm and below Mercury.",
+   "bodh_3to4line": "A well-developed mount is read as strength in that planet's qualities; a flat or over-developed one as excess or lack. Source: Cheiro and Benham.",
+   "tags": [
+    "palmistry",
+    "mounts"
+   ]
+  },
+  {
+   "id": "palm-shapes",
+   "text": "The seven hand shapes",
+   "translations": {
+    "en": "Cheiro follows D'Arpentigny in sorting hands into seven types by palm and finger proportion: elementary, square, spatulate, conic, psychic, philosophic and mixed. Each type is read as a temperament rather than a fate.",
+    "hi": "Cheiro follows D'Arpentigny in sorting hands into seven types by palm and finger proportion: elementary, square, spatulate, conic, psychic, philosophic and mixed. Each type is read as a temperament rather than a fate.",
+    "mr": ""
+   },
+   "summary_1line": "D'Arpentigny's classification, used by Cheiro",
+   "summary_2to3line": "Cheiro follows D'Arpentigny in sorting hands into seven types by palm and finger proportion: elementary, square, spatulate, conic, psychic, philosophic and mixed. Each type is read as a temperament rather than a fate.",
+   "bodh_3to4line": "Source: Cheiro, Language of the Hand, following D'Arpentigny. Most hands are mixed, and Cheiro says so.",
+   "tags": [
+    "palmistry",
+    "shapes"
+   ]
+  },
+  {
+   "id": "palm-caveat",
+   "text": "What palmistry can and cannot be",
+   "translations": {
+    "en": "There is no algorithm that reads a hand. A palmistry reading requires an actual hand, a reader, and judgement; nothing here claims otherwise. This section is a reference to what the classical texts say, so that you can read about the tradition - not a service that tells you your future from a tap.",
+    "hi": "There is no algorithm that reads a hand. A palmistry reading requires an actual hand, a reader, and judgement; nothing here claims otherwise. This section is a reference to what the classical texts say, so that you can read about the tradition - not a service that tells you your future from a tap.",
+    "mr": ""
+   },
+   "summary_1line": "The honest position on reading hands",
+   "summary_2to3line": "There is no algorithm that reads a hand. A palmistry reading requires an actual hand, a reader, and judgement; nothing here claims otherwise. This section is a reference to what the classical texts say, so that you can read about the tradition - not a service that tells you your future from a tap.",
+   "bodh_3to4line": "Palmistry has no demonstrated predictive validity and is not a diagnostic tool. It is included as traditional reference material. If you want a reading of your own hand, the honest route is a book and your own hand, or a practitioner you trust - not an app.",
+   "tags": [
+    "palmistry",
+    "caveat"
+   ]
+  }
+ ]
+}

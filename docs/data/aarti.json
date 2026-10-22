@@ -1,0 +1,89 @@
+{
+ "packId": "aarti",
+ "packName": "Aarti & Prayers",
+ "description": "Common aartis in Devanagari with transliteration and meaning. Traditional texts; regional versions vary.",
+ "version": 1,
+ "ordering": "daily",
+ "items": [
+  {
+   "id": "aarti-jagdish",
+   "text": "ॐ जय जगदीश हरे, स्वामी जय जगदीश हरे।\nभक्त जनों के संकट, दास जनों के संकट, क्षण में दूर करे॥\nॐ जय जगदीश हरे॥",
+   "transliteration": "om jaya jagadīśa hare, svāmī jaya jagadīśa hare\nbhakta janoṁ ke saṅkaṭa, dāsa janoṁ ke saṅkaṭa, kṣaṇa meṁ dūra kare\nom jaya jagadīśa hare",
+   "translations": {"en": "Victory to the Lord of the universe, O Master. The troubles of devotees, the troubles of servants, are removed in an instant.", "hi": "हे जगत के स्वामी, आपकी जय हो। भक्तों और सेवकों के संकट आप क्षण भर में दूर कर देते हैं।", "mr": ""},
+   "summary_1line": "The best-known aarti in North India",
+   "summary_2to3line": "It praises the Lord of the universe and asks him to clear the troubles of those who come to him.",
+   "bodh_3to4line": "Sung at the end of almost any puja, especially in the evening. It is the default aarti when no specific deity is being worshipped.",
+   "tags": ["aarti", "Vishnu", "universal"]
+  },
+  {
+   "id": "aarti-shiv",
+   "text": "ॐ जय शिव ओंकारा, स्वामी जय शिव ओंकारा।\nब्रह्मा विष्णु सदाशिव, अर्द्धांगी धारा॥\nॐ जय शिव ओंकारा॥",
+   "transliteration": "om jaya śiva oṁkārā, svāmī jaya śiva oṁkārā\nbrahmā viṣṇu sadāśiva, arddhāṅgī dhārā\nom jaya śiva oṁkārā",
+   "translations": {"en": "Victory to Shiva, who is Om. Brahma, Vishnu and Sadashiva, and the one who holds the half-body (Parvati).", "hi": "ॐ के स्वरूप शिव की जय। ब्रह्मा, विष्णु, सदाशिव तथा अर्धांगिनी पार्वती सहित आपकी जय हो।", "mr": ""},
+   "summary_1line": "The main aarti of Lord Shiva",
+   "summary_2to3line": "It names Shiva as Om itself, and honours his place alongside Brahma and Vishnu and his consort.",
+   "bodh_3to4line": "Sung on Shivratri, during Monday fasts, and at the end of any Shiva puja or rudrabhishek.",
+   "tags": ["aarti", "Shiva", "shiva"]
+  },
+  {
+   "id": "aarti-lakshmi",
+   "text": "ॐ जय लक्ष्मी माता, मैया जय लक्ष्मी माता।\nतुमको निशिदिन सेवत, हर विष्णु विधाता॥\nॐ जय लक्ष्मी माता॥",
+   "transliteration": "om jaya lakṣmī mātā, maiyā jaya lakṣmī mātā\ntumako niśidina sevata, hara viṣṇu vidhātā\nom jaya lakṣmī mātā",
+   "translations": {"en": "Victory to Mother Lakshmi. Day and night Shiva, Vishnu and the Creator serve you.", "hi": "हे माता लक्ष्मी, आपकी जय हो। शिव, विष्णु और विधाता दिन-रात आपकी सेवा करते हैं।", "mr": ""},
+   "summary_1line": "The aarti of the goddess of prosperity",
+   "summary_2to3line": "It honours Lakshmi as the one served by the great gods themselves, and asks for her steady presence.",
+   "bodh_3to4line": "Sung on Diwali, on Fridays, and during Lakshmi puja. Often sung after the Lakshmi puja steps are complete.",
+   "tags": ["aarti", "Lakshmi", "lakshmi", "wealth"]
+  },
+  {
+   "id": "aarti-ganesh",
+   "text": "जय गणेश जय गणेश जय गणेश देवा।\nमाता जाकी पार्वती पिता महादेवा॥\nएक दन्त दयावन्त चार भुजा धारी।\nमाथे सिन्दूर सोहे मूसे की सवारी॥",
+   "transliteration": "jaya gaṇeśa jaya gaṇeśa jaya gaṇeśa devā\nmātā jākī pārvatī pitā mahādevā\neka danta dayāvanta cāra bhujā dhārī\nmāthe sindūra sohe mūse kī savārī",
+   "translations": {"en": "Victory to Ganesha, whose mother is Parvati and father Mahadeva. One-tusked, kind, four-armed, vermilion on his brow, riding a mouse.", "hi": "गणेश जी की जय हो, जिनकी माता पार्वती और पिता महादेव हैं। एकदंत, दयालु, चार भुजाधारी, मस्तक पर सिंदूर और मूषक की सवारी।", "mr": ""},
+   "summary_1line": "The aarti of the remover of obstacles",
+   "summary_2to3line": "It describes Ganesha plainly — his parents, his one tusk, his four arms, his mouse — and asks him to be present.",
+   "bodh_3to4line": "Sung first, before any other aarti, because Ganesha is invoked at the start of every undertaking.",
+   "tags": ["aarti", "Ganesh", "ganesh", "beginnings"]
+  },
+  {
+   "id": "aarti-ambe",
+   "text": "जय अम्बे गौरी, मैया जय श्यामा गौरी।\nतुमको निशिदिन ध्यावत, हरि ब्रह्मा शिवरी॥\nजय अम्बे गौरी॥",
+   "transliteration": "jaya ambe gaurī, maiyā jaya śyāmā gaurī\ntumako niśidina dhyāvata, hari brahmā śivarī\njaya ambe gaurī",
+   "translations": {"en": "Victory to Ambe Gauri, Mother, to Shyama Gauri. Vishnu, Brahma and Shiva meditate on you day and night.", "hi": "हे अम्बे गौरी, माता, आपकी जय हो। हरि, ब्रह्मा और शिव दिन-रात आपका ध्यान करते हैं।", "mr": ""},
+   "summary_1line": "The aarti of the Mother goddess",
+   "summary_2to3line": "It praises the goddess as the one the great gods themselves meditate upon, under both her bright and dark forms.",
+   "bodh_3to4line": "Sung during Navratri, on Durga puja days, and at the end of a Devi puja.",
+   "tags": ["aarti", "Durga", "durga", "devi"]
+  },
+  {
+   "id": "aarti-saraswati",
+   "text": "ॐ जय सरस्वती माता, मैया जय सरस्वती माता।\nसद्गुण वैभव शालिनी, त्रिभुवन विख्याता॥\nॐ जय सरस्वती माता॥",
+   "transliteration": "om jaya sarasvatī mātā, maiyā jaya sarasvatī mātā\nsadguṇa vaibhava śālinī, tribhuvana vikhyātā\nom jaya sarasvatī mātā",
+   "translations": {"en": "Victory to Mother Saraswati, endowed with virtue and splendour, renowned through the three worlds.", "hi": "हे माता सरस्वती, आपकी जय हो। सद्गुणों और वैभव से युक्त, तीनों लोकों में विख्यात।", "mr": ""},
+   "summary_1line": "The aarti of learning",
+   "summary_2to3line": "It praises Saraswati as the one famed through all three worlds for virtue and grace, and asks for her blessing on speech and study.",
+   "bodh_3to4line": "Sung on Vasant Panchami, before exams or a new course of study, and in schools and music rooms.",
+   "tags": ["aarti", "Saraswati", "saraswati", "learning"]
+  },
+  {
+   "id": "aarti-hanuman",
+   "text": "आरती कीजै हनुमान लला की।\nदुष्ट दलन रघुनाथ कला की॥\nजाके बल से गिरिवर कांपे।\nरोग दोष जाके निकट न झांके॥",
+   "transliteration": "āratī kījai hanumāna lalā kī\nduṣṭa dalana raghunātha kalā kī\njāke bala se girivara kāṁpe\nroga doṣa jāke nikaṭa na jhāṁke",
+   "translations": {"en": "Perform the aarti of Hanuman, the destroyer of the wicked, the art of Raghunatha. Mountains tremble at his strength; disease and fault do not come near him.", "hi": "हनुमान जी की आरती कीजिए, जो दुष्टों का नाश करने वाले और रघुनाथ की कला हैं। जिनके बल से पर्वत कांपते हैं और रोग-दोष पास नहीं आते।", "mr": ""},
+   "summary_1line": "The aarti of Hanuman",
+   "summary_2to3line": "It praises Hanuman's strength and his service to Rama, and asks that illness and ill fortune keep their distance.",
+   "bodh_3to4line": "Sung on Tuesdays and Saturdays, and at the end of a Hanuman Chalisa reading.",
+   "tags": ["aarti", "Hanuman", "hanuman", "strength"]
+  },
+  {
+   "id": "aarti-tulsi",
+   "text": "जय तुलसी माता, जय तुलसी माता।\nजय श्री तुलसी माता, जय तुलसी माता॥",
+   "transliteration": "jaya tulasī mātā, jaya tulasī mātā\njaya śrī tulasī mātā, jaya tulasī mātā",
+   "translations": {"en": "Victory to Mother Tulsi, victory to Mother Tulsi.", "hi": "हे तुलसी माता, आपकी जय हो।", "mr": ""},
+   "summary_1line": "The short aarti sung to the Tulsi plant",
+   "summary_2to3line": "It greets the Tulsi plant as a mother and asks for her blessing on the household.",
+   "bodh_3to4line": "Sung while watering or circling the Tulsi plant, usually in the morning or at dusk.",
+   "tags": ["aarti", "Tulsi", "tulsi", "home"]
+  }
+ ]
+}

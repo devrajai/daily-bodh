@@ -1,0 +1,169 @@
+{
+ "packId": "numerology",
+ "packName": "Numerology",
+ "description": "How the numbers are worked out and what each means, following Cheiro (d. 1936), public domain in India.",
+ "version": 1,
+ "ordering": "daily",
+ "items": [
+  {
+   "id": "num-system",
+   "text": "How these numbers are worked out",
+   "translations": {
+    "en": "Your psychic number (mulank) is the day of the month you were born, reduced to a single digit. Your destiny number (bhagyank) is the full date, reduced the same way. Your name number is the sum of the letters of your name, reduced.",
+    "hi": "Your psychic number (mulank) is the day of the month you were born, reduced to a single digit. Your destiny number (bhagyank) is the full date, reduced the same way. Your name number is the sum of the letters of your name, reduced.",
+    "mr": ""
+   },
+   "summary_1line": "The arithmetic behind numerology, and the three numbers that matter",
+   "summary_2to3line": "Your psychic number (mulank) is the day of the month you were born, reduced to a single digit. Your destiny number (bhagyank) is the full date, reduced the same way. Your name number is the sum of the letters of your name, reduced.",
+   "bodh_3to4line": "Reduction means adding the digits until one digit remains: 29 becomes 2+9 = 11, and 11 becomes 1+1 = 2. Cheiro used a fixed letter table (A=1, B=2, ... I=1, J=1, K=2 ...). Nothing here is a judgement about you - it is arithmetic on a date and a name, and the interpretation on top of it is Cheiro's, not a fact.",
+   "tags": [
+    "numerology",
+    "how-to"
+   ]
+  },
+  {
+   "id": "num-1",
+   "text": "Number 1 — Sun",
+   "translations": {
+    "en": "Cheiro gives 1 to the Sun: the person is meant to lead rather than follow, is original and ambitious, but must avoid arrogance and domineering.",
+    "hi": "Cheiro gives 1 to the Sun: the person is meant to lead rather than follow, is original and ambitious, but must avoid arrogance and domineering.",
+    "mr": ""
+   },
+   "summary_1line": "Leadership, originality, ambition. A number of self-direction.",
+   "summary_2to3line": "Cheiro gives 1 to the Sun: the person is meant to lead rather than follow, is original and ambitious, but must avoid arrogance and domineering.",
+   "bodh_3to4line": "Days: Sunday and Monday. Colours: gold, orange, yellow. Cheiro pairs 1 with 4, 2 with 7, and 3, 6 and 9 with each other as friendly numbers. Source: Cheiro, Book of Numbers.",
+   "tags": [
+    "numerology",
+    "sun"
+   ]
+  },
+  {
+   "id": "num-2",
+   "text": "Number 2 — Moon",
+   "translations": {
+    "en": "Cheiro gives 2 to the Moon: imaginative, gentle and adaptable, but easily affected by moods and by the opinions of others.",
+    "hi": "Cheiro gives 2 to the Moon: imaginative, gentle and adaptable, but easily affected by moods and by the opinions of others.",
+    "mr": ""
+   },
+   "summary_1line": "Sensitivity, imagination, changeability. A number of feeling.",
+   "summary_2to3line": "Cheiro gives 2 to the Moon: imaginative, gentle and adaptable, but easily affected by moods and by the opinions of others.",
+   "bodh_3to4line": "Days: Monday and Friday. Colours: cream, pale green, white. Cheiro regards 2 and 7 as closely related. Source: Cheiro, Book of Numbers.",
+   "tags": [
+    "numerology",
+    "moon"
+   ]
+  },
+  {
+   "id": "num-3",
+   "text": "Number 3 — Jupiter",
+   "translations": {
+    "en": "Cheiro gives 3 to Jupiter: the planner and the administrator, strong on discipline and system, sometimes rigid and inclined to instruct others.",
+    "hi": "Cheiro gives 3 to Jupiter: the planner and the administrator, strong on discipline and system, sometimes rigid and inclined to instruct others.",
+    "mr": ""
+   },
+   "summary_1line": "Discipline, planning, authority. A number of order.",
+   "summary_2to3line": "Cheiro gives 3 to Jupiter: the planner and the administrator, strong on discipline and system, sometimes rigid and inclined to instruct others.",
+   "bodh_3to4line": "Days: Thursday, Tuesday, Friday. Colours: mauve, violet, purple. Cheiro groups 3 with 6 and 9 as mutually friendly. Source: Cheiro, Book of Numbers.",
+   "tags": [
+    "numerology",
+    "jupiter"
+   ]
+  },
+  {
+   "id": "num-4",
+   "text": "Number 4 — Uranus (Sun)",
+   "translations": {
+    "en": "Cheiro, writing in a period when Uranus had just entered popular use, assigns 4 to it: the number of the unconventional, of sudden reversals and of things done differently.",
+    "hi": "Cheiro, writing in a period when Uranus had just entered popular use, assigns 4 to it: the number of the unconventional, of sudden reversals and of things done differently.",
+    "mr": ""
+   },
+   "summary_1line": "Unconventional, sudden change, restless energy.",
+   "summary_2to3line": "Cheiro, writing in a period when Uranus had just entered popular use, assigns 4 to it: the number of the unconventional, of sudden reversals and of things done differently.",
+   "bodh_3to4line": "Days: Saturday and Sunday. Colours: grey and electric blue. Cheiro pairs 4 with 1 and 8. Source: Cheiro, Book of Numbers.",
+   "tags": [
+    "numerology",
+    "uranus (sun)"
+   ]
+  },
+  {
+   "id": "num-5",
+   "text": "Number 5 — Mercury",
+   "translations": {
+    "en": "Cheiro gives 5 to Mercury: fast, adaptable, good with words and trade, fond of travel and change, but easily scattered.",
+    "hi": "Cheiro gives 5 to Mercury: fast, adaptable, good with words and trade, fond of travel and change, but easily scattered.",
+    "mr": ""
+   },
+   "summary_1line": "Quickness, versatility, travel and commerce.",
+   "summary_2to3line": "Cheiro gives 5 to Mercury: fast, adaptable, good with words and trade, fond of travel and change, but easily scattered.",
+   "bodh_3to4line": "Days: Wednesday and Friday. Colours: light grey, white, silver. 5 is the most changeable of Cheiro's numbers. Source: Cheiro, Book of Numbers.",
+   "tags": [
+    "numerology",
+    "mercury"
+   ]
+  },
+  {
+   "id": "num-6",
+   "text": "Number 6 — Venus",
+   "translations": {
+    "en": "Cheiro gives 6 to Venus: affection, attractiveness and domestic comfort, but also duty towards family and a tendency to over-attach.",
+    "hi": "Cheiro gives 6 to Venus: affection, attractiveness and domestic comfort, but also duty towards family and a tendency to over-attach.",
+    "mr": ""
+   },
+   "summary_1line": "Love, beauty, comfort, and responsibility for others.",
+   "summary_2to3line": "Cheiro gives 6 to Venus: affection, attractiveness and domestic comfort, but also duty towards family and a tendency to over-attach.",
+   "bodh_3to4line": "Days: Friday, Tuesday, Thursday. Colours: pink, light blue, turquoise. Cheiro groups 6 with 3 and 9. Source: Cheiro, Book of Numbers.",
+   "tags": [
+    "numerology",
+    "venus"
+   ]
+  },
+  {
+   "id": "num-7",
+   "text": "Number 7 — Neptune (Moon)",
+   "translations": {
+    "en": "Cheiro assigns 7 to Neptune, linked with the Moon: the dreamer and the thinker, drawn to the unseen, often happiest alone.",
+    "hi": "Cheiro assigns 7 to Neptune, linked with the Moon: the dreamer and the thinker, drawn to the unseen, often happiest alone.",
+    "mr": ""
+   },
+   "summary_1line": "Reflection, philosophy, solitude.",
+   "summary_2to3line": "Cheiro assigns 7 to Neptune, linked with the Moon: the dreamer and the thinker, drawn to the unseen, often happiest alone.",
+   "bodh_3to4line": "Days: Monday and Sunday. Colours: sea green, pale yellow, white. Cheiro pairs 7 with 2. Source: Cheiro, Book of Numbers.",
+   "tags": [
+    "numerology",
+    "neptune (moon)"
+   ]
+  },
+  {
+   "id": "num-8",
+   "text": "Number 8 — Saturn",
+   "translations": {
+    "en": "Cheiro gives 8 to Saturn: the hardest of the numbers in his reading, promising solid results but only after delay, discipline and often loss first.",
+    "hi": "Cheiro gives 8 to Saturn: the hardest of the numbers in his reading, promising solid results but only after delay, discipline and often loss first.",
+    "mr": ""
+   },
+   "summary_1line": "Discipline, material weight, delay then reward.",
+   "summary_2to3line": "Cheiro gives 8 to Saturn: the hardest of the numbers in his reading, promising solid results but only after delay, discipline and often loss first.",
+   "bodh_3to4line": "Days: Saturday, Friday, Monday. Colours: black, dark blue, grey. Cheiro warns 8 pairs badly with 4. Source: Cheiro, Book of Numbers.",
+   "tags": [
+    "numerology",
+    "saturn"
+   ]
+  },
+  {
+   "id": "num-9",
+   "text": "Number 9 — Mars",
+   "translations": {
+    "en": "Cheiro gives 9 to Mars: energy and courage, capacity for hard achievement, but a tendency to conflict and to act before thinking.",
+    "hi": "Cheiro gives 9 to Mars: energy and courage, capacity for hard achievement, but a tendency to conflict and to act before thinking.",
+    "mr": ""
+   },
+   "summary_1line": "Force, courage, conflict, and achievement through struggle.",
+   "summary_2to3line": "Cheiro gives 9 to Mars: energy and courage, capacity for hard achievement, but a tendency to conflict and to act before thinking.",
+   "bodh_3to4line": "Days: Tuesday, Friday, Monday. Colours: crimson, red, rose. Cheiro groups 9 with 3 and 6. Source: Cheiro, Book of Numbers.",
+   "tags": [
+    "numerology",
+    "mars"
+   ]
+  }
+ ]
+}
