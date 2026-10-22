@@ -8,7 +8,8 @@ import argparse, json, os, shutil
 
 WEB = ["panchang.json", "festivals.json", "rashifal.json", "moonstars.json",
        "ephemeris.json", "muhurat.json", "numerology.json", "palmistry.json",
-       "lalkitab.json", "shastra.json", "remedies.json", "aarti.json",
+       "lalkitab.json", "shastra.json", "jyotish.json", "places.json",
+       "remedies.json", "aarti.json",
        "mantras.json", "puja.json"]
 
 
