@@ -247,8 +247,44 @@ async function renderJyotish(){
   const s = $('#jyotish');
   if(!s.dataset.built){
     const J = await data('jyotish.json');
+    const S = await data('sources.json');
     s.innerHTML = `<h2>Jyotish</h2>
-      <p class="lead">${J.description||''}</p><div class="card" id="jy"></div>`;
+      <p class="lead">${J.description||''}</p><div class="card" id="jy"></div>
+
+      <h2 style="margin-top:30px">${S.title}</h2>
+      <p class="lead">${S.intro}</p>
+
+      <div class="card">
+        <h3>${S.branches.title}</h3>
+        ${S.branches.items.map(b=>`<p style="margin:9px 0"><strong>${b.name}</strong><br><span class="muted">${b.covers}</span></p>`).join('')}
+        <p class="muted" style="margin-top:8px">${S.branches.note}</p>
+      </div>
+
+      <div class="card">
+        <h3>${S.bphs.title}</h3>
+        <p class="muted">${S.bphs.note}</p>
+        <ul>${S.bphs.facts.map(f=>`<li style="margin:7px 0">${f}</li>`).join('')}</ul>
+        <table>${S.bphs.editions.map(e=>`<tr>
+          <td class="k" style="width:11%">${e.year}</td>
+          <td><strong>${e.by}</strong><br><span class="muted">${e.note}</span></td></tr>`).join('')}</table>
+        <p class="muted" style="margin-top:10px">${S.bphs.source}</p>
+      </div>
+
+      <div class="card">
+        <h3>${S.sources.title}</h3>
+        <p class="muted">${S.sources.note}</p>
+        ${S.sources.items.map(x=>`<div style="border-top:1px solid var(--line);padding:11px 0">
+          <strong>${x.name}</strong><br><span class="muted">${x.kind}</span>
+          <p style="margin:7px 0 0;font-size:14.5px">${x.used}</p>
+          <p class="muted" style="margin:5px 0 0"><em>Licence:</em> ${x.licence}</p>
+        </div>`).join('')}
+      </div>
+
+      <div class="card">
+        <h3>${S.howto.title}</h3>
+        ${S.howto.points.map(p=>`<p style="margin:9px 0">${p}</p>`).join('')}
+      </div>
+      <div class="warn">${S.howto.note}</div>`;
     packList(J.items, $('#jy')); s.dataset.built='1';
   }
 }

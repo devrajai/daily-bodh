@@ -1,0 +1,87 @@
+{
+ "title": "Sources and authenticity",
+ "intro": "Where the material on this site comes from, what its licence allows, and how much weight it can carry. Nothing here is presented as more settled than it is.",
+ "branches": {
+  "title": "The three branches of Jyotisha",
+  "note": "The classical division, so it is clear which branch any given text belongs to.",
+  "items": [
+   {"name": "Hora", "covers": "Predictive or natal astrology - reading a birth chart. This is the branch of the Brihat Parashara Hora Shastra and of almost everything on this site."},
+   {"name": "Siddhanta", "covers": "Mathematical astronomy - planetary positions, motions, distances and strengths. The ephemeris and the ascendant calculation on this site belong here."},
+   {"name": "Samhita", "covers": "Mundane astrology - collective matters, weather, society. Varahamihira's Brihat Samhita is the standard work. Not covered on this site."}
+  ]
+ },
+ "bphs": {
+  "title": "About the Brihat Parashara Hora Shastra",
+  "note": "This is the text most often cited as the authority for the rules on this site, so its standing matters.",
+  "facts": [
+   "It is the most comprehensive surviving shastra on Vedic natal astrology, and is ascribed to the sage Parashara.",
+   "The version in common circulation has 97 chapters. That numbering follows R. Santhanam's 1984 English translation, which is itself in copyright.",
+   "The origin and date of the original composition are unknown.",
+   "J. Gonda dates the purva-khanda (the first part) to roughly 600-750 CE. He notes it is deeply indebted to Varahamihira's Brihat Jataka, which is earlier, and that it borrows verses from Sphujidhvaja. The uttara-khanda was commented on by Govindasvamin around 850 CE.",
+   "Bhattotpala, writing around 900 CE, recorded that although he had heard of the Brihat Parashara Hora Shastra he had never seen it. The text appears to have been lost for about nine hundred years.",
+   "Manuscripts re-emerged only in the early twentieth century. The first printed version was in 1905, from the Sri Venkateswara Press.",
+   "No ancient commentary on the text is known. The oldest known is Devacandra Jha's Hindi commentary from the first half of the twentieth century - less than a hundred years old.",
+   "Sitaram Jha's 1944 edition reportedly admitted that he had changed and removed elements of the manuscript.",
+   "The practical consequence: when a modern book says 'Parashara says', it is usually quoting a twentieth-century reconstruction of a text whose early history is genuinely uncertain. Treat the rules as the living tradition's, not as a verbatim ancient authority."
+  ],
+  "editions": [
+   {"year": "1905", "by": "Giridhara Lala Sarma and Govinda Sarma", "note": "First printed version, 5781 verses, mostly Sanskrit with partial Hindi commentary."},
+   {"year": "1926", "by": "Thakuradasa Cudamana", "note": "Bengali translation."},
+   {"year": "1944", "by": "Sitaram Jha", "note": "Hindi, 71 chapters, 5100 verses. The editor reportedly admitted altering the manuscript."},
+   {"year": "1963", "by": "N.N.K. Rao and V.B. Choudhari", "note": "English, 2 volumes, 25 chapters, without the Sanskrit verses."},
+   {"year": "1984", "by": "R. Santhanam", "note": "English, 97 chapters. The version most modern citations follow. In copyright."}
+  ],
+  "source": "Summary of the Wikipedia article 'Brihat Parashara Hora Shastra', which is available under CC BY-SA 4.0."
+ },
+ "sources": {
+  "title": "Source register",
+  "note": "Every source consulted, and exactly what may be taken from it.",
+  "items": [
+   {"name": "Brihat Parashara Hora Shastra (Sanskrit original)",
+    "kind": "Classical text, public domain",
+    "used": "Described only. The rules on this site follow the tradition the text records.",
+    "licence": "The Sanskrit original is public domain. A digital edition is published by the Rashtriya Sanskrit Sansthan at sanskrit.nic.in. That file could not be retrieved from the build environment, so nothing was taken from it directly."},
+   {"name": "Modern BPHS translations - Santhanam (1984), Sagar, Ranjan and others",
+    "kind": "Modern translations and commentaries",
+    "used": "Not used. No text from any of them appears on this site.",
+    "licence": "In copyright. Their wording, notes and numbering are the translators' work, not the original's. Cite them; do not copy them."},
+   {"name": "Wikipedia, 'Brihat Parashara Hora Shastra'",
+    "kind": "Encyclopaedia article",
+    "used": "The dating, the manuscript history and the editions table above, summarised with attribution.",
+    "licence": "CC BY-SA 4.0. Reusable with attribution, which is given here."},
+   {"name": "P.V.R. Narasimha Rao, 'Lessons on Vedic Astrology', Volume I",
+    "kind": "Course notes, Sri Jagannath Center, Boston, 2005",
+    "used": "Consulted as a curriculum reference for the order in which topics are taught. No text is reproduced.",
+    "licence": "Copyright the author, 2005. Free to read at vedicastrologer.org, but that is not the same as free to republish."},
+   {"name": "Chennareddy Vasudev, 'The Origin, Meaning and Purpose of Astrology'",
+    "kind": "Book, Shantha Vasantha Trust, 2019",
+    "used": "Consulted for the themes in 'How to read this' below. No text is reproduced.",
+    "licence": "Copyright the author, 2019."},
+   {"name": "Varahamihira, Brihat Jataka and Brihat Samhita",
+    "kind": "Classical texts, public domain",
+    "used": "Named as the earlier authorities the later texts draw on.",
+    "licence": "Sanskrit original is public domain; modern translations are not."},
+   {"name": "kalagana",
+    "kind": "Software library",
+    "used": "All astronomy: the ephemeris, the ascendant and the panchang.",
+    "licence": "MIT. Its licence notice is retained."},
+   {"name": "gita/gita dataset",
+    "kind": "Data",
+    "used": "The Bhagavad Gita text and English translation bundled in the app.",
+    "licence": "The Unlicense, which places it in the public domain."}
+  ]
+ },
+ "howto": {
+  "title": "How to read this",
+  "note": "Original notes, not quoted from any source.",
+  "points": [
+   "The calculation is the factual part. A planet's longitude, a nakshatra pada, the ascendant - these are computed and can be checked. The meaning attached to them is the tradition's, and reasonable astrologers disagree about it.",
+   "Astrology here is a traditional interpretive framework, not an established science. Nothing on this site is a prediction of a specific event, and nothing here should be used to make a decision you would not otherwise make.",
+   "A chart does not remove your choices. The classical texts treat daivam - fate - as one factor among several, alongside effort, and the older literature is much more insistent on effort than modern popular astrology is.",
+   "Scores and doshas are inputs, not verdicts. The 36-point matching total, Mangal dosha, Kaal Sarp - the texts themselves treat these as things to reason about, and most of them have classical cancellation rules that this site deliberately does not apply. Treat a bare score as the beginning of a question, not the answer.",
+   "Read a chart from the Moon when the birth time is uncertain. That is the standard fallback, and it is why the Moon columns are shown alongside the lagna ones.",
+   "Be careful with anyone who is certain. A reading that names dates and guarantees outcomes, or that creates fear to sell a remedy, is not doing what the texts describe. The older literature is explicit that an astrologer should be learned, steady and unwilling to frighten people.",
+   "Remedies here are faith practice. A mantra, a daan or a havan is a religious act. It is not a substitute for a doctor, a lawyer or a financial adviser."
+  ]
+ }
+}
