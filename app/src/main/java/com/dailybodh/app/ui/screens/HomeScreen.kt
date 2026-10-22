@@ -79,6 +79,12 @@ fun HomeScreen(vm: MainViewModel, nav: NavController) {
                     )
                 }
             }
+            Spacer(Modifier.height(12.dp))
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                AssistChip(onClick = { nav.navigate("panchang") }, label = { Text("Panchang") })
+                AssistChip(onClick = { nav.navigate("rashifal") }, label = { Text("Rashifal") })
+                AssistChip(onClick = { nav.navigate("match") }, label = { Text("Match") })
+            }
             Spacer(Modifier.height(16.dp))
 
             val current = item
