@@ -301,7 +301,12 @@ async function renderHoroscope(){
       R = await data('rashifal-yearly.json');
     }
   } catch(e) {
-    R = {}; // Ignore fetch failure if year file doesn't exist
+    // A missing year file just means that year is not bundled, so fall through
+    // to the "no reading bundled" note below. Anything else is a real failure,
+    // and is re-thrown so the tab shows an error with a retry rather than
+    // pretending there is simply no data for that period.
+    if(!/HTTP 404/.test((e && e.message) || '')) throw e;
+    R = {};
   }
 
   const bag = per==='daily' ? (R.daily||{}) : (per==='monthly' ? (R.monthly||{}) : (R.yearly||{}));
