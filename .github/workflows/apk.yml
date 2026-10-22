@@ -3,7 +3,12 @@ name: Build APK
 # Builds both flavours on GitHub's runners, generates every derived asset (the Gita
 # pack, the temple tones, the reference packs, the shastra and jyotish libraries,
 # the panchang family and the graha ephemeris), publishes that content into
-# docs/data/ for the website, and stages the APKs plus a source archive.
+# docs/data/ for the website, and stages the APKs.
+#
+# It deliberately does NOT build a source archive: a `git archive` of HEAD
+# contains the previous archive, so it grew on every run until it passed
+# GitHub's 100 MB per-file limit and the push was rejected. The repository is
+# itself the source, and GitHub offers "Download ZIP" on the repo page.
 
 on:
   push:
@@ -81,13 +86,12 @@ jobs:
           chmod +x gradlew
           ./gradlew assembleOfflineDebug assembleUpdaterDebug --no-daemon --stacktrace
 
-      - name: Stage APKs, source archive and the update manifest
+      - name: Stage the APKs and the update manifest
         run: |
           set -e
           mkdir -p docs/download
           cp app/build/outputs/apk/offline/debug/app-offline-debug.apk docs/download/DailyBodh-offline.apk
           cp app/build/outputs/apk/updater/debug/app-updater-debug.apk docs/download/DailyBodh-updater.apk
-          git archive --format=zip --prefix=DailyBodh/ -o docs/download/DailyBodh-source.zip HEAD
           VCODE=$(grep -oE 'versionCode = [0-9]+' app/build.gradle.kts | grep -oE '[0-9]+' | head -1)
           VNAME=$(grep -oE 'versionName = "[^"]+"' app/build.gradle.kts | sed 's/.*"\(.*\)"/\1/' | head -1)
           printf '{"versionCode": %s, "versionName": "%s", "apk": "DailyBodh-updater.apk", "notes": "Daily Bodh %s"}\n' \
@@ -102,6 +106,22 @@ jobs:
           git add -A docs/data docs/download app/src/main/assets/content app/src/main/assets/sounds
           echo "--- staged ---"
           git status --short | head -40
+
+          # GitHub rejects any file over 100 MB and fails the whole push. Catch it
+          # here with a clear message instead, at a stricter 50 MB.
+          git diff --staged --name-only -z > /tmp/staged.z
+          big=""
+          while IFS= read -r -d '' f; do
+            if [ -f "$f" ]; then
+              s=$(stat -c%s "$f")
+              if [ "$s" -gt 52428800 ]; then big="$big  $f ($((s/1048576)) MB)\n"; fi
+            fi
+          done < /tmp/staged.z
+          if [ -n "$big" ]; then
+            printf 'Refusing to push - these staged files are too large:\n%b' "$big"
+            exit 1
+          fi
+
           if git diff --staged --quiet; then
             echo "nothing to publish"
           else
