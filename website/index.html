@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AstroKundali - Your Complete Astrology Guide</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        header {
+            background-color: #4a148c;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #6a1b9a;
+            padding: 0.5rem;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        nav a:hover {
+            background-color: #8e24aa;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .card h2 {
+            color: #4a148c;
+        }
+        .card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #ffb300;
+            color: #333;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #ff8f00;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>AstroKundali</h1>
+    <p>Your Ultimate Portal for Vedic Astrology, Numerology & Palmistry</p>
+</header>
+
+<nav>
+    <a href="#kundali">Free Kundali</a>
+    <a href="#horoscope">Horoscopes</a>
+    <a href="#doshas">Doshas & Remedies</a>
+    <a href="#matching">Kundali Matching</a>
+    <a href="#chat">Chat with Astrologer</a>
+</nav>
+
+<div class="container">
+    <div class="card" id="kundali">
+        <h2>Free Kundali Generation</h2>
+        <p>Enter your Date of Birth, Time, and Location to generate your accurate Vedic Kundali (Birth Chart) instantly.</p>
+        <form style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem; text-align: left;">
+            <input type="text" placeholder="Name" required style="padding: 0.5rem;">
+            <input type="date" required style="padding: 0.5rem;">
+            <input type="time" required style="padding: 0.5rem;">
+            <input type="text" placeholder="Birth Location" required style="padding: 0.5rem;">
+            <button type="submit" class="btn" style="border: none; cursor: pointer; width: 100%;">Generate Kundali</button>
+        </form>
+    </div>
+
+    <div class="card" id="horoscope">
+        <h2>Daily & Yearly Horoscopes</h2>
+        <p>Get personalized predictions for your Zodiac sign. Read your Daily, Weekly, Monthly, and Yearly Horoscope.</p>
+        <a href="#" class="btn">Read Horoscope</a>
+    </div>
+
+    <div class="card" id="doshas">
+        <h2>Doshas & Remedies</h2>
+        <p>Analyze your chart for Mangal Dosh, Sani Sadesati, Kaal Sarp Dosh. Discover effective Pooja rituals and Lal Kitab remedies.</p>
+        <a href="#" class="btn">Check Doshas</a>
+    </div>
+
+    <div class="card" id="matching">
+        <h2>Marriage Match Making</h2>
+        <p>Check 36 Gunas compatibility, Zodiac sign compatibility, and search for auspicious marriage dates.</p>
+        <a href="#" class="btn">Match Kundali</a>
+    </div>
+
+    <div class="card" id="chat">
+        <h2>Live Chat Predictions</h2>
+        <p>Connect with our expert Astrologers, Numerologists, and Palmists for real-time guidance and predictions.</p>
+        <a href="#" class="btn">Start Chat Now</a>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2024 AstroKundali. All rights reserved. | Vedic Astrology | Numerology | Palmistry | Lal Kitab</p>
+</footer>
+
+</body>
+</html>
