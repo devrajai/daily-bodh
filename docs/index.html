@@ -91,9 +91,19 @@
 /* ---------------------------------------------------------------- helpers */
 const $ = (s,r=document)=>r.querySelector(s);
 const el = (t,c,h)=>{const n=document.createElement(t); if(c)n.className=c; if(h!=null)n.innerHTML=h; return n;};
+/* Fetch a bundled JSON file. A failure is never cached, so a retry really
+   retries, and a non-200 answer is reported instead of being parsed as data. */
 const cache = {};
-async function data(name){
-  if(!cache[name]) cache[name] = await (await fetch('data/'+name)).json();
+function data(name){
+  if(!cache[name]){
+    cache[name] = (async () => {
+      const r = await fetch('data/' + name, {cache: 'no-cache'});
+      if(!r.ok) throw new Error('could not load ' + name + ' (HTTP ' + r.status + ')');
+      try { return await r.json(); }
+      catch(e){ throw new Error(name + ' is not valid JSON'); }
+    })();
+    cache[name].catch(() => { delete cache[name]; });
+  }
   return cache[name];
 }
 const NAK = ["Ashwini","Bharani","Krittika","Rohini","Mrigashira","Ardra","Punarvasu","Pushya",
@@ -549,8 +559,30 @@ const done={};
 function show(id){
   document.querySelectorAll('section').forEach(s=>s.classList.toggle('on', s.id===id));
   document.querySelectorAll('#tabs button').forEach(b=>b.setAttribute('aria-selected', b.dataset.t===id));
-  if(!done[id]){ done[id]=1; TABS.find(t=>t[0]===id)[2](); }
   location.hash = id;
+  if(done[id]) return;
+  const tab = TABS.find(t=>t[0]===id);
+  const box = $('#'+id);
+  const label = tab ? tab[1] : id;
+  if(!tab || !box) return;
+  // Mark the tab done only once it has actually rendered. A blank tab with no
+  // explanation is worse than an error message, so say what failed and offer
+  // a retry instead of leaving the screen empty forever.
+  Promise.resolve()
+    .then(()=>tab[2]())
+    .then(()=>{ done[id]=1; })
+    .catch(err=>{
+      const msg = (err && err.message) ? err.message : String(err);
+      box.innerHTML = '<div class="card">'
+        + '<h2>' + label + '</h2>'
+        + '<p>This screen could not load.</p>'
+        + '<p class="muted">' + msg + '</p>'
+        + '<p class="muted">Everything is served from this site itself, so check your connection and try again.</p>'
+        + '</div>'
+        + '<button class="go" id="retrybtn">Try again</button>';
+      const rb = $('#retrybtn');
+      if(rb) rb.onclick = ()=>show(id);
+    });
 }
 $('#tabs').innerHTML = TABS.map(([id,label])=>
   `<button data-t="${id}">${label}</button>`).join('');
