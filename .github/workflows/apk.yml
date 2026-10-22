@@ -1,9 +1,9 @@
 name: Build APK
 
 # Builds both flavours on GitHub's runners, generates every derived asset (the Gita
-# pack, the temple tones, the reference packs, the shastra library, the panchang
-# family and the graha ephemeris), publishes that content into docs/data/ for the
-# website, and stages the APKs plus a source archive in docs/download/.
+# pack, the temple tones, the reference packs, the shastra and jyotish libraries,
+# the panchang family and the graha ephemeris), publishes that content into
+# docs/data/ for the website, and stages the APKs plus a source archive.
 
 on:
   push:
@@ -58,6 +58,9 @@ jobs:
       - name: Generate the shastra library
         run: python3 tools/author_shastra.py --out app/src/main/assets/content
 
+      - name: Generate the Jyotish pack and the birth-place table
+        run: python3 tools/author_jyotish.py --out app/src/main/assets/content
+
       - name: Generate panchang, festivals, rashifal and the Moon-star table
         run: |
           python3 tools/build_panchang.py --out app/src/main/assets/content \
@@ -111,6 +114,8 @@ jobs:
                   app/src/main/assets/content/palmistry.json \
                   app/src/main/assets/content/lalkitab.json \
                   app/src/main/assets/content/shastra.json \
+                  app/src/main/assets/content/jyotish.json \
+                  app/src/main/assets/content/places.json \
                   app/src/main/assets/sounds
           if git diff --staged --quiet; then
             echo "nothing to publish"
