@@ -51,3 +51,6 @@ jobs:
               raise SystemExit(1)
           print(f"Validated {len(files)} JSON file(s).")
           PY
+
+      - name: Run tests
+        run: npm install && npm test

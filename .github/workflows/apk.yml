@@ -21,25 +21,10 @@ permissions:
   contents: write
 
 jobs:
-  build:
+  publish-data:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: '17'
-
-      - name: Prepare Android SDK
-        run: |
-          export ANDROID_HOME="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
-          echo "ANDROID_HOME=$ANDROID_HOME" >> "$GITHUB_ENV"
-          SDKM="$(command -v sdkmanager || echo "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager")"
-          echo "using $SDKM"
-          yes | "$SDKM" --licenses >/dev/null 2>&1 || true
-          "$SDKM" "platform-tools" "platforms;android-34" "build-tools;34.0.0"
 
       - name: Install generator dependencies
         run: python3 -m pip install --quiet numpy imageio-ffmpeg kalagana
@@ -81,21 +66,15 @@ jobs:
       - name: Publish the content for the website
         run: python3 tools/publish_web_data.py --src app/src/main/assets/content --dst docs/data
 
-      - name: Build both flavours
-        run: |
-          chmod +x gradlew
-          ./gradlew assembleOfflineDebug assembleUpdaterDebug --no-daemon --stacktrace
-
-      - name: Stage the APKs and the update manifest
+      - name: Stage the update manifest
         run: |
           set -e
           mkdir -p docs/download
-          cp app/build/outputs/apk/offline/debug/app-offline-debug.apk docs/download/DailyBodh-offline.apk
-          cp app/build/outputs/apk/updater/debug/app-updater-debug.apk docs/download/DailyBodh-updater.apk
           VCODE=$(grep -oE 'versionCode = [0-9]+' app/build.gradle.kts | grep -oE '[0-9]+' | head -1)
           VNAME=$(grep -oE 'versionName = "[^"]+"' app/build.gradle.kts | sed 's/.*"\(.*\)"/\1/' | head -1)
-          printf '{"versionCode": %s, "versionName": "%s", "apk": "DailyBodh-updater.apk", "notes": "Daily Bodh %s"}\n' \
-            "$VCODE" "$VNAME" "$VNAME" > docs/download/latest.json
+          APK_URL="https://github.com/devrajai/daily-bodh/releases/download/latest-build/DailyBodh-updater.apk"
+          printf '{"versionCode": %s, "versionName": "%s", "apk": "%s", "notes": "Daily Bodh %s"}\n' \
+            "$VCODE" "$VNAME" "$APK_URL" "$VNAME" > docs/download/latest.json
           ls -la docs/download
           cat docs/download/latest.json
 
@@ -125,11 +104,43 @@ jobs:
           if git diff --staged --quiet; then
             echo "nothing to publish"
           else
-            git commit -m "Publish website content, APKs and generated assets [skip ci]"
+            git commit -m "Publish website content and generated assets [skip ci]"
             # another run may have pushed while this one was building, so rebase first
             git pull --rebase --autostash origin main || true
             git push
           fi
+
+  build-apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Prepare Android SDK
+        run: |
+          export ANDROID_HOME="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          echo "ANDROID_HOME=$ANDROID_HOME" >> "$GITHUB_ENV"
+          SDKM="$(command -v sdkmanager || echo "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager")"
+          echo "using $SDKM"
+          yes | "$SDKM" --licenses >/dev/null 2>&1 || true
+          "$SDKM" "platform-tools" "platforms;android-34" "build-tools;34.0.0"
+
+      - name: Build both flavours
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleOfflineDebug assembleUpdaterDebug --no-daemon --stacktrace
+
+      - name: Stage the APKs
+        run: |
+          set -e
+          mkdir -p build-apks
+          cp app/build/outputs/apk/offline/debug/app-offline-debug.apk build-apks/DailyBodh-offline.apk
+          cp app/build/outputs/apk/updater/debug/app-updater-debug.apk build-apks/DailyBodh-updater.apk
 
       - name: Attach APKs to a release
         uses: softprops/action-gh-release@v2
@@ -138,5 +149,5 @@ jobs:
           name: Latest build
           body: "Automatically built debug APKs of Daily Bodh: the offline build and the updater build."
           files: |
-            docs/download/DailyBodh-offline.apk
-            docs/download/DailyBodh-updater.apk
+            build-apks/DailyBodh-offline.apk
+            build-apks/DailyBodh-updater.apk
