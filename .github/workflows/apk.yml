@@ -1,9 +1,9 @@
 name: Build APK
 
-# Builds both flavours on GitHub's runners, generates the full Bhagavad Gita pack
-# from the public-domain source and the synthesised temple tones, and publishes
-# the APKs plus the update manifest into docs/download/ so the GitHub Pages site
-# can serve them. Also attaches the APKs to a release.
+# Builds both flavours on GitHub's runners, generates all the derived assets
+# (the full Gita pack, the temple tones, the panchang/festival/rashifal data and
+# the Moon-star table), and publishes the APKs plus the update manifest into
+# docs/download/ so the GitHub Pages site can serve them.
 
 on:
   push:
@@ -38,6 +38,9 @@ jobs:
           yes | "$SDKM" --licenses >/dev/null 2>&1 || true
           "$SDKM" "platform-tools" "platforms;android-34" "build-tools;34.0.0"
 
+      - name: Install generator dependencies
+        run: python3 -m pip install --quiet numpy imageio-ffmpeg kalagana
+
       - name: Fetch the public-domain Gita source data
         run: |
           mkdir -p /tmp/gitasrc
@@ -49,9 +52,14 @@ jobs:
         run: python3 tools/build_gita.py --src /tmp/gitasrc --out app/src/main/assets/content/gita.json
 
       - name: Generate the bundled temple tones
+        run: python3 tools/make_sounds.py --out app/src/main/assets/sounds
+
+      - name: Generate panchang, festivals, rashifal and the Moon-star table
         run: |
-          python3 -m pip install --quiet numpy imageio-ffmpeg
-          python3 tools/make_sounds.py --out app/src/main/assets/sounds
+          python3 tools/build_panchang.py --out app/src/main/assets/content \
+            --city Delhi --from 2026 --to 2031 --rashifal-daily-to 2028
+          python3 tools/build_moonstars.py --out app/src/main/assets/content/moonstars.json \
+            --from 1930 --to 2035
 
       - name: Build both flavours
         run: |
@@ -79,11 +87,15 @@ jobs:
                   docs/download/DailyBodh-updater.apk \
                   docs/download/latest.json \
                   app/src/main/assets/content/gita.json \
+                  app/src/main/assets/content/panchang.json \
+                  app/src/main/assets/content/festivals.json \
+                  app/src/main/assets/content/rashifal.json \
+                  app/src/main/assets/content/moonstars.json \
                   app/src/main/assets/sounds
           if git diff --staged --quiet; then
             echo "nothing to publish"
           else
-            git commit -m "Publish APKs, update manifest and generated assets [skip ci]"
+            git commit -m "Publish APKs, manifest and generated assets [skip ci]"
             git push
           fi
 
