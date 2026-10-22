@@ -84,6 +84,7 @@ fun HomeScreen(vm: MainViewModel, nav: NavController) {
                 AssistChip(onClick = { nav.navigate("panchang") }, label = { Text("Panchang") })
                 AssistChip(onClick = { nav.navigate("rashifal") }, label = { Text("Rashifal") })
                 AssistChip(onClick = { nav.navigate("match") }, label = { Text("Match") })
+                AssistChip(onClick = { nav.navigate("numerology") }, label = { Text("Numerology") })
             }
             Spacer(Modifier.height(16.dp))
 

@@ -32,6 +32,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.dailybodh.app.data.GunaMilan
+import com.dailybodh.app.data.Vimshottari
 import com.dailybodh.app.data.PanchangRepository
 import com.dailybodh.app.ui.MainViewModel
 import kotlinx.coroutines.launch
@@ -53,6 +54,8 @@ fun MatchScreen(vm: MainViewModel, nav: NavController) {
     var warning by remember { mutableStateOf<String?>(null) }
 
     var result by remember { mutableStateOf<GunaMilan.Result?>(null) }
+    var boyChart by remember { mutableStateOf<String?>(null) }
+    var girlChart by remember { mutableStateOf<String?>(null) }
 
     Scaffold(bottomBar = { BottomBar(nav, current = "match") }) { pad ->
         Column(
@@ -70,6 +73,7 @@ fun MatchScreen(vm: MainViewModel, nav: NavController) {
             PersonPicker("Boy", boyRashi, boyNak,
                 { boyRashi = it }, { boyNak = it },
                 boyDate, { boyDate = it },
+                chart = boyChart,
                 onUseDate = {
                     scope.launch {
                         val d = runCatching { LocalDate.parse(boyDate.trim()) }.getOrNull()
@@ -79,6 +83,7 @@ fun MatchScreen(vm: MainViewModel, nav: NavController) {
                         } else {
                             boyNak = n
                             boyRashi = (n * 4) / 9
+                            boyChart = describe(d!!, repo)
                             warning = "Approximated from the Moon's position at noon on that date. " +
                                 "The Moon changes nakshatra about once a day, so if you were born late " +
                                 "or early it may be the neighbouring one. Use the exact star if you know it."
@@ -91,6 +96,7 @@ fun MatchScreen(vm: MainViewModel, nav: NavController) {
             PersonPicker("Girl", girlRashi, girlNak,
                 { girlRashi = it }, { girlNak = it },
                 girlDate, { girlDate = it },
+                chart = girlChart,
                 onUseDate = {
                     scope.launch {
                         val d = runCatching { LocalDate.parse(girlDate.trim()) }.getOrNull()
@@ -100,6 +106,7 @@ fun MatchScreen(vm: MainViewModel, nav: NavController) {
                         } else {
                             girlNak = n
                             girlRashi = (n * 4) / 9
+                            girlChart = describe(d!!, repo)
                             warning = "Approximated from the Moon's position at noon on that date."
                         }
                     }
@@ -183,6 +190,7 @@ private fun PersonPicker(
     onNak: (Int) -> Unit,
     dateText: String,
     onDate: (String) -> Unit,
+    chart: String?,
     onUseDate: () -> Unit
 ) {
     Card(Modifier.fillMaxWidth()) {
@@ -228,10 +236,33 @@ private fun PersonPicker(
                     label = { Text("Birth date") },
                     modifier = Modifier.weight(1f)
                 )
+                Spacer(Modifier.height(0.dp))
                 OutlinedButton(onClick = onUseDate, modifier = Modifier.padding(start = 8.dp)) {
                     Text("Use")
                 }
             }
+            chart?.let {
+                Spacer(Modifier.height(8.dp))
+                Text(
+                    it,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }
         }
     }
+}
+
+/** Nakshatra, pada and the running Vimshottari dasha from the Moon's longitude. */
+private suspend fun describe(birth: LocalDate, repo: PanchangRepository): String? {
+    val lon = repo.moonLongitude(birth) ?: return null
+    val span = 360.0 / 27.0
+    val nak = (lon / span).toInt() % 27
+    val within = lon % span
+    val pada = (within / (span / 4.0)).toInt() + 1
+    val age = java.time.temporal.ChronoUnit.DAYS.between(birth, LocalDate.now()) / 365.25
+    val md = Vimshottari.current(nak, within / span, age)
+    val ad = Vimshottari.antardasha(md.lord, age - md.startYear)
+    val name = GunaMilan.nakshatraNames.getOrNull(nak) ?: "?"
+    return "$name, pada $pada \u00b7 ${md.lord} mahadasha, $ad antardasha"
 }
