@@ -1,0 +1,53 @@
+name: Validate website JSON
+
+# Guards the one thing that silently breaks the site: a malformed JSON file under
+# docs/data. Read-only, no secrets, no external calls.
+
+on:
+  push:
+    paths:
+      - "docs/data/**/*.json"
+      - ".github/workflows/validate-json.yml"
+  pull_request:
+    paths:
+      - "docs/data/**/*.json"
+      - ".github/workflows/validate-json.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-json:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Validate all JSON files under docs/data
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -d docs/data ]; then
+            echo "docs/data not found; nothing to validate."
+            exit 0
+          fi
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          files = sorted(Path("docs/data").rglob("*.json"))
+          if not files:
+              print("No JSON files found.")
+          failed = False
+          for path in files:
+              try:
+                  with path.open("r", encoding="utf-8") as f:
+                      json.load(f)
+                  print(f"OK  {path}")
+              except Exception as exc:
+                  failed = True
+                  print(f"BAD {path}: {exc}")
+          if failed:
+              raise SystemExit(1)
+          print(f"Validated {len(files)} JSON file(s).")
+          PY
