@@ -10,8 +10,10 @@ data class PanchangDay(
     val paksha: String = "",
     val masa: String = "",
     val tithi: String = "",
+    val tithiNum: Int = 0,
     val tithiEnd: String = "",
     val nakshatra: String = "",
+    val nakNum: Int = -1,
     val nakEnd: String = "",
     val yoga: String = "",
     val karana: String = "",
@@ -74,4 +76,25 @@ data class RashifalFile(
     val daily: Map<String, List<RashiEntry>> = emptyMap(),
     val monthly: Map<String, List<RashiEntry>> = emptyMap(),
     val yearly: Map<String, List<RashiEntry>> = emptyMap()
+)
+
+@Serializable
+data class MuhuratFunction(
+    val id: String = "",
+    val name: String = "",
+    val varas: List<String> = emptyList(),
+    val tithis: List<Int> = emptyList(),
+    val nakshatras: List<Int> = emptyList(),
+    val avoidYogas: List<String> = emptyList(),
+    val avoidKaranas: List<String> = emptyList(),
+    val note: String = ""
+)
+
+@Serializable
+data class MuhuratFile(
+    val note: String = "",
+    val taras: List<String> = emptyList(),
+    val goodTaras: List<Int> = emptyList(),
+    val goodMoonHouses: List<Int> = emptyList(),
+    val functions: List<MuhuratFunction> = emptyList()
 )
