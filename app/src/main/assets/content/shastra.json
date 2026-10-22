@@ -1,0 +1,290 @@
+{
+ "packId": "shastra",
+ "packName": "Shastra library",
+ "version": 1,
+ "ordering": "daily",
+ "description": "The classical Jyotish texts and Samudrika Shastra: what each covers, where it comes from, and where to read the originals. Described, never reproduced.",
+ "items": [
+  {
+   "id": "s-bphs",
+   "text": "Brihat Parashara Hora Shastra (BPHS)",
+   "translations": {
+    "en": "The BPHS is the core text of what is now called Parashari Jyotish. It sets out the zodiac and its divisions, the grahas and their natures, the twelve bhavas, aspects, yogas, the Vimshottari dasha, the divisional charts (vargas) and longevity.",
+    "hi": "The BPHS is the core text of what is now called Parashari Jyotish. It sets out the zodiac and its divisions, the grahas and their natures, the twelve bhavas, aspects, yogas, the Vimshottari dasha, the divisional charts (vargas) and longevity.",
+    "mr": ""
+   },
+   "summary_1line": "Attributed to Sage Parashara - the foundational compendium",
+   "summary_2to3line": "The BPHS is the core text of what is now called Parashari Jyotish. It sets out the zodiac and its divisions, the grahas and their natures, the twelve bhavas, aspects, yogas, the Vimshottari dasha, the divisional charts (vargas) and longevity.",
+   "bodh_3to4line": "Almost every modern Jyotish practice - including the dasha system and the varga charts this site computes - traces back to it. The attribution to Parashara is traditional; the text as we have it was compiled and expanded over centuries. Source: the Sanskrit text is public domain. Several early English translations exist; check each translator's date before reusing any of them.",
+   "tags": [
+    "shastra",
+    "jyotish"
+   ]
+  },
+  {
+   "id": "s-jataka",
+   "text": "Brihat Jataka",
+   "translations": {
+    "en": "Varahamihira's Brihat Jataka is among the earliest surviving systematic works of Indian horoscopy, written in a compact verse style. It treats the signs, the grahas, the bhavas, and the results of planetary combinations.",
+    "hi": "Varahamihira's Brihat Jataka is among the earliest surviving systematic works of Indian horoscopy, written in a compact verse style. It treats the signs, the grahas, the bhavas, and the results of planetary combinations.",
+    "mr": ""
+   },
+   "summary_1line": "Varahamihira, 6th century - one of the oldest systematic treatises",
+   "summary_2to3line": "Varahamihira's Brihat Jataka is among the earliest surviving systematic works of Indian horoscopy, written in a compact verse style. It treats the signs, the grahas, the bhavas, and the results of planetary combinations.",
+   "bodh_3to4line": "It is prized for being early and terse, and it sits alongside the same author's Brihat Samhita. Source: public domain in Sanskrit; Varahamihira is placed in the 6th century CE.",
+   "tags": [
+    "shastra",
+    "jyotish"
+   ]
+  },
+  {
+   "id": "s-saravali",
+   "text": "Saravali",
+   "translations": {
+    "en": "The Saravali works through the grahas in each sign and each bhava, the yogas, and the results of combinations, gathering and comparing what earlier authorities had said.",
+    "hi": "The Saravali works through the grahas in each sign and each bhava, the yogas, and the results of combinations, gathering and comparing what earlier authorities had said.",
+    "mr": ""
+   },
+   "summary_1line": "Kalyanavarma - a comprehensive digest of earlier authorities",
+   "summary_2to3line": "The Saravali works through the grahas in each sign and each bhava, the yogas, and the results of combinations, gathering and comparing what earlier authorities had said.",
+   "bodh_3to4line": "Useful precisely because it is a digest: where texts disagree, it often shows both readings. Source: public domain in Sanskrit.",
+   "tags": [
+    "shastra",
+    "jyotish"
+   ]
+  },
+  {
+   "id": "s-phaladeepika",
+   "text": "Phaladeepika",
+   "translations": {
+    "en": "The Phaladeepika is a practical manual of predictive astrology: the grahas in the signs and bhavas, yogas, the dashas, and transits. It is one of the texts most often quoted in ordinary practice.",
+    "hi": "The Phaladeepika is a practical manual of predictive astrology: the grahas in the signs and bhavas, yogas, the dashas, and transits. It is one of the texts most often quoted in ordinary practice.",
+    "mr": ""
+   },
+   "summary_1line": "Mantreswara - a widely used predictive manual",
+   "summary_2to3line": "The Phaladeepika is a practical manual of predictive astrology: the grahas in the signs and bhavas, yogas, the dashas, and transits. It is one of the texts most often quoted in ordinary practice.",
+   "bodh_3to4line": "Source: public domain in Sanskrit. Several English renderings exist from the early twentieth century; those are likely public domain, later ones are not.",
+   "tags": [
+    "shastra",
+    "jyotish"
+   ]
+  },
+  {
+   "id": "s-parijata",
+   "text": "Jataka Parijata",
+   "translations": {
+    "en": "The Jataka Parijata is arranged in three parts: the fundamentals of the chart, the results of the grahas and bhavas, and the dashas and longevity.",
+    "hi": "The Jataka Parijata is arranged in three parts: the fundamentals of the chart, the results of the grahas and bhavas, and the dashas and longevity.",
+    "mr": ""
+   },
+   "summary_1line": "Vaidyanatha Dikshita - in three parts",
+   "summary_2to3line": "The Jataka Parijata is arranged in three parts: the fundamentals of the chart, the results of the grahas and bhavas, and the dashas and longevity.",
+   "bodh_3to4line": "Its organisation makes it a convenient reference for looking a combination up. Source: public domain in Sanskrit.",
+   "tags": [
+    "shastra",
+    "jyotish"
+   ]
+  },
+  {
+   "id": "s-jaimini",
+   "text": "Jaimini Sutras (Upadesa Sutras)",
+   "translations": {
+    "en": "Attributed to Jaimini, these sutras set out a distinct method: the chara karakas (the grahas ranked by degree as signifiers of self, spouse, career and so on), argala and virodhargala, and the rashi dashas, rather than the Parashari bhava-and-dasha approach.",
+    "hi": "Attributed to Jaimini, these sutras set out a distinct method: the chara karakas (the grahas ranked by degree as signifiers of self, spouse, career and so on), argala and virodhargala, and the rashi dashas, rather than the Parashari bhava-and-dasha approach.",
+    "mr": ""
+   },
+   "summary_1line": "A different system, not Parashari",
+   "summary_2to3line": "Attributed to Jaimini, these sutras set out a distinct method: the chara karakas (the grahas ranked by degree as signifiers of self, spouse, career and so on), argala and virodhargala, and the rashi dashas, rather than the Parashari bhava-and-dasha approach.",
+   "bodh_3to4line": "Important because it is genuinely another system, not a variant - a chart read by Jaimini's rules can give a different answer from the same chart read by Parashara's. Source: public domain in Sanskrit.",
+   "tags": [
+    "shastra",
+    "jyotish"
+   ]
+  },
+  {
+   "id": "s-horasara",
+   "text": "Hora Sara",
+   "translations": {
+    "en": "A concise horoscopy text by Prithuyasas, covering the grahas, the bhavas and their results.",
+    "hi": "A concise horoscopy text by Prithuyasas, covering the grahas, the bhavas and their results.",
+    "mr": ""
+   },
+   "summary_1line": "Prithuyasas, son of Varahamihira",
+   "summary_2to3line": "A concise horoscopy text by Prithuyasas, covering the grahas, the bhavas and their results.",
+   "bodh_3to4line": "Source: public domain in Sanskrit; placed in the 6th-7th century, following Varahamihira.",
+   "tags": [
+    "shastra",
+    "jyotish"
+   ]
+  },
+  {
+   "id": "s-uttarakalamrita",
+   "text": "Uttara Kalamrita",
+   "translations": {
+    "en": "The Uttara Kalamrita is best known for its tables of karakas - which graha signifies which matter, down to quite specific things - and for its chapters on remedial measures.",
+    "hi": "The Uttara Kalamrita is best known for its tables of karakas - which graha signifies which matter, down to quite specific things - and for its chapters on remedial measures.",
+    "mr": ""
+   },
+   "summary_1line": "Kalidasa (attribution debated) - strong on karakas and remedies",
+   "summary_2to3line": "The Uttara Kalamrita is best known for its tables of karakas - which graha signifies which matter, down to quite specific things - and for its chapters on remedial measures.",
+   "bodh_3to4line": "The attribution to Kalidasa is traditional and disputed. Source: public domain in Sanskrit.",
+   "tags": [
+    "shastra",
+    "jyotish"
+   ]
+  },
+  {
+   "id": "s-laghu",
+   "text": "Laghu Parashari (Jataka Chandrika)",
+   "translations": {
+    "en": "A brief text - a few dozen verses - that presents the rules for interpreting the Vimshottari dasha as given by Parashara, and is often studied before the BPHS itself because it is so compressed.",
+    "hi": "A brief text - a few dozen verses - that presents the rules for interpreting the Vimshottari dasha as given by Parashara, and is often studied before the BPHS itself because it is so compressed.",
+    "mr": ""
+   },
+   "summary_1line": "A short work on the dasha rules",
+   "summary_2to3line": "A brief text - a few dozen verses - that presents the rules for interpreting the Vimshottari dasha as given by Parashara, and is often studied before the BPHS itself because it is so compressed.",
+   "bodh_3to4line": "Source: public domain in Sanskrit.",
+   "tags": [
+    "shastra",
+    "jyotish"
+   ]
+  },
+  {
+   "id": "s-samhita",
+   "text": "Brihat Samhita",
+   "translations": {
+    "en": "The Brihat Samhita is not a text of natal astrology. It is an encyclopaedic work on omens, the transits of the grahas, weather and rain, agriculture, architecture, gems, and - in the chapters that matter here - the marks on the human body.",
+    "hi": "The Brihat Samhita is not a text of natal astrology. It is an encyclopaedic work on omens, the transits of the grahas, weather and rain, agriculture, architecture, gems, and - in the chapters that matter here - the marks on the human body.",
+    "mr": ""
+   },
+   "summary_1line": "Varahamihira, 6th century - an encyclopaedia, not a horoscopy manual",
+   "summary_2to3line": "The Brihat Samhita is not a text of natal astrology. It is an encyclopaedic work on omens, the transits of the grahas, weather and rain, agriculture, architecture, gems, and - in the chapters that matter here - the marks on the human body.",
+   "bodh_3to4line": "Because it ranges so widely it is the single richest early source for samudrika shastra in Sanskrit. Source: public domain; 6th century CE.",
+   "tags": [
+    "shastra",
+    "samudrika"
+   ]
+  },
+  {
+   "id": "s-samudrika-what",
+   "text": "What Samudrika Shastra is",
+   "translations": {
+    "en": "Samudrika Shastra is the branch of Jyotish that reads the human body - its build, complexion, voice, gait, the marks and lines on the skin, and the form of the hands and feet - and draws conclusions from them about a person's past and future.",
+    "hi": "Samudrika Shastra is the branch of Jyotish that reads the human body - its build, complexion, voice, gait, the marks and lines on the skin, and the form of the hands and feet - and draws conclusions from them about a person's past and future.",
+    "mr": ""
+   },
+   "summary_1line": "The Indian tradition of reading the body",
+   "summary_2to3line": "Samudrika Shastra is the branch of Jyotish that reads the human body - its build, complexion, voice, gait, the marks and lines on the skin, and the form of the hands and feet - and draws conclusions from them about a person's past and future.",
+   "bodh_3to4line": "The name comes from Samudra, understood both as a name of Shiva and as a sage, and the body itself is called samudra because it is 'imprinted with lines'. Varahamihira's Brihat Samhita treats it in the chapters on the marks of men, of the great man, and of women (67, 69 and 70 in the vulgate numbering; 68, 70 and 71 in editions that count an extra chapter). Source: Brihat Samhita, public domain.",
+   "tags": [
+    "samudrika",
+    "shastra"
+   ]
+  },
+  {
+   "id": "s-samudrika-what-read",
+   "text": "What the practitioner examines",
+   "translations": {
+    "en": "Brihat Samhita opens its chapter on the marks of men by saying that a learned person should first examine twelve things: the body, the complexion, the voice, the strength, the joints, the gloss, the colour, the shape of the face, the height, the weight, the disposition, and the gait - and only then speak.",
+    "hi": "Brihat Samhita opens its chapter on the marks of men by saying that a learned person should first examine twelve things: the body, the complexion, the voice, the strength, the joints, the gloss, the colour, the shape of the face, the height, the weight, the disposition, and the gait - and only then speak.",
+    "mr": ""
+   },
+   "summary_1line": "Twelve things, before any prediction",
+   "summary_2to3line": "Brihat Samhita opens its chapter on the marks of men by saying that a learned person should first examine twelve things: the body, the complexion, the voice, the strength, the joints, the gloss, the colour, the shape of the face, the height, the weight, the disposition, and the gait - and only then speak.",
+   "bodh_3to4line": "That ordering is worth noticing. The text puts measurement and observation before interpretation, and later verses give actual proportions - the navel at the mid-point of the body, the circumference of the head equal to the waist, the nose the length of the forefinger. Source: Brihat Samhita, chapter on the marks of men.",
+   "tags": [
+    "samudrika",
+    "method"
+   ]
+  },
+  {
+   "id": "s-samudrika-lines",
+   "text": "The lines of the hand",
+   "translations": {
+    "en": "Brihat Samhita describes the lines of the palm directly. The line running from the root of the thumb toward the root of the first finger is called the Male line and stands for the man himself; the line next to it stands for his partner. If the two join between the thumb and the first finger, the text reads long conjugal happiness; if they are separated, the couple stay apart.",
+    "hi": "Brihat Samhita describes the lines of the palm directly. The line running from the root of the thumb toward the root of the first finger is called the Male line and stands for the man himself; the line next to it stands for his partner. If the two join between the thumb and the first finger, the text reads long conjugal happiness; if they are separated, the couple stay apart.",
+    "mr": ""
+   },
+   "summary_1line": "The Male line, the Life line and the Fortune line",
+   "summary_2to3line": "Brihat Samhita describes the lines of the palm directly. The line running from the root of the thumb toward the root of the first finger is called the Male line and stands for the man himself; the line next to it stands for his partner. If the two join between the thumb and the first finger, the text reads long conjugal happiness; if they are separated, the couple stay apart.",
+   "bodh_3to4line": "It names a line running from the foot of the little finger to that of the forefinger as the Life line, and a vertical line from the wrist toward the root of the second finger as the Fortune or wealth line. A cut or defect in a line is read as ill health or danger. It also holds that a person's left palm indicates the spouse's fortune and the right their own - and the reverse for a woman. Source: Brihat Samhita, chapter on the marks of men.",
+   "tags": [
+    "samudrika",
+    "palmistry"
+   ]
+  },
+  {
+   "id": "s-samudrika-marks",
+   "text": "The planetary marks",
+   "translations": {
+    "en": "Brihat Samhita gives a set of marks found on the body and the palm and assigns each to a graha: a circle to the Sun, a square to the Moon, a triangle to Mars, an arrow to Mercury, and further shapes - a quadrilateral, a pentagon, a bow, a flag - to the remaining grahas.",
+    "hi": "Brihat Samhita gives a set of marks found on the body and the palm and assigns each to a graha: a circle to the Sun, a square to the Moon, a triangle to Mars, an arrow to Mercury, and further shapes - a quadrilateral, a pentagon, a bow, a flag - to the remaining grahas.",
+    "mr": ""
+   },
+   "summary_1line": "A circle for the Sun, a square for the Moon, a triangle for Mars",
+   "summary_2to3line": "Brihat Samhita gives a set of marks found on the body and the palm and assigns each to a graha: a circle to the Sun, a square to the Moon, a triangle to Mars, an arrow to Mercury, and further shapes - a quadrilateral, a pentagon, a bow, a flag - to the remaining grahas.",
+   "bodh_3to4line": "The method that follows is genuinely astrological: find the limb the mark sits on, and the nakshatra and sign assigned to that limb, and you have the graha's position at the person's birth. The text also gives a way to work out the natal ascendant from body measurements - height and head circumference. Source: Brihat Samhita, chapter on the marks of men. This is a description of what the text says, not a claim that it works.",
+   "tags": [
+    "samudrika",
+    "palmistry",
+    "method"
+   ]
+  },
+  {
+   "id": "s-samudrika-three",
+   "text": "The three branches",
+   "translations": {
+    "en": "Later samudrika literature divides the subject into three branches: palmistry, the reading of the body and face, and the marks of women. It also sorts marks into three kinds - natural, seasonal or temporal, and casual - and holds that the lines are the writing of the creator on the body, which an expert can read.",
+    "hi": "Later samudrika literature divides the subject into three branches: palmistry, the reading of the body and face, and the marks of women. It also sorts marks into three kinds - natural, seasonal or temporal, and casual - and holds that the lines are the writing of the creator on the body, which an expert can read.",
+    "mr": ""
+   },
+   "summary_1line": "Palmistry, physiognomy, and the marks of women",
+   "summary_2to3line": "Later samudrika literature divides the subject into three branches: palmistry, the reading of the body and face, and the marks of women. It also sorts marks into three kinds - natural, seasonal or temporal, and casual - and holds that the lines are the writing of the creator on the body, which an expert can read.",
+   "bodh_3to4line": "The Brihat Samhita gives a separate chapter to the marks of women, and the Garudapurana redacts the same material into its own chapters on men's and women's marks. Source: Brihat Samhita and the Garudapurana; both public domain. The Puranic version is an abbreviated redaction, so where the two differ the Samhita is the fuller text.",
+   "tags": [
+    "samudrika",
+    "shastra"
+   ]
+  },
+  {
+   "id": "s-samudrika-caveat",
+   "text": "How to hold this",
+   "translations": {
+    "en": "Samudrika Shastra is a traditional system of interpretation with no demonstrated predictive validity, and nothing here is offered as a reading of your own body. The Brihat Samhita's own verses run from careful proportion to claims about a man's fate from the number of hairs in a pore; the two are not the same kind of statement.",
+    "hi": "Samudrika Shastra is a traditional system of interpretation with no demonstrated predictive validity, and nothing here is offered as a reading of your own body. The Brihat Samhita's own verses run from careful proportion to claims about a man's fate from the number of hairs in a pore; the two are not the same kind of statement.",
+    "mr": ""
+   },
+   "summary_1line": "Traditional reference, not measurement",
+   "summary_2to3line": "Samudrika Shastra is a traditional system of interpretation with no demonstrated predictive validity, and nothing here is offered as a reading of your own body. The Brihat Samhita's own verses run from careful proportion to claims about a man's fate from the number of hairs in a pore; the two are not the same kind of statement.",
+   "bodh_3to4line": "The site presents this material because it is the authentic Indian source for palmistry and body reading, and because it is public domain and therefore quotable in description. It is not a diagnostic tool and not a basis for decisions. Source: Brihat Samhita; described, not reproduced.",
+   "tags": [
+    "samudrika",
+    "caveat"
+   ]
+  },
+  {
+   "id": "s-sources",
+   "text": "Where to read the originals",
+   "translations": {
+    "en": "The Sanskrit originals of all these texts are public domain. The trouble is translations: the well-known modern ones - Santhanam, Sagar, Ranjan and others - are still in copyright, so they cannot be reused. Older English renderings from the nineteenth and early twentieth centuries usually are free.",
+    "hi": "The Sanskrit originals of all these texts are public domain. The trouble is translations: the well-known modern ones - Santhanam, Sagar, Ranjan and others - are still in copyright, so they cannot be reused. Older English renderings from the nineteenth and early twentieth centuries usually are free.",
+    "mr": ""
+   },
+   "summary_1line": "The Sanskrit is free; many translations are not",
+   "summary_2to3line": "The Sanskrit originals of all these texts are public domain. The trouble is translations: the well-known modern ones - Santhanam, Sagar, Ranjan and others - are still in copyright, so they cannot be reused. Older English renderings from the nineteenth and early twentieth centuries usually are free.",
+   "bodh_3to4line": "The classical chapter numbering also varies between editions, which is why a citation can point at two different chapters: the vulgate edition with Bhattotpala's commentary (around 966 CE) is the one used here, and other editions count one extra chapter.",
+   "tags": [
+    "shastra",
+    "sources"
+   ],
+   "steps": [
+    "archive.org - search the text name together with an early translator such as Suryanarain Rao or Krishna Rau for public-domain English renderings.",
+    "sanskritdocuments.org and GRETIL (Gottingen) - free digital Sanskrit texts.",
+    "Wikisource, Sanskrit and Hindi - proofread texts.",
+    "indianculture.gov.in and the Digital Library of India - scanned Indian books.",
+    "eGangotri and the Sarasvati Mahal Library - manuscripts.",
+    "Before reusing any translation, check the translator's date and the licence. A public-domain original does not make its modern translation public domain."
+   ]
+  }
+ ]
+}
