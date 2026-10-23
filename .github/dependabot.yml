@@ -1,0 +1,22 @@
+version: 2
+
+# The website has no runtime dependencies at all (package.json declares none),
+# so the only things worth watching are the Android build's Gradle dependencies
+# and the Actions used by the workflows.
+
+updates:
+  - package-ecosystem: "gradle"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "gradle"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "ci"

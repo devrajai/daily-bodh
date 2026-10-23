@@ -1,0 +1,45 @@
+name: CodeQL
+
+# Free for public repositories, needs no API key, and runs GitHub's own
+# static analysis over the JavaScript in docs/ and the Python in tools/.
+# Note: this project has no server, no user input handling, no database and
+# no network calls, so the attack surface is small and findings will likely be
+# thin. It is here because it is free, deterministic, and continuous.
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 6 * * 1'      # Mondays 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    name: Analyze ${{ matrix.language }}
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write    # required to upload results
+      contents: read
+      actions: read
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'javascript-typescript', 'python' ]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          queries: security-and-quality
+
+      - name: Perform CodeQL analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:${{ matrix.language }}"
