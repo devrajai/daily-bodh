@@ -12,7 +12,7 @@
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
-  body{background:var(--cream);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans",sans-serif}
+  body{background:var(--cream);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans",sans-serif;min-height:100vh;display:flex;flex-direction:column}
   header{background:var(--navy);color:#fff;padding:14px 16px 0}
   .brand{display:flex;align-items:center;gap:10px;max-width:1000px;margin:0 auto}
   .om{width:34px;height:34px;border-radius:9px;background:var(--accent);display:grid;place-items:center;font-size:19px}
@@ -23,7 +23,7 @@
   nav button{background:none;border:0;color:#c9d2e4;font:inherit;font-size:14px;padding:9px 12px;border-radius:9px 9px 0 0;white-space:nowrap;cursor:pointer}
   nav button[aria-selected="true"]{background:var(--cream);color:var(--navy);font-weight:600}
   nav button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
-  main{max-width:1000px;margin:0 auto;padding:16px 16px 64px}
+  main{flex:1;width:100%;max-width:1000px;margin:0 auto;padding:16px 16px 64px}
   section{display:none}
   section.on{display:block}
   .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin:0 0 12px}
@@ -590,6 +590,9 @@ function show(id){
   const box = $('#'+id);
   const label = tab ? tab[1] : id;
   if(!tab || !box) return;
+  // Fill an empty panel while the data loads, so the screen never looks blank
+  // (and the footer is never mistaken for content).
+  if(!box.innerHTML.trim()) box.innerHTML = '<p class="muted">Loading…</p>';
   // Mark the tab done only once it has actually rendered. A blank tab with no
   // explanation is worse than an error message, so say what failed and offer
   // a retry instead of leaving the screen empty forever.
