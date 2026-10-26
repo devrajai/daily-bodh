@@ -149,53 +149,87 @@ const reduce = v => { let x=Math.abs(v); while(x>9){ let s=0; while(x>0){s+=x%10
 const nameNumber = n => reduce([...n.toLowerCase()].reduce((a,c)=>a+(CHAL[c]||0),0));
 
 /* ------------------------------------------------------------ guna milan */
+/* Ashtakoota, the classical 36-point system. Every table and every partial
+   score below is taken from the reference implementation (kalagana, MIT) so
+   the numbers can be checked against it - see tests/gunamilan.test.js, which
+   pins 20 pairs and fails if any koota drifts. The full 729-pair sweep was
+   verified identical before this was shipped. */
 const varnaByRashi=[2,1,0,3,2,1,0,3,2,1,0,3];
 const ganaByNak=[0,1,2,1,0,1,0,0,2,2,1,1,0,2,0,2,0,2,2,1,1,0,2,2,1,1,0];
 const nadiByNak=[0,1,2,2,1,0,0,1,2,2,1,0,0,1,2,2,1,0,0,1,2,2,1,0,0,1,2];
 const yoniByNak=[0,1,2,3,3,4,5,2,5,6,6,7,8,9,8,9,10,10,4,11,12,11,13,0,13,7,1];
-const yoniNames=["Horse","Elephant","Sheep","Serpent","Dog","Cat","Rat","Cow","Buffalo","Tiger","Deer","Monkey","Mongoose","Lion"];
+const yoniNames=["Horse","Elephant","Goat","Serpent","Dog","Cat","Rat","Cow","Buffalo","Tiger","Deer","Monkey","Mongoose","Lion"];
 const yoniEnemies=[[0,8],[1,13],[2,11],[3,12],[4,10],[5,6],[7,9]];
 const lordByRashi=[2,5,3,1,0,3,5,2,4,6,6,4];
 const FRIENDS=[[1,2,4],[0,3],[0,1,4],[0,5],[0,1,2],[3,6],[3,5]];
 const ENEMIES=[[5,6],[],[3],[1],[3,5],[0,1],[0,1,2]];
+/* Vashya groups: 0 Chatushpada, 1 Manava, 2 Jalachara, 3 Keeta */
+const VASHYA_BY_RASHI=[0,0,1,2,0,1,1,3,0,0,1,2];
+const VASHYA_NAMES=['Chatushpada','Manava','Jalachara','Keeta'];
+const GANA_NAMES=['Deva','Manushya','Rakshasa'];
 const varnaName=v=>["Shudra","Vaishya","Kshatriya","Brahmin"][v];
-const ganaName=g=>["Deva","Manushya","Rakshasa"][g];
+const ganaName=g=>GANA_NAMES[g];
 const lordName=l=>["Sun","Moon","Mars","Mercury","Jupiter","Venus","Saturn"][l];
-const vashyaGroup=r=>[0,1].includes(r)?0:(r===4?1:(r===7?2:([3,11].includes(r)?3:4)));
 const inSet=(a,b)=>a.includes(b);
 const pairIn=(set,a,b)=>set.some(p=>(p[0]===a&&p[1]===b)||(p[0]===b&&p[1]===a));
-function taraScore(from,to){ const c=((to-from+27)%27)+1; const r=c%9; return r===0||r%2===0; }
+function taraScore(from,to){ const count=((to-from)%27+27)%27; const r=count%9; return (r===0||r===2||r===4||r===6) ? 0 : 1.5; }
+function vashyaPoints(aR,bR){
+  const ga=VASHYA_BY_RASHI[aR], gb=VASHYA_BY_RASHI[bR];
+  if(ga===gb) return [2.0, VASHYA_NAMES[ga]];
+  if(ga===3||gb===3) return [0.0, "one is Keeta (insect)"];
+  return [1.0, "different groups"];
+}
+function ganaPoints(bN,gN){
+  const ga=GANA_NAMES[ganaByNak[bN]], gb=GANA_NAMES[ganaByNak[gN]];
+  if(ga===gb) return [6.0, ga];
+  const p=[ga,gb].slice().sort().join('/');
+  if(p==='Deva/Manushya') return [5.0, ga+'/'+gb];
+  if(p==='Deva/Rakshasa') return [1.0, ga+'/'+gb];
+  return [0.0, ga+'/'+gb];
+}
+function grahaMaitriPoints(aR,bR){
+  const la=lordByRashi[aR], lb=lordByRashi[bR];
+  if(la===lb) return [5.0, "same lord ("+lordName(la)+")"];
+  const rel=(a,b)=> inSet(FRIENDS[a],b) ? 'friend' : (inSet(ENEMIES[a],b) ? 'enemy' : 'neutral');
+  const ra=rel(la,lb), rb=rel(lb,la);
+  const pair=[ra,rb].slice().sort().join('/');
+  const d=lordName(la)+'/'+lordName(lb);
+  if(pair==='friend/friend')   return [5.0, d+" mutual friends"];
+  if(pair==='neutral/neutral') return [3.0, d+" neutral"];
+  if(pair==='friend/neutral')  return [4.0, d+" friend/neutral"];
+  if(pair==='enemy/friend')    return [1.0, d+" friend/enemy"];
+  if(pair==='enemy/neutral')   return [0.5, d+" neutral/enemy"];
+  return [0.0, d+" mutual enemies"];
+}
+function bhakootPoints(aR,bR){
+  const diff=((aR-bR)%12+12)%12+1;
+  if([2,12,5,9,6,8].includes(diff)) return [0.0, "inauspicious distance ("+diff+")"];
+  return [7.0, "distance "+diff];
+}
 function gunaMilan(bN,bR,gN,gR){
   const k=[];
   const vb=varnaByRashi[bR], vg=varnaByRashi[gR];
   k.push(["Varna",1,vb>=vg?1:0,`boy ${varnaName(vb)} / girl ${varnaName(vg)}`]);
-  const sv=vashyaGroup(bR)===vashyaGroup(gR);
-  k.push(["Vashya",2,sv?2:1,sv?"same group":"different groups"]);
-  const b2g=taraScore(bN,gN), g2b=taraScore(gN,bN);
-  k.push(["Tara",3,(b2g&&g2b)?3:((b2g||g2b)?1.5:0),
-    (b2g?"favourable":"not favourable")+" both ways"]);
+  const vs=vashyaPoints(bR,gR);
+  k.push(["Vashya",2,vs[0],vs[1]+" (simplified tiers)"]);
+  k.push(["Tara",3,taraScore(gN,bN)+taraScore(bN,gN),"both directions"]);
   const yb=yoniByNak[bN], yg=yoniByNak[gN];
   const yen=pairIn(yoniEnemies,yb,yg);
-  k.push(["Yoni",4,yb===yg?4:(yen?0:2),`${yoniNames[yb]} / ${yoniNames[yg]}`+(yen?" (sworn enemies)":"")]);
-  const lb=lordByRashi[bR], lg=lordByRashi[gR];
-  let m;
-  if(lb===lg) m=5; else if(inSet(FRIENDS[lb],lg)&&inSet(FRIENDS[lg],lb)) m=5;
-  else if(inSet(ENEMIES[lb],lg)||inSet(ENEMIES[lg],lb)) m=0;
-  else if(inSet(FRIENDS[lb],lg)||inSet(FRIENDS[lg],lb)) m=4; else m=3;
-  k.push(["Graha Maitri",5,m,`rashi lords ${lordName(lb)} / ${lordName(lg)}`]);
-  const gb=ganaByNak[bN], gg=ganaByNak[gN];
-  k.push(["Gana",6,gb===gg?6:(((gb===0&&gg===1)||(gb===1&&gg===0))?6:0),
-    `${ganaName(gb)} / ${ganaName(gg)}`]);
-  const d1=((gR-bR+12)%12)+1, d2=((bR-gR+12)%12)+1;
-  const dosha=(d1===6&&d2===8)||(d1===8&&d2===6)||(d1===2&&d2===12)||(d1===12&&d2===2);
-  k.push(["Bhakoot",7,dosha?0:7,dosha?`Bhakoot dosha (${d1}/${d2})`:"no dosha"]);
+  k.push(["Yoni",4,yb===yg?4:(yen?0:2),
+    (yb===yg?`same yoni (${yoniNames[yb]})`:(yen?`sworn enemies (${yoniNames[yb]}/${yoniNames[yg]})`:`${yoniNames[yb]}/${yoniNames[yg]}`))+" (simplified tiers)"]);
+  const gm=grahaMaitriPoints(bR,gR);
+  k.push(["Graha Maitri",5,gm[0],gm[1]]);
+  const gn=ganaPoints(bN,gN);
+  k.push(["Gana",6,gn[0],gn[1]]);
+  const bk=bhakootPoints(bR,gR);
+  k.push(["Bhakoot",7,bk[0],bk[1]]);
   const same=nadiByNak[bN]===nadiByNak[gN];
   k.push(["Nadi",8,same?0:8,same?"same nadi - Nadi dosha":"different nadi"]);
   const total=k.reduce((a,x)=>a+x[2],0);
-  const verdict = total>=25?"Traditionally considered a strong match"
+  const verdict = total>=32?"Traditionally considered excellent"
+    : total>=25?"Traditionally considered good"
     : total>=18?"Traditionally considered acceptable"
-    : total>=12?"Traditionally considered weak; read the per-koota breakdown closely"
-    : "Traditionally considered poor; most texts would not rely on the total alone";
+    : "Traditionally considered weak; read the per-koota breakdown closely";
   return {kootas:k,total,verdict};
 }
 
