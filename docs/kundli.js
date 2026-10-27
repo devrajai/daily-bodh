@@ -194,6 +194,21 @@ async function drawKundli(){
   for(let i=0;i<7;i++) for(let j=i+1;j<7;j++)
     maitri.push(`${GRAHAS[i]}–${GRAHAS[j]}: <strong>${panchadha(GRAHAS[i],GRAHAS[j],rashiByPlanet)}</strong>`);
 
+  /* ---- the chart wheel ---- */
+  let chartHtml = '';
+  try {
+    const SHORT = {Sun:'Su', Moon:'Mo', Mars:'Ma', Mercury:'Me',
+                   Jupiter:'Ju', Venus:'Ve', Saturn:'Sa', Rahu:'Ra', Ketu:'Ke'};
+    const byName = {};
+    GRAHAS.forEach(g => { byName[SHORT[g]] = houseOf(ascRashi, P[g]); });
+    const wheel = new KundliChartRenderer({width: 420, height: 420});
+    chartHtml = `<div class="card">
+      <h3>${unknown ? 'Chandra chart (counted from the Moon)' : 'Birth chart'}</h3>
+      <div style="max-width:420px;margin:0 auto">${wheel.renderNorthIndianSVG(ascRashi + 1, byName)}</div>
+      <p class="muted">North Indian style: the houses are fixed and the ascendant sits at the top. Su Sun, Mo Moon, Ma Mars, Me Mercury, Ju Jupiter, Ve Venus, Sa Saturn, Ra Rahu, Ke Ketu.${unknown ? ' Counted from the Moon, because no birth time was given.' : ''}</p>
+    </div>`;
+  } catch(e) { /* the tables below still show every placement */ }
+
   box.innerHTML = `
     <div class="card">
       <h3>${unknown ? 'Moon sign (birth time not given)' : 'Lagna'}</h3>
@@ -215,6 +230,7 @@ async function drawKundli(){
       </table>
       <p class="muted" style="margin-top:10px">Sidereal positions, Lahiri ayanamsa (${ayanamsa(jd).toFixed(2)}°). D9 is the navamsa sign. ${unknown ? '<strong>House is counted from the Moon</strong>, since there is no birth time.' : 'House is from the lagna; "from Moon" is the reading to use when the birth time is uncertain.'}</p>
     </div>
+    ${chartHtml}
     <div class="card">
       <h3>Transits today</h3>
       ${ nowP ? `<table>${transits}</table>
@@ -320,5 +336,194 @@ async function renderJyotish(){
       <div class="card" id="dh"></div>`;
     packList(J.items, $('#jy'));
     packList(D.items, $('#dh')); s.dataset.built='1';
+  }
+}
+
+/* ---------------------------------------------- the chart wheel (SVG) */
+/**
+ * Daily Bodh - Kundli Chart Renderer (Pure SVG)
+ * Zero dependencies. Renders both North Indian (Diamond) and South Indian (Square) charts.
+ * Clean, responsive, customizable styling matching Vedic aesthetics.
+ */
+
+class KundliChartRenderer {
+  constructor(config = {}) {
+    this.width = config.width || 500;
+    this.height = config.height || 500;
+    this.theme = {
+      bgColor: config.bgColor || "#0e1117",
+      strokeColor: config.strokeColor || "#d4af37", // Vedic Gold
+      strokeWidth: config.strokeWidth || 2,
+      textColor: config.textColor || "#e6edf3",
+      rashiColor: config.rashiColor || "#8b949e",
+      planetColor: config.planetColor || "#f0883e",
+      fontFamily: config.fontFamily || "system-ui, -apple-system, sans-serif"
+    };
+
+    this.rashiNamesShort = ["Mes", "Vri", "Mit", "Kar", "Sim", "Kan", "Tul", "Vri", "Dha", "Mak", "Kum", "Mee"];
+  }
+
+  /**
+   * Render North Indian Diamond Chart SVG
+   * @param {number} ascendantSign 1-12 (Lagna)
+   * @param {Object} planets Map of planetName -> { house: 1-12, isRetrograde: bool, isCombust: bool }
+   */
+  renderNorthIndianSVG(ascendantSign = 1, planets = {}) {
+    const W = this.width;
+    const H = this.height;
+    const stroke = this.theme.strokeColor;
+    const strokeW = this.theme.strokeWidth;
+    const bg = this.theme.bgColor;
+
+    // Center coordinates of all 12 houses in North Indian layout
+    const houseCenters = {
+      1:  { x: W * 0.50, y: H * 0.25 },
+      2:  { x: W * 0.25, y: H * 0.12 },
+      3:  { x: W * 0.12, y: H * 0.25 },
+      4:  { x: W * 0.25, y: H * 0.50 },
+      5:  { x: W * 0.12, y: H * 0.75 },
+      6:  { x: W * 0.25, y: H * 0.88 },
+      7:  { x: W * 0.50, y: H * 0.75 },
+      8:  { x: W * 0.75, y: H * 0.88 },
+      9:  { x: W * 0.88, y: H * 0.75 },
+      10: { x: W * 0.75, y: H * 0.50 },
+      11: { x: W * 0.88, y: H * 0.25 },
+      12: { x: W * 0.75, y: H * 0.12 }
+    };
+
+    // Group planets by house
+    const planetsByHouse = {};
+    for (let h = 1; h <= 12; h++) planetsByHouse[h] = [];
+    for (const [pName, pData] of Object.entries(planets)) {
+      const h = typeof pData === 'number' ? pData : (pData.house || 1);
+      if (planetsByHouse[h]) {
+        planetsByHouse[h].push({ name: pName, ...pData });
+      }
+    }
+
+    let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="100%" height="100%" style="background-color: ${bg}; font-family: ${this.theme.fontFamily}; user-select: none;">`;
+
+    // Outer rectangle
+    svg += `<rect x="0" y="0" width="${W}" height="${H}" fill="none" stroke="${stroke}" stroke-width="${strokeW}"/>`;
+
+    // Main Diagonals
+    svg += `<line x1="0" y1="0" x2="${W}" y2="${H}" stroke="${stroke}" stroke-width="${strokeW}"/>`;
+    svg += `<line x1="${W}" y1="0" x2="0" y2="${H}" stroke="${stroke}" stroke-width="${strokeW}"/>`;
+
+    // Inner Diamond
+    svg += `<polygon points="${W/2},0 ${W},${H/2} ${W/2},${H} 0,${H/2}" fill="none" stroke="${stroke}" stroke-width="${strokeW}"/>`;
+
+    // Render House Numbers (Rashi sign assigned to each house)
+    for (let h = 1; h <= 12; h++) {
+      const sign = ((ascendantSign - 1 + (h - 1)) % 12) + 1;
+      const center = houseCenters[h];
+
+      // Sign number label (small, subtle)
+      svg += `<text x="${center.x}" y="${center.y - 18}" fill="${this.theme.rashiColor}" font-size="12" font-weight="600" text-anchor="middle">${sign}</text>`;
+
+      // Planet labels in this house
+      const housePlanets = planetsByHouse[h];
+      if (housePlanets.length > 0) {
+        let pY = center.y;
+        housePlanets.forEach((p, idx) => {
+          let label = p.name.substring(0, 3);
+          if (p.isRetrograde) label += "(R)";
+          if (p.isCombust) label += "*";
+          svg += `<text x="${center.x}" y="${pY + (idx * 15)}" fill="${this.theme.planetColor}" font-size="12" font-weight="bold" text-anchor="middle">${label}</text>`;
+        });
+      }
+    }
+
+    // Lagna badge in House 1
+    svg += `<text x="${houseCenters[1].x}" y="${houseCenters[1].y - 32}" fill="${this.theme.strokeColor}" font-size="11" font-weight="bold" text-anchor="middle">ASC</text>`;
+
+    svg += `</svg>`;
+    return svg;
+  }
+
+  /**
+   * Render South Indian Square Chart SVG
+   * Fixed Rashi positions:
+   * [12 Pisces] [ 1 Aries ] [ 2 Taurus] [ 3 Gemini ]
+   * [11 Aqua  ] [        CENTRAL       ] [ 4 Cancer ]
+   * [10 Capri ] [         SPACE        ] [ 5 Leo    ]
+   * [ 9 Sagit ] [ 8 Scorp ] [ 7 Libra ] [ 6 Virgo  ]
+   */
+  renderSouthIndianSVG(ascendantSign = 1, planets = {}) {
+    const W = this.width;
+    const H = this.height;
+    const stroke = this.theme.strokeColor;
+    const strokeW = this.theme.strokeWidth;
+    const bg = this.theme.bgColor;
+    const cellW = W / 4;
+    const cellH = H / 4;
+
+    // Coordinates of 12 signs in 4x4 perimeter
+    const signBoxes = {
+      12: { col: 0, row: 0 }, 1: { col: 1, row: 0 }, 2: { col: 2, row: 0 }, 3: { col: 3, row: 0 },
+      4:  { col: 3, row: 1 }, 5: { col: 3, row: 2 }, 6: { col: 3, row: 3 },
+      7:  { col: 2, row: 3 }, 8: { col: 1, row: 3 }, 9: { col: 0, row: 3 },
+      10: { col: 0, row: 2 }, 11: { col: 0, row: 1 }
+    };
+
+    // Group planets by sign
+    const planetsBySign = {};
+    for (let s = 1; s <= 12; s++) planetsBySign[s] = [];
+    for (const [pName, pData] of Object.entries(planets)) {
+      // If house is given, sign = ((ascendantSign - 1 + house - 1) % 12) + 1
+      const house = typeof pData === 'number' ? pData : (pData.house || 1);
+      const sign = ((ascendantSign - 1 + house - 1) % 12) + 1;
+      if (planetsBySign[sign]) {
+        planetsBySign[sign].push({ name: pName, ...pData });
+      }
+    }
+
+    let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="100%" height="100%" style="background-color: ${bg}; font-family: ${this.theme.fontFamily}; user-select: none;">`;
+
+    // Outer border
+    svg += `<rect x="0" y="0" width="${W}" height="${H}" fill="none" stroke="${stroke}" stroke-width="${strokeW}"/>`;
+
+    // Inner center box (empty)
+    svg += `<rect x="${cellW}" y="${cellH}" width="${cellW * 2}" height="${cellH * 2}" fill="rgba(212,175,55,0.03)" stroke="${stroke}" stroke-width="${strokeW}"/>`;
+
+    // Grid lines for the 12 boxes
+    for (let i = 1; i <= 3; i++) {
+      // Horizontal lines
+      svg += `<line x1="0" y1="${i * cellH}" x2="${W}" y2="${i * cellH}" stroke="${stroke}" stroke-width="${strokeW}"/>`;
+      // Vertical lines
+      svg += `<line x1="${i * cellW}" y1="0" x2="${i * cellW}" y2="${H}" stroke="${stroke}" stroke-width="${strokeW}"/>`;
+    }
+
+    // Render contents for each sign
+    for (let sign = 1; sign <= 12; sign++) {
+      const box = signBoxes[sign];
+      const x = box.col * cellW;
+      const y = box.row * cellH;
+
+      // Sign name badge
+      const isLagna = (sign === ascendantSign);
+      svg += `<text x="${x + 8}" y="${y + 18}" fill="${isLagna ? stroke : this.theme.rashiColor}" font-size="11" font-weight="${isLagna ? 'bold' : 'normal'}">${this.rashiNamesShort[sign - 1]}${isLagna ? ' (ASC)' : ''}</text>`;
+
+      // If Lagna, draw subtle diagonal line in top-right corner
+      if (isLagna) {
+        svg += `<line x1="${x}" y1="${y}" x2="${x + 25}" y2="${y + 25}" stroke="${stroke}" stroke-width="2"/>`;
+      }
+
+      // Render planets
+      const pList = planetsBySign[sign];
+      let pY = y + 36;
+      pList.forEach((p, idx) => {
+        let label = p.name.substring(0, 3);
+        if (p.isRetrograde) label += "(R)";
+        svg += `<text x="${x + cellW / 2}" y="${pY + (idx * 15)}" fill="${this.theme.planetColor}" font-size="12" font-weight="bold" text-anchor="middle">${label}</text>`;
+      });
+    }
+
+    // Central Title
+    svg += `<text x="${W/2}" y="${H/2 - 10}" fill="${stroke}" font-size="16" font-weight="bold" text-anchor="middle">Daily Bodh</text>`;
+    svg += `<text x="${W/2}" y="${H/2 + 15}" fill="${this.theme.textColor}" font-size="12" text-anchor="middle">South Indian Kundli</text>`;
+
+    svg += `</svg>`;
+    return svg;
   }
 }
