@@ -527,3 +527,71 @@ class KundliChartRenderer {
     return svg;
   }
 }
+
+/* --------------------------- Lo Shu grid + personal cycles (Numerology tab) */
+function reduce9(n){ n = Math.abs(Math.trunc(n)); while(n > 9) n = String(n).split('').reduce((a,b)=>a+ +b, 0); return n; }
+const LOSHU_MEANING = {1:'self, leadership', 2:'partnership, sensitivity', 3:'expression, creativity',
+  4:'structure, work', 5:'change, freedom, the centre', 6:'home, family, care',
+  7:'analysis, introspection', 8:'material affairs, authority', 9:'completion, letting go'};
+
+function loshuMarkup(dateStr){
+  if(!dateStr) return '';
+  const digits = dateStr.replace(/\D/g,'').split('').map(Number).filter(n => n > 0 && n <= 9);
+  if(!digits.length) return '';
+  const freq = {}; for(let i=1;i<=9;i++) freq[i]=0;
+  digits.forEach(d => { freq[d]++; });
+  const grid = [[4,9,2],[3,5,7],[8,1,6]];
+  const cell = n => {
+    const c = freq[n];
+    const val = c ? n + (c>1 ? `<span style="font-size:12px;font-weight:400"> &times;${c}</span>` : '') : '&middot;';
+    return `<td style="border:1px solid var(--line);text-align:center;padding:9px;font-size:19px;font-weight:700;${c?'':'opacity:.35'}">${val}</td>`;
+  };
+  const missing = Object.keys(freq).filter(k => freq[k]===0).map(Number);
+  const repeated = Object.keys(freq).filter(k => freq[k]>1).map(Number);
+
+  const d = new Date(dateStr+'T00:00:00');
+  const now = new Date();
+  const personalYear = reduce9(reduce9(d.getDate()) + reduce9(d.getMonth()+1) + reduce9(now.getFullYear()));
+  const personalMonth = reduce9(personalYear + reduce9(now.getMonth()+1));
+  const personalDay = reduce9(personalMonth + reduce9(now.getDate()));
+
+  return `<div class="card">
+    <h3>Lo Shu grid</h3>
+    <p class="muted">The birth digits placed in the fixed 3&times;3 square, one mark per occurrence. Zeros carry no position in this tradition.</p>
+    <table style="max-width:250px;margin:10px auto;border-collapse:collapse">${grid.map(r=>`<tr>${r.map(cell).join('')}</tr>`).join('')}</table>
+    <p class="muted">${repeated.length ? '<strong>Repeated:</strong> ' + repeated.map(n=>n+' ('+freq[n]+'&times; &mdash; '+LOSHU_MEANING[n]+')').join(', ') + '. ' : ''}${missing.length ? '<strong>Missing:</strong> ' + missing.map(n=>n+' &mdash; '+LOSHU_MEANING[n]).join(', ') + '. Missing numbers are read as qualities to develop, not as deficiencies.' : 'Every number is present.'}</p>
+  </div>
+  <div class="card">
+    <h3>Personal cycles <span class="muted" style="font-weight:400;font-size:13px">(for ${now.getFullYear()})</span></h3>
+    <p><strong>Year ${personalYear}</strong> <span class="muted">&mdash; ${LOSHU_MEANING[personalYear]||''}</span></p>
+    <p><strong>Month ${personalMonth}</strong> <span class="muted">&mdash; ${LOSHU_MEANING[personalMonth]||''}</span></p>
+    <p><strong>Day ${personalDay}</strong> <span class="muted">&mdash; ${LOSHU_MEANING[personalDay]||''}</span></p>
+    <p class="muted">Reduced from your birth day and month plus the current year, month and day. Traditional numerological convention, not a forecast.</p>
+  </div>`;
+}
+
+/* The Numerology tab is built in index.html, which we do not rewrite here, so
+   append our own container beside it and refill it whenever the date changes.
+   index.html's own handler writes only to #nout, so the two never collide. */
+function loshuAttach(){
+  const sec = document.getElementById('numerology');
+  if(!sec || !sec.dataset.built) return false;
+  const nd = document.getElementById('nd');
+  if(!nd) return false;
+  let box = document.getElementById('nloshu');
+  if(!box){
+    box = document.createElement('div');
+    box.id = 'nloshu';
+    sec.appendChild(box);
+  }
+  box.innerHTML = loshuMarkup(nd.value);
+  return true;
+}
+document.addEventListener('change', e => {
+  if(e.target && e.target.id === 'nd') setTimeout(loshuAttach, 0);
+}, true);
+document.addEventListener('input', e => {
+  if(e.target && e.target.id === 'nd') setTimeout(loshuAttach, 0);
+}, true);
+window.addEventListener('hashchange', () => { setTimeout(loshuAttach, 0); });
+setTimeout(loshuAttach, 0);
