@@ -43,6 +43,12 @@ async function renderKundli(){
           <div><label>Birth date</label><input type="date" id="kd" value="1990-03-15"></div>
           <div><label>Birth time</label><input type="time" id="kt" value="12:00"></div>
         </div>
+        <div style="margin-top:10px">
+          <label style="display:flex;align-items:center;gap:8px;margin:0;font-size:14px">
+            <input type="checkbox" id="kunknown" style="width:auto;margin:0">
+            <span>I don't know my birth time</span>
+          </label>
+        </div>
         <div class="row">
           <div><label>Place</label><select id="kp">${P.map((p,i)=>`<option value="${i}">${p.name}</option>`).join('')}</select></div>
           <div><label>UTC offset (hours)</label><input type="number" id="ko" step="0.25" value="5.5"></div>
@@ -59,13 +65,17 @@ async function renderKundli(){
     });
     $('#kgo').addEventListener('click', drawKundli);
     $('#kd').addEventListener('change', drawKundli);
+    $('#kt').addEventListener('change', drawKundli);
+    $('#kunknown').addEventListener('change', drawKundli);
     drawKundli();
   }
 }
 
 async function drawKundli(){
   const box = $('#kout'); if(!box) return;
-  const dateStr = $('#kd').value, timeStr = $('#kt').value || '12:00';
+  const dateStr = $('#kd').value;
+  const unknown = !!(document.getElementById('kunknown') && document.getElementById('kunknown').checked);
+  const timeStr = unknown ? '12:00' : ($('#kt').value || '12:00');
   const off = parseFloat($('#ko').value) || 0;
   const p = (await places())[+$('#kp').value];
   if(!dateStr){ box.innerHTML=''; return; }
@@ -77,8 +87,18 @@ async function drawKundli(){
   if(!P){ box.innerHTML='<p class="muted">No ephemeris for that date (1930-2035).</p>'; return; }
 
   const jd = jdFromLocal(dateStr, timeStr, off);
-  const asc = ascendant(jd, p.lat, p.lon);
-  const ascRashi = rashiOf(asc);
+  const asc = unknown ? null : ascendant(jd, p.lat, p.lon);
+
+  // Without a birth time the ascendant is unknowable - it moves through a whole
+  // sign in about two hours. Inventing one would be worse than showing none, so
+  // fall back to the Moon, which is the classical answer, and say so.
+  let moonR0 = rashiOf(P.Moon), moonR1 = rashiOf(P.Moon), moonMoves = false;
+  if(unknown){
+    const P0 = await planetsAt(dateStr, 0);
+    const P1 = await planetsAt(dateStr, 0.9993);
+    if(P0 && P1){ moonR0 = rashiOf(P0.Moon); moonR1 = rashiOf(P1.Moon); moonMoves = moonR0 !== moonR1; }
+  }
+  const ascRashi = unknown ? moonR0 : rashiOf(asc);
   const rashiByPlanet = {};
   GRAHAS.forEach(g => rashiByPlanet[g] = rashiOf(P[g]));
 
@@ -139,7 +159,7 @@ async function drawKundli(){
     const strong = (EXALT[g]===r) || (MOOLA[g]===r) || (OWN[g]||[]).includes(r);
     if(!strong) return;
     const hL = houseOf(ascRashi, lon), hM = houseOf(rashiOf(P.Moon), lon);
-    if(KENDRA.includes(hL)) mp.push(`${MAHAPURUSHA[g]} — ${g} in its own or exalted sign, in kendra house ${hL} from the lagna`);
+    if(!unknown && KENDRA.includes(hL)) mp.push(`${MAHAPURUSHA[g]} — ${g} in its own or exalted sign, in kendra house ${hL} from the lagna`);
     else if(KENDRA.includes(hM)) mp.push(`${MAHAPURUSHA[g]} — ${g} in its own or exalted sign, in kendra house ${hM} from the Moon`);
   });
 
@@ -148,6 +168,7 @@ async function drawKundli(){
   const tLords = [...new Set(TRIKONA.map(lordOfHouse))];
   const raja = [];
   kLords.forEach(k=>tLords.forEach(t=>{
+    if(unknown) return;   // houses are counted from the Moon here, not a lagna
     if(k===t) return;
     const kSign=rashiByPlanet[GRAHAS[k]], tSign=rashiByPlanet[GRAHAS[t]];
     if(kSign===tSign)
@@ -175,10 +196,16 @@ async function drawKundli(){
 
   box.innerHTML = `
     <div class="card">
-      <h3>Lagna</h3>
-      <div class="big">${RASHI[ascRashi]}</div>
-      <p class="muted">Ascendant at ${(asc%30).toFixed(2)}° of ${RASHI[ascRashi].split(' (')[0]} (sidereal, Lahiri), cast for ${p.name} (${p.lat}, ${p.lon}) at ${timeStr} local, UTC${off>=0?'+':''}${off}.</p>
-      <p class="muted">Tropical ascendant: ${RASHI[Math.floor(tropicalOf(asc,jd)/30)%12].split(' (')[0]} ${(tropicalOf(asc,jd)%30).toFixed(2)}° · Lagna lord: <strong>${GRAHAS[SIGN_LORD[ascRashi]]}</strong> · Moon ${RASHI[rashiOf(P.Moon)].split(' (')[0]}, ${NAK[b.nak]} pada ${b.pada}</p>
+      <h3>${unknown ? 'Moon sign (birth time not given)' : 'Lagna'}</h3>
+      <div class="big">${unknown
+        ? (moonMoves ? RASHI[moonR0].split(' (')[0]+' or '+RASHI[moonR1].split(' (')[0] : RASHI[ascRashi])
+        : RASHI[ascRashi]}</div>
+      ${ unknown
+        ? `<p class="muted"><strong>No ascendant is shown, because none can be known without a birth time.</strong> The lagna moves through a whole sign in about two hours, so any value here would be invented. Everything below is counted from the <strong>Moon</strong> instead, which is the classical fallback.${moonMoves ? ' The Moon changes sign during this day, so the house numbers below may shift by one — give an approximate time to narrow it.' : ''}</p>`
+        : `<p class="muted">Ascendant at ${(asc%30).toFixed(2)}° of ${RASHI[ascRashi].split(' (')[0]} (sidereal, Lahiri), cast for ${p.name} (${p.lat}, ${p.lon}) at ${timeStr} local, UTC${off>=0?'+':''}${off}.</p>` }
+      <p class="muted">${unknown
+        ? 'Lagna lord: not available'
+        : 'Tropical ascendant: '+RASHI[Math.floor(tropicalOf(asc,jd)/30)%12].split(' (')[0]+' '+(tropicalOf(asc,jd)%30).toFixed(2)+'° · Lagna lord: <strong>'+GRAHAS[SIGN_LORD[ascRashi]]+'</strong>'} · Moon ${RASHI[rashiOf(P.Moon)].split(' (')[0]}, ${NAK[b.nak]} pada ${b.pada}</p>
     </div>
     <div class="card">
       <h3>The nine grahas</h3>
@@ -186,7 +213,7 @@ async function drawKundli(){
         <tr class="muted"><td>Graha</td><td>Rashi</td><td>Deg</td><td>Nakshatra</td><td>House</td><td>from Moon</td><td>Dignity</td><td>Digbala</td><td>D9</td></tr>
         ${rows}
       </table>
-      <p class="muted" style="margin-top:10px">Sidereal positions, Lahiri ayanamsa (${ayanamsa(jd).toFixed(2)}°). D9 is the navamsa sign. House is from the lagna; "from Moon" is the reading to use when the birth time is uncertain.</p>
+      <p class="muted" style="margin-top:10px">Sidereal positions, Lahiri ayanamsa (${ayanamsa(jd).toFixed(2)}°). D9 is the navamsa sign. ${unknown ? '<strong>House is counted from the Moon</strong>, since there is no birth time.' : 'House is from the lagna; "from Moon" is the reading to use when the birth time is uncertain.'}</p>
     </div>
     <div class="card">
       <h3>Transits today</h3>
@@ -209,7 +236,8 @@ async function drawKundli(){
     <div class="card">
       <h3>Mangal dosha</h3>
       <table>
-        <tr><td class="k">Mars from the lagna</td><td>house ${fromL} — <span class="${bad.includes(fromL)?'no':'ok'}">${bad.includes(fromL)?'affected':'clear'}</span></td></tr>
+        ${unknown ? '<tr><td class="k">Mars from the lagna</td><td><span class="muted">not available without a birth time</span></td></tr>'
+                  : `<tr><td class="k">Mars from the lagna</td><td>house ${fromL} — <span class="${bad.includes(fromL)?'no':'ok'}">${bad.includes(fromL)?'affected':'clear'}</span></td></tr>`}
         <tr><td class="k">Mars from the Moon</td><td>house ${fromM} — <span class="${bad.includes(fromM)?'no':'ok'}">${bad.includes(fromM)?'affected':'clear'}</span></td></tr>
         <tr><td class="k">Mars from Venus</td><td>house ${fromV} — <span class="${bad.includes(fromV)?'no':'ok'}">${bad.includes(fromV)?'affected':'clear'}</span></td></tr>
       </table>
