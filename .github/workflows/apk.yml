@@ -24,7 +24,7 @@ jobs:
   publish-data:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Install generator dependencies
         run: python3 -m pip install --quiet numpy imageio-ffmpeg kalagana skyfield
@@ -120,7 +120,7 @@ jobs:
   build-apk:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
