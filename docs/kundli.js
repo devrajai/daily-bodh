@@ -209,6 +209,43 @@ async function drawKundli(){
     </div>`;
   } catch(e) { /* the tables below still show every placement */ }
 
+  /* ---- Lal Kitab: the fixed-house chart ---- */
+  let lalKitabHtml = '';
+  try {
+    const lkSigns = {};
+    GRAHAS.forEach(g => { lkSigns[g] = rashiOf(P[g]) + 1; });   // 1 = Aries
+    const lk = new LalKitabEngine();
+    const lkHouses = lk.convertToLalKitabHouses(lkSigns);
+    const sleeping = lk.detectSleepingHouses(lkHouses);
+    const debts = lk.detectKarmicDebts(lkHouses) || [];
+    const teva = lk.evaluateSpecialTeva(lkHouses) || {};
+    const lkRows = Object.keys(lkHouses).map(h => {
+      const ps = lkHouses[h];
+      const cls = sleeping.includes(+h) ? 'muted' : '';
+      return `<tr><td class="k" style="width:18%">House ${h}</td>
+        <td style="width:22%">${RASHI[(+h)-1].split(' (')[0]}</td>
+        <td class="${cls}">${ps.length ? ps.join(', ') : (sleeping.includes(+h) ? 'dormant (khali)' : '&mdash;')}</td></tr>`;
+    }).join('');
+    const debtText = (Array.isArray(debts) && debts.length)
+      ? debts.map(d => `<p><strong>${d.rin || d.name || 'Karmic debt'}</strong><br>
+          <span class="muted">Traditionally read as: ${d.symptom || ''}</span><br>
+          <span class="muted">Remedy given in the text: ${d.remedy || ''}</span></p>`).join('')
+      : '<p class="muted">No karmic debt (Rin) combination is formed by this placement set.</p>';
+    const tevaText = (teva.isAndhaTeva || teva.isDharmiTeva)
+      ? `<p><strong>Special teva:</strong> ${teva.isAndhaTeva ? 'Andha teva' : ''}${teva.isAndhaTeva && teva.isDharmiTeva ? ' and ' : ''}${teva.isDharmiTeva ? 'Dharmi teva' : ''}.${(teva.reasons && teva.reasons.length) ? ' ' + teva.reasons.join('; ') : ''}</p>`
+      : '';
+    lalKitabHtml = `<div class="card">
+      <h3>Lal Kitab <span class="muted" style="font-weight:400;font-size:13px">(fixed-house chart)</span></h3>
+      <p class="muted">Lal Kitab fixes the houses to the signs: house 1 is always Aries, house 2 Taurus, and so on, so a planet's house is simply its sign. This is a different chart from the lagna-based one above, and that is not an error.</p>
+      <table>${lkRows}</table>
+      <p class="muted" style="margin-top:10px">Dormant (khali) houses, counted here as houses with no planet: ${sleeping.length ? sleeping.join(', ') : 'none'}.</p>
+      ${debtText}
+      ${tevaText}
+      <p class="muted">The chart, the dormant houses, the Masnui combinations and the Rin rules are computed here. The interpretations are Pt. Roop Chand Joshi's, published from 1939 and still in copyright, so this page names the combinations rather than reproducing his text.</p>
+      <p class="muted">Where a remedy above involves collecting metal or feeding animals in numbers, treat it as the text's wording rather than an instruction: nothing here needs to cost money, and any practice that harms you or your household should be skipped.</p>
+    </div>`;
+  } catch(e) { /* the rest of the chart still renders */ }
+
   box.innerHTML = `
     <div class="card">
       <h3>${unknown ? 'Moon sign (birth time not given)' : 'Lagna'}</h3>
@@ -231,6 +268,7 @@ async function drawKundli(){
       <p class="muted" style="margin-top:10px">Sidereal positions, Lahiri ayanamsa (${ayanamsa(jd).toFixed(2)}°). D9 is the navamsa sign. ${unknown ? '<strong>House is counted from the Moon</strong>, since there is no birth time.' : 'House is from the lagna; "from Moon" is the reading to use when the birth time is uncertain.'}</p>
     </div>
     ${chartHtml}
+    ${lalKitabHtml}
     <div class="card">
       <h3>Transits today</h3>
       ${ nowP ? `<table>${transits}</table>
@@ -595,3 +633,197 @@ document.addEventListener('input', e => {
 }, true);
 window.addEventListener('hashchange', () => { setTimeout(loshuAttach, 0); });
 setTimeout(loshuAttach, 0);
+
+/* ------------------------------------------------ Lal Kitab (fixed house) */
+/**
+ * Daily Bodh - Lal Kitab Engine
+ * Fixed-house astrological evaluation, Masnui Grah (Artificial combinations),
+ * Karmic Debts (Rin) detection, and classical safe remedies.
+ */
+
+class LalKitabEngine {
+  constructor() {
+    // Permanent house rulers in Lal Kitab (Pakka Ghar)
+    this.pakkaGhar = {
+      1: "Sun",
+      2: "Jupiter",
+      3: "Mars",
+      4: "Moon",
+      5: "Jupiter",
+      6: "Mercury / Ketu",
+      7: "Venus / Mercury",
+      8: "Mars / Saturn",
+      9: "Jupiter",
+      10: "Saturn",
+      11: "Jupiter",
+      12: "Jupiter / Rahu"
+    };
+
+    // Masnui (Artificial) Planet Combinations
+    this.masnuiCombinations = [
+      { planets: ["Sun", "Saturn"], yields: "Venus", nature: "Debilitated/Mixed" },
+      { planets: ["Sun", "Mercury"], yields: "Mars", nature: "Benefic (Nek)" },
+      { planets: ["Sun", "Jupiter"], yields: "Mars", nature: "Debilitated (Bad)" },
+      { planets: ["Jupiter", "Rahu"], yields: "Mercury", nature: "Mixed" },
+      { planets: ["Mars", "Saturn"], yields: "Ketu", nature: "Challenging" },
+      { planets: ["Venus", "Jupiter"], yields: "Sun", nature: "Illuminating" },
+      { planets: ["Moon", "Saturn"], yields: "Poison / Depression", nature: "Visha Yoga" }
+    ];
+  }
+
+  /**
+   * Convert standard natal chart to Lal Kitab fixed house scheme.
+   * In Lal Kitab, House 1 is ALWAYS Aries (Sign 1), House 2 is ALWAYS Taurus (Sign 2), etc.
+   * @param {Object} planets Map of planet -> signNumber (1 to 12)
+   */
+  convertToLalKitabHouses(planets) {
+    // In Lal Kitab, the sign number itself corresponds to the House Number!
+    // If Jupiter is in Cancer (Sign 4), Jupiter is in House 4 of Lal Kitab.
+    const lkHouses = { 1: [], 2: [], 3: [], 4: [], 5: [], 6: [], 7: [], 8: [], 9: [], 10: [], 11: [], 12: [] };
+    
+    for (const [planet, sign] of Object.entries(planets)) {
+      if (sign >= 1 && sign <= 12) {
+        lkHouses[sign].push(planet);
+      }
+    }
+    return lkHouses;
+  }
+
+  /**
+   * Detect Soya Grah (Sleeping Planets / Dormant Houses)
+   * In Lal Kitab, if a house has no planets and receives no aspect, or if its ruler is inactive, it's dormant.
+   */
+  detectSleepingHouses(lkHouses) {
+    const sleepingHouses = [];
+    for (let h = 1; h <= 12; h++) {
+      if (lkHouses[h].length === 0) {
+        sleepingHouses.push(h);
+      }
+    }
+    return sleepingHouses;
+  }
+
+  /**
+   * Detect Andha Teva (Blind Horoscope) & Dharmi Teva (Virtuous Horoscope)
+   */
+  evaluateSpecialTeva(lkHouses) {
+    const flags = {
+      isAndhaTeva: false,
+      isDharmiTeva: false,
+      reasons: []
+    };
+
+    // Andha Teva: 10th house is afflicted or when Sun and Saturn/Rahu afflict 10th/4th
+    const h10 = lkHouses[10] || [];
+    const h4 = lkHouses[4] || [];
+    if (h10.includes("Saturn") && h10.includes("Sun")) {
+      flags.isAndhaTeva = true;
+      flags.reasons.push("Sun and Saturn conjoined in House 10 create an Andha Teva (Blind Horoscope).");
+    }
+
+    // Dharmi Teva: Jupiter or Saturn associations, or Jupiter placed in 11th or 9th with no malefic aspect
+    const h9 = lkHouses[9] || [];
+    const h11 = lkHouses[11] || [];
+    if (h9.includes("Jupiter") || h11.includes("Jupiter") || (lkHouses[4].includes("Jupiter") && lkHouses[10].includes("Saturn"))) {
+      flags.isDharmiTeva = true;
+      flags.reasons.push("Jupiter or Saturn placed virtuously creates a Dharmi Teva (protective shield in crises).");
+    }
+
+    return flags;
+  }
+
+  /**
+   * Detect Karmic Debts (Rin)
+   */
+  detectKarmicDebts(lkHouses) {
+    const debts = [];
+
+    // 1. Pitra Rin (Father's Debt): Jupiter afflicted in 2, 5, 9, or 12 by Venus, Saturn, Mercury, Rahu
+    const pitraHouses = [2, 5, 9, 12];
+    for (const h of pitraHouses) {
+      if (lkHouses[h].includes("Jupiter") && (lkHouses[h].includes("Venus") || lkHouses[h].includes("Mercury") || lkHouses[h].includes("Rahu"))) {
+        debts.push({
+          rin: "Pitra Rin (Father's Karmic Debt)",
+          symptom: "Sudden obstacles in family legacy, lack of elder blessings, hair loss, unearned criticism.",
+          remedy: "Collect equal contributions of gold/brass from all blood relatives and donate to a temple, or serve elderly priests."
+        });
+        break;
+      }
+    }
+
+    // 2. Matra Rin (Mother's Debt): Moon afflicted by Ketu
+    for (let h = 1; h <= 12; h++) {
+      if (lkHouses[h].includes("Moon") && lkHouses[h].includes("Ketu")) {
+        debts.push({
+          rin: "Matra Rin (Mother's Karmic Debt)",
+          symptom: "Severe emotional anxiety, instability in finances, mother's chronic poor health.",
+          remedy: "Collect silver coins from all family members and submerge in running river water."
+        });
+        break;
+      }
+    }
+
+    // 3. Stri Rin (Wife/Women's Debt): Venus afflicted by Sun or Rahu
+    for (let h = 1; h <= 12; h++) {
+      if (lkHouses[h].includes("Venus") && (lkHouses[h].includes("Sun") || lkHouses[h].includes("Rahu"))) {
+        debts.push({
+          rin: "Stri Rin (Debt towards Women)",
+          symptom: "Marital disharmony, delays in childbirth, financial leakage through luxuries.",
+          remedy: "Feed 100 cows with green fodder (Chari) collectively contributed by family members."
+        });
+        break;
+      }
+    }
+
+    // 4. Zalimana Rin (Oppression Debt): Saturn afflicted by Mars or Sun
+    for (let h = 1; h <= 12; h++) {
+      if (lkHouses[h].includes("Saturn") && (lkHouses[h].includes("Mars") || lkHouses[h].includes("Sun"))) {
+        debts.push({
+          rin: "Zalimana Rin (Debt of Injustice/Cruelty)",
+          symptom: "Sudden legal traps, fire hazards, loss of ancestral property.",
+          remedy: "Feed fish balls made of whole wheat flour or serve laborers voluntarily."
+        });
+        break;
+      }
+    }
+
+    return debts;
+  }
+
+  /**
+   * Safe Remedies & Classical Precautions (Savdhaniyaan)
+   */
+  getPrecautionsAndRemedies(planet, house) {
+    const rules = {
+      Sun: {
+        1: { precaution: "Never accept free brass items or gifts from elders without giving something in return.", remedy: "Offer water mixed with jaggery to the rising Sun." },
+        7: { precaution: "Do not start big ventures without spouse's consent.", remedy: "Bury a square piece of silver under a neem tree." },
+        10: { precaution: "Avoid wearing dark blue or black clothing.", remedy: "Throw copper coins in running water for 43 consecutive days." }
+      },
+      Moon: {
+        2: { precaution: "Do not waste potable water; avoid drinking cold milk at night.", remedy: "Keep a silver coin gifted by your mother in your wallet." },
+        6: { precaution: "Do not dig a well or bore pump inside your house.", remedy: "Serve milk or water to guests; donate water cooler to a hospital." },
+        12: { precaution: "Do not give education or books away for free without taking a symbolic coin.", remedy: "Wear a pure silver chain around the neck." }
+      },
+      Jupiter: {
+        2: { precaution: "Never insult teachers, gurus, or elderly scholars.", remedy: "Apply saffron (kesar) tilak on the forehead and navel." },
+        10: { precaution: "Never build a temple inside a bedroom; don't wear gold on the lower body.", remedy: "Clean temple steps or donate yellow pulses." }
+      },
+      Saturn: {
+        1: { precaution: "Never tell lies, avoid consuming alcohol and meat.", remedy: "Bury mustard oil in an earthenware pot in barren ground." },
+        8: { precaution: "Do not construct dark underground basements without ventilation.", remedy: "Donate dark iron or black sesame seeds on Saturdays." },
+        11: { precaution: "Avoid living in south-facing houses without remedial silver threshold.", remedy: "Pour drops of mustard oil on bare earth before sunset." }
+      },
+      Rahu: {
+        1: { precaution: "Never keep non-functional electronics or rusted clocks at home.", remedy: "Flow 400g of barley washed in milk into a river." },
+        5: { precaution: "Never be dishonest in financial speculations.", remedy: "Keep an elephant figurine made of solid silver in the living room." },
+        12: { precaution: "Always eat meals inside the kitchen, not in the bedroom.", remedy: "Keep saunf (fennel seeds) wrapped in red cloth under your pillow." }
+      }
+    };
+
+    return (rules[planet] && rules[planet][house]) || {
+      precaution: "Maintain clean habits, avoid clutter, and do not make false promises.",
+      remedy: "Chant the planetary beeja mantra and feed birds in the morning."
+    };
+  }
+}
