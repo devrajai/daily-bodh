@@ -1,0 +1,170 @@
+{
+ "title": "Doshas, dashas and remedies",
+ "intro": "What the classical texts actually say about each dosha, what is later practice, and what is modern invention. The calculations are exact; the meanings are the tradition's.",
+ "items": [
+  {
+   "id": "d-dasha",
+   "text": "The Vimshottari dasha system",
+   "summary_1line": "Nine periods totalling 120 years, fixed from the Moon's nakshatra",
+   "summary_2to3line": "Vimshottari assigns the whole of a life to a repeating cycle of nine planetary periods totalling 120 years. The starting point is the Moon's nakshatra at birth: each of the 27 nakshatras belongs to one of the nine lords, so the Moon's position fixes which period you are born into and how much of it is left.",
+   "bodh_3to4line": "Ketu 7, Venus 20, Sun 6, Moon 10, Mars 7, Rahu 18, Jupiter 16, Saturn 19, Mercury 17. The order is fixed and always runs Ketu, Venus, Sun, Moon, Mars, Rahu, Jupiter, Saturn, Mercury, then repeats.",
+   "tags": ["dasha"],
+   "steps": [
+    "A mahadasha is one of those nine long periods.",
+    "Inside every mahadasha the same nine lords run again as antardashas, each proportionally shorter: a lord's antardasha lasts mahadasha_years x its_years / 120.",
+    "Inside an antardasha the same logic gives a pratyantardasha.",
+    "This nesting is why a competent reading names a specific pair - 'Rahu mahadasha, Jupiter antardasha' - rather than just 'your Rahu period'.",
+    "A period is not an outcome. The tradition holds that its lord colours experience - its concerns and tone - modified by where that lord sits in your chart, how strong it is, and what it is associated with.",
+    "The same Saturn period is read very differently for two people, which is why a bare period name tells you almost nothing."
+   ]
+  },
+  {
+   "id": "d-nodes",
+   "text": "Rahu and Ketu periods",
+   "summary_1line": "The nodes own no sign, so they are judged differently",
+   "summary_2to3line": "Rahu and Ketu are calculated points - the lunar nodes - not physical planets, so the classical texts treat them differently from the seven. Both are read as agents of disruption and redirection rather than of steady gain.",
+   "bodh_3to4line": "Rahu (18 years) is associated with ambition, foreign things, technology, sudden expansion and obsession - the texts frame it as hunger that gives much and leaves the native wanting more. Ketu (7 years) is the shortest period and is associated with detachment, loss of interest, spiritual turn and completion: cutting away rather than adding.",
+   "tags": ["dasha"],
+   "steps": [
+    "Because neither owns a sign, their periods are judged almost entirely by the house they occupy, their nakshatra, and the planets they are with or aspected by.",
+    "A Rahu period in the 10th house of a strong chart reads very differently from one in the 6th.",
+    "Antardashas inside a node period carry the detail: a Rahu mahadasha with a Jupiter antardasha is read quite differently from the same mahadasha with a Mars antardasha."
+   ]
+  },
+  {
+   "id": "d-sadesati",
+   "text": "Sade Sati - what it actually means",
+   "summary_1line": "Saturn transiting the 12th, 1st and 2nd from your Moon",
+   "summary_2to3line": "Sade Sati is not a dosha in the chart. It is a transit: the period in which Saturn passes through the sign before your natal Moon, your Moon sign itself, and the sign after it. 'Sade' means seven-and-a-half, roughly how long the whole passage takes.",
+   "bodh_3to4line": "The popular framing - seven and a half years of disaster - is a distortion. What the texts describe is pressure and maturation, not misfortune. Saturn is the planet of time, discipline and limitation; its transit is read as forcing consolidation. Severity depends on Saturn's strength in your own chart, which is why a bare 'you have Sade Sati' tells you almost nothing.",
+   "tags": ["dosha"],
+   "steps": [
+    "First phase: Saturn in the 12th from the Moon, about 2.5 years - expense, sleep disturbance, background worry, letting go.",
+    "Second phase, the peak: Saturn in the Moon sign, about 2.5 years - pressure on the self, health, confidence and the mind.",
+    "Third phase: Saturn in the 2nd from the Moon, about 2.5 years - family, money and speech; rebuilding after the peak.",
+    "Most people pass through Sade Sati two or three times in a normal life, because Saturn takes about 29.5 years to go round the zodiac. It is not a rare affliction.",
+    "Dhaiya (small panoti) is the shorter version: Saturn transiting the 4th or 8th from the Moon, lasting about 2.5 years.",
+    "Many traditional astrologers treat the second phase as the significant one and the first and third as comparatively mild.",
+    "Remedies traditionally given: the Shani mantra 'Om sham shanaishcharaya namah' on Saturdays; the Hanuman Chalisa, the most widespread practice in north India; daan of black sesame, black cloth, iron or food to labourers; and service - the texts are insistent that Saturn is propitiated by work and by treating subordinates well, more than by ritual."
+   ]
+  },
+  {
+   "id": "d-kaalsarp",
+   "text": "Kaal Sarp dosha",
+   "summary_1line": "All seven planets on one side of the Rahu-Ketu axis - and not classical",
+   "summary_2to3line": "Kaal Sarp is said to occur when all seven classical planets lie on one side of the axis between Rahu and Ketu - hemmed between the two nodes. Take the nodes' longitudes (always 180 degrees apart); if every one of Sun, Moon, Mars, Mercury, Jupiter, Venus and Saturn falls in the same half of the zodiac, the condition is present.",
+   "bodh_3to4line": "Important: Kaal Sarp is not in the classical texts. It does not appear in the Brihat Parashara Hora Shastra, Varahamihira, or the older corpus; it became widespread in popular practice only in the twentieth century. Many serious astrologers reject it outright, on the grounds that requiring all seven planets in one half of the zodiac is a common configuration, not a rare affliction. Treat it as a modern popular idea, not scriptural authority.",
+   "tags": ["dosha"],
+   "steps": [
+    "The twelve types are named by the house Rahu occupies from the ascendant.",
+    "Rahu in the 1st: Anant. 2nd: Kulik. 3rd: Vasuki. 4th: Shankhpal. 5th: Padma. 6th: Mahapadma.",
+    "7th: Mahapadma. 8th: Takshak. 9th: Karkotak. 10th: Shankhachud. 11th: Ghatak. 12th: Sheshnag.",
+    "Remedies traditionally given: the Mahamrityunjaya mantra; 'Om ram rahave namah' on Saturdays; worship of Shiva and the Naga devatas, often on Nag Panchami; daan of black items.",
+    "Do not feed snakes. That is sometimes suggested and it is both illegal and dangerous."
+   ]
+  },
+  {
+   "id": "d-manglik",
+   "text": "Manglik (Mangal) dosha",
+   "summary_1line": "Mars in the 1st, 4th, 7th, 8th or 12th - with many cancellations",
+   "summary_2to3line": "Mars is called Mangal or Manglik. The dosha is said to occur when Mars occupies the 1st, 4th, 7th, 8th or 12th house - the houses linked to marriage and its stability - counted from the ascendant, from the Moon, or from Venus. Different schools use different reference points, which is why two astrologers can disagree about whether you have it.",
+   "bodh_3to4line": "The 1st is the self, the 4th domestic happiness, the 7th the spouse, the 8th the length of the marriage, and the 12th loss. Mars is heat, conflict and separation; placed in those houses it is read as bringing friction to married life. But the texts give many cancellations, and in practice they fire far more often than popular matching admits. Manglik is the most common reason given for rejecting a match, and a large share of those verdicts are overstated.",
+   "tags": ["dosha"],
+   "steps": [
+    "Cancellation 1: Mars in its own sign, Aries or Scorpio.",
+    "Cancellation 2: Mars in its exaltation sign, Capricorn.",
+    "Cancellation 3: Mars in the 1st in Aries, the 4th in Scorpio, the 7th in Capricorn, or the 8th in Cancer.",
+    "Cancellation 4: Mars aspected by, or conjunct, Jupiter.",
+    "Cancellation 5: Mars in Leo or Aquarius, according to some schools.",
+    "Cancellation 6: when the condition applies from the Moon but not the ascendant, many astrologers halve its weight.",
+    "Ask which reference point and which cancellation rules the astrologer is using. A good one will tell you."
+   ]
+  },
+  {
+   "id": "d-pitru",
+   "text": "Pitru dosha",
+   "summary_1line": "Ancestral obligation showing in the chart - and a common guilt lever",
+   "summary_2to3line": "Pitru dosha is the claim that ancestral displeasure - typically unperformed shraddha and tarpan for deceased ancestors - shows in a chart and obstructs the native's children, career or peace. There is no single agreed rule; traditions differ widely.",
+   "bodh_3to4line": "Pitru dosha is frequently used as a guilt lever - 'your ancestors are unhappy, so you must pay for this shraddha'. The traditional remedy is a religious duty performed for its own sake, not a purchase. If a family has not performed shraddha, doing so is a reasonable act of remembrance regardless of any chart.",
+   "tags": ["dosha"],
+   "steps": [
+    "The combinations most often cited: the Sun afflicted by Rahu, Ketu or Saturn, especially in the 9th house (father, dharma) or the 5th (children).",
+    "The 9th house or its lord afflicted, with no benefic aspect.",
+    "The 5th house or its lord afflicted, particularly by the nodes.",
+    "Rahu in the 9th, or the Sun conjunct Rahu in any house.",
+    "Remedies: perform shraddha in Pitru Paksha, the waning fortnight of Bhadrapada (September-October), ideally on the tithi of the parent's death.",
+    "Offer tarpan - water with black sesame - daily or on the relevant tithi, facing south.",
+    "Feed crows, dogs and the poor; give food to those in need.",
+    "Recite the Pitru Sukta (Rigveda 10.14) or the Mahamrityunjaya mantra.",
+    "Serve living parents and elders - the texts are blunt that this outweighs ritual for the dead."
+   ]
+  },
+  {
+   "id": "d-remedies",
+   "text": "Remedies and puja, step by step",
+   "summary_1line": "The standard household forms, with safety rules",
+   "summary_2to3line": "These are the standard forms as practised in most Indian households. Regional and family traditions differ, and a family priest's instruction should take precedence over anything here.",
+   "bodh_3to4line": "Safety rule for every remedy here: none requires spending significant money, buying a gemstone, fasting in a way that harms you, stopping any medical treatment, or taking on debt. Any practice that does is not what the texts describe. Fasting should be skipped entirely if you are pregnant, diabetic, on medication, or unwell.",
+   "tags": ["remedy"],
+   "steps": [
+    "Saturday practice for Saturn: bathe and wear clean clothes, ideally dark blue or black.",
+    "Light a mustard-oil lamp before Hanuman or Shani at sunrise or dusk.",
+    "Offer black sesame, mustard oil, or black cloth.",
+    "Recite the Hanuman Chalisa, or 'Om sham shanaishcharaya namah' 108 times on a mala.",
+    "Give food, clothing or money to a labourer, sweeper or poor household - the giving is the operative part, not the amount.",
+    "Rahu and Ketu: light a lamp before Shiva or Durga; recite 'Om ram rahave namah' or 'Om kem ketave namah' 108 times; offer black sesame (Rahu) or white sesame and coconut (Ketu); feed stray dogs (Ketu) or birds (Rahu); avoid intoxicants during the observance.",
+    "Mangal: light a lamp before Hanuman or Kartikeya on a Tuesday; recite the Hanuman Chalisa or 'Om angarakaya namah' 108 times; offer red flowers, jaggery or red masoor dal; give red cloth or jaggery to someone in need; avoid conflict and harsh speech on the day - the classical remedy for Mars is conduct, not ritual.",
+    "Pitru: face south and offer water with black sesame in the morning; light a lamp and offer food to a crow, a dog, or a poor person; perform shraddha in Pitru Paksha on the correct tithi; serve your living parents and elders."
+   ]
+  },
+  {
+   "id": "d-loshu",
+   "text": "Lo Shu grid numerology",
+   "summary_1line": "A 3x3 magic square; the birth digits placed in it",
+   "summary_2to3line": "The Lo Shu square is a 3x3 magic square in which every row, column and diagonal sums to 15. In the numerology tradition derived from it, the digits of a birth date are placed in the grid and the resulting pattern - which numbers appear, how often, and which are missing - is read as a character map.",
+   "bodh_3to4line": "The square is fixed and does not change. Top row 4, 9, 2. Middle row 3, 5, 7. Bottom row 8, 1, 6. Repeated numbers are read as a strengthened quality; missing numbers as qualities to be developed, not as deficiencies to be feared. A missing 8 is not 'no money'. The centre, 5, is read as the self and given particular weight.",
+   "tags": ["numerology"],
+   "steps": [
+    "Write the birth date as digits: day, month, year. For 15 March 1990 that is 1, 5, 0, 3, 1, 9, 9, 0.",
+    "Drop the zeros - they carry no position in this tradition.",
+    "Place each remaining digit in its square on the grid, one mark per occurrence.",
+    "Read the result: which squares are empty, which have one number, which have two or three.",
+    "Number themes: 1 self and leadership. 2 partnership and sensitivity. 3 expression and creativity. 4 structure and work. 5 change, freedom, the centre. 6 home, family, care. 7 analysis and introspection. 8 material affairs and authority. 9 completion and letting go.",
+    "The Lo Shu square is a genuine old mathematical object and the grid method is a coherent system, but it is not a predictive tool and has no evidential basis. Treat the reading as a structured prompt for reflection."
+   ]
+  },
+  {
+   "id": "d-panchak",
+   "text": "Panchak",
+   "summary_1line": "The Moon in the last five nakshatras, about five days a month",
+   "summary_2to3line": "Panchak means 'the group of five'. It is the period when the Moon transits the last five nakshatras of the zodiac - from the second half of Dhanishta through Revati. The Moon takes roughly one day per nakshatra, so a Panchak lasts about five days and recurs about once a month.",
+   "bodh_3to4line": "Panchak is not uniformly inauspicious. Several traditions treat it as the correct time for certain acts, particularly the Panchak shanti rites and some forms of daan. The avoidances are specific, not general. It also illustrates why a tithi at midnight is not enough for a festival date: many observances are tied to sunrise or to a specific moment in the day.",
+   "tags": ["panchang"],
+   "steps": [
+    "The five nakshatras: Dhanishta (2nd half) - avoid roofing and buying land.",
+    "Shatabhisha - inauspicious for some cremation-ground rites.",
+    "Purva Bhadrapada - avoid south-facing construction.",
+    "Uttara Bhadrapada - avoid bed-making and sleep-related rites.",
+    "Revati - avoid fire rites and cremation.",
+    "Generally avoided: starting construction, buying land or cots, marriage and naming ceremonies in most traditions, and travel to the south in some regions.",
+    "Panchak depends on the Moon's sidereal longitude, so it can be computed exactly for any date from the same ephemeris that draws the chart."
+   ]
+  },
+  {
+   "id": "d-limits",
+   "text": "What this does not claim",
+   "summary_1line": "Read this before acting on any of the above",
+   "summary_2to3line": "The classification tables here are the common classical material described in the Parashari corpus, described and never reproduced from any modern translation. The dasha arithmetic has been checked against an independent reference implementation over a 729-pair sweep. Sade Sati, Manglik and Panchak are standard traditional practice. Kaal Sarp is not classical. The Lo Shu material is modern numerological tradition, not Vedic.",
+   "bodh_3to4line": "Nothing here claims that any placement causes any event - the tradition offers tendencies and themes, not outcomes. No remedy replaces medical, legal or financial advice. The birth time cannot be guessed: the ascendant moves through a whole sign in about two hours, so without a time no ascendant can be known. And the classical texts do not say what popular astrology says they say - Kaal Sarp and the Manglik cancellations are the clearest cases.",
+   "tags": ["caveat"],
+   "steps": [
+    "On the Brihat Parashara Hora Shastra: the version in common circulation has 97 chapters, which is R. Santhanam's 1984 numbering.",
+    "J. Gonda dates the first part to roughly 600-750 CE, deeply indebted to Varahamihira's earlier Brihat Jataka.",
+    "Bhattotpala, writing around 900 CE, recorded that he had heard of the text but had never seen it. It appears to have been lost for about nine hundred years; manuscripts re-emerged only in the early twentieth century.",
+    "No ancient commentary exists. Sitaram Jha's 1944 edition reportedly admitted altering the manuscript.",
+    "So when a modern book says 'Parashara says', it is usually quoting a twentieth-century reconstruction of a text whose early history is genuinely uncertain. Treat these rules as the living tradition's, not as verbatim ancient authority.",
+    "One last thing: a reading that frightens you in order to sell you something is not doing what these texts describe. You are entitled to ask any astrologer which source and which school they use, and to walk away from one who will not say."
+   ]
+  }
+ ]
+}
