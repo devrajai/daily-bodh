@@ -27,7 +27,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install generator dependencies
-        run: python3 -m pip install --quiet numpy imageio-ffmpeg kalagana
+        run: python3 -m pip install --quiet numpy imageio-ffmpeg kalagana skyfield
 
       - name: Fetch the public-domain Gita source data
         run: |
@@ -58,10 +58,17 @@ jobs:
           python3 tools/build_moonstars.py --out app/src/main/assets/content/moonstars.json \
             --from 1930 --to 2035
 
+      - name: Fetch the JPL DE421 kernel
+        run: |
+          # Build-time only. DE421 is the same JPL data Horizons serves; the app
+          # and website stay offline because nothing is fetched at runtime.
+          curl -fsSL -o de421.bsp https://ssd.jpl.nasa.gov/ftp/eph/planets/bsp/de421.bsp
+          ls -la de421.bsp
+
       - name: Generate the graha ephemeris
         run: |
           python3 tools/build_ephemeris.py --out app/src/main/assets/content/ephemeris.json \
-            --from 1930 --to 2035
+            --from 1930 --to 2035 --kernel de421.bsp
 
       - name: Publish the content for the website
         run: python3 tools/publish_web_data.py --src app/src/main/assets/content --dst docs/data
