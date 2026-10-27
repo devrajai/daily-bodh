@@ -276,6 +276,7 @@ async function renderJyotish(){
   if(!s.dataset.built){
     const J = await data('jyotish.json');
     const S = await data('sources.json');
+    const D = await data('doshas.json');
     s.innerHTML = `<h2>Jyotish</h2>
       <p class="lead">${J.description||''}</p><div class="card" id="jy"></div>
 
@@ -312,7 +313,12 @@ async function renderJyotish(){
         <h3>${S.howto.title}</h3>
         ${S.howto.points.map(p=>`<p style="margin:9px 0">${p}</p>`).join('')}
       </div>
-      <div class="warn">${S.howto.note}</div>`;
-    packList(J.items, $('#jy')); s.dataset.built='1';
+      <div class="warn">${S.howto.note}</div>
+
+      <h2 style="margin-top:34px">${D.title}</h2>
+      <p class="lead">${D.intro}</p>
+      <div class="card" id="dh"></div>`;
+    packList(J.items, $('#jy'));
+    packList(D.items, $('#dh')); s.dataset.built='1';
   }
 }
