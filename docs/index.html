@@ -110,7 +110,6 @@
   .item .b{display:none;margin-top:6px;color:#333;font-size:14.5px}
   .item.open .b{display:block}
   .warn{background:#fff8ec;border:1px solid #f0dcc0;border-radius:12px;padding:12px;font-size:13px;color:#5c4a2e;margin:14px 0 0}
-  footer{max-width:1000px;margin:0 auto;padding:0 16px 40px;color:var(--muted);font-size:12.5px}
 </style>
 </head>
 <body>
@@ -141,7 +140,6 @@
   <section id="jyotish" role="tabpanel" tabindex="0"></section>
   <section id="reading" role="tabpanel" tabindex="0"></section>
 </main>
-<footer><span id="footer-meta"></span></footer>
 
 <script src="chart.js"></script>
 <script src="kundli.js"></script>
@@ -744,12 +742,6 @@ window.addEventListener('hashchange',()=>{
   const id=(location.hash||'#panchang').slice(1);
   if(TABS.some(t=>t[0]===id)) show(id);
 });
-data('metadata.json').then(m => {
-  if(m && m.generated) {
-    const d = new Date(m.generated);
-    $('#footer-meta').innerHTML = '<br>Data generated on: ' + d.toLocaleDateString() + ' ' + d.toLocaleTimeString();
-  }
-}).catch(()=>{});
 </script>
 </body>
 </html>
