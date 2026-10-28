@@ -12,6 +12,62 @@ async function places(){
   return PLACES;
 }
 
+/* ------------------------------------------------- the place gazetteer
+   558,000 villages from GeoNames (CC BY 4.0), split by state and name prefix
+   so the browser loads one small file rather than four megabytes. The manifest
+   maps every prefix to its file; we load the longest prefix the query starts
+   with, then filter in memory. */
+let PMAN = null, PSEL = null, PCHUNK = null, PCHUNKFILE = '';
+
+async function placeManifest(){
+  if(!PMAN) PMAN = await data('places/manifest.json');
+  return PMAN;
+}
+
+async function placeSearch(){
+  const M = await placeManifest();
+  const code = $('#kstate').value;
+  const q = ($('#kq').value || '').trim();
+  const out = $('#kres');
+  const st = M.states[code];
+  if(!st){ out.innerHTML = ''; return; }
+  if(q.length < 2){
+    out.innerHTML = '<span class="muted">' + st.name + ': ' + st.count.toLocaleString() +
+      ' places. Type two or more letters.</span>';
+    return;
+  }
+  const s = q.toLowerCase().replace(/[^a-z0-9]/g, '');
+  const byPrefix = {};
+  st.chunks.forEach(c => { byPrefix[c.p] = c.f; });
+  let file = null;
+  for(let len = Math.min(4, s.length); len >= 1; len--){
+    if(byPrefix[s.slice(0, len)]){ file = byPrefix[s.slice(0, len)]; break; }
+  }
+  if(!file){ out.innerHTML = '<span class="muted">No match in this state.</span>'; return; }
+  if(PCHUNKFILE !== file){
+    PCHUNK = await data('places/' + file);
+    PCHUNKFILE = file;
+  }
+  const ql = q.toLowerCase();
+  const hits = PCHUNK.filter(r => r[0].toLowerCase().indexOf(ql) >= 0).slice(0, 25);
+  if(!hits.length){ out.innerHTML = '<span class="muted">No match. Try fewer letters.</span>'; return; }
+  out.innerHTML = hits.map((r, i) =>
+    `<div data-p="${i}" style="cursor:pointer;padding:7px 0;border-top:1px solid var(--line)">
+       <strong>${r[0]}</strong> <span class="muted">${r[1].toFixed(2)}, ${r[2].toFixed(2)}</span></div>`
+  ).join('') + '<p class="muted" style="margin-top:6px">Tap a place to use it.</p>';
+  out.querySelectorAll('[data-p]').forEach(n => {
+    n.onclick = () => {
+      const r = hits[+n.dataset.p];
+      PSEL = {name: r[0], lat: r[1], lon: r[2],
+              offset: parseFloat($('#ko').value) || 5.5, state: st.name};
+      $('#kq').value = r[0];
+      out.innerHTML = '<strong>Selected:</strong> ' + r[0] + ', ' + st.name +
+        ' &mdash; ' + r[1] + ', ' + r[2];
+      drawKundli();
+    };
+  });
+}
+
 /* ------------------------------------------------- western aspects + vargas */
 const ASPECTS = [["Conjunction",0,8],["Opposition",180,8],["Trine",120,7],
                  ["Square",90,7],["Sextile",60,5]];
@@ -33,7 +89,8 @@ const tropicalOf = (lon, jd) => norm360(lon + ayanamsa(jd));
 
 async function renderKundli(){
   const s = $('#kundli');
-  const P = await places();
+  const M = await placeManifest();
+  if(!PSEL) PSEL = {name:'Delhi', lat:28.6139, lon:77.209, offset:5.5, state:'Delhi'};
   if(!s.dataset.built){
     s.innerHTML = `
       <h2>Kundli</h2>
@@ -50,19 +107,22 @@ async function renderKundli(){
           </label>
         </div>
         <div class="row">
-          <div><label>Place</label><select id="kp">${P.map((p,i)=>`<option value="${i}">${p.name}</option>`).join('')}</select></div>
+          <div><label>State</label><select id="kstate">${M.states ? Object.keys(M.states).map(c=>`<option value="${c}">${M.states[c].name}</option>`).join('') : ''}</select></div>
+          <div><label>Place</label><input id="kq" placeholder="Village, town or city" autocomplete="off"></div>
+        </div>
+        <div id="kres" style="font-size:14px;margin-top:8px"></div>
+        <div class="row">
           <div><label>UTC offset (hours)</label><input type="number" id="ko" step="0.25" value="5.5"></div>
         </div>
         <button class="go" id="kgo">Cast the chart</button>
       </div>
       <div id="kout"></div>
-      <div class="warn">The ascendant needs an exact birth time — a few minutes moves it. If the time is a guess, read the chart from the Moon instead, which is what the "from Moon" column is for. Planets are interpolated between noon positions, so a fast-moving Moon can be a fraction of a degree out.</div>
+      <div class="warn">The ascendant needs an exact birth time — a few minutes moves it. If the time is a guess, read the chart from the Moon instead, which is what the "from Moon" column is for. Planets are interpolated between noon positions, so a fast-moving Moon can be a fraction of a degree out. Place data: GeoNames, CC BY 4.0.</div>
     `;
     s.dataset.built='1';
-    $('#kp').addEventListener('change',()=>{
-      const p = PLACES[+$('#kp').value];
-      $('#ko').value = p.offset;
-    });
+    $('#kstate').addEventListener('change', placeSearch);
+    $('#kq').addEventListener('input', placeSearch);
+    placeSearch();
     $('#kgo').addEventListener('click', drawKundli);
     $('#kd').addEventListener('change', drawKundli);
     $('#kt').addEventListener('change', drawKundli);
@@ -77,7 +137,8 @@ async function drawKundli(){
   const unknown = !!(document.getElementById('kunknown') && document.getElementById('kunknown').checked);
   const timeStr = unknown ? '12:00' : ($('#kt').value || '12:00');
   const off = parseFloat($('#ko').value) || 0;
-  const p = (await places())[+$('#kp').value];
+  const p = PSEL;
+  if(!p){ box.innerHTML = '<p class="muted">Choose a place above first.</p>'; return; }
   if(!dateStr){ box.innerHTML=''; return; }
   box.innerHTML = '<p class="muted">Casting…</p>';
 
@@ -270,7 +331,7 @@ async function drawKundli(){
         : RASHI[ascRashi]}</div>
       ${ unknown
         ? `<p class="muted"><strong>No ascendant is shown, because none can be known without a birth time.</strong> The lagna moves through a whole sign in about two hours, so any value here would be invented. Everything below is counted from the <strong>Moon</strong> instead, which is the classical fallback.${moonMoves ? ' The Moon changes sign during this day, so the house numbers below may shift by one — give an approximate time to narrow it.' : ''}</p>`
-        : `<p class="muted">Ascendant at ${(asc%30).toFixed(2)}° of ${RASHI[ascRashi].split(' (')[0]} (sidereal, Lahiri), cast for ${p.name} (${p.lat}, ${p.lon}) at ${timeStr} local, UTC${off>=0?'+':''}${off}.</p>` }
+        : `<p class="muted">Ascendant at ${(asc%30).toFixed(2)}° of ${RASHI[ascRashi].split(' (')[0]} (sidereal, Lahiri), cast for ${p.name}${p.state ? ', '+p.state : ''} (${p.lat}, ${p.lon}) at ${timeStr} local, UTC${off>=0?'+':''}${off}.</p>` }
       <p class="muted">${unknown
         ? 'Lagna lord: not available'
         : 'Tropical ascendant: '+RASHI[Math.floor(tropicalOf(asc,jd)/30)%12].split(' (')[0]+' '+(tropicalOf(asc,jd)%30).toFixed(2)+'° · Lagna lord: <strong>'+GRAHAS[SIGN_LORD[ascRashi]]+'</strong>'} · Moon ${RASHI[rashiOf(P.Moon)].split(' (')[0]}, ${NAK[b.nak]} pada ${b.pada}</p>
@@ -338,7 +399,7 @@ async function drawKundli(){
       <h3>Panchadha maitri <span class="muted" style="font-weight:400;font-size:13px">(five-fold relationship)</span></h3>
       <p class="muted">${maitri.join(' · ')}</p>
     </div>
-    <div class="warn">No Shadbala, Ashtakavarga or the other divisional charts beyond D9 are computed — those are large tables I could not verify against an authoritative source from here, so the app leaves them out rather than guess. Everything on this page is computed in your browser from files bundled with the site: no API, no key, no account, no paid service.</div>
+    <div class="warn">No Shadbala, Ashtakavarga or the other divisional charts beyond D9 are computed — those are large tables I could not verify against an authoritative source from here, so the app leaves them out rather than guess. Everything on this page is computed in your browser from files bundled with the site: no API, no key, no account, no paid service. Place data: GeoNames, CC BY 4.0.</div>
   `;
 }
 
