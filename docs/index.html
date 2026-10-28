@@ -326,6 +326,8 @@ function pRow(k,v){ return v ? `<tr><td class="k">${k}</td><td>${v}</td></tr>` :
 async function renderPanchang(){
   const P = await data('panchang.json');
   const F = await data('festivals.json');
+  let RG = null;
+  try { RG = await data('retrograde.json'); } catch(e) { /* optional */ }
   const s = $('#panchang');
   const day = s.dataset.date || iso(today());
   const d = P.days.find(x=>x.d===day);
@@ -360,6 +362,25 @@ async function renderPanchang(){
       </table>
       <p class="muted" style="margin-top:10px">Rahu kalam, Yamaganda and Gulika are the windows traditionally avoided for new starts.</p>
     </div>` : '' }
+    ${ RG ? (() => {
+      const todayIso = iso(today());
+      const rows = [];
+      Object.keys(RG.retrograde).forEach(b => {
+        const w = RG.retrograde[b];
+        const now = w.find(x => x[0] <= todayIso && todayIso <= x[1]);
+        const next = w.find(x => x[0] > todayIso);
+        if(now) rows.push([b, 'Retrograde now', now[0] + ' to ' + now[1], now[2], true]);
+        else if(next) rows.push([b, 'Next retrograde', next[0] + ' to ' + next[1], next[2], false]);
+      });
+      return `<div class="card">
+        <h3>Retrograde</h3>
+        <table>${rows.map(r => `<tr>
+          <td class="k" style="width:30%">${r[0]}</td>
+          <td style="width:32%">${r[4] ? '<span class="no">' + r[1] + '</span>' : '<span class="muted">' + r[1] + '</span>'}</td>
+          <td class="muted">${r[2]} <span class="muted">(${r[3]} days)</span></td></tr>`).join('')}</table>
+        <p class="muted" style="margin-top:10px">Computed from the same ephemeris that draws the charts: a planet is retrograde on any day its longitude decreases. Mercury retrogrades about three times a year for roughly three weeks; the outer planets for months.</p>
+      </div>`;
+    })() : '' }
     <div class="card">
       <h3>Festivals ahead</h3>
       ${upcoming.map(f=>`<div style="padding:5px 0"><span class="pill">${f.d}</span> ${f.n}${f.k?` <span class="muted">· ${f.k}</span>`:''}</div>`).join('')}
