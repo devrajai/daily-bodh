@@ -246,6 +246,22 @@ async function drawKundli(){
     </div>`;
   } catch(e) { /* the rest of the chart still renders */ }
 
+  /* ---- Sade Sati windows (computed from this same ephemeris) ---- */
+  let sadeWindow = '';
+  try {
+    const SAD = await data('sadesati.json');
+    const moonSign = rashiOf(P.Moon);
+    const wins = (SAD.windows && SAD.windows[String(moonSign)]) || [];
+    const nowIso = iso(today());
+    const cur = wins.find(w => w[0] <= nowIso && nowIso <= w[1]);
+    const next = wins.find(w => w[0] > nowIso);
+    const fmt = w => `<strong>${w[0]}</strong> to <strong>${w[1]}</strong> (${w[2]} years)`;
+    if(cur) sadeWindow = `<p><strong>This window:</strong> ${fmt(cur)}. You are inside it now.</p>`;
+    else if(next) sadeWindow = `<p><strong>Next window:</strong> ${fmt(next)}.</p>`;
+    else sadeWindow = '<p class="muted">No Sade Sati window falls in the bundled range for this Moon sign.</p>';
+    sadeWindow += `<p class="muted">Counted from a Moon in ${RASHI[moonSign].split(' (')[0]}. Short windows of a few months are brief retrograde re-entries, not separate periods. Windows that touch 1930 or 2035 are cut by the data range.</p>`;
+  } catch(e) { /* the status line above still shows */ }
+
   box.innerHTML = `
     <div class="card">
       <h3>${unknown ? 'Moon sign (birth time not given)' : 'Lagna'}</h3>
@@ -309,6 +325,7 @@ async function drawKundli(){
         ? `<span class="no">Running</span> — Saturn is in house ${sade.house} from the natal Moon.`
         : `<span class="ok">Not running</span> — Saturn is in house ${sade.house} from the natal Moon (Sade Sati is houses 12, 1 and 2).` }</p>
         <p class="muted">Saturn today: ${RASHI[sade.satRashi].split(' (')[0]}.</p>` : '' }
+      ${sadeWindow}
     </div>
     <div class="card">
       <h3>Yogas found</h3>
