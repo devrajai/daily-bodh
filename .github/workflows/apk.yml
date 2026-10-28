@@ -2,8 +2,8 @@ name: Build APK
 
 # Builds both flavours on GitHub's runners, generates every derived asset (the Gita
 # pack, the temple tones, the reference packs, the shastra and jyotish libraries,
-# the panchang family and the graha ephemeris), publishes that content into
-# docs/data/ for the website, and stages the APKs.
+# the panchang family, the graha ephemeris and the place gazetteer), publishes
+# that content into docs/data/ for the website, and stages the APKs.
 #
 # It deliberately does NOT build a source archive: a `git archive` of HEAD
 # contains the previous archive, so it grew on every run until it passed
@@ -72,6 +72,14 @@ jobs:
 
       - name: Publish the content for the website
         run: python3 tools/publish_web_data.py --src app/src/main/assets/content --dst docs/data
+
+      - name: Build the place gazetteer (GeoNames, CC BY 4.0)
+        run: |
+          # Village-level coordinates, split by state and name prefix so the
+          # browser loads one small file instead of 4 MB. Build-time only:
+          # GitHub's runners can reach GeoNames, and the site stays offline.
+          python3 tools/build_places.py --out docs/data/places
+          du -sh docs/data/places
 
       - name: Stage the update manifest
         run: |
