@@ -1,84 +1,17 @@
-name: Build APK
-
-# Builds both flavours on GitHub's runners, generates every derived asset (the Gita
-# pack, the temple tones, the reference packs, the shastra and jyotish libraries,
-# the panchang family, the graha ephemeris, the retrograde calendar and the place
-# gazetteer), publishes that content into docs/data/ for the website, and stages
-# the APKs.
-#
-# It deliberately does NOT build a source archive: a `git archive` of HEAD
-# contains the previous archive, so it grew on every run until it passed
-# GitHub's 100 MB per-file limit and the push was rejected. The repository is
-# itself the source, and GitHub offers "Download ZIP" on the repo page.
-
-on:
-  push:
-    branches: [ main ]
-    paths-ignore:
-      - 'docs/**'          # the publish step touches docs/ only, so this avoids a loop
-  workflow_dispatch:
-
-permissions:
-  contents: write
-
-jobs:
-  publish-data:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install generator dependencies
-        run: python3 -m pip install --quiet numpy imageio-ffmpeg kalagana skyfield
-
-      - name: Fetch the public-domain Gita source data
-        run: |
-          mkdir -p /tmp/gitasrc
-          for f in verse.json translation.json chapters.json; do
-            curl -fsSL "https://raw.githubusercontent.com/gita/gita/main/data/$f" -o "/tmp/gitasrc/$f"
-          done
-
-      - name: Generate the full Gita pack (18 chapters, 701 shlokas)
-        run: python3 tools/build_gita.py --src /tmp/gitasrc --out app/src/main/assets/content/gita.json
-
-      - name: Generate the bundled temple tones
-        run: python3 tools/make_sounds.py --out app/src/main/assets/sounds
-
-      - name: Generate the reference packs (numerology, palmistry, Lal Kitab)
-        run: python3 tools/author_reference.py --out app/src/main/assets/content
-
-      - name: Generate the shastra library
-        run: python3 tools/author_shastra.py --out app/src/main/assets/content
-
-      - name: Generate the Jyotish pack and the birth-place table
-        run: python3 tools/author_jyotish.py --out app/src/main/assets/content
-
-      - name: Generate panchang, festivals, rashifal and the Moon-star table
-        run: |
-          python3 tools/build_panchang.py --out app/src/main/assets/content \
-            --city Delhi --from 2026 --to 2031 --rashifal-daily-to 2028
-          python3 tools/build_moonstars.py --out app/src/main/assets/content/moonstars.json \
-            --from 1930 --to 2035
-
-      - name: Fetch the JPL DE421 kernel
-        run: |
-          # Build-time only. DE421 is the same JPL data Horizons serves; the app
-          # and website stay offline because nothing is fetched at runtime.
-          curl -fsSL -o de421.bsp https://ssd.jpl.nasa.gov/ftp/eph/planets/bsp/de421.bsp
-          ls -la de421.bsp
-
-      - name: Generate the graha ephemeris
-        run: |
-          python3 tools/build_ephemeris.py --out app/src/main/assets/content/ephemeris.json \
-            --from 1930 --to 2035 --kernel de421.bsp
-
-      - name: Publish the content for the website
-        run: python3 tools/publish_web_data.py --src app/src/main/assets/content --dst docs/data
-
       - name: Build the retrograde and combustion calendar
         run: |
           # Pure function of the ephemeris generated just above - no external source.
           python3 tools/build_retrograde.py --eph docs/data/ephemeris.json \
             --out docs/data/retrograde.json
+
+      - name: Fill festival-calendar gaps from the panchang
+        run: |
+          # kalagana's festival table has holes - Krishna Janmashtami was absent
+          # from 2026 entirely. Each missing entry is derived from the panchang
+          # by masa, paksha and tithi, so the date is computed rather than typed.
+          python3 tools/patch_festivals.py \
+            --festivals docs/data/festivals.json \
+            --panchang docs/data/panchang.json
 
       - name: Build the place gazetteer (GeoNames, CC BY 4.0)
         run: |
@@ -87,89 +20,3 @@ jobs:
           # GitHub's runners can reach GeoNames, and the site stays offline.
           python3 tools/build_places.py --out docs/data/places
           du -sh docs/data/places
-
-      - name: Stage the update manifest
-        run: |
-          set -e
-          mkdir -p docs/download
-          VCODE=$(grep -oE 'versionCode = [0-9]+' app/build.gradle.kts | grep -oE '[0-9]+' | head -1)
-          VNAME=$(grep -oE 'versionName = "[^"]+"' app/build.gradle.kts | sed 's/.*"\(.*\)"/\1/' | head -1)
-          APK_URL="https://github.com/devrajai/daily-bodh/releases/download/latest-build/DailyBodh-updater.apk"
-          printf '{"versionCode": %s, "versionName": "%s", "apk": "%s", "notes": "Daily Bodh %s"}\n' \
-            "$VCODE" "$VNAME" "$APK_URL" "$VNAME" > docs/download/latest.json
-          ls -la docs/download
-          cat docs/download/latest.json
-
-      - name: Publish generated assets and staged files
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A docs/data docs/download app/src/main/assets/content app/src/main/assets/sounds
-          echo "--- staged ---"
-          git status --short | head -40
-
-          # GitHub rejects any file over 100 MB and fails the whole push. Catch it
-          # here with a clear message instead, at a stricter 50 MB.
-          git diff --staged --name-only -z > /tmp/staged.z
-          big=""
-          while IFS= read -r -d '' f; do
-            if [ -f "$f" ]; then
-              s=$(stat -c%s "$f")
-              if [ "$s" -gt 52428800 ]; then big="$big  $f ($((s/1048576)) MB)\n"; fi
-            fi
-          done < /tmp/staged.z
-          if [ -n "$big" ]; then
-            printf 'Refusing to push - these staged files are too large:\n%b' "$big"
-            exit 1
-          fi
-
-          if git diff --staged --quiet; then
-            echo "nothing to publish"
-          else
-            git commit -m "Publish website content and generated assets [skip ci]"
-            # another run may have pushed while this one was building, so rebase first
-            git pull --rebase --autostash origin main || true
-            git push
-          fi
-
-  build-apk:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: '17'
-
-      - name: Prepare Android SDK
-        run: |
-          export ANDROID_HOME="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
-          echo "ANDROID_HOME=$ANDROID_HOME" >> "$GITHUB_ENV"
-          SDKM="$(command -v sdkmanager || echo "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager")"
-          echo "using $SDKM"
-          yes | "$SDKM" --licenses >/dev/null 2>&1 || true
-          "$SDKM" "platform-tools" "platforms;android-34" "build-tools;34.0.0"
-
-      - name: Build both flavours
-        run: |
-          chmod +x gradlew
-          ./gradlew assembleOfflineDebug assembleUpdaterDebug --no-daemon --stacktrace
-
-      - name: Stage the APKs
-        run: |
-          set -e
-          mkdir -p build-apks
-          cp app/build/outputs/apk/offline/debug/app-offline-debug.apk build-apks/DailyBodh-offline.apk
-          cp app/build/outputs/apk/updater/debug/app-updater-debug.apk build-apks/DailyBodh-updater.apk
-
-      - name: Attach APKs to a release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: latest-build
-          name: Latest build
-          body: "Automatically built debug APKs of Daily Bodh: the offline build and the updater build."
-          files: |
-            build-apks/DailyBodh-offline.apk
-            build-apks/DailyBodh-updater.apk
