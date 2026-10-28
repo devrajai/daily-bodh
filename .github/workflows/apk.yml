@@ -2,8 +2,9 @@ name: Build APK
 
 # Builds both flavours on GitHub's runners, generates every derived asset (the Gita
 # pack, the temple tones, the reference packs, the shastra and jyotish libraries,
-# the panchang family, the graha ephemeris and the place gazetteer), publishes
-# that content into docs/data/ for the website, and stages the APKs.
+# the panchang family, the graha ephemeris, the retrograde calendar and the place
+# gazetteer), publishes that content into docs/data/ for the website, and stages
+# the APKs.
 #
 # It deliberately does NOT build a source archive: a `git archive` of HEAD
 # contains the previous archive, so it grew on every run until it passed
@@ -72,6 +73,12 @@ jobs:
 
       - name: Publish the content for the website
         run: python3 tools/publish_web_data.py --src app/src/main/assets/content --dst docs/data
+
+      - name: Build the retrograde and combustion calendar
+        run: |
+          # Pure function of the ephemeris generated just above - no external source.
+          python3 tools/build_retrograde.py --eph docs/data/ephemeris.json \
+            --out docs/data/retrograde.json
 
       - name: Build the place gazetteer (GeoNames, CC BY 4.0)
         run: |
