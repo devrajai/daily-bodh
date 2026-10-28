@@ -74,6 +74,14 @@ jobs:
       - name: Publish the content for the website
         run: python3 tools/publish_web_data.py --src app/src/main/assets/content --dst docs/data
 
+      - name: Add samvat, moonrise and yoga end times to the panchang
+        run: |
+          python3 tools/build_panchang_extra.py \
+            --panchang docs/data/panchang.json \
+            --eph docs/data/ephemeris.json \
+            --kernel de421.bsp \
+            --out docs/data/panchang.json
+
       - name: Build the retrograde and combustion calendar
         run: |
           # Pure function of the ephemeris generated just above - no external source.
