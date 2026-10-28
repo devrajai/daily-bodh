@@ -110,6 +110,9 @@
   .item .b{display:none;margin-top:6px;color:#333;font-size:14.5px}
   .item.open .b{display:block}
   .warn{background:#fff8ec;border:1px solid #f0dcc0;border-radius:12px;padding:12px;font-size:13px;color:#5c4a2e;margin:14px 0 0}
+  .disclaimer{background:#f3eefc;border:1px solid #ddd0f5;border-radius:12px;
+    padding:11px 13px;font-size:12.5px;line-height:1.5;color:#4a3d63;margin:0 0 14px}
+  .disclaimer strong{color:#5b21b6}
 </style>
 </head>
 <body>
@@ -126,8 +129,30 @@
 <aside id="drawer" aria-label="Sections">
   <div class="dh">Sections</div>
   <nav id="tabs" role="tablist"></nav>
+  <div class="dfoot">
+    <strong style="color:var(--accent)">On the scope of this site.</strong>
+    Everything here is offered for study, cultural interest and personal reflection. Jyotisha,
+    numerology, palmistry and Lal Kitab are classical systems with their own internal logic,
+    literature and lineage; they are not modern science and do not need to be. What this site
+    computes is exact and reproducible. What it interprets is the tradition's reading of those
+    computations, and a competent astrologer may read the same chart differently. No reading here
+    determines your future, and nothing on this site will change your life on its own. Remedies are
+    religious practice, not treatment; none requires money, unsafe fasting, or stopping medical
+    care. For anything consequential, consult a doctor, a lawyer, a financial adviser, or an
+    astrologer trained in your own tradition.
+  </div>
 </aside>
 <main>
+  <div class="disclaimer">
+    <strong>A note before you read.</strong> Jyotisha is a classical Indian shastra &mdash; a body
+    of knowledge with its own methods, texts and rules of interpretation, refined over many
+    centuries and still taught in living lineages. It is a different order of knowledge from modern
+    empirical science, and this site does not offer it as a replacement for one. The astronomy here
+    is exact and checkable: JPL ephemeris, Lahiri ayanamsa, positions verified against NASA data.
+    The meanings drawn from those positions are the tradition's, and schools genuinely differ. Read
+    it as a disciplined lens for reflection, not as a forecast of events. Nothing here is medical,
+    legal or financial advice.
+  </div>
   <section id="panchang" role="tabpanel" tabindex="0"></section>
   <section id="horoscope" role="tabpanel" tabindex="0"></section>
   <section id="muhurat" role="tabpanel" tabindex="0"></section>
@@ -143,6 +168,7 @@
 
 <script src="chart.js"></script>
 <script src="kundli.js"></script>
+<script src="ask.js"></script>
 <script>
 /* ---------------------------------------------------------------- helpers */
 if ('serviceWorker' in navigator) {
