@@ -13,9 +13,11 @@
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
   body{background:var(--cream);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans",sans-serif;min-height:100vh;display:flex;flex-direction:column}
-  header{background:#4c1d95;color:#fff;padding:14px 16px 0;display:flex;align-items:flex-start;gap:10px}
-  #menu-btn{background:rgba(255,255,255,.16);border:0;color:#fff;font-size:19px;line-height:1;
-    padding:9px 12px;border-radius:10px;cursor:pointer;flex:0 0 auto}
+  header{background:#4c1d95;color:#fff;padding:14px 16px;display:flex;align-items:center;
+    justify-content:center;position:relative}
+  #menu-btn{position:absolute;left:14px;top:50%;transform:translateY(-50%);
+    background:rgba(255,255,255,.16);border:0;color:#fff;font-size:19px;line-height:1;
+    padding:9px 12px;border-radius:10px;cursor:pointer}
   #drawer{position:fixed;top:0;left:0;height:100%;width:282px;max-width:84vw;background:var(--card);
     transform:translateX(-102%);transition:transform .22s ease;z-index:60;overflow-y:auto;
     box-shadow:2px 0 18px rgba(40,20,70,.22)}
@@ -66,7 +68,7 @@
     td{padding:3px 1px}
     .card{padding:11px}
   }
-  .brand{display:flex;align-items:center;gap:10px;max-width:1000px;margin:0 auto}
+  .brand{display:flex;align-items:center;gap:10px;justify-content:center;margin:0 auto}
   .om{width:34px;height:34px;border-radius:9px;background:var(--accent);display:grid;place-items:center;font-size:19px}
   h1{font-size:19px;margin:0;font-weight:650;letter-spacing:.2px}
   .sub{font-size:12px;opacity:.72;margin-top:1px}
@@ -78,6 +80,10 @@
   main{flex:1;width:100%;max-width:1000px;margin:0 auto;padding:16px 16px 64px}
   section{display:none}
   section.on{display:block}
+  /* A focused <section tabindex="0"> drew the browser's black focus ring around
+     the whole panel. Remove it for mouse and touch, keep it for keyboard. */
+  section:focus{outline:none}
+  section:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:14px}
   .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin:0 0 12px}
   h2{font-size:20px;margin:4px 0 10px}
   h3{font-size:15px;margin:0 0 8px;font-weight:650}
@@ -121,9 +127,6 @@
 <aside id="drawer" aria-label="Sections">
   <div class="dh">Sections</div>
   <nav id="tabs" role="tablist"></nav>
-  <div class="dfoot">Everything is computed in your browser from files bundled with this site &mdash;
-    no server, no accounts, no tracking. Astronomy: JPL DE421. Places: GeoNames (CC BY 4.0).
-    Classical texts are described, never reproduced.</div>
 </aside>
 <main>
   <section id="panchang" role="tabpanel" tabindex="0"></section>
