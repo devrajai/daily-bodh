@@ -1,0 +1,47 @@
+name: Daily post
+
+# Builds tomorrow's post pack every night and commits it to docs/data/.
+# Kept in its own workflow so it never touches apk.yml.
+
+on:
+  schedule:
+    # 00:15 IST is 18:45 UTC the previous day
+    - cron: '45 18 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Build tomorrow's post pack
+        run: |
+          # Uses the panchang, festivals and weekly readings already committed
+          # by the main workflow. Nothing is downloaded from a third party.
+          python3 tools/build_daily_post.py \
+            --panchang docs/data/panchang.json \
+            --weekly docs/data/rashifal-weekly.json \
+            --festivals docs/data/festivals.json \
+            --out docs/data/daily-post.json
+
+      - name: Commit the post
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/data/daily-post.json
+          if git diff --staged --quiet; then
+            echo "nothing changed"
+          else
+            git commit -m "Daily post for $(date -d '+1 day' +%Y-%m-%d) [skip ci]"
+            git pull --rebase --autostash origin main || true
+            git push
+          fi
