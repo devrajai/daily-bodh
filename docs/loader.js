@@ -38,6 +38,7 @@
     'cycles.js',               // Personal year, month, day and the week ahead
     'numbers-check.js',        // Mobile / vehicle / house number checker
     'numerology-classical.js', // Exaltation, odd/even, the friendly-enemy paradox
+    'numerology-lenses.js',    // Cheiro beside Bullinger, same numbers
     'mount-guard.js'           // LAST: re-mounts anything a tab render wiped
   ];
 
