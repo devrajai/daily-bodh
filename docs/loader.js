@@ -41,6 +41,7 @@
     'cycles.js',                // Personal year, month, day and the week ahead
     'numbers-check.js',         // Mobile / vehicle / house number checker
     'number-compatibility.js',  // Compare two numbers, plus the 9x9 grid
+    'zodiac-compatibility.js',  // Compare two signs, plus the 144-pair grid
     'numerology-classical.js',  // Exaltation, odd/even, the friendly-enemy paradox
     'numerology-lenses.js',     // Cheiro beside Bullinger, same numbers
     'mount-guard.js'            // Very last: re-mounts anything a tab render wiped
