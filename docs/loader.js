@@ -18,17 +18,18 @@
   'use strict';
 
   var MODULES = [
-    'home.js',           // Today landing page (registers itself first)
-    'ask.js',            // Ask screen
-    'choghadiya.js',     // Choghadiya, Hora, Panchak on the Panchang tab
-    'rajju.js',          // Rajju and Vedha on the Matching screen
-    'vastu.js',          // Vastu reference tab
-    'weekly.js',         // This week's reading on the Horoscope tab
-    'timezone.js',       // Historical Indian UTC offset on the Kundli screen
-    'mulank.js',         // Mulank 1-9 picker on the Numerology tab
-    'cycles.js',         // Personal year, month, day and the week ahead
-    'numbers-check.js',  // Mobile / vehicle / house number checker
-    'numerology-kit.js'  // Full bilingual guide, if its JSON is present
+    'home.js',                 // Today landing page (registers itself first)
+    'ask.js',                  // Ask screen
+    'choghadiya.js',           // Choghadiya, Hora, Panchak on the Panchang tab
+    'rajju.js',                // Rajju and Vedha on the Matching screen
+    'vastu.js',                // Vastu reference tab
+    'weekly.js',               // This week's reading on the Horoscope tab
+    'timezone.js',             // Historical Indian UTC offset on the Kundli screen
+    'mulank.js',               // Mulank 1-9 picker on the Numerology tab
+    'cycles.js',               // Personal year, month, day and the week ahead
+    'numbers-check.js',        // Mobile / vehicle / house number checker
+    'numerology-classical.js', // Exaltation, odd/even, the friendly-enemy paradox
+    'numerology-kit.js'        // Full guide, if its JSON is present
   ];
 
   function loadOne(src) {
