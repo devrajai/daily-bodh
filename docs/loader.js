@@ -13,7 +13,8 @@
  *     `if (typeof TABS !== 'undefined')` quietly skips registering its tab.
  *     Loading after the inline script avoids this entirely.
  *
- *  2. Modules append their cards in load order, so load order is visual order.
+ *  2. Modules append their cards in load order, so load order IS visual order.
+ *     Keep the list below in the order you want the cards to appear.
  *
  * mount-guard.js must be the very LAST entry: it re-mounts any module whose
  * card was wiped by a tab renderer doing section.innerHTML = "...".
@@ -36,14 +37,17 @@
     'house-system.js',          // Kundli tab: which house system, and why
     'houses.js',                // Kundli tab: the twelve houses explained
     'kp-astrology.js',          // Kundli tab: KP, and how it differs
-    'numerology-report.js',     // FIRST on the numerology tab: full report
-    'numerology-kit.js',        // The full guide, 1-9 with all fields
-    'cycles.js',                // Personal year, month, day and the week ahead
-    'numbers-check.js',         // Mobile / vehicle / house number checker
-    'number-compatibility.js',  // Compare two numbers, plus the 9x9 grid
-    'zodiac-compatibility.js',  // Compare two signs, plus the 144-pair grid
-    'numerology-classical.js',  // Exaltation, odd/even, the friendly-enemy paradox
-    'numerology-lenses.js',     // Cheiro beside Bullinger, same numbers
+
+    /* --- Numerology tab, in display order --- */
+    'numerology-report.js',     // 1. full report (uses the page's own form)
+    'numerology-kit.js',        // 2. the 1-9 guide
+    'cycles.js',                // 3. personal year, month, day
+    'number-compatibility.js',  // 4. compare two numbers
+    'zodiac-compatibility.js',  // 5. compare two signs
+    'numerology-classical.js',  // 6. exaltation, odd/even, the paradox
+    'numerology-lenses.js',     // 7. Cheiro beside Bullinger
+    'numbers-check.js',         // 8. LAST: check a mobile / vehicle / house number
+
     'mount-guard.js'            // Very last: re-mounts anything a tab render wiped
   ];
 
