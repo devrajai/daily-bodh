@@ -3,6 +3,10 @@ name: Move sign comparison
 # The sign comparison belongs with the other compatibility tools, on the
 # Kundali match tab, not on Numerology. This retargets the module and updates
 # the mount guard so both lists agree. Safe to re-run.
+#
+# NOTE: the module refers to its section in TWO places - attach() and boot().
+# An earlier version of this workflow changed only attach(), and the verify step
+# caught it, which is why nothing was committed that time.
 
 on:
   workflow_dispatch:
@@ -21,18 +25,13 @@ jobs:
           python3 - <<'PY'
           import pathlib
 
-          # 1. the module: attach to #match instead of #numerology
           p = pathlib.Path("docs/zodiac-compatibility.js")
           s = p.read_text(encoding="utf-8")
-          before = s
-          s = s.replace("    var sec = el('numerology');", "    var sec = el('match');")
-          if s == before:
-              print("zodiac module: no change (already retargeted?)")
-          else:
-              print("zodiac module: retargeted to #match")
+          n = s.count("el('numerology')")
+          s = s.replace("el('numerology')", "el('match')")
           p.write_text(s, encoding="utf-8")
+          print(f"zodiac module: retargeted {n} reference(s) to #match")
 
-          # 2. the guard: watch it under 'match' as well
           g = pathlib.Path("docs/mount-guard.js")
           t = g.read_text(encoding="utf-8")
           old = "{ section: 'numerology', file: 'zodiac-compatibility.js', host: 'zodhost' }"
@@ -55,14 +54,13 @@ jobs:
           z = pathlib.Path("docs/zodiac-compatibility.js").read_text(encoding="utf-8")
           assert "el('match')" in z, "module not retargeted"
           assert "el('numerology')" not in z, "module still points at numerology"
-          print("module attaches to #match")
+          print("module attaches to #match in every reference")
 
           g = pathlib.Path("docs/mount-guard.js").read_text(encoding="utf-8")
           assert re.search(r"section:\s*'match',\s*file:\s*'zodiac-compatibility\.js'", g), \
               "guard entry not updated"
           print("guard entry correct")
 
-          # the match section must actually exist in the page
           idx = pathlib.Path("docs/index.html").read_text(encoding="utf-8")
           assert 'id="match"' in idx, "no #match section in index.html"
           print("#match section exists")
