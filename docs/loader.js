@@ -5,17 +5,24 @@
  * The tag is installed at the end of <body> by .github/workflows/install-loader.yml,
  * because docs/index.html is too large to edit by hand reliably.
  *
- * Order matters and this is why. The main page declares `const TABS` in its
- * inline script. A classic <script> that runs BEFORE that one sees
- * `typeof TABS === "undefined"` - no error, just undefined - so every module
- * that checks `if (typeof TABS !== 'undefined')` quietly skips registering its
- * tab. The screen gets built but no drawer entry appears, which looks like the
- * feature is missing. Loading after the inline script avoids this entirely.
+ * Order matters, twice over:
+ *
+ *  1. The main page declares `const TABS` in its inline script. A classic
+ *     <script> that runs BEFORE that one sees `typeof TABS === "undefined"` -
+ *     no error, just undefined - so every module that checks
+ *     `if (typeof TABS !== 'undefined')` quietly skips registering its tab.
+ *     Loading after the inline script avoids this entirely.
+ *
+ *  2. Modules append their cards in load order, so load order is visual order.
+ *     The richest numerology card (the full guide, which carries money, health,
+ *     remedies and mantra) loads first so it sits at the top of the tab instead
+ *     of below the thinner ones.
+ *
+ * mulank.js is deliberately NOT loaded: the full guide supersedes it and
+ * showing both put a shorter card above a longer one.
  *
  * mount-guard.js must be LAST: it re-mounts any module whose card was wiped by
  * a tab renderer doing section.innerHTML = "...".
- *
- * If a module is missing, it is skipped and the rest still load.
  */
 (function () {
   'use strict';
@@ -28,11 +35,10 @@
     'vastu.js',                // Vastu reference tab
     'weekly.js',               // This week's reading on the Horoscope tab
     'timezone.js',             // Historical Indian UTC offset on the Kundli screen
-    'mulank.js',               // Mulank 1-9 picker on the Numerology tab
+    'numerology-kit.js',       // FIRST on the tab: the full guide (richest card)
     'cycles.js',               // Personal year, month, day and the week ahead
     'numbers-check.js',        // Mobile / vehicle / house number checker
     'numerology-classical.js', // Exaltation, odd/even, the friendly-enemy paradox
-    'numerology-kit.js',       // Full guide, if its JSON is present
     'mount-guard.js'           // LAST: re-mounts anything a tab render wiped
   ];
 
@@ -58,7 +64,7 @@
         'inline script, or the add-on tabs will not register.');
     }
 
-    // Sequential, so a module that registers itself first (home.js) keeps its place.
+    // Sequential, so the visual order of the cards is predictable.
     var p = Promise.resolve();
     MODULES.forEach(function (m) {
       p = p.then(function () { return loadOne(m); });
