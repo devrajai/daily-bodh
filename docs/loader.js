@@ -14,15 +14,13 @@
  *     Loading after the inline script avoids this entirely.
  *
  *  2. Modules append their cards in load order, so load order is visual order.
- *     The richest numerology card (the full guide, which carries money, health,
- *     remedies and mantra) loads first so it sits at the top of the tab instead
- *     of below the thinner ones.
- *
- * mulank.js is deliberately NOT loaded: the full guide supersedes it and
- * showing both put a shorter card above a longer one.
+ *     The report generator loads first on the numerology tab because it is the
+ *     thing most people come for.
  *
  * mount-guard.js must be LAST: it re-mounts any module whose card was wiped by
  * a tab renderer doing section.innerHTML = "...".
+ *
+ * numerology-advanced.js is deliberately absent until its renderers are fixed.
  */
 (function () {
   'use strict';
@@ -35,7 +33,8 @@
     'vastu.js',                // Vastu reference tab
     'weekly.js',               // This week's reading on the Horoscope tab
     'timezone.js',             // Historical Indian UTC offset on the Kundli screen
-    'numerology-kit.js',       // FIRST on the tab: the full guide (richest card)
+    'numerology-report.js',    // FIRST on the tab: name + birth date -> full report
+    'numerology-kit.js',       // The full guide, 1-9 with all fields
     'cycles.js',               // Personal year, month, day and the week ahead
     'numbers-check.js',        // Mobile / vehicle / house number checker
     'numerology-classical.js', // Exaltation, odd/even, the friendly-enemy paradox
@@ -54,8 +53,6 @@
   }
 
   function run() {
-    // By the time this file runs the page has declared TABS. Say so plainly if not,
-    // because the symptom (no tabs appearing) is otherwise baffling.
     var haveTabs = false;
     try { haveTabs = (typeof TABS !== 'undefined' && Array.isArray(TABS)); } catch (e) { haveTabs = false; }
     if (!haveTabs) {
@@ -64,7 +61,6 @@
         'inline script, or the add-on tabs will not register.');
     }
 
-    // Sequential, so the visual order of the cards is predictable.
     var p = Promise.resolve();
     MODULES.forEach(function (m) {
       p = p.then(function () { return loadOne(m); });
