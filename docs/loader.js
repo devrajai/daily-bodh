@@ -32,6 +32,7 @@
     'weekly.js',               // This week's reading on the Horoscope tab
     'timezone.js',             // Historical Indian UTC offset on the Kundli screen
     'house-system.js',         // Kundli tab: which house system, and why
+    'houses.js',               // Kundli tab: the twelve houses explained
     'numerology-report.js',    // FIRST on the numerology tab: full report
     'numerology-kit.js',       // The full guide, 1-9 with all fields
     'cycles.js',               // Personal year, month, day and the week ahead
