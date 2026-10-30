@@ -1,0 +1,53 @@
+name: Unpack numerology advanced
+
+# tools/numadv.b64 holds the advanced numerology dataset (Lo Shu arrows and
+# planes, karmic debts, challenges, triads, personal-year depth, daily tips,
+# gem and vastu notes, angel numbers) gzipped and base64-encoded. It is stored
+# that way because the raw JSON is 32 KB and the compressed form is 12 KB, which
+# keeps the commit small. This workflow turns it back into normal JSON that the
+# site fetches.
+
+on:
+  push:
+    paths:
+      - 'tools/numadv.b64'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  unpack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Decode to JSON
+        run: |
+          python3 - <<'PY'
+          import base64, gzip, json, pathlib
+
+          src = pathlib.Path("tools/numadv.b64").read_text()
+          raw = gzip.decompress(base64.b64decode(src))
+          data = json.loads(raw)          # fails loudly if corrupt
+
+          out = pathlib.Path("docs/data/numerology-advanced.json")
+          out.parent.mkdir(parents=True, exist_ok=True)
+          out.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+
+          print(f"decoded {len(raw)} bytes -> {out} ({out.stat().st_size} bytes)")
+          print("sections:", ", ".join(f"{k}({len(v)})" for k, v in data.items()))
+          PY
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/data/numerology-advanced.json
+          if git diff --staged --quiet; then
+            echo "nothing changed"
+          else
+            git commit -m "Unpack the advanced numerology dataset [skip ci]"
+            git pull --rebase --autostash origin main || true
+            git push
+          fi
