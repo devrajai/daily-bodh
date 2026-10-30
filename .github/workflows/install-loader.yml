@@ -1,0 +1,84 @@
+name: Install loader
+
+# One-off: adds the loader script tag to docs/index.html and commits it.
+#
+# This exists because docs/index.html is 40 KB - too large to rewrite by hand
+# reliably - but a workflow runner can edit it safely. Run it once from the
+# Actions tab; it is safe to run again, and does nothing if the tag is present.
+#
+# After it runs, every module in docs/loader.js goes live: the mulank picker,
+# the numerology cycles, Choghadiya, Rajju, Vastu, the weekly reading, the
+# historical time zone handling, the home page and the Ask screen.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Insert the loader tag before </body>
+        run: |
+          python3 - <<'PY'
+          import re, sys, pathlib
+          p = pathlib.Path("docs/index.html")
+          s = p.read_text(encoding="utf-8")
+
+          if 'src="loader.js"' in s:
+              print("loader.js tag already present - nothing to do")
+              sys.exit(0)
+
+          tag = '<script src="loader.js"></script>'
+          if "</body>" not in s:
+              print("no </body> found - refusing to guess")
+              sys.exit(1)
+
+          # Insert right before the closing body tag, so it runs AFTER the
+          # inline script that declares TABS. That ordering is required: a
+          # script that runs earlier sees typeof TABS === "undefined" and the
+          # add-on tabs never register.
+          s2 = s.replace("</body>", tag + "\n</body>", 1)
+          p.write_text(s2, encoding="utf-8")
+          print(f"inserted. {len(s)} -> {len(s2)} bytes")
+          PY
+
+      - name: Verify the page still parses and the tag is in the right place
+        run: |
+          python3 - <<'PY'
+          import re, pathlib
+          s = pathlib.Path("docs/index.html").read_text(encoding="utf-8")
+
+          # exactly one loader tag
+          n = len(re.findall(r'src="loader\.js"', s))
+          print(f"loader tags: {n}")
+          assert n == 1, f"expected exactly 1 loader tag, found {n}"
+
+          # it must come after the inline script that declares TABS
+          i_tabs = s.find("const TABS")
+          i_load = s.find('src="loader.js"')
+          print(f"TABS at {i_tabs}, loader at {i_load}")
+          assert i_tabs != -1, "could not find 'const TABS' in the page"
+          assert i_load > i_tabs, "loader tag is BEFORE the TABS declaration - it will not work"
+
+          # the file did not get truncated
+          assert len(s) > 40000, f"page shrank to {len(s)} bytes - aborting"
+          print(f"page is {len(s)} bytes, loader after TABS - correct")
+          PY
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/index.html
+          if git diff --staged --quiet; then
+            echo "nothing changed"
+          else
+            git commit -m "Add the loader tag so every add-on module loads [skip ci]"
+            git pull --rebase --autostash origin main || true
+            git push
+          fi
