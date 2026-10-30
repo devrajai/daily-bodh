@@ -26,7 +26,8 @@
     'choghadiya.js',  // Choghadiya, Hora, Panchak on the Panchang tab
     'rajju.js',       // Rajju and Vedha on the Matching screen
     'vastu.js',       // Vastu reference tab
-    'weekly.js'       // This week's reading on the Horoscope tab
+    'weekly.js',      // This week's reading on the Horoscope tab
+    'timezone.js'     // Historical Indian UTC offset on the Kundli screen
   ];
 
   function loadOne(src) {
