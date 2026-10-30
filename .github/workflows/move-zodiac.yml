@@ -1,0 +1,82 @@
+name: Move sign comparison
+
+# The sign comparison belongs with the other compatibility tools, on the
+# Kundali match tab, not on Numerology. This retargets the module and updates
+# the mount guard so both lists agree. Safe to re-run.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  move:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Retarget the module and the guard
+        run: |
+          python3 - <<'PY'
+          import pathlib
+
+          # 1. the module: attach to #match instead of #numerology
+          p = pathlib.Path("docs/zodiac-compatibility.js")
+          s = p.read_text(encoding="utf-8")
+          before = s
+          s = s.replace("    var sec = el('numerology');", "    var sec = el('match');")
+          if s == before:
+              print("zodiac module: no change (already retargeted?)")
+          else:
+              print("zodiac module: retargeted to #match")
+          p.write_text(s, encoding="utf-8")
+
+          # 2. the guard: watch it under 'match' as well
+          g = pathlib.Path("docs/mount-guard.js")
+          t = g.read_text(encoding="utf-8")
+          old = "{ section: 'numerology', file: 'zodiac-compatibility.js', host: 'zodhost' }"
+          new = "{ section: 'match',      file: 'zodiac-compatibility.js', host: 'zodhost' }"
+          if old in t:
+              t = t.replace(old, new)
+              print("guard: zodiac-compatibility now watched under 'match'")
+          elif new in t:
+              print("guard: already correct")
+          else:
+              print("WARNING: guard entry not found - check by hand")
+          g.write_text(t, encoding="utf-8")
+          PY
+
+      - name: Verify
+        run: |
+          python3 - <<'PY'
+          import pathlib, re
+
+          z = pathlib.Path("docs/zodiac-compatibility.js").read_text(encoding="utf-8")
+          assert "el('match')" in z, "module not retargeted"
+          assert "el('numerology')" not in z, "module still points at numerology"
+          print("module attaches to #match")
+
+          g = pathlib.Path("docs/mount-guard.js").read_text(encoding="utf-8")
+          assert re.search(r"section:\s*'match',\s*file:\s*'zodiac-compatibility\.js'", g), \
+              "guard entry not updated"
+          print("guard entry correct")
+
+          # the match section must actually exist in the page
+          idx = pathlib.Path("docs/index.html").read_text(encoding="utf-8")
+          assert 'id="match"' in idx, "no #match section in index.html"
+          print("#match section exists")
+          PY
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/zodiac-compatibility.js docs/mount-guard.js
+          if git diff --staged --quiet; then
+            echo "nothing changed"
+          else
+            git commit -m "Move the sign comparison onto the Kundali match tab [skip ci]"
+            git pull --rebase --autostash origin main || true
+            git push
+          fi
