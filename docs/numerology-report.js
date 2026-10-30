@@ -1,7 +1,11 @@
 /* Daily Bodh — numerology report.
  *
- * Enter a name and a birth date, get a full report, and download it as a
- * self-contained HTML file you can keep, print to PDF, or send to someone.
+ * The page already draws a Numerology card with a name field (#nn), a birth-date
+ * field (#nd) and an output area (#nout). This module used to draw a SECOND
+ * identical form above it, which asked the same two questions twice.
+ *
+ * It now hooks into the existing fields and adds only the download bar and the
+ * rendered report underneath. One form, one set of inputs.
  *
  * Everything is computed and assembled in the browser from data already in the
  * repo. Nothing is uploaded, no account, no server, no charge.
@@ -194,32 +198,41 @@
     setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
   }
 
+  /* The page already has a name field (#nn), a birth-date field (#nd) and an
+     output area (#nout) in its own Numerology card. Rather than draw a second
+     identical form above it, this hooks into those and adds the download bar
+     underneath. One form, one set of inputs. */
   function render() {
     var host = el('reporthost');
     if (!host) return;
-    var nm = (el('rpname') && el('rpname').value) || '';
-    var dob = (el('rpdob') && el('rpdob').value) || '';
+
+    var nn = el('nn'), nd = el('nd');
+    if (!nn || !nd) return;
 
     host.innerHTML =
-      '<div class="card"><h3>Your full report</h3>' +
-      '<p class="muted">Enter a name and birth date. Everything is computed in your browser &mdash; ' +
-      'nothing is sent anywhere, there is no account, and it is free.</p>' +
-      '<label>Name</label><input id="rpname" placeholder="Full name as usually written" value="' + esc(nm) + '">' +
-      '<label>Birth date</label><input id="rpdob" type="date" value="' + esc(dob) + '">' +
-      '<div id="rpout" style="margin-top:14px"></div></div>';
+      '<div class="card" id="reportcard">' +
+      '<h3>Your full report</h3>' +
+      '<p class="muted">Uses the name and birth date above. Everything is computed in your browser ' +
+      '\u2014 nothing is sent anywhere, there is no account, and it is free.</p>' +
+      '<div id="rpbar" style="display:flex;gap:8px;flex-wrap:wrap"></div>' +
+      '<div id="rpout" style="margin-top:12px"></div></div>';
 
-    var out = el('rpout');
+    var bar = el('rpbar'), out = el('rpout');
 
     function go() {
-      var n = el('rpname').value, b = el('rpdob').value;
-      if (!b) { out.innerHTML = '<p class="muted">Pick a birth date to generate the report.</p>'; return; }
+      var n = nn.value || '', b = nd.value || '';
+      if (!b) {
+        bar.innerHTML = '';
+        out.innerHTML = '<p class="muted">Enter a birth date above to build the full report.</p>';
+        return;
+      }
       loadAll().then(function () {
-        var html = build(n, b);
-        out.innerHTML = '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">' +
+        bar.innerHTML =
           '<button class="chip" id="rpdl">Download report</button>' +
-          '<button class="chip" id="rppr">Print / save as PDF</button></div>' +
+          '<button class="chip" id="rppr">Print / save as PDF</button>';
+        out.innerHTML =
           '<div id="rprender" style="border:1px solid #e6e0ee;border-radius:12px;padding:10px;background:#fdfcfa">' +
-          html + '</div>';
+          build(n, b) + '</div>';
         var st = document.createElement('style');
         st.textContent = CSS.replace(/body\{/, '#rprender{');
         out.appendChild(st);
@@ -236,9 +249,9 @@
       });
     }
 
-    el('rpname').oninput = function () { if (el('rpdob').value) go(); };
-    el('rpdob').onchange = go;
-    if (dob) go();
+    nn.oninput = function () { if (nd.value) go(); };
+    nd.onchange = go;
+    if (nd.value) go();
   }
 
   function attach() {
@@ -248,7 +261,7 @@
     if (!host) {
       host = document.createElement('div');
       host.id = 'reporthost';
-      sec.insertBefore(host, sec.firstChild ? sec.firstChild.nextSibling : null);
+      sec.appendChild(host);
     }
     if (!host.innerHTML.trim()) render();
   }
