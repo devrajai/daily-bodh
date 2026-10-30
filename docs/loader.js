@@ -28,7 +28,8 @@
     'vastu.js',       // Vastu reference tab
     'weekly.js',      // This week's reading on the Horoscope tab
     'timezone.js',    // Historical Indian UTC offset on the Kundli screen
-    'mulank.js'       // Mulank 1-9 picker on the Numerology tab
+    'mulank.js',      // Mulank 1-9 picker on the Numerology tab
+    'cycles.js'       // Personal year, month, day and the week ahead
   ];
 
   function loadOne(src) {
