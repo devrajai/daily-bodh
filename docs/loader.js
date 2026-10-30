@@ -18,7 +18,9 @@
  * mount-guard.js must be the very LAST entry: it re-mounts any module whose
  * card was wiped by a tab renderer doing section.innerHTML = "...".
  *
- * numerology-advanced.js is deliberately absent until its renderers are fixed.
+ * Not loaded on purpose:
+ *   numerology-advanced.js  - renderers need repairing first
+ *   numerology-sources.js   - the sources card was removed from the tab
  */
 (function () {
   'use strict';
@@ -40,7 +42,6 @@
     'numbers-check.js',        // Mobile / vehicle / house number checker
     'numerology-classical.js', // Exaltation, odd/even, the friendly-enemy paradox
     'numerology-lenses.js',    // Cheiro beside Bullinger, same numbers
-    'numerology-sources.js',   // LAST numerology card: sources and corrections
     'mount-guard.js'           // Very last: re-mounts anything a tab render wiped
   ];
 
