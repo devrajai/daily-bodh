@@ -12,6 +12,9 @@
  * tab. The screen gets built but no drawer entry appears, which looks like the
  * feature is missing. Loading after the inline script avoids this entirely.
  *
+ * mount-guard.js must be LAST: it re-mounts any module whose card was wiped by
+ * a tab renderer doing section.innerHTML = "...".
+ *
  * If a module is missing, it is skipped and the rest still load.
  */
 (function () {
@@ -29,7 +32,8 @@
     'cycles.js',               // Personal year, month, day and the week ahead
     'numbers-check.js',        // Mobile / vehicle / house number checker
     'numerology-classical.js', // Exaltation, odd/even, the friendly-enemy paradox
-    'numerology-kit.js'        // Full guide, if its JSON is present
+    'numerology-kit.js',       // Full guide, if its JSON is present
+    'mount-guard.js'           // LAST: re-mounts anything a tab render wiped
   ];
 
   function loadOne(src) {
@@ -61,7 +65,6 @@
     });
     p.then(function () {
       var loaded = MODULES.filter(function (m) {
-        // a module that loaded has either created its section or added its tab
         var id = m.replace('.js', '');
         return !!document.getElementById(id);
       });
