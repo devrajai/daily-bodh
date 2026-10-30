@@ -33,7 +33,7 @@
     { section: 'numerology', file: 'cycles.js',               host: 'cycleshost' },
     { section: 'numerology', file: 'numbers-check.js',        host: 'numcheckhost' },
     { section: 'numerology', file: 'number-compatibility.js', host: 'comphost' },
-    { section: 'numerology', file: 'zodiac-compatibility.js', host: 'zodhost' },
+    { section: 'match',      file: 'zodiac-compatibility.js', host: 'zodhost' },
     { section: 'numerology', file: 'numerology-classical.js', host: 'classichost' },
     { section: 'numerology', file: 'numerology-lenses.js',    host: 'lenshost' }
   ];

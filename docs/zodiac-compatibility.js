@@ -192,7 +192,7 @@
   }
 
   function attach() {
-    var sec = el('numerology');
+    var sec = el('match');
     if (!sec) return;
     var host = el('zodhost');
     if (!host) {
@@ -206,7 +206,7 @@
   function boot() {
     var tries = 0;
     var iv = setInterval(function () {
-      if (el('numerology')) { attach(); clearInterval(iv); }
+      if (el('match')) { attach(); clearInterval(iv); }
       else if (++tries > 40) clearInterval(iv);
     }, 250);
     window.addEventListener('hashchange', function () { setTimeout(attach, 200); });
