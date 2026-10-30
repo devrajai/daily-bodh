@@ -27,7 +27,8 @@
     'rajju.js',       // Rajju and Vedha on the Matching screen
     'vastu.js',       // Vastu reference tab
     'weekly.js',      // This week's reading on the Horoscope tab
-    'timezone.js'     // Historical Indian UTC offset on the Kundli screen
+    'timezone.js',    // Historical Indian UTC offset on the Kundli screen
+    'mulank.js'       // Mulank 1-9 picker on the Numerology tab
   ];
 
   function loadOne(src) {
