@@ -2,11 +2,8 @@
  *
  * One script tag for every add-on, instead of one per module.
  *
- * PLACE THIS AT THE END OF <body>, after the main inline <script>:
- *
- *     ... </script>
- *     <script src="loader.js"></script>
- *   </body>
+ * The tag is installed at the end of <body> by .github/workflows/install-loader.yml,
+ * because docs/index.html is too large to edit by hand reliably.
  *
  * Order matters and this is why. The main page declares `const TABS` in its
  * inline script. A classic <script> that runs BEFORE that one sees
@@ -30,6 +27,7 @@
     'timezone.js',       // Historical Indian UTC offset on the Kundli screen
     'mulank.js',         // Mulank 1-9 picker on the Numerology tab
     'cycles.js',         // Personal year, month, day and the week ahead
+    'numbers-check.js',  // Mobile / vehicle / house number checker
     'numerology-kit.js'  // Full bilingual guide, if its JSON is present
   ];
 
