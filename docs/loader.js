@@ -13,8 +13,7 @@
  *     `if (typeof TABS !== 'undefined')` quietly skips registering its tab.
  *     Loading after the inline script avoids this entirely.
  *
- *  2. Modules append their cards in load order, so load order is visual order:
- *     report first (what people come for), sources last (what they read after).
+ *  2. Modules append their cards in load order, so load order is visual order.
  *
  * mount-guard.js must be the very LAST entry: it re-mounts any module whose
  * card was wiped by a tab renderer doing section.innerHTML = "...".
@@ -32,13 +31,14 @@
     'vastu.js',                // Vastu reference tab
     'weekly.js',               // This week's reading on the Horoscope tab
     'timezone.js',             // Historical Indian UTC offset on the Kundli screen
-    'numerology-report.js',    // FIRST on the tab: name + birth date -> full report
+    'house-system.js',         // Kundli tab: which house system, and why
+    'numerology-report.js',    // FIRST on the numerology tab: full report
     'numerology-kit.js',       // The full guide, 1-9 with all fields
     'cycles.js',               // Personal year, month, day and the week ahead
     'numbers-check.js',        // Mobile / vehicle / house number checker
     'numerology-classical.js', // Exaltation, odd/even, the friendly-enemy paradox
     'numerology-lenses.js',    // Cheiro beside Bullinger, same numbers
-    'numerology-sources.js',   // LAST card: sources and how to report a correction
+    'numerology-sources.js',   // LAST numerology card: sources and corrections
     'mount-guard.js'           // Very last: re-mounts anything a tab render wiped
   ];
 
