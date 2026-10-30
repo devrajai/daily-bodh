@@ -13,12 +13,11 @@
  *     `if (typeof TABS !== 'undefined')` quietly skips registering its tab.
  *     Loading after the inline script avoids this entirely.
  *
- *  2. Modules append their cards in load order, so load order is visual order.
- *     The report generator loads first on the numerology tab because it is the
- *     thing most people come for.
+ *  2. Modules append their cards in load order, so load order is visual order:
+ *     report first (what people come for), sources last (what they read after).
  *
- * mount-guard.js must be LAST: it re-mounts any module whose card was wiped by
- * a tab renderer doing section.innerHTML = "...".
+ * mount-guard.js must be the very LAST entry: it re-mounts any module whose
+ * card was wiped by a tab renderer doing section.innerHTML = "...".
  *
  * numerology-advanced.js is deliberately absent until its renderers are fixed.
  */
@@ -39,7 +38,8 @@
     'numbers-check.js',        // Mobile / vehicle / house number checker
     'numerology-classical.js', // Exaltation, odd/even, the friendly-enemy paradox
     'numerology-lenses.js',    // Cheiro beside Bullinger, same numbers
-    'mount-guard.js'           // LAST: re-mounts anything a tab render wiped
+    'numerology-sources.js',   // LAST card: sources and how to report a correction
+    'mount-guard.js'           // Very last: re-mounts anything a tab render wiped
   ];
 
   function loadOne(src) {
