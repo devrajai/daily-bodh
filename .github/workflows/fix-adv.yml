@@ -1,0 +1,82 @@
+name: Fix advanced renderers
+
+# Three renderers in docs/numerology-advanced.js lost their `return` and their
+# opening <div>, so triad, yearDeep and gemVastu rendered nothing. This repairs
+# them in place. Safe to re-run: it does nothing once fixed.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Repair the three renderers
+        run: |
+          python3 - <<'PY'
+          import pathlib, sys
+
+          p = pathlib.Path("docs/numerology-advanced.js")
+          s = p.read_text(encoding="utf-8")
+
+          # the broken shape: a bare string expression with no return and no opening div
+          broken = """        rows(J.{name}, function (k, v) {{
+            '<strong>' + esc(k) + '</strong>' + entryBody(v) + '</div>';
+        }}));"""
+          fixed = """        rows(J.{name}, function (k, v) {{
+          return '<div style=\"padding:7px 0;border-bottom:1px solid #f0f0f0\">' +
+            '<strong>' + esc(k) + '</strong>' + entryBody(v) + '</div>';
+        }}));"""
+
+          changed = 0
+          for name in ("triad", "yearDeep", "gemVastu"):
+              b = broken.format(name=name)
+              f = fixed.format(name=name)
+              if b in s:
+                  s = s.replace(b, f)
+                  changed += 1
+                  print(f"repaired {name}")
+              elif f in s:
+                  print(f"{name} already correct")
+              else:
+                  print(f"WARNING: could not find the broken block for {name}")
+
+          p.write_text(s, encoding="utf-8")
+          print(f"changed {changed} block(s)")
+          PY
+
+      - name: Verify every renderer returns
+        run: |
+          python3 - <<'PY'
+          import pathlib, re
+          s = pathlib.Path("docs/numerology-advanced.js").read_text(encoding="utf-8")
+
+          # no bare string expression followed by '</div>' without a return
+          bad = re.findall(r"rows\(J\.\w+, function \(k, v\) \{\s*\n\s*'<", s)
+          print(f"unreturned blocks remaining: {len(bad)}")
+          assert len(bad) == 0, "still broken"
+
+          # each of the three now has a return + opening div
+          for name in ("triad", "yearDeep", "gemVastu"):
+              ok = f"rows(J.{name}, function (k, v) {{" in s
+              assert ok, f"{name} block missing"
+          print("all three present")
+          PY
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/numerology-advanced.js
+          if git diff --staged --quiet; then
+            echo "nothing to change"
+          else
+            git commit -m "Repair the advanced numerology renderers [skip ci]"
+            git pull --rebase --autostash origin main || true
+            git push
+          fi
