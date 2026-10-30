@@ -12,6 +12,10 @@
  * module's script, which re-runs it and re-appends the card. Cheap, and it works
  * for every add-on without changing any of them.
  *
+ * KEEP THIS LIST IN STEP WITH loader.js. Anything watched here gets re-injected
+ * whether or not the loader loads it - which is how the retired mulank card kept
+ * reappearing after the fuller guide had replaced it.
+ *
  *   <script src="mount-guard.js"></script>   (load this LAST)
  */
 (function () {
@@ -21,11 +25,17 @@
   var WATCH = [
     { section: 'panchang',   file: 'choghadiya.js',           host: 'choghadiyahost' },
     { section: 'horoscope',  file: 'weekly.js',               host: 'weeklyhost' },
-    { section: 'numerology', file: 'mulank.js',               host: 'mulankhost' },
+    { section: 'kundli',     file: 'house-system.js',         host: 'househost' },
+    { section: 'kundli',     file: 'houses.js',               host: 'houseshost' },
+    { section: 'kundli',     file: 'kp-astrology.js',         host: 'kphost' },
+    { section: 'numerology', file: 'numerology-report.js',    host: 'reporthost' },
+    { section: 'numerology', file: 'numerology-kit.js',       host: 'kithost' },
     { section: 'numerology', file: 'cycles.js',               host: 'cycleshost' },
     { section: 'numerology', file: 'numbers-check.js',        host: 'numcheckhost' },
+    { section: 'numerology', file: 'number-compatibility.js', host: 'comphost' },
+    { section: 'numerology', file: 'zodiac-compatibility.js', host: 'zodhost' },
     { section: 'numerology', file: 'numerology-classical.js', host: 'classichost' },
-    { section: 'numerology', file: 'numerology-kit.js',       host: 'kithost' }
+    { section: 'numerology', file: 'numerology-lenses.js',    host: 'lenshost' }
   ];
 
   var reloading = {};    // file -> true while a reload is in flight
