@@ -30,6 +30,7 @@
     'home.js',                  // Today landing page (registers itself first)
     'ask.js',                   // Ask screen
     'choghadiya.js',            // Choghadiya, Hora, Panchak on the Panchang tab
+    'live-panchang.js',         // Panchang times for the chosen place, not Delhi
     'rajju.js',                 // Rajju and Vedha on the Matching screen
     'vastu.js',                 // Vastu reference tab
     'chakras.js',               // Chakras, kundalini, reiki, crystals (own tab)
