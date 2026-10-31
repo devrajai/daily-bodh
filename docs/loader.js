@@ -14,7 +14,6 @@
  *     Loading after the inline script avoids this entirely.
  *
  *  2. Modules append their cards in load order, so load order IS visual order.
- *     Keep the list below in the order you want the cards to appear.
  *
  * mount-guard.js must be the very LAST entry: it re-mounts any module whose
  * card was wiped by a tab renderer doing section.innerHTML = "...".
@@ -22,6 +21,7 @@
  * Not loaded on purpose:
  *   numerology-advanced.js  - renderers need repairing first
  *   numerology-sources.js   - the sources card was removed from the tab
+ *   mulank.js               - superseded by the fuller 1-9 guide
  */
 (function () {
   'use strict';
@@ -33,6 +33,7 @@
     'rajju.js',                 // Rajju and Vedha on the Matching screen
     'vastu.js',                 // Vastu reference tab
     'chakras.js',               // Chakras, kundalini, reiki, crystals (own tab)
+    'meditation.js',            // Meditation timer and methods (Chakras tab)
     'weekly.js',                // This week's reading on the Horoscope tab
     'timezone.js',              // Historical Indian UTC offset on the Kundli screen
     'house-system.js',          // Kundli tab: which house system, and why
