@@ -31,6 +31,7 @@
     'ask.js',                   // Ask screen
     'choghadiya.js',            // Choghadiya, Hora, Panchak on the Panchang tab
     'live-panchang.js',         // Panchang times for the chosen place, not Delhi
+    'calendar-links.js',        // Panchang tab: subscribe to the festival calendar
     'rajju.js',                 // Rajju and Vedha on the Matching screen
     'vastu.js',                 // Vastu reference tab
     'chakras.js',               // Chakras, kundalini, reiki, crystals (own tab)
