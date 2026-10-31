@@ -32,6 +32,7 @@
     'choghadiya.js',            // Choghadiya, Hora, Panchak on the Panchang tab
     'rajju.js',                 // Rajju and Vedha on the Matching screen
     'vastu.js',                 // Vastu reference tab
+    'chakras.js',               // Chakras, kundalini, reiki, crystals (own tab)
     'weekly.js',                // This week's reading on the Horoscope tab
     'timezone.js',              // Historical Indian UTC offset on the Kundli screen
     'house-system.js',          // Kundli tab: which house system, and why
@@ -43,10 +44,9 @@
     'numerology-kit.js',        // 2. the 1-9 guide
     'cycles.js',                // 3. personal year, month, day
     'number-compatibility.js',  // 4. compare two numbers
-    'zodiac-compatibility.js',  // 5. compare two signs
-    'numerology-classical.js',  // 6. exaltation, odd/even, the paradox
-    'numerology-lenses.js',     // 7. Cheiro beside Bullinger
-    'numbers-check.js',         // 8. LAST: check a mobile / vehicle / house number
+    'numerology-classical.js',  // 5. exaltation, odd/even, the paradox
+    'numerology-lenses.js',     // 6. Cheiro beside Bullinger
+    'numbers-check.js',         // 7. LAST: check a mobile / vehicle / house number
 
     'mount-guard.js'            // Very last: re-mounts anything a tab render wiped
   ];
