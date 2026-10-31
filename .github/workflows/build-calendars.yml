@@ -1,0 +1,124 @@
+name: Build calendars
+
+# Turns docs/data/festivals.json into .ics files people can subscribe to in
+# Google Calendar, Apple Calendar or Outlook. Static files, no server, refreshed
+# weekly so new festival data lands without anyone lifting a finger.
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * 1'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate the .ics files
+        run: |
+          mkdir -p docs/calendar
+          python3 - <<'PY'
+          import json, re, datetime, pathlib
+
+          src = pathlib.Path("docs/data/festivals.json")
+          data = json.loads(src.read_text(encoding="utf-8"))
+          events = data["festivals"]
+          print(f"source: {len(events)} entries {data['from']}-{data['to']} at {data['location']}")
+
+          def fold(line):
+              """RFC 5545: fold at 75 octets; continuation lines start with a space."""
+              if len(line.encode("utf-8")) <= 75:
+                  return line
+              out, cur = [], ""
+              for ch in line:
+                  if len((cur + ch).encode("utf-8")) > 74:
+                      out.append(cur)
+                      cur = " " + ch
+                  else:
+                      cur += ch
+              out.append(cur)
+              return "\r\n".join(out)
+
+          def slug(s):
+              return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
+
+          def esc(s):
+              return (s.replace("\\", "\\\\").replace(";", r"\;")
+                       .replace(",", r"\,").replace("\n", r"\n"))
+
+          now = datetime.datetime.now(datetime.UTC).strftime("%Y%m%dT%H%M%SZ")
+
+          def build(items, calname, out):
+              L = ["BEGIN:VCALENDAR", "VERSION:2.0",
+                   "PRODID:-//Daily Bodh//Panchang Calendar//EN",
+                   "CALSCALE:GREGORIAN", "METHOD:PUBLISH",
+                   "X-WR-CALNAME:" + calname,
+                   "X-WR-CALDESC:Hindu festival dates bundled by Daily Bodh. Free, no account.",
+                   "X-WR-TIMEZONE:Asia/Kolkata"]
+              seen = set()
+              for e in items:
+                  d = e["d"]
+                  uid = d + "-" + slug(e["n"]) + "@dailybodh"
+                  if uid in seen:
+                      continue
+                  seen.add(uid)
+                  try:
+                      dt = datetime.date.fromisoformat(d)
+                  except Exception:
+                      continue
+                  nxt = (dt + datetime.timedelta(days=1)).strftime("%Y%m%d")
+                  cat = "Festival" if e.get("k") == "festival" else "Observance"
+                  L += ["BEGIN:VEVENT", "UID:" + uid, "DTSTAMP:" + now,
+                        "DTSTART;VALUE=DATE:" + dt.strftime("%Y%m%d"),
+                        "DTEND;VALUE=DATE:" + nxt,
+                        "SUMMARY:" + esc(e["n"]),
+                        "CATEGORIES:" + cat,
+                        "TRANSP:TRANSPARENT", "END:VEVENT"]
+              L.append("END:VCALENDAR")
+              body = "\r\n".join(fold(x) for x in L) + "\r\n"
+              pathlib.Path(out).write_text(body, encoding="utf-8", newline="")
+              return len(seen), len(body)
+
+          n1, b1 = build(events, "Hindu Festivals (Daily Bodh)", "docs/calendar/festivals.ics")
+          print(f"  festivals.ics: {n1} events, {b1} bytes")
+
+          only = [e for e in events if e.get("k") == "festival"]
+          n2, b2 = build(only, "Hindu Festivals only (Daily Bodh)", "docs/calendar/festivals-only.ics")
+          print(f"  festivals-only.ics: {n2} events, {b2} bytes")
+          PY
+
+      - name: Verify
+        run: |
+          python3 - <<'PY'
+          import pathlib
+          for name in ("festivals.ics", "festivals-only.ics"):
+              p = pathlib.Path("docs/calendar") / name
+              b = p.read_bytes()
+              assert b.startswith(b"BEGIN:VCALENDAR"), name + ": bad header"
+              assert b.rstrip().endswith(b"END:VCALENDAR"), name + ": bad footer"
+              assert b"\r\n" in b, name + ": no CRLF"
+              lines = b.split(b"\r\n")
+              bad = [l for l in lines if len(l) > 75]
+              assert not bad, name + f": {len(bad)} lines over 75 octets"
+              n = b.count(b"BEGIN:VEVENT")
+              assert n > 100, name + f": only {n} events"
+              assert n == b.count(b"END:VEVENT"), name + ": unbalanced VEVENT"
+              print(f"  {name}: {n} events, {len(b)} bytes, all lines <=75, CRLF ok")
+          PY
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/calendar/
+          if git diff --staged --quiet; then
+            echo "no change"
+          else
+            git commit -m "Refresh festival calendars [skip ci]"
+            git pull --rebase --autostash origin main || true
+            git push
+          fi
