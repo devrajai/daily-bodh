@@ -36,6 +36,7 @@
     'vastu.js',                 // Vastu reference tab
     'chakras.js',               // Chakras, kundalini, reiki, crystals (own tab)
     'meditation.js',            // Meditation timer and methods (Chakras tab)
+    'scriptures.js',            // Shastra tab: full texts held in Drive
     'weekly.js',                // This week's reading on the Horoscope tab
     'timezone.js',              // Historical Indian UTC offset on the Kundli screen
     'sadesati.js',              // Kundli tab: Sade Sati phase and windows
