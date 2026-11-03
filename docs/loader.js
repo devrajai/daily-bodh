@@ -37,6 +37,7 @@
     'vastu.js',                 // Vastu reference tab
     'chakras.js',               // Chakras, kundalini, reiki, crystals (own tab)
     'meditation.js',            // Meditation timer and methods (Chakras tab)
+    'ayurveda.js',              // Ayurveda: doshas, tastes, dinacharya (own tab)
     'scriptures.js',            // Shastra tab: full texts held in Drive
     'market-astrology.js',      // Jyotish tab: financial astrology as history, no timings
     'about-calc.js',            // How we calculate, privacy, credits (own tab)
