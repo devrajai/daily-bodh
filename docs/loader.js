@@ -39,6 +39,7 @@
     'meditation.js',            // Meditation timer and methods (Chakras tab)
     'scriptures.js',            // Shastra tab: full texts held in Drive
     'market-astrology.js',      // Jyotish tab: financial astrology as history, no timings
+    'about-calc.js',            // How we calculate, privacy, credits (own tab)
     'weekly.js',                // This week's reading on the Horoscope tab
     'timezone.js',              // Historical Indian UTC offset on the Kundli screen
     'sadesati.js',              // Kundli tab: Sade Sati phase and windows
