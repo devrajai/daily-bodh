@@ -1,0 +1,127 @@
+name: Patch head tags
+
+# docs/index.html is 40 KB and editing it by hand has gone wrong before, so the
+# head is patched here on the runner with assertions either side.
+# Safe to re-run: every step is idempotent.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Patch the head
+        run: |
+          python3 - <<'PY'
+          import pathlib, re
+
+          p = pathlib.Path("docs/index.html")
+          s = p.read_text(encoding="utf-8")
+          before = len(s)
+
+          NEW_DESC = ("Panchang, kundli, matching, numerology and Vastu \u2014 free, no account, "
+                      "nothing collected. Verified planetary data, works offline.")
+          assert 100 <= len(NEW_DESC) <= 160, f"description is {len(NEW_DESC)} chars"
+
+          # 1. shorten the meta description
+          s, n = re.subn(r'(<meta[^>]*name=["\']description["\'][^>]*content=["\'])(.*?)(["\'])',
+                         lambda m: m.group(1) + NEW_DESC + m.group(3), s, count=1, flags=re.S)
+          print(f"meta description replaced: {n}")
+
+          # 2. build the block to insert right after </title>
+          block = f'''
+<link rel="canonical" href="https://devrajai.github.io/daily-bodh/">
+<meta name="theme-color" content="#4c1d95">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="manifest" href="manifest.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Daily Bodh">
+<meta property="og:title" content="Daily Bodh \u2014 Panchang, Kundli, Numerology">
+<meta property="og:description" content="{NEW_DESC}">
+<meta property="og:url" content="https://devrajai.github.io/daily-bodh/">
+<meta property="og:image" content="https://devrajai.github.io/daily-bodh/icon.svg">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Daily Bodh \u2014 Panchang, Kundli, Numerology">
+<meta name="twitter:description" content="{NEW_DESC}">
+<meta name="twitter:image" content="https://devrajai.github.io/daily-bodh/icon.svg">
+<script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Daily Bodh",
+  "url": "https://devrajai.github.io/daily-bodh/",
+  "description": "{NEW_DESC}",
+  "inLanguage": "en-IN",
+  "isAccessibleForFree": true,
+  "creator": {{ "@type": "Person", "name": "Daily Bodh" }}
+}}
+</script>
+'''
+
+          # 3. insert once, after </title>
+          if 'og:site_name' in s:
+              print("head tags already present \u2014 skipping insert")
+          else:
+              m = re.search(r'</title>', s)
+              assert m, "no </title> in index.html"
+              s = s[:m.end()] + block + s[m.end():]
+              print("head tags inserted after </title>")
+
+          p.write_text(s, encoding="utf-8")
+          print(f"index.html {before} -> {len(s)} bytes")
+          PY
+
+      - name: Verify
+        run: |
+          python3 - <<'PY'
+          import pathlib, re, json
+
+          s = pathlib.Path("docs/index.html").read_text(encoding="utf-8")
+
+          d = re.search(r'<meta[^>]*name=["\']description["\'][^>]*content=["\'](.*?)["\']', s, re.S)
+          assert d, "no meta description"
+          L = len(d.group(1))
+          assert L <= 160, f"description still {L} chars"
+          print(f"meta description: {L} chars")
+
+          for tag in ["canonical", "og:site_name", "og:image", "twitter:card",
+                      "application/ld+json", "manifest", "theme-color", 'rel="icon"']:
+              assert tag in s, f"missing {tag}"
+          print("all head tags present")
+
+          # the JSON-LD must actually parse
+          m = re.search(r'<script type="application/ld\+json">(.*?)</script>', s, re.S)
+          json.loads(m.group(1))
+          print("JSON-LD parses")
+
+          # body must still start clean - the page had no stray text before
+          body = s[s.find("<body"):]
+          assert body.startswith("<body>"), "body start changed"
+          assert "meta-description:" not in body, "stray metadata text in body"
+          print("body still clean")
+
+          # title untouched
+          assert "Daily Bodh \u2014 Panchang, Horoscope, Muhurat, Kundli" in s
+          print("title unchanged")
+          PY
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/index.html
+          if git diff --staged --quiet; then
+            echo "nothing changed"
+          else
+            git commit -m "Add canonical, Open Graph, Twitter, JSON-LD and manifest tags [skip ci]"
+            git pull --rebase --autostash origin main || true
+            git push
+          fi
