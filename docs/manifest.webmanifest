@@ -1,0 +1,17 @@
+{
+  "name": "Daily Bodh — Panchang, Kundli, Numerology",
+  "short_name": "Daily Bodh",
+  "description": "Panchang, kundli, matching, numerology and Vastu. Free, no account, works offline.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fdfcfa",
+  "theme_color": "#4c1d95",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["lifestyle", "education", "reference"],
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# The place gazetteer is 15.9 MB of small JSON files that exist only to be
+# fetched by the app. Crawling them wastes everyone's budget.
+Disallow: /data/places/
+
+Sitemap: https://devrajai.github.io/daily-bodh/sitemap.xml
