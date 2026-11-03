@@ -27,6 +27,7 @@
   'use strict';
 
   var MODULES = [
+    'myprofile.js',             // Today tab: saved birth details, first thing shown
     'home.js',                  // Today landing page (registers itself first)
     'ask.js',                   // Ask screen
     'choghadiya.js',            // Choghadiya, Hora, Panchak on the Panchang tab
