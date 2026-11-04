@@ -1,8 +1,8 @@
 /* Daily Bodh — scripture library.
  *
- * The full texts are far too large to bundle (the Mahabharata alone is 15 MB),
- * so they live in Drive and this screen links to them. Everything listed here
- * is a public-domain translation, not a modern copyrighted one.
+ * The full texts are far too large to bundle, so they live in Drive and this
+ * screen links to them. Everything listed here is a public-domain translation,
+ * not a modern copyrighted one.
  *
  * The texts are NOT offline. They open in Drive and need a connection — the
  * card says so, because the rest of the site does not.
@@ -33,10 +33,34 @@
         'context, within the Bhishma Parva.',
       drive: 'https://drive.google.com/file/d/1SFdSxLZad9GQscz9SSFcXTTsay9Umzpr/view',
       live: true
+    },
+    {
+      name: 'Sushruta Samhita \u2014 Vol 1', sk: '\u0938\u0941\u0936\u094d\u0930\u0941\u0924 \u0938\u0902\u0939\u093f\u0924\u093e',
+      translator: 'Kaviraj Kunja Lal Bhishagratna',
+      year: '1907',
+      words: '\u2014',
+      size: '1.1 MB',
+      note: 'The Sutrasthana \u2014 the foundational book on theory, training, instruments and ' +
+        'the principles of treatment. The oldest surgical treatise in the world, and the one that ' +
+        'describes rhinoplasty and cataract surgery.',
+      drive: 'https://drive.google.com/file/d/1YRE6BSDq8LLE0M7o58hhk8WWTSdPlFng/view',
+      live: true
+    },
+    {
+      name: 'Sushruta Samhita \u2014 Vol 3', sk: '\u0938\u0941\u0936\u094d\u0930\u0941\u0924 \u0938\u0902\u0939\u093f\u0924\u093e',
+      translator: 'Kaviraj Kunja Lal Bhishagratna',
+      year: '1916',
+      words: '\u2014',
+      size: '1.0 MB',
+      note: 'The Uttaratantra \u2014 the supplementary book, covering eye disease, ENT, ' +
+        'paediatrics and toxicology. Bhishagratna\u2019s is the standard English translation.',
+      drive: 'https://drive.google.com/file/d/1zaF_rV60ApayI-X_-gTuwBAQVFyciwxW/view',
+      live: true
     }
   ];
 
   var PLANNED = [
+    { name: 'Sushruta Samhita \u2014 Vol 2', translator: 'K. K. Bhishagratna', year: '1907' },
     { name: 'Ramayana', translator: 'Ralph T. H. Griffith', year: '1870\u20131874' },
     { name: 'Rigveda', translator: 'Ralph T. H. Griffith', year: '1896' },
     { name: 'Yajurveda', translator: 'Ralph T. H. Griffith', year: '1899' },
@@ -56,8 +80,7 @@
         '<div style="font-weight:700;font-size:15px;color:var(--accent)">' + esc(t.name) +
         ' <span class="muted" style="font-weight:400;font-size:13px">' + esc(t.sk) + '</span></div>' +
         '<div class="muted" style="font-size:12.5px;margin-top:3px">' +
-        esc(t.translator) + ', ' + esc(t.year) + ' \u00b7 ' + esc(t.words) + ' words \u00b7 ' +
-        esc(t.size) + '</div>' +
+        esc(t.translator) + ', ' + esc(t.year) + ' \u00b7 ' + esc(t.size) + '</div>' +
         '<div style="margin-top:6px">' + esc(t.note) + '</div>' +
         '<p style="margin-top:8px"><a href="' + esc(t.drive) + '" target="_blank" rel="noopener">' +
         'Open the full text in Drive \u2192</a></p>' +
@@ -65,7 +88,7 @@
     }).join('');
 
     var planned = PLANNED.map(function (t) {
-      return '<tr><td class="k" style="width:34%">' + esc(t.name) + '</td>' +
+      return '<tr><td class="k" style="width:38%">' + esc(t.name) + '</td>' +
         '<td>' + esc(t.translator) + ' <span class="muted">(' + esc(t.year) + ')</span></td></tr>';
     }).join('');
 
@@ -88,14 +111,15 @@
       'about technical terms, but they are lawful to share and they are complete.</p></div>' +
 
       '<div class="card"><h3>Still to add</h3>' +
-      '<p class="muted">These are identified and available in public-domain translation. Each needs ' +
-      'locating, checking and uploading before it appears above \u2014 nothing is listed as ready ' +
-      'until the file is actually there.</p>' +
+      '<p class="muted">Identified and available in public-domain translation. Each needs locating, ' +
+      'checking and uploading before it appears above \u2014 nothing is listed as ready until the ' +
+      'file is actually there.</p>' +
       '<table><tr><td class="k">Text</td><td class="k">Translation</td></tr>' + planned + '</table>' +
-      '<div class="warn">Puranas are the hardest. Only a handful were translated before 1930, and ' +
-      'the eighteen Mahapuranas have never been completed in public-domain English. The Bhagavata ' +
-      'Purana in particular has no free complete translation \u2014 anyone offering one is almost ' +
-      'certainly reproducing a copyrighted edition.</div></div>';
+      '<div class="warn">Two gaps worth knowing. <strong>Charaka Samhita</strong> has no complete ' +
+      'public-domain English translation on any accessible archive \u2014 the Kaviratna 1897 edition ' +
+      'survives only in fragments. And the eighteen <strong>Mahapuranas</strong> have never been ' +
+      'completed in public-domain English at all; the Bhagavata in particular has no free complete ' +
+      'translation, so anyone offering one is almost certainly reproducing a copyrighted edition.</div></div>';
   }
 
   function attach() {
