@@ -38,6 +38,7 @@
     'chakras.js',               // Chakras, kundalini, reiki, crystals (own tab)
     'meditation.js',            // Meditation timer and methods (Chakras tab)
     'ayurveda.js',              // Ayurveda: doshas, tastes, dinacharya (own tab)
+    'garbha.js',                // Ayurveda tab: conception and pregnancy in the texts
     'scriptures.js',            // Shastra tab: full texts held in Drive
     'kamasutra.js',             // Shastra tab: the Kamasutra, described and linked
     'market-astrology.js',      // Jyotish tab: financial astrology as history, no timings
