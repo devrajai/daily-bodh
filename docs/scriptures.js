@@ -35,6 +35,16 @@
       live: true
     },
     {
+      name: 'Ramayana \u2014 Vol 1', sk: '\u0930\u093e\u092e\u093e\u092f\u0923',
+      translator: 'Ralph T. H. Griffith',
+      year: '1870',
+      words: '\u2014',
+      size: '1.2 MB',
+      note: 'The Bala Kanda \u2014 the book of childhood, covering Rama\u2019s birth, his education, the breaking of Shiva\u2019s bow, and the marriage to Sita. Griffith\u2019s is the first complete English verse translation and the standard public-domain one.',
+      drive: 'https://drive.google.com/file/d/1Bn9WtpvzgM9tLJQgRuDCh_F3F_8WpWIm/view',
+      live: true
+    },
+    {
       name: 'Sushruta Samhita \u2014 Vol 1', sk: '\u0938\u0941\u0936\u094d\u0930\u0941\u0924 \u0938\u0902\u0939\u093f\u0924\u093e',
       translator: 'Kaviraj Kunja Lal Bhishagratna',
       year: '1907',
@@ -61,7 +71,7 @@
 
   var PLANNED = [
     { name: 'Sushruta Samhita \u2014 Vol 2', translator: 'K. K. Bhishagratna', year: '1907' },
-    { name: 'Ramayana', translator: 'Ralph T. H. Griffith', year: '1870\u20131874' },
+    { name: 'Ramayana \u2014 Vols 2\u20135', translator: 'Ralph T. H. Griffith', year: '1870\u20131874' },
     { name: 'Rigveda', translator: 'Ralph T. H. Griffith', year: '1896' },
     { name: 'Yajurveda', translator: 'Ralph T. H. Griffith', year: '1899' },
     { name: 'Atharvaveda', translator: 'Ralph T. H. Griffith', year: '1895\u20131896' },
