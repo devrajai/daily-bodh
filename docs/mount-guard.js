@@ -11,31 +11,27 @@
  * This watches every section. When a module's card disappears, it re-loads that
  * module's script, which re-runs it and re-appends the card.
  *
- * TWO BUGS THIS FIXES
+ * KEEP THIS LIST IN STEP WITH loader.js. It drifted badly once — the loader
+ * carried 34 modules while this watched 13, so twenty-one add-ons vanished the
+ * first time their tab rendered.
  *
- * 1. The list had drifted badly. The loader carried 34 modules while this
- *    watched 13, so twenty-one add-ons were unprotected and vanished the first
- *    time their tab rendered. That is why features "were not there".
+ * Also fixed here: choghadiya.js creates #choghost, but this file used to watch
+ * #choghadiyahost, a div that does not exist.
  *
- * 2. choghadiya.js creates #choghost, but this file was watching
- *    #choghadiyahost, a div that does not exist. It could never remount it.
- *
- * KEEP THIS LIST IN STEP WITH loader.js. Every module that creates a host div
- * needs an entry here, with the section it lives in and the exact id it uses.
+ * The Today section has no id in the markup, so myprofile.js cannot be watched
+ * here — it falls back to the first <section> itself.
  *
  *   <script src="mount-guard.js"></script>   (load this LAST)
  */
 (function () {
   'use strict';
 
-  /* file -> { section it appends into, element id it creates }
-     The Today section has no id in the markup, so myprofile.js cannot be
-     watched here — it falls back to the first <section> itself. */
   var WATCH = [
     /* --- Panchang --- */
     { section: 'panchang',   file: 'choghadiya.js',           host: 'choghost' },
     { section: 'panchang',   file: 'live-panchang.js',        host: 'livepanchang' },
     { section: 'panchang',   file: 'calendar-links.js',       host: 'calhost' },
+    { section: 'panchang',   file: 'why-dates.js',            host: 'whyhost' },
 
     /* --- Horoscope --- */
     { section: 'horoscope',  file: 'weekly.js',               host: 'weeklyhost' },

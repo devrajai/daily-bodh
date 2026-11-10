@@ -17,6 +17,8 @@
  *
  * mount-guard.js must be the very LAST entry: it re-mounts any module whose
  * card was wiped by a tab renderer doing section.innerHTML = "...".
+ * KEEP THE GUARD'S LIST IN STEP WITH THIS ONE — it drifted badly once, and
+ * twenty-one modules silently stopped appearing because of it.
  *
  * Not loaded on purpose:
  *   numerology-advanced.js  - renderers need repairing first
@@ -33,6 +35,7 @@
     'choghadiya.js',            // Choghadiya, Hora, Panchak on the Panchang tab
     'live-panchang.js',         // Panchang times for the chosen place, not Delhi
     'calendar-links.js',        // Panchang tab: subscribe to the festival calendar
+    'why-dates.js',             // Panchang tab: why festivals fall on two dates
     'rajju.js',                 // Rajju and Vedha on the Matching screen
     'vastu.js',                 // Vastu reference tab
     'chakras.js',               // Chakras, kundalini, reiki, crystals (own tab)
