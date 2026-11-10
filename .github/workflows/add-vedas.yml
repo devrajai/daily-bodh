@@ -1,0 +1,93 @@
+name: Add vedas to library
+
+# Inserts the Rigveda and Vishnu Purana entries into docs/scriptures.js.
+# Idempotent: re-running does nothing once they are present.
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/add-vedas.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Patch scriptures.js
+        run: |
+          python3 - <<'PY'
+          import pathlib, re
+
+          p = pathlib.Path("docs/scriptures.js")
+          s = p.read_text(encoding="utf-8")
+
+          if "1sMZbWHiTnE6Z5oVZmVlldIW2u830mHyv" in s:
+              print("already present \u2014 nothing to do")
+              raise SystemExit(0)
+
+          entry = '''    {
+      name: 'Rigveda', sk: '\\u090b\\u0917\\u094d\\u0935\\u0947\\u0926',
+      translator: 'Ralph T. H. Griffith',
+      year: '1897',
+      words: '\\u2014',
+      size: '1.4 MB',
+      note: 'All 1,028 hymns in ten mandalas. Griffith\\u2019s verse translation is the standard public-domain English Rigveda. The oldest of the four Vedas, and the oldest surviving Indo-European religious text.',
+      drive: 'https://drive.google.com/file/d/1sMZbWHiTnE6Z5oVZmVlldIW2u830mHyv/view',
+      live: true
+    },
+    {
+      name: 'Vishnu Purana', sk: '\\u0935\\u093f\\u0937\\u094d\\u0923\\u0941 \\u092a\\u0941\\u0930\\u093e\\u0923',
+      translator: 'H. H. Wilson',
+      year: '1866',
+      words: '\\u2014',
+      size: '0.7 MB',
+      note: 'The first Purana translated into English. Covers the creation, the Manvantaras, the dynasties, and the life of Krishna in some of its fullest early telling.',
+      drive: 'https://drive.google.com/file/d/1P3yRkkchYInhc4gKCyQvFdsbZpEQ9-tA/view',
+      live: true
+    }
+'''
+
+          marker = "  ];\n\n  var PLANNED"
+          assert marker in s, "array end marker not found"
+          head, tail = s.split(marker, 1)
+          head = head.rstrip()
+          assert head.endswith("}"), "unexpected array shape"
+          head += ",\n"
+          s = head + entry + marker + tail
+
+          # drop the two names from the planned list
+          s = re.sub(r"\s*\{ name: 'Rigveda',[^}]*\},\n", "\n", s)
+          s = re.sub(r"\s*\{ name: 'Vishnu Purana',[^}]*\},\n", "\n", s)
+
+          p.write_text(s, encoding="utf-8")
+          print("inserted Rigveda and Vishnu Purana")
+          PY
+
+      - name: Verify
+        run: |
+          node --check docs/scriptures.js && echo "parses OK"
+          python3 - <<'PY'
+          import pathlib
+          s = pathlib.Path("docs/scriptures.js").read_text(encoding="utf-8")
+          assert "1sMZbWHiTnE6Z5oVZmVlldIW2u830mHyv" in s, "rigveda missing"
+          assert "1P3yRkkchYInhc4gKCyQvFdsbZpEQ9-tA" in s, "vishnu purana missing"
+          n = s.count("live: true")
+          assert n >= 6, f"only {n} live texts"
+          print(f"live texts: {n}")
+          PY
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/scriptures.js
+          if git diff --staged --quiet; then echo "nothing changed"; else
+            git commit -m "Add Rigveda and Vishnu Purana to the library [skip ci]"
+            git pull --rebase --autostash origin main || true
+            git push
+          fi
