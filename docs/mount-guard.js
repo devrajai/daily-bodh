@@ -28,11 +28,10 @@
 (function () {
   'use strict';
 
-  /* file -> { section it appends into, element id it creates } */
+  /* file -> { section it appends into, element id it creates }
+     The Today section has no id in the markup, so myprofile.js cannot be
+     watched here — it falls back to the first <section> itself. */
   var WATCH = [
-    /* --- Today --- */
-    { section: 'today',      file: 'myprofile.js',            host: 'pfhost' },
-
     /* --- Panchang --- */
     { section: 'panchang',   file: 'choghadiya.js',           host: 'choghost' },
     { section: 'panchang',   file: 'live-panchang.js',        host: 'livepanchang' },
