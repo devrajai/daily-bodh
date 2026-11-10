@@ -49,6 +49,7 @@
     'weekly.js',                // This week's reading on the Horoscope tab
     'timezone.js',              // Historical Indian UTC offset on the Kundli screen
     'sadesati.js',              // Kundli tab: Sade Sati phase and windows
+    'dasha.js',                 // Kundli tab: Vimshottari dasha timeline
     'house-system.js',          // Kundli tab: which house system, and why
     'houses.js',                // Kundli tab: the twelve houses explained
     'kp-astrology.js',          // Kundli tab: KP, and how it differs
