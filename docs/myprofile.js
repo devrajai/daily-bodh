@@ -8,7 +8,8 @@
  * and the personal day number. The Moon sign cannot be derived from a date
  * (the Moon changes sign every ~2.25 days), so it is asked for, not guessed.
  *
- * Appends to the Today tab.
+ * Appends to the Today tab. That section carries no id in the page markup, so
+ * the fallback to the first <section> is what actually makes this work.
  *   <script src="myprofile.js"></script>
  */
 (function () {
@@ -157,7 +158,9 @@
   }
 
   function attach() {
-    var sec = el('today') || el('home');
+    // The Today section carries no id in the page markup, so fall back to the
+    // first <section>, which is what it is. Without this the card never mounted.
+    var sec = el('today') || el('home') || document.querySelector('section');
     if (!sec) return;
     var host = el('pfhost');
     if (!host) {
@@ -172,7 +175,7 @@
   function boot() {
     var tries = 0;
     var iv = setInterval(function () {
-      if (el('today') || el('home')) { attach(); clearInterval(iv); }
+      if (el('today') || el('home') || document.querySelector('section')) { attach(); clearInterval(iv); }
       else if (++tries > 40) clearInterval(iv);
     }, 250);
     window.addEventListener('hashchange', function () { setTimeout(attach, 200); });
