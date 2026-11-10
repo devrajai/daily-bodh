@@ -42,6 +42,7 @@
     'sacred.js',                // Shastra tab: Jyotirlingas, deity stories, daily story
     'forms.js',                 // Shastra tab: Bhairav, Hanuman forms, rishis, festivals
     'scriptures.js',            // Shastra tab: full texts held in Drive
+    'vedas.js',                 // Shastra tab: Rigveda and Vishnu Purana
     'kamasutra.js',             // Shastra tab: the Kamasutra, described and linked
     'market-astrology.js',      // Jyotish tab: financial astrology as history, no timings
     'about-calc.js',            // How we calculate, privacy, credits (own tab)
