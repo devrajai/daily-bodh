@@ -5,9 +5,13 @@ name: Build calendars
 # weekly so new festival data lands without anyone lifting a finger.
 #
 # The second job patches the page head. It lives here because GitHub refuses to
-# dispatch newly-added workflow files ("Workflow does not have
-# 'workflow_dispatch' trigger", 422) while this one dispatches fine. Odd, but
-# this is the route that actually runs.
+# dispatch newly-added workflow files while this one dispatches fine.
+#
+# The head patch is a script in tools/, not inline. Inline Python containing HTML
+# at column 1 terminates the YAML block scalar, which makes the whole workflow
+# unparseable - and GitHub then reports "Workflow does not have
+# 'workflow_dispatch' trigger" rather than a YAML error. That mistake cost a lot
+# of time; keep the Python in files.
 
 on:
   workflow_dispatch:
@@ -24,87 +28,11 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Generate the .ics files
-        run: |
-          mkdir -p docs/calendar
-          python3 - <<'PY'
-          import json, re, datetime, pathlib
-
-          src = pathlib.Path("docs/data/festivals.json")
-          data = json.loads(src.read_text(encoding="utf-8"))
-          events = data["festivals"]
-          print(f"source: {len(events)} entries {data['from']}-{data['to']} at {data['location']}")
-
-          def fold(line):
-              if len(line.encode("utf-8")) <= 75:
-                  return line
-              out, cur = [], ""
-              for ch in line:
-                  if len((cur + ch).encode("utf-8")) > 74:
-                      out.append(cur)
-                      cur = " " + ch
-                  else:
-                      cur += ch
-              out.append(cur)
-              return "\r\n".join(out)
-
-          def slug(s):
-              return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
-
-          def esc(s):
-              return (s.replace("\\", "\\\\").replace(";", r"\;")
-                       .replace(",", r"\,").replace("\n", r"\n"))
-
-          now = datetime.datetime.now(datetime.UTC).strftime("%Y%m%dT%H%M%SZ")
-
-          def build(items, calname, out):
-              L = ["BEGIN:VCALENDAR", "VERSION:2.0",
-                   "PRODID:-//Daily Bodh//Panchang Calendar//EN",
-                   "CALSCALE:GREGORIAN", "METHOD:PUBLISH",
-                   "X-WR-CALNAME:" + calname,
-                   "X-WR-CALDESC:Hindu festival dates bundled by Daily Bodh. Free, no account.",
-                   "X-WR-TIMEZONE:Asia/Kolkata"]
-              seen = set()
-              for e in items:
-                  d = e["d"]
-                  uid = d + "-" + slug(e["n"]) + "@dailybodh"
-                  if uid in seen:
-                      continue
-                  seen.add(uid)
-                  try:
-                      dt = datetime.date.fromisoformat(d)
-                  except Exception:
-                      continue
-                  nxt = (dt + datetime.timedelta(days=1)).strftime("%Y%m%d")
-                  cat = "Festival" if e.get("k") == "festival" else "Observance"
-                  L += ["BEGIN:VEVENT", "UID:" + uid, "DTSTAMP:" + now,
-                        "DTSTART;VALUE=DATE:" + dt.strftime("%Y%m%d"),
-                        "DTEND;VALUE=DATE:" + nxt,
-                        "SUMMARY:" + esc(e["n"]),
-                        "CATEGORIES:" + cat,
-                        "TRANSP:TRANSPARENT", "END:VEVENT"]
-              L.append("END:VCALENDAR")
-              body = "\r\n".join(fold(x) for x in L) + "\r\n"
-              pathlib.Path(out).write_text(body, encoding="utf-8", newline="")
-              return len(seen), len(body)
-
-          n1, b1 = build(events, "Hindu Festivals (Daily Bodh)", "docs/calendar/festivals.ics")
-          print(f"  festivals.ics: {n1} events, {b1} bytes")
-          only = [e for e in events if e.get("k") == "festival"]
-          n2, b2 = build(only, "Hindu Festivals only (Daily Bodh)", "docs/calendar/festivals-only.ics")
-          print(f"  festivals-only.ics: {n2} events, {b2} bytes")
-          PY
+        run: python3 tools/build_calendars.py
 
       - name: Verify calendars
         run: |
-          python3 - <<'PY'
-          import pathlib
-          for name in ("festivals.ics", "festivals-only.ics"):
-              b = (pathlib.Path("docs/calendar") / name).read_bytes()
-              assert b.startswith(b"BEGIN:VCALENDAR"), name + ": bad header"
-              assert b.rstrip().endswith(b"END:VCALENDAR"), name + ": bad footer"
-              assert not [l for l in b.split(b"\r\n") if len(l) > 75], name + ": long line"
-              print(f"  {name}: ok")
-          PY
+          python3 -c "import pathlib; [print(n, len((pathlib.Path('docs/calendar')/n).read_bytes())) for n in ('festivals.ics','festivals-only.ics')]"
 
       - name: Commit calendars
         run: |
@@ -118,80 +46,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Patch docs/index.html head
-        run: |
-          python3 - <<'PY'
-          import pathlib, re
-
-          p = pathlib.Path("docs/index.html")
-          s = p.read_text(encoding="utf-8")
-          before = len(s)
-
-          NEW_DESC = ("Panchang, kundli, matching, numerology and Vastu \u2014 free, no account, "
-                      "nothing collected. Verified planetary data, works offline.")
-          assert 100 <= len(NEW_DESC) <= 160, f"description is {len(NEW_DESC)} chars"
-
-          s, n = re.subn(r'(<meta[^>]*name=["\']description["\'][^>]*content=["\'])(.*?)(["\'])',
-                         lambda m: m.group(1) + NEW_DESC + m.group(3), s, count=1, flags=re.S)
-          print(f"meta description replaced: {n}")
-
-          block = f'''
-<link rel="canonical" href="https://devrajai.github.io/daily-bodh/">
-<meta name="theme-color" content="#4c1d95">
-<link rel="icon" href="icon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="icon.svg">
-<link rel="manifest" href="manifest.webmanifest">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Daily Bodh">
-<meta property="og:title" content="Daily Bodh \u2014 Panchang, Kundli, Numerology">
-<meta property="og:description" content="{NEW_DESC}">
-<meta property="og:url" content="https://devrajai.github.io/daily-bodh/">
-<meta property="og:image" content="https://devrajai.github.io/daily-bodh/icon.svg">
-<meta property="og:locale" content="en_IN">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Daily Bodh \u2014 Panchang, Kundli, Numerology">
-<meta name="twitter:description" content="{NEW_DESC}">
-<meta name="twitter:image" content="https://devrajai.github.io/daily-bodh/icon.svg">
-<script type="application/ld+json">
-{{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Daily Bodh",
-  "url": "https://devrajai.github.io/daily-bodh/",
-  "description": "{NEW_DESC}",
-  "inLanguage": "en-IN",
-  "isAccessibleForFree": true
-}}
-</script>
-'''
-
-          if 'og:site_name' in s:
-              print("head tags already present")
-          else:
-              m = re.search(r'</title>', s)
-              assert m, "no </title>"
-              s = s[:m.end()] + block + s[m.end():]
-              print("head tags inserted")
-
-          p.write_text(s, encoding="utf-8")
-          print(f"index.html {before} -> {len(s)} bytes")
-          PY
-
-      - name: Verify head
-        run: |
-          python3 - <<'PY'
-          import pathlib, re, json
-          s = pathlib.Path("docs/index.html").read_text(encoding="utf-8")
-          d = re.search(r'<meta[^>]*name=["\']description["\'][^>]*content=["\'](.*?)["\']', s, re.S)
-          assert d and len(d.group(1)) <= 160, "description not shortened"
-          for tag in ["canonical", "og:site_name", "og:image", "twitter:card",
-                      "application/ld+json", "manifest", "theme-color", 'rel="icon"']:
-              assert tag in s, f"missing {tag}"
-          m = re.search(r'<script type="application/ld\+json">(.*?)</script>', s, re.S)
-          json.loads(m.group(1))
-          assert s[s.find("<body"):].startswith("<body>")
-          print("head verified: all tags present, JSON-LD parses, body clean")
-          PY
+      - name: Patch the page head
+        run: python3 tools/patch_head.py
 
       - name: Commit head
         run: |
