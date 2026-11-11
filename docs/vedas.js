@@ -28,18 +28,30 @@
       drive: 'https://drive.google.com/file/d/1sMZbWHiTnE6Z5oVZmVlldIW2u830mHyv/view'
     },
     {
+      name: 'Yajurveda (White)', sk: '\u092f\u091c\u0941\u0930\u094d\u0935\u0947\u0926',
+      translator: 'Ralph T. H. Griffith', year: '1899', size: '0.9 MB',
+      note: 'The Shukla (white) Yajurveda \u2014 the liturgical Veda: the formulas and directions ' +
+        'for the sacrifice. Griffith\u2019s verse translation, public domain.',
+      drive: 'https://drive.google.com/file/d/12-s2HA1QW5el2cVwDfdmddhI22_Q8Qgm/view'
+    },
+    {
       name: 'Vishnu Purana', sk: '\u0935\u093f\u0937\u094d\u0923\u0941 \u092a\u0941\u0930\u093e\u0923',
       translator: 'H. H. Wilson', year: '1866', size: '0.7 MB',
       note: 'The first Purana translated into English, and still the one scholars cite. Covers the ' +
         'creation, the Manvantaras, the royal dynasties, and the life of Krishna in one of its ' +
         'fullest early tellings.',
       drive: 'https://drive.google.com/file/d/1P3yRkkchYInhc4gKCyQvFdsbZpEQ9-tA/view'
+    },
+    {
+      name: 'Sushruta Samhita \u2014 Vol 2', sk: '\u0938\u0941\u0936\u094d\u0930\u0941\u0924 \u0938\u0902\u0939\u093f\u0924\u093e',
+      translator: 'Kaviraj Kunja Lal Bhishagratna', year: '1907', size: '1.6 MB',
+      note: 'Nidana, Sharira and Chikitsa \u2014 diagnosis, anatomy and therapeutics. With Vols 1 ' +
+        'and 3 this completes Bhishagratna\u2019s translation.',
+      drive: 'https://drive.google.com/file/d/1QhvSRQhHuHBMw-M1a8AlqYUdrkohOEkj/view'
     }
   ];
 
   var PENDING = [
-    { name: 'Yajurveda (White)', translator: 'R. T. H. Griffith', year: '1899',
-      why: 'Upload timed out twice. The file is identified on archive.org and ready to retry.' },
     { name: 'Atharvaveda', translator: 'Griffith', year: '1895\u201396',
       why: 'No clean full text located yet; the available copies are partial or modern editions.' },
     { name: 'Samaveda', translator: '\u2014', year: '\u2014',
@@ -71,8 +83,7 @@
       '<div class="warn">These open in Drive and need a connection. The rest of the site does not.</div></div>' +
 
       '<div class="card"><h3>Not yet added, and why</h3>' +
-      '<p class="muted">Four of the texts you asked for could not be added, and the reason matters ' +
-      'more than the absence. None of these is a refusal \u2014 they are specific, checkable blockers.</p>' +
+      '<p class="muted">Each of these is a specific, checkable blocker rather than a refusal.</p>' +
       PENDING.map(function (p) {
         return '<div style="padding:9px 0;border-bottom:1px solid #eee">' +
           '<strong style="font-size:13.5px">' + esc(p.name) + '</strong>' +
