@@ -50,6 +50,7 @@
     'market-astrology.js',      // Jyotish tab: financial astrology as history, no timings
     'about-calc.js',            // How we calculate, privacy, credits (own tab)
     'weekly.js',                // This week's reading on the Horoscope tab
+    'rashi-deep.js',            // Horoscope tab: the twelve signs in depth
     'timezone.js',              // Historical Indian UTC offset on the Kundli screen
     'sadesati.js',              // Kundli tab: Sade Sati phase and windows
     'dasha.js',                 // Kundli tab: Vimshottari dasha timeline
