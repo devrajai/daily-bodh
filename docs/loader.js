@@ -52,6 +52,7 @@
     'about-calc.js',            // How we calculate, privacy, credits (own tab)
     'weekly.js',                // This week's reading on the Horoscope tab
     'rashi-deep.js',            // Horoscope tab: the twelve signs in depth
+    'nakshatras.js',            // Horoscope tab: the 27 lunar mansions
     'timezone.js',              // Historical Indian UTC offset on the Kundli screen
     'planets.js',               // Kundli tab: nine grahas and their effect in each house
     'sadesati.js',              // Kundli tab: Sade Sati phase and windows

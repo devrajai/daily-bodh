@@ -36,6 +36,7 @@
     /* --- Horoscope --- */
     { section: 'horoscope',  file: 'weekly.js',               host: 'weeklyhost' },
     { section: 'horoscope',  file: 'rashi-deep.js',           host: 'rashihost' },
+    { section: 'horoscope',  file: 'nakshatras.js',          host: 'nakhhost' },
 
     /* --- Kundli --- */
     { section: 'kundli',     file: 'planets.js',              host: 'planethost' },
