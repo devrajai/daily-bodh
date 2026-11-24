@@ -38,6 +38,7 @@
     { section: 'horoscope',  file: 'rashi-deep.js',           host: 'rashihost' },
 
     /* --- Kundli --- */
+    { section: 'kundli',     file: 'planets.js',              host: 'planethost' },
     { section: 'kundli',     file: 'sadesati.js',             host: 'sshost' },
     { section: 'kundli',     file: 'dasha.js',                host: 'dashahost' },
     { section: 'kundli',     file: 'house-system.js',         host: 'househost' },
