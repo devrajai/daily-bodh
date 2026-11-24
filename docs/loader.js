@@ -64,6 +64,7 @@
     /* --- Numerology tab, in display order --- */
     'numerology-report.js',     // 1. full report (uses the page's own form)
     'numerology-kit.js',        // 2. the 1-9 guide
+    'relationship.js',          // 2b. relationships by number, and by evidence
     'cycles.js',                // 3. personal year, month, day
     'number-compatibility.js',  // 4. compare two numbers
     'numerology-classical.js',  // 5. exaltation, odd/even, the paradox

@@ -53,6 +53,7 @@
     /* --- Numerology --- */
     { section: 'numerology', file: 'numerology-report.js',    host: 'reporthost' },
     { section: 'numerology', file: 'numerology-kit.js',       host: 'kithost' },
+    { section: 'numerology', file: 'relationship.js',         host: 'relhost' },
     { section: 'numerology', file: 'cycles.js',               host: 'cycleshost' },
     { section: 'numerology', file: 'number-compatibility.js', host: 'comphost' },
     { section: 'numerology', file: 'numerology-classical.js', host: 'classichost' },
