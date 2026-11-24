@@ -47,6 +47,8 @@
     'scriptures.js',            // Shastra tab: full texts held in Drive
     'vedas.js',                 // Shastra tab: Rigveda and Vishnu Purana
     'kamasutra.js',             // Shastra tab: the Kamasutra, described and linked
+    'chanakya.js',              // Shastra tab: Chanakya Niti on trust, speech and conduct
+    'philosophy.js',            // Shastra tab: Osho, Stoics, Buddhists, Gibran on relationship
     'market-astrology.js',      // Jyotish tab: financial astrology as history, no timings
     'glossary.js',              // Jyotish tab: every term in one line
     'about-calc.js',            // How we calculate, privacy, credits (own tab)

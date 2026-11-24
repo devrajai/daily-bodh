@@ -66,6 +66,8 @@
     { section: 'shastra',    file: 'scriptures.js',           host: 'scripturehost' },
     { section: 'shastra',    file: 'vedas.js',                host: 'vedashost' },
     { section: 'shastra',    file: 'kamasutra.js',            host: 'kamsutrahost' },
+    { section: 'shastra',    file: 'chanakya.js',             host: 'chanakyahost' },
+    { section: 'shastra',    file: 'philosophy.js',           host: 'philhost' },
 
     /* --- Jyotish --- */
     { section: 'jyotish',    file: 'market-astrology.js',     host: 'markethost' },
