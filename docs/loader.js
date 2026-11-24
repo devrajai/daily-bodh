@@ -36,6 +36,7 @@
     'live-panchang.js',         // Panchang times for the chosen place, not Delhi
     'calendar-links.js',        // Panchang tab: subscribe to the festival calendar
     'why-dates.js',             // Panchang tab: why festivals fall on two dates
+    'fullmoon.js',              // Panchang tab: the full moon by sign and by mulank
     'rajju.js',                 // Rajju and Vedha on the Matching screen
     'vastu.js',                 // Vastu reference tab
     'chakras.js',               // Chakras, kundalini, reiki, crystals (own tab)

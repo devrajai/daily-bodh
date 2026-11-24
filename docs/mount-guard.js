@@ -32,6 +32,7 @@
     { section: 'panchang',   file: 'live-panchang.js',        host: 'livepanchang' },
     { section: 'panchang',   file: 'calendar-links.js',       host: 'calhost' },
     { section: 'panchang',   file: 'why-dates.js',            host: 'whyhost' },
+    { section: 'panchang',   file: 'fullmoon.js',            host: 'fmhost' },
 
     /* --- Horoscope --- */
     { section: 'horoscope',  file: 'weekly.js',               host: 'weeklyhost' },
