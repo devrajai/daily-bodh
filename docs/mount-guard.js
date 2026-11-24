@@ -66,6 +66,7 @@
 
     /* --- Jyotish --- */
     { section: 'jyotish',    file: 'market-astrology.js',     host: 'markethost' },
+    { section: 'jyotish',    file: 'glossary.js',             host: 'glosshost' },
 
     /* --- Ayurveda --- */
     { section: 'ayurveda',   file: 'ayurveda.js',             host: 'ayurhost' },
